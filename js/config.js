@@ -1,8 +1,8 @@
 window.DEMO_URLS = {
-  "npd-readiness":          "REPLACE_WITH_DEMO_URL_NPD_READINESS",
-  "change-impact-workflow": "REPLACE_WITH_DEMO_URL_CHANGE_IMPACT_WORKFLOW",
-  "plm-workspace":          "REPLACE_WITH_DEMO_URL_PLM_WORKSPACE",
-  "item-setup-readiness":   "REPLACE_WITH_DEMO_URL_ITEM_SETUP_READINESS"
+  "npd-readiness":          "https://mingle-portal.inforcloudsuite.com/v2/SLSGDENA119_DEM/342ee1f0-e25b-45f7-80b8-8e683410af0a",
+  "change-impact-workflow": "https://mingle-portal.inforcloudsuite.com/v2/SLSGDENA119_DEM/1307dce4-cf6f-485d-9a1e-cdc664e45406",
+  "plm-workspace":          "https://mingle-portal.inforcloudsuite.com/v2/SLSGDENA119_DEM/f284f515-8161-481b-bee7-6350eb837706",
+  "item-setup-readiness":   "https://mingle-portal.inforcloudsuite.com/v2/SLSGDENA119_DEM/b16f921c-c21a-4b89-9e93-936d8011d5e0"
 };
 
 window.DEMO_TARGET = "_top";
@@ -17,7 +17,7 @@ window.PROTO_URLS = {
   "plm-first-item-launch":      "https://starforge.ai.infor.com/p/velocity-item-creation-automation-and-approval-flow/g/3c8db1f5-f93f-430a-887f-3a707c3a25df?version=v1"
 };
 
-window.NPD_STATUS = "Coming to the demo tenant";
+window.NPD_STATUS = "In the demo tenant";
 
 window.LOCAL_PROTOS = {
   "npd-v3":       "prototypes/npd-v3.html",
