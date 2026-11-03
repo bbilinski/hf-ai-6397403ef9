@@ -72,9 +72,10 @@
       a.setAttribute("target", target);
       a.setAttribute("rel", "noopener");
     } else {
-      a.classList.add("is-unset");
-      a.setAttribute("title", "Not linked yet.");
-      a.addEventListener("click", function (e) { e.preventDefault(); toast("Not linked yet."); });
+      var soon = document.createElement("span");
+      soon.className = "soon";
+      soon.textContent = "Coming to the demo tenant";
+      a.parentNode.replaceChild(soon, a);
     }
   });
 

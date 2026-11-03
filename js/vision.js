@@ -1,84 +1,77 @@
 (function () {
-  var board = document.getElementById("vb");
+  var V = window.VISION;
   var road = document.getElementById("vb-road");
-  if (!board || !road) return;
-  var count = document.getElementById("vb-count");
-  var pills = Array.prototype.slice.call(board.querySelectorAll(".uc2__y"));
-  var total = pills.length;
-  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var lanes = {};
-  [["FY27", "Prove it and build the core"], ["FY28", "Scale it and harden it"], ["FY29", "Operate on it"], ["None", "Raised, year not set"]].forEach(function (y) {
-    var col = document.createElement("div");
-    col.className = "vb-road__col";
-    col.setAttribute("data-y", y[0]);
-    var h = document.createElement("div");
-    h.className = "vb-road__h";
-    h.textContent = y[0] === "None" ? "No year yet" : y[0];
-    var sm = document.createElement("small");
-    sm.textContent = y[1];
-    h.appendChild(sm);
-    var c = document.createElement("div");
-    c.className = "vb-road__c";
+  if (!road) return;
+  function mk(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function link(a, go) { a.setAttribute("data-go", go); a.setAttribute("href", "#" + go); }
+  var tr = document.getElementById("vb-today-row");
+  V.today.forEach(function (x, i) {
+    var a = mk("a", "vb-today__c", x.t);
+    a.style.setProperty("--i", i);
+    link(a, x.go);
+    tr.appendChild(a);
+  });
+  var lanes = {}, heads = {};
+  V.lanes.forEach(function (l) {
+    var col = mk("div", "vb-road__col");
+    col.setAttribute("data-y", l.k);
+    var h = mk("div", "vb-road__h", l.h);
+    var c = mk("div", "vb-road__c");
     col.appendChild(h);
     col.appendChild(c);
+    if (l.none) c.appendChild(mk("span", "vb-road__none", l.none));
     road.appendChild(col);
-    lanes[y[0]] = c;
+    lanes[l.k] = c;
+    heads[l.k] = h;
   });
-  var chips = pills.map(function (p) {
-    var chip = document.createElement("span");
-    chip.className = "vb-road__chip";
-    chip.textContent = p.closest(".uc2").querySelector(".uc2__t").textContent;
-    lanes[p.getAttribute("data-from")].appendChild(chip);
-    return { chip: chip, from: p.getAttribute("data-from"), pill: p };
+  var chips = V.chips.map(function (x) {
+    var a = mk("a", "vb-road__chip" + (x.road ? "" : " vb-road__chip--out"));
+    link(a, x.go);
+    a.appendChild(mk("b", "", x.t));
+    if (x.road) a.appendChild(mk("small", "vb-road__r", x.road));
+    a.appendChild(mk("em", "vb-road__ph", x.tag));
+    lanes[x.lane].appendChild(a);
+    return { el: a, lane: x.lane };
   });
-  function paint(p, y) {
-    p.setAttribute("data-now", y);
-    p.textContent = y === "None" ? "No year" : y;
-  }
-  function words(goal) {
-    var inFY27 = chips.filter(function (c) { return c.from === "FY27"; }).length;
-    if (count) count.textContent = goal
-      ? "The goal: all " + total + " use cases in FY27."
-      : "Your plan: 3 years, with " + inFY27 + " of " + total + " use cases in FY27.";
+  var words = document.getElementById("vb-count");
+  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function say(goal) {
+    if (words) words.textContent = goal ? "The goal: all of it in FY27." : "Your roadmap, phase by phase.";
+    heads.p1.textContent = goal ? "The goal: FY27" : "Phase 1";
   }
   function set(state) {
-    if (board.getAttribute("data-state") === state) return;
+    if (road.getAttribute("data-state") === state) return;
     var goal = state === "goal";
-    var first = chips.map(function (c) { return c.chip.getBoundingClientRect(); });
-    board.setAttribute("data-state", state);
+    var first = chips.map(function (c) { return c.el.getBoundingClientRect(); });
     road.setAttribute("data-state", state);
     document.querySelectorAll("[data-vb]").forEach(function (b) { b.classList.toggle("is-on", b.getAttribute("data-vb") === state); });
-    chips.forEach(function (c) {
-      lanes[goal ? "FY27" : c.from].appendChild(c.chip);
-      paint(c.pill, goal ? "FY27" : c.from);
-    });
-    words(goal);
-    if (calm || !chips[0].chip.animate) return;
+    chips.forEach(function (c) { lanes[goal ? "p1" : c.lane].appendChild(c.el); });
+    say(goal);
+    if (calm || !chips[0].el.animate) return;
     requestAnimationFrame(function () {
       chips.forEach(function (c, i) {
-        var last = c.chip.getBoundingClientRect();
-        if (c.from === "FY27") return;
-        c.chip.animate([
+        var last = c.el.getBoundingClientRect();
+        c.el.animate([
           { transform: "translate(" + (first[i].left - last.left) + "px," + (first[i].top - last.top) + "px)" },
           { transform: "none" }
-        ], { duration: 1100, delay: i * 45, easing: "cubic-bezier(.2,.7,.2,1)", fill: "backwards" });
+        ], { duration: 1000, delay: i * 45, easing: "cubic-bezier(.2,.7,.2,1)", fill: "backwards" });
       });
     });
   }
+  var played = false, timer = null;
   document.addEventListener("click", function (e) {
     var b = e.target.closest("[data-vb]");
-    if (b) { played = true; set(b.getAttribute("data-vb")); }
+    if (b) { played = true; clearTimeout(timer); set(b.getAttribute("data-vb")); }
   });
-  var played = false;
   function maybePlay() {
+    clearTimeout(timer);
     if (location.hash !== "#vision") return;
     set("plan");
     if (played) return;
     played = true;
-    setTimeout(function () { if (location.hash === "#vision") set("goal"); }, 3000);
+    timer = setTimeout(function () { if (location.hash === "#vision") set("goal"); }, 3500);
   }
-  chips.forEach(function (c) { paint(c.pill, c.from); });
-  words(false);
+  say(false);
   window.addEventListener("hashchange", function () { played = false; maybePlay(); });
   maybePlay();
 })();

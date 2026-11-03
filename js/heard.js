@@ -1,36 +1,56 @@
-window.HEARD_COLUMNS = [
-  { p: "P1", name: "Order to Cash", note: "On your AI Adoption Hub roadmap" },
-  { p: "P2", name: "Idea to Product" }
-];
-
 window.HEARD = [
-  { p: "P2", area: "Item setup", what: "Many people touch one item, and data gets missed.",
-    from: "Hub" },
-  { p: "P2", area: "Integrations", what: "Flat-file schedules hold new products back.",
-    from: "Hub" },
-  { p: "P2", area: "Your environment", what: "Settings made for another company still sit in LN.",
-    from: "Hub" },
-
-  { p: "P1", area: "Blocked orders", what: "Orders block daily on margin, cross references, pricing and EDI.",
-    from: "Hub" },
-  { p: "P1", area: "Customer setup", what: "A new account takes days, with approvals in a separate tool.",
-    from: "Hub" },
-  { p: "P1", area: "Account changes", what: "A simple update goes through a long approval chain.",
-    from: "Hub" },
-  { p: "P1", area: "Pricing", what: "Customer prices go unloaded, so orders wait on a manual approval.",
-    from: "Hub" }
+  { n: "1", area: "Reduce blocked orders", tag: "Biggest priority", big: [["$", 50, "K"], " to ", ["$", 250, "K"]], unit: "a day held in blocked orders", what: "Every block is researched by hand across teams. Stop them at the source.", go: "real-blocked-orders", see: "Blocked orders" },
+  { n: "2", area: "Right the first time", pre: "Up to", big: [["", 2, " weeks"]], unit: "to set up a customer", what: "Items go unsellable when data gets missed, and price gaps surface only at the block.", go: "real-item-setup-readiness", see: "Item Setup Readiness" },
+  { n: "3", area: "From flat files to APIs", big: [["", 48, " hours"]], unit: "from new product to sellable", what: "The online store integration is due next September.", go: "real-online-store", see: "Online store integration" },
+  { n: "4", area: "Inventory and working capital", pre: "About", big: [["", 40, "%"]], unit: "forecast accuracy", what: "Stock held for one large order can't sell in the meantime." },
+  { n: "5", area: "Simplify the inherited platform", pre: "About", big: [["", 1200, ""]], unit: "extensions", what: "They burden every upgrade. Replace the third-party AR tool with native LN.", go: "real-cash-application", see: "Cash application" },
+  { n: "6", area: "Absorb Infor releases safely", pre: "Over", big: [["", 500, ""]], unit: "line items in the 2026.10 release", what: "Incomplete test cases leave audit gaps." },
+  { n: "7", area: "Product data and retailer content", pre: "About", big: [["", 800, ""]], unit: "product attributes", what: "Mapped to each retailer by hand. Perhaps half should stay.", go: "proto-retailer", see: "Retailer content" }
 ];
 
 (function renderHeard() {
   var host = document.getElementById("heard-days");
   if (!host) return;
-  var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); };
-  host.innerHTML = window.HEARD_COLUMNS.map(function (col, ci) {
-    var cards = window.HEARD.filter(function (h) { return h.p === col.p; }).map(function (h) {
-      return '<div class="moment fx"><i class="fx__b" aria-hidden="true"></i>' +
-        '<div class="moment__area">' + esc(h.area) + (h.from && h.from !== "Hub" ? ' <span class="moment__from">' + esc(h.from) + '</span>' : "") + '</div>' +
-        '<div class="moment__what">' + esc(h.what) + '</div></div>';
-    }).join("");
-    return '<div class="rv' + (ci ? " rv-d2" : "") + '"><div class="day__head"><span class="day__badge' + (col.p === "P2" ? " day__badge--p2" : "") + '">' + col.p + '</span><span class="day__date">' + esc(col.name) + '</span>' + (col.note ? '<span class="day__note">' + esc(col.note) + '</span>' : '') + '</div><div class="moments">' + cards + '</div></div>';
-  }).join("");
+  function fmt(v) { return String(v).replace(/\B(?=(\d{3})+$)/g, ","); }
+  function mk(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  var nums = [];
+  window.HEARD.forEach(function (g, i) {
+    var c = mk(g.go ? "a" : "div", "hg__c fx" + (i === 0 ? " hg__c--hero" : ""));
+    c.style.setProperty("--i", i);
+    if (g.go) { c.setAttribute("data-go", g.go); c.setAttribute("href", "#" + g.go); }
+    var b = mk("i", "fx__b"); b.setAttribute("aria-hidden", "true"); c.appendChild(b);
+    var top = mk("div", "hg__top");
+    top.appendChild(mk("span", "hg__n", g.n));
+    top.appendChild(mk("span", "hg__area", g.area));
+    if (g.tag) top.appendChild(mk("span", "hg__tag", g.tag));
+    c.appendChild(top);
+    var big = mk("div", "hg__big");
+    if (g.pre) big.appendChild(mk("small", "", g.pre));
+    g.big.forEach(function (p) {
+      if (typeof p === "string") { big.appendChild(mk("small", "", p)); return; }
+      var s = mk("b", "", p[0] + fmt(p[1]) + p[2]);
+      nums.push({ el: s, pre: p[0], to: p[1], suf: p[2] });
+      big.appendChild(s);
+    });
+    c.appendChild(big);
+    c.appendChild(mk("div", "hg__unit", g.unit));
+    c.appendChild(mk("p", "hg__what", g.what));
+    if (g.go) c.appendChild(mk("span", "hg__see", g.see));
+    host.appendChild(c);
+  });
+  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function count() {
+    if (calm) return;
+    var t0 = null, dur = 1300;
+    function step(t) {
+      if (t0 === null) t0 = t;
+      var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      nums.forEach(function (x) { x.el.textContent = x.pre + fmt(Math.round(x.to * e)) + x.suf; });
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  function maybe() { if (location.hash === "#heard") count(); }
+  window.addEventListener("hashchange", maybe);
+  maybe();
 })();
