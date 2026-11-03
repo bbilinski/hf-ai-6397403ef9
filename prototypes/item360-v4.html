@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="en">
+<head>
+  
+  
+  
+
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hunter Fan, New item intake and Item 360</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ids-color-background-default:#ffffff;
+  --ids-color-background-elevated:#ffffff;
+  --ids-color-neutral-10:#f5f5f5;
+  --ids-color-neutral-20:#e0e0e1;
+  --ids-color-neutral-30:#c5c5c9;
+  --ids-color-neutral-90:#28282a;
+  --ids-color-border-weak:#bbbbbf;
+  --ids-color-border-weaker:#e0e0e1;
+  --ids-color-border-strong:#525257;
+  --ids-color-foreground-default-default:#161618;
+  --ids-color-foreground-default-secondary:#3b3b3f;
+  --ids-color-foreground-default-tertiary:#6f6f76;
+  --ids-color-foreground-light-default:#f5f5f5;
+  --ids-color-accent-neutral-weakest:#f5f5f5;
+  --ids-color-accent-neutral-weaker:#e0e0e1;
+  --ids-color-accent-blue-stronger:#0054b1;
+  --ids-color-action-default:#0072ed;
+  --ids-color-action-stronger:#0066d4;
+  --ids-color-action-strongest:#004a99;
+  --ids-color-action-weakest:#e6f1fd;
+  --ids-color-blue-10:#e6f1fd;
+  --ids-color-blue-40:#55a3f3;
+  --ids-color-info-default:#0072ed;      --ids-color-info-weak:#e6f1fd;
+  --ids-color-success-default:#2ac371;   --ids-color-success-weak:#ebf9f1;  --ids-color-success-stronger:#156138;
+  --ids-color-warning-default:#f98300;   --ids-color-warning-weak:#fef2e5;  --ids-color-warning-stronger:#a14100;
+  --ids-color-error-default:#da1217;     --ids-color-error-weak:#fbe7e8;    --ids-color-error-stronger:#c31014;
+  --ids-color-accent-teal-strong:#39a9aa;
+  --ids-ai-flat:#460DAF;
+  --ids-color-accent-purple-weakest:#f1ebfc;
+  --ids-font-family-default:'Source Sans 3','Source Sans Pro',Arial,sans-serif;
+  --ids-font-size-3xs:10px; --ids-font-size-2xs:13px; --ids-font-size-xs:14px;
+  --ids-font-size-sm:16px;  --ids-font-size-md:20px;  --ids-font-size-lg:24px;
+  --ids-font-size-xl:28px;  --ids-font-size-2xl:32px; --ids-font-size-3xl:40px;
+  --ids-font-weight-normal:400; --ids-font-weight-strong:600;
+  --ids-space-2xs:4px; --ids-space-xs:8px; --ids-space-sm:16px; --ids-space-lg:32px;
+  --ids-border-radius-2xs:2px; --ids-border-radius-xs:4px; --ids-border-radius-sm:6px;
+  --ids-border-radius-circle:9999px;
+  --ids-masthead-height:40px;
+  --ids-widget-border-radius:8px;
+  --ids-widget-shadow:0 0 8px rgba(0,0,0,.1);
+  --ids-button-height:34px;
+  --ids-button-radius:8px;
+  --ids-overlay-background-color:rgb(0 0 0 / 0.5);
+  --ids-modal-shadow-default:0px 0px 8px 0px rgb(0 0 0 / 0.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,select,textarea{font-family:inherit}
+body{
+  font-family:var(--ids-font-family-default);
+  font-size:var(--ids-font-size-sm);
+  color:var(--ids-color-foreground-default-default);
+  background:var(--ids-color-neutral-10);
+  line-height:1.35;-webkit-font-smoothing:antialiased;
+}
+.ids-masthead{height:40px;background:#000000;display:flex;align-items:center;padding-inline:8px;gap:8px;position:sticky;top:0;z-index:200}
+.mh-start,.mh-end{display:flex;align-items:center;gap:4px}
+.mh-logo-btn,.mh-bento-btn,.mh-icon-btn{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;border-radius:4px;color:#f5f5f5;padding:0}
+.mh-icon-btn:hover,.mh-bento-btn:hover{background:#28282a;color:#ffffff}
+.mh-tabs{display:flex;align-items:center;flex:1;min-width:0;gap:4px}
+.mh-tab{display:inline-flex;align-items:center;gap:8px;height:32px;padding-inline:16px;background:#28282a;border-radius:4px;color:#ffffff;font-size:14px;font-weight:600;max-width:560px}
+.mh-tab-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mh-tab-divider{width:1px;height:18px;background:#3b3b3f}
+.mh-tab-close{width:18px;height:18px;background:none;border:0;cursor:pointer;color:#ffffff}
+.mh-end{margin-left:auto}
+
+
+.app-wrap{max-width:1760px;margin:0 auto;padding:20px 32px 64px}
+.ws-titlebar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+.ws-title{font-size:24px;font-weight:600;color:#161618}
+.ws-subtitle{font-size:14px;color:#6f6f76;margin-top:2px}
+.app-actions{display:flex;align-items:center;gap:8px}
+
+
+.console-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.ctab{display:flex;align-items:center;gap:12px;background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;padding:14px 16px;cursor:pointer;font-family:inherit;text-align:left;width:100%;transition:background .12s,border-color .12s}
+.ctab:hover{background:#f5f5f5}
+.ctab.active{background:#e6f1fd;border-color:#0072ed}
+.ctab-num{width:28px;height:28px;border-radius:9999px;background:#f5f5f5;border:1px solid #c5c5c9;color:#3b3b3f;font-size:14px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.ctab.active .ctab-num{background:#0072ed;border-color:#0072ed;color:#ffffff}
+.ctab-body{flex:1;min-width:0}
+.ctab-ttl{font-size:15px;font-weight:600;color:#161618;line-height:1.25}
+.ctab.active .ctab-ttl{color:#0054b1}
+.ctab-count{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:24px;padding:0 8px;border-radius:9999px;background:#f5f5f5;color:#3b3b3f;font-size:13px;font-weight:700;flex-shrink:0}
+.ctab.active .ctab-count{background:#0072ed;color:#ffffff}
+.ctab-count[hidden]{display:none}
+
+
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+
+.answer-band{background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;padding:16px 20px;margin-bottom:12px}
+.answer-line{font-size:18px;font-weight:600;color:#161618;line-height:1.35}
+
+
+.counts-strip{background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;padding:0;margin-bottom:16px;display:flex;align-items:stretch;overflow:hidden}
+.count-cell{flex:1;padding:14px 18px;display:flex;flex-direction:column;gap:2px;border-right:1px solid #e0e0e1}
+.count-cell:last-child{border-right:0}
+.count-val{font-size:22px;font-weight:600;color:#161618;line-height:1}
+.count-val.ok{color:#156138}
+.count-val.wait{color:#a14100}
+.count-val.err{color:#c31014}
+.count-lbl{font-size:13px;color:#6f6f76}
+
+
+.card{background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;padding:16px 18px;margin-bottom:16px}
+.card-h{font-size:16px;font-weight:600;color:#161618;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+
+
+.loader-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;padding:14px 18px;margin-bottom:12px}
+.loader-file{font-size:13px;color:#3b3b3f;font-family:'Source Sans 3',monospace}
+.loader-file.empty{color:#6f6f76}
+.loader-link{background:none;border:0;color:#0072ed;font-size:13px;font-weight:600;cursor:pointer;text-decoration:underline;padding:0;margin-left:auto;font-family:inherit}
+.loader-link:hover{color:#0066d4}
+
+
+.data-tbl{width:100%;border-collapse:collapse;font-size:14px}
+.data-tbl thead th{background:#f5f5f5;text-align:left;padding:10px 12px;font-weight:600;font-size:13px;color:#3b3b3f;border-bottom:1px solid #c5c5c9;white-space:nowrap}
+.data-tbl tbody td{padding:12px;border-bottom:1px solid #e0e0e1;vertical-align:top;font-size:14px}
+.data-tbl tbody td.wrap{white-space:normal;word-break:break-word}
+.data-tbl .cell-item{font-weight:600;color:#161618;white-space:nowrap}
+.data-tbl .cell-desc{white-space:normal;word-break:break-word}
+
+
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:9999px;font-size:13px;font-weight:600;line-height:16px;white-space:nowrap}
+.badge.ok{background:#ebf9f1;color:#156138}
+.badge.err{background:#fbe7e8;color:#c31014}
+.badge.wait{background:#fef2e5;color:#a14100}
+.badge.info{background:#e6f1fd;color:#0054b1}
+.badge.ai{background:#f1ebfc;color:#460daf}
+.badge.neu{background:#f5f5f5;color:#28282a}
+
+
+.btn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:8px;border:1px solid transparent;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit}
+.btn.primary{background:#0072ed;color:#ffffff;border-color:#0072ed}
+.btn.primary:hover{background:#0066d4;border-color:#0066d4}
+.btn.primary:disabled{background:#c5c5c9;border-color:#c5c5c9;color:#ffffff;cursor:not-allowed}
+.btn.sec{background:#ffffff;color:#0072ed;border-color:#0072ed}
+.btn.sec:hover{background:#e6f1fd}
+.btn.sec:disabled{color:#8e8e95;border-color:#c5c5c9;cursor:not-allowed}
+.btn.ter{background:none;color:#3b3b3f}
+.btn.ter:hover{background:#f5f5f5}
+.btn.sm{height:28px;padding:0 10px;font-size:13px}
+.flow-btn-launch,.run-demo-btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:6px;font-size:13px;font-weight:500;background:#0072ed;color:#ffffff;border:1px solid #0072ed;cursor:pointer;font-family:inherit;white-space:nowrap}
+.flow-btn-launch:hover,.run-demo-btn:hover{background:#1c86ef;border-color:#1c86ef}
+.run-demo-btn.running{background:#da1217;border-color:#da1217}
+
+
+.ready-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.ready-cell{background:#f5f5f5;border:1px solid #e0e0e1;border-radius:6px;padding:12px}
+.ready-cell.ok{background:#ebf9f1;border-color:#2ac371}
+.ready-cell.miss{background:#fef2e5;border-color:#f98300}
+.ready-cell-k{font-size:13px;color:#6f6f76;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.ready-cell-v{font-size:14px;font-weight:600;margin-top:4px}
+.ready-cell.ok .ready-cell-v{color:#156138}
+.ready-cell.miss .ready-cell-v{color:#a14100}
+.ready-cell-note{font-size:13px;color:#3b3b3f;margin-top:6px;line-height:1.4}
+
+
+.i360-top{display:grid;grid-template-columns:320px 1fr;gap:24px;margin-bottom:16px}
+.i360-image{background:#f5f5f5;border:1px solid #e0e0e1;border-radius:8px;height:280px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.i360-image svg{width:220px;height:220px}
+.i360-image-cap{position:absolute;bottom:10px;left:14px;background:rgba(255,255,255,0.95);padding:6px 10px;border-radius:4px;font-size:13px;color:#3b3b3f;font-weight:600}
+.i360-head h2{font-size:22px;font-weight:600;color:#161618;margin-bottom:4px;word-break:break-word}
+.i360-head .sub{font-size:14px;color:#6f6f76;margin-bottom:14px}
+.i360-attrs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.i360-attr{background:#f5f5f5;border:1px solid #e0e0e1;border-radius:6px;padding:10px 12px}
+.i360-attr-k{font-size:13px;color:#6f6f76;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.i360-attr-v{font-size:14px;color:#161618;font-weight:600;margin-top:2px}
+
+.origin-strip{background:#f1ebfc;border:1px solid #c2a1f1;border-radius:8px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.origin-h{font-size:13px;color:#460daf;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.origin-v{font-size:15px;font-weight:600;color:#161618}
+
+
+.sys-lanes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.sys-lane{background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;padding:14px;min-height:130px;display:flex;flex-direction:column;gap:6px}
+.sys-lane .sl-sys{font-size:13px;font-weight:700;color:#6f6f76;text-transform:uppercase;letter-spacing:.4px}
+.sys-lane .sl-state{font-size:16px;font-weight:600;color:#161618}
+.sys-lane .sl-time{font-size:13px;color:#3b3b3f}
+.sys-lane .sl-why{font-size:13px;color:#3b3b3f;line-height:1.4;margin-top:auto}
+.sys-lane.ok{background:#ebf9f1;border-color:#2ac371}
+.sys-lane.ok .sl-state{color:#156138}
+
+
+.missing-bars{display:flex;flex-direction:column;gap:12px}
+.mb-row{display:grid;grid-template-columns:200px 1fr 40px;gap:12px;align-items:center}
+.mb-lbl{font-size:14px;color:#161618}
+.mb-track{height:22px;background:#f5f5f5;border-radius:4px;overflow:hidden}
+.mb-fill{height:100%;background:#f98300;display:flex;align-items:center;padding-left:10px;color:#ffffff;font-weight:600;font-size:13px}
+.mb-fill.zero{background:#c5c5c9}
+.mb-count{font-size:14px;font-weight:600;color:#161618;text-align:right}
+
+
+.gap-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.gap-card{background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.gap-head{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.gap-item{font-size:15px;font-weight:600;color:#161618;line-height:1.3;word-break:break-word}
+.gap-item .code{color:#0054b1}
+.gap-read{font-size:14px;color:#161618;line-height:1.5}
+.gap-fix{font-size:14px;color:#3b3b3f;background:#f1ebfc;padding:10px 12px;border-radius:6px;line-height:1.5}
+.gap-fix .from{font-size:13px;color:#6f6f76;margin-top:4px}
+.gap-owner-row{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f5f5f5;border-radius:6px;padding:10px 12px;flex-wrap:wrap}
+.gap-owner-k{font-size:13px;color:#6f6f76;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.gap-owner-v{font-size:14px;color:#161618;font-weight:600}
+.gap-actions{display:flex;gap:6px;flex-wrap:wrap}
+
+
+.insights-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.chart-card{background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;padding:16px 18px}
+.chart-card.full{width:100%}
+.chart-h{font-size:16px;font-weight:600;color:#161618;margin-bottom:6px}
+.chart-sub{font-size:13px;color:#6f6f76;margin-bottom:14px}
+.bar-chart{display:flex;align-items:flex-end;gap:16px;height:200px;padding-top:10px;border-bottom:1px solid #c5c5c9}
+.bar-chart.full{width:100%}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative}
+.bar-val{font-size:13px;font-weight:600;color:#161618;margin-bottom:4px}
+.bar-fill{width:100%;max-width:46px;background:#0072ed;border-radius:3px 3px 0 0;min-height:24px}
+.bar-fill.g{background:#2ac371}
+.bar-fill.a{background:#f98300}
+.bar-lbl{font-size:13px;color:#3b3b3f;margin-top:8px;text-align:center}
+.hbar-list{display:flex;flex-direction:column;gap:12px}
+.hbar{display:flex;align-items:center;gap:12px}
+.hbar-lbl{width:200px;font-size:14px;color:#161618;flex-shrink:0}
+.hbar-track{flex:1;height:26px;background:#f5f5f5;border-radius:4px;overflow:hidden}
+.hbar-fill{height:100%;background:#da1217;display:flex;align-items:center;padding-left:10px;color:#ffffff;font-weight:600;font-size:13px}
+.hbar-count{font-size:14px;font-weight:600;color:#161618;width:40px;text-align:right}
+
+
+.wgt-modal-overlay{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;padding:24px}
+.wgt-modal-overlay.open{display:flex}
+.wgt-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.wgt-modal-dialog{position:relative;background:#ffffff;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.3);width:min(900px,95vw);max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
+.wgt-modal-dialog.sm{width:min(560px,95vw)}
+.mdl-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #e0e0e1}
+.mdl-title{font-size:18px;font-weight:600}
+.mdl-close{width:32px;height:32px;background:none;border:0;border-radius:6px;cursor:pointer;font-size:16px;color:#3b3b3f}
+.mdl-close:hover{background:#f5f5f5}
+.mdl-body{flex:1;overflow:auto;padding:20px;font-size:14px}
+.mdl-footer{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid #e0e0e1}
+
+
+.flow-modal{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;padding:24px}
+.flow-modal.open{display:flex}
+.flow-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.flow-dialog{position:relative;background:#ffffff;border-radius:12px;width:min(1200px,96vw);max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
+.flow-header{padding:18px 24px;border-bottom:1px solid #e0e0e1;display:flex;align-items:center;justify-content:space-between}
+.flow-title{font-size:20px;font-weight:600}
+.flow-eyebrow{font-size:13px;color:#460daf;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.flow-close{width:34px;height:34px;border:1px solid #e0e0e1;background:#ffffff;border-radius:50%;cursor:pointer;font-size:16px}
+.flow-stage{flex:1;background:#f5f5f5;padding:24px 28px;overflow:auto}
+.flow-row{margin-bottom:22px}
+.flow-row-h{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.flow-row-eyebrow{font-size:13px;font-weight:700;color:#460daf;text-transform:uppercase;letter-spacing:.4px}
+.flow-row-title{font-size:16px;font-weight:600;color:#161618}
+.flow-nodes{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.flow-node{background:#ffffff;border:2px solid #e0e0e1;border-radius:10px;padding:14px 12px;text-align:center;position:relative;min-height:120px}
+.flow-node .sn{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;background:#ffffff;border:2px solid #c5c5c9;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;color:#3b3b3f}
+.flow-node .nn{font-size:13px;font-weight:700;color:#161618;margin-top:6px;line-height:1.3}
+.flow-node .nb{font-size:13px;color:#3b3b3f;margin-top:6px;line-height:1.4}
+.flow-note{font-size:13px;color:#3b3b3f;background:#ffffff;border:1px dashed #c5c5c9;border-radius:6px;padding:10px 12px;margin-top:10px;line-height:1.5}
+
+
+.map-tbl{width:100%;border-collapse:collapse;font-size:14px}
+.map-tbl th,.map-tbl td{padding:10px 12px;border-bottom:1px solid #e0e0e1;text-align:left}
+.map-tbl th{background:#f5f5f5;font-size:13px;color:#3b3b3f;font-weight:600}
+
+
+.demo-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:none;align-items:center;gap:6px;background:#ffffff;border:1px solid #e0e0e1;border-radius:50px;padding:7px 10px;z-index:10001;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.demo-controls.visible{display:flex}
+.demo-btn{width:38px;height:38px;border-radius:50%;border:none;background:transparent;color:#3b3b3f;cursor:pointer;font-size:14px}
+.demo-btn:hover{background:#e6f1fd;color:#0072ed}
+.demo-btn.play{background:#0072ed;color:#ffffff;width:44px;height:44px}
+.demo-status{padding:0 12px;font-size:13px;color:#6f6f76}
+.caption-bar{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);max-width:880px;width:88%;background:#ffffff;border:1px solid #e0e0e1;border-radius:14px;padding:14px 24px;font-size:15px;line-height:1.5;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:10000;display:none}
+.caption-bar.visible{display:block}
+.caption-step{font-size:13px;color:#6f6f76;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.highlight{outline:2px solid #0072ed!important;outline-offset:3px;box-shadow:0 0 0 6px rgba(0,114,237,.18)!important;border-radius:8px}
+
+.smp-launcher{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:#ffffff;border:1px solid #c5c5c9;box-shadow:0 4px 12px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:260}
+
+@media (max-width:1200px){
+  .i360-top{grid-template-columns:1fr}
+  .insights-grid{grid-template-columns:1fr}
+  .gap-list{grid-template-columns:1fr}
+  .console-tabs{grid-template-columns:1fr 1fr}
+}
+</style>
+
+</head>
+<body>
+<header class="ids-masthead" role="banner">
+  <div class="mh-start">
+    <button class="mh-logo-btn" type="button" aria-label="Infor home"><img class="mh-logo-default" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAdCAYAAABWk2cPAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAHaADAAQAAAABAAAAHQAAAADeexZRAAABc0lEQVRIDe1WsU7DMBA9O+4ACpBIzG1+oIIPaKXyCYzd+ATWbnTrCH8AU2eWrukn8Ae0/QDqShkqNbY5WyRKJ+ykaZaclPic3N3zPfusI/An2yAI5OHwBJTeZd9ONirFKcBnmCRLHZPoFwJGUogYlIr0vC5B4BcEnhrQH9+PFcCoLrBiXAnw4OkslZSvxR8uOgkCgP3exSWkkKaRi0fRlg2HcDWfFz/9qyPFN/iUk8vZDK4XC6DdrnMA5upBez2Tndfvu7rm9s6ZdgYDqAKokZ1B8+VWUMjW90d4jOMKMZxcsUaXjWTqfJA6WCYXk0mendztIBmP87mN4gyqS0TXZyZys8lU67EReltQ6/0pY9jSW4Y1a5+WXmuqyhg2Qi/DtpMDMU2h1aL1BS/X69y2zN1LTJOdpt8YBdu6Mwgh7zTknGPP+3EGOANBPW9q9vQ2SZ4R+K1mYK4IecQkV0ebqRtvIcQ9gp+UaqXUijH2pVnVif0Cs8ZiV8EfxU8AAAAASUVORK5CYII=" width="28" height="28" alt="" aria-hidden="true"></button>
+    <button class="mh-bento-btn" type="button" aria-label="App menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="3.5" height="3.5" rx="0.5"/><rect x="7.25" y="2" width="3.5" height="3.5" rx="0.5"/><rect x="12.5" y="2" width="3.5" height="3.5" rx="0.5"/><rect x="2" y="7.25" width="3.5" height="3.5" rx="0.5"/><rect x="7.25" y="7.25" width="3.5" height="3.5" rx="0.5"/><rect x="12.5" y="7.25" width="3.5" height="3.5" rx="0.5"/><rect x="2" y="12.5" width="3.5" height="3.5" rx="0.5"/><rect x="7.25" y="12.5" width="3.5" height="3.5" rx="0.5"/><rect x="12.5" y="12.5" width="3.5" height="3.5" rx="0.5"/></svg>
+    </button>
+  </div>
+  <div class="mh-tabs">
+    <div class="mh-tab">
+      <span class="mh-tab-label">Hunter Fan, New item intake and Item 360</span>
+      <span class="mh-tab-divider" aria-hidden="true"></span>
+      <button class="mh-tab-close" type="button" aria-label="Close tab">✕</button>
+    </div>
+  </div>
+  <div class="mh-end">
+    <button class="mh-icon-btn" type="button" aria-label="Search"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7.5" cy="7.5" r="5.5"/><path d="M11.6 11.6L16.5 16.5"/></svg></button>
+    <button class="mh-icon-btn" type="button" aria-label="Bookmarks"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 2h10v14l-5-3.5L4 16V2z"/></svg></button>
+    <button class="mh-icon-btn" type="button" aria-label="Profile"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="6" r="3.5"/><path d="M2.5 16.5c.8-3.3 3.4-5 6.5-5s5.7 1.7 6.5 5"/></svg></button>
+  </div>
+</header>
+
+<main class="app-wrap">
+  <div class="ws-titlebar">
+    <div>
+      <div class="ws-title">New item intake and Item 360</div>
+      <div class="ws-subtitle">Hunter Fan. The product feed creates the LN item, the agent makes it sellable.</div>
+    </div>
+    <div class="app-actions">
+      <button class="flow-btn-launch" id="flowBtn" onclick="HFOpenFlow()">
+        <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Flow
+      </button>
+      <button class="run-demo-btn" id="runDemoBtn">
+        <svg viewBox="0 0 14 14" width="14" height="14" fill="currentColor"><path d="M3 2v10l8-5-8-5z"/></svg>
+        <span id="runDemoLabel">Run demo</span>
+      </button>
+    </div>
+  </div>
+
+  
+  <div class="console-tabs" role="tablist">
+    <button class="ctab active" data-tab="feed" role="tab">
+      <span class="ctab-num">1</span>
+      <span class="ctab-body"><span class="ctab-ttl">Product feed</span></span>
+      <span class="ctab-count" id="tabCountFeed" hidden>12</span>
+    </button>
+    <button class="ctab" data-tab="notsellable" role="tab">
+      <span class="ctab-num">2</span>
+      <span class="ctab-body"><span class="ctab-ttl">Not sellable yet</span></span>
+      <span class="ctab-count" id="tabCountGaps">7</span>
+    </button>
+    <button class="ctab" data-tab="item360" role="tab">
+      <span class="ctab-num">3</span>
+      <span class="ctab-body"><span class="ctab-ttl">Item 360</span></span>
+    </button>
+    <button class="ctab" data-tab="insights" role="tab">
+      <span class="ctab-num">4</span>
+      <span class="ctab-body"><span class="ctab-ttl">Insights</span></span>
+    </button>
+  </div>
+
+  
+  <section class="tab-panel active" data-panel="feed">
+    <div class="answer-band">
+      <div class="answer-line" id="feedAnswer">The 08:14 feed brought 12 rows. Press Check only, then Create in LN to add 10 items.</div>
+    </div>
+
+    <div class="loader-row">
+      <button class="btn sec" id="btnSample">Use the sample</button>
+      <button class="btn sec" id="btnChoose">Choose a CSV file</button>
+      <button class="btn sec" id="btnCheck" disabled>Check only</button>
+      <button class="btn primary" id="btnCreate" disabled>Create in LN</button>
+      <span class="loader-file empty" id="loaderFile">No file loaded</span>
+      <button class="loader-link" onclick="openWgtModal('mapModal')">Column mapping</button>
+    </div>
+
+    <div class="counts-strip">
+      <div class="count-cell"><div class="count-val" id="cntRows">0</div><div class="count-lbl">Rows in file</div></div>
+      <div class="count-cell"><div class="count-val ok" id="cntCreate">0</div><div class="count-lbl" id="cntCreateLbl">Would create</div></div>
+      <div class="count-cell"><div class="count-val wait" id="cntSkip">0</div><div class="count-lbl">Skipped</div></div>
+      <div class="count-cell"><div class="count-val err" id="cntFail">0</div><div class="count-lbl">Failed</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">Feed rows</div>
+      <table class="data-tbl">
+        <thead>
+          <tr>
+            <th>Item code</th>
+            <th>Description</th>
+            <th>Unit</th>
+            <th>Country</th>
+            <th>Item group</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody id="feedRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  
+  <section class="tab-panel" data-panel="notsellable">
+    <div class="answer-band">
+      <div class="answer-line">10 items created. 3 are ready to sell. 7 are not sellable yet, most often the price book line.</div>
+    </div>
+
+    <div class="counts-strip">
+      <div class="count-cell"><div class="count-val" id="nsTotal">7</div><div class="count-lbl">Not sellable yet</div></div>
+      <div class="count-cell"><div class="count-val wait">3</div><div class="count-lbl">Owners</div></div>
+      <div class="count-cell"><div class="count-val ok">6</div><div class="count-lbl">Approved today</div></div>
+      <div class="count-cell"><div class="count-val" id="nsApproved">0</div><div class="count-lbl">Approved this session</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">Items missing each check</div>
+      <div class="missing-bars" id="missingBars"></div>
+    </div>
+
+    <div class="gap-list" id="gapList"></div>
+  </section>
+
+  
+  <section class="tab-panel" data-panel="item360">
+    <div class="answer-band">
+      <div class="answer-line">Aria 44 inch matte black. Created in LN at 08:14, ready to sell at 09:03 after Priya approved 1 price book line.</div>
+    </div>
+
+    <div class="counts-strip">
+      <div class="count-cell"><div class="count-val ok">5 of 5</div><div class="count-lbl">Setup checks met</div></div>
+      <div class="count-cell"><div class="count-val">08:14</div><div class="count-lbl">Created in LN</div></div>
+      <div class="count-cell"><div class="count-val ok">09:03</div><div class="count-lbl">Ready to sell</div></div>
+      <div class="count-cell"><div class="count-val">1</div><div class="count-lbl">Gap filled by agent</div></div>
+    </div>
+
+    <div class="i360-top">
+      <div class="i360-image">
+        <svg viewBox="0 0 200 200" fill="none" stroke="#161618" stroke-width="3">
+          <circle cx="100" cy="100" r="18" fill="#28282a"/>
+          <path d="M100 82 C 50 60, 20 50, 25 95 C 60 95, 90 85, 100 82 Z" fill="#28282a"/>
+          <path d="M118 100 C 140 50, 150 20, 105 25 C 105 60, 115 90, 118 100 Z" fill="#28282a"/>
+          <path d="M100 118 C 150 140, 180 150, 175 105 C 140 105, 110 115, 100 118 Z" fill="#28282a"/>
+          <path d="M82 100 C 60 150, 50 180, 95 175 C 95 140, 85 110, 82 100 Z" fill="#28282a"/>
+          <circle cx="100" cy="100" r="7" fill="#f5f5f5"/>
+          <rect x="92" y="118" width="16" height="22" fill="#28282a"/>
+          <circle cx="100" cy="146" r="8" fill="#f5f5f5" stroke="#28282a" stroke-width="2"/>
+        </svg>
+        <div class="i360-image-cap">Product feed image</div>
+      </div>
+      <div class="i360-head">
+        <h2>ARIA-44-MB. Aria 44 inch smart fan, matte black</h2>
+        <div class="sub">Created in LN today 08:14. Ready to sell 09:03. 1 gap filled.</div>
+        <div class="i360-attrs">
+          <div class="i360-attr"><div class="i360-attr-k">Inventory unit</div><div class="i360-attr-v">EA</div></div>
+          <div class="i360-attr"><div class="i360-attr-k">Country of origin</div><div class="i360-attr-v">VN</div></div>
+          <div class="i360-attr"><div class="i360-attr-k">Item group</div><div class="i360-attr-v">FIN-FAN-SMART</div></div>
+          <div class="i360-attr"><div class="i360-attr-k">Product type</div><div class="i360-attr-v">Finished good</div></div>
+          <div class="i360-attr"><div class="i360-attr-k">Order system</div><div class="i360-attr-v">SIC</div></div>
+          <div class="i360-attr"><div class="i360-attr-k">Finish</div><div class="i360-attr-v">Matte black</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="origin-strip">
+      <span class="origin-h">Where it started</span>
+      <span class="origin-v">Product feed, Oct 30 08:14, row 4</span>
+      <span class="badge ai">Core fields written by feed</span>
+    </div>
+
+    <div class="card">
+      <div class="card-h">Item setup readiness <span class="badge ok">Ready to sell</span></div>
+      <div class="ready-grid">
+        <div class="ready-cell ok"><div class="ready-cell-k">Sales data</div><div class="ready-cell-v">Met</div><div class="ready-cell-note">Sales UOM, price group, tax code set.</div></div>
+        <div class="ready-cell ok"><div class="ready-cell-k">Price book line</div><div class="ready-cell-v">Met</div><div class="ready-cell-note">Priya approved at 09:02, copied from ARIA-44-BN.</div></div>
+        <div class="ready-cell ok"><div class="ready-cell-k">Warehouse data</div><div class="ready-cell-v">Met</div><div class="ready-cell-note">Ship-from WH-FIN-FG-01 set with locations.</div></div>
+        <div class="ready-cell ok"><div class="ready-cell-k">Purchase data</div><div class="ready-cell-v">Met</div><div class="ready-cell-note">Primary supplier SUPP-ARIA-MFG set.</div></div>
+        <div class="ready-cell ok"><div class="ready-cell-k">Standard cost</div><div class="ready-cell-v">Met</div><div class="ready-cell-note">Rolled from BOM at 09:00.</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">Where it stands in each system</div>
+      <div class="sys-lanes">
+        <div class="sys-lane ok"><div class="sl-sys">LN</div><div class="sl-state">Created</div><div class="sl-time">Today 08:14</div><div class="sl-why">Written from product feed row 4, core fields only.</div></div>
+        <div class="sys-lane ok"><div class="sl-sys">Ready to sell</div><div class="sl-state">Reached</div><div class="sl-time">Today 09:03</div><div class="sl-why">All 5 setup checks Met after Priya approved the price book line.</div></div>
+        <div class="sys-lane ok"><div class="sl-sys">CPQ</div><div class="sl-state">Quotable</div><div class="sl-time">Today 09:12</div><div class="sl-why">Picked up on LN sync after Ready to sell.</div></div>
+        <div class="sys-lane ok"><div class="sl-sys">Retail feed</div><div class="sl-state">Picked up</div><div class="sl-time">Today 09:20</div><div class="sl-why">Product content system picked up the sellable item.</div></div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="tab-panel" data-panel="insights">
+    <div class="answer-band">
+      <div class="answer-line">Minutes from feed file to item created, and hours from created to ready to sell, by week.</div>
+    </div>
+
+    <div class="counts-strip">
+      <div class="count-cell"><div class="count-val ok">0.4m</div><div class="count-lbl">Median file to created</div></div>
+      <div class="count-cell"><div class="count-val">3h</div><div class="count-lbl">Median created to ready to sell</div></div>
+      <div class="count-cell"><div class="count-val ok">88%</div><div class="count-lbl">Agent proposals approved as-is</div></div>
+      <div class="count-cell"><div class="count-val">18</div><div class="count-lbl">Price book line missing this month</div></div>
+    </div>
+
+    <div class="insights-grid">
+      <div class="chart-card">
+        <div class="chart-h">Hours from created in LN to ready to sell, by week</div>
+        <div class="chart-sub">Median hours, lower is better. Target 4 hours.</div>
+        <div class="bar-chart">
+          <div class="bar-col"><span class="bar-val">38h</span><div class="bar-fill a" style="height:70%"></div><span class="bar-lbl">Wk 12</span></div>
+          <div class="bar-col"><span class="bar-val">26h</span><div class="bar-fill a" style="height:48%"></div><span class="bar-lbl">Wk 13</span></div>
+          <div class="bar-col"><span class="bar-val">14h</span><div class="bar-fill a" style="height:26%"></div><span class="bar-lbl">Wk 14</span></div>
+          <div class="bar-col"><span class="bar-val">6h</span><div class="bar-fill g" style="height:12%"></div><span class="bar-lbl">Wk 15</span></div>
+          <div class="bar-col"><span class="bar-val">3h</span><div class="bar-fill g" style="height:6%"></div><span class="bar-lbl">Wk 16</span></div>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-h">Missing setup, by check</div>
+        <div class="chart-sub">New items this month that reached LN with each setup check Missing.</div>
+        <div class="hbar-list" style="margin-top:14px">
+          <div class="hbar"><div class="hbar-lbl">Price book line</div><div class="hbar-track"><div class="hbar-fill" style="width:82%">18</div></div><div class="hbar-count">18</div></div>
+          <div class="hbar"><div class="hbar-lbl">Purchase data</div><div class="hbar-track"><div class="hbar-fill" style="width:54%;background:#f98300">12</div></div><div class="hbar-count">12</div></div>
+          <div class="hbar"><div class="hbar-lbl">Warehouse data</div><div class="hbar-track"><div class="hbar-fill" style="width:40%;background:#f98300">9</div></div><div class="hbar-count">9</div></div>
+          <div class="hbar"><div class="hbar-lbl">Sales data</div><div class="hbar-track"><div class="hbar-fill" style="width:28%;background:#0072ed">6</div></div><div class="hbar-count">6</div></div>
+          <div class="hbar"><div class="hbar-lbl">Standard cost</div><div class="hbar-track"><div class="hbar-fill" style="width:18%;background:#0072ed">4</div></div><div class="hbar-count">4</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card full">
+      <div class="chart-h">Minutes from feed file to item created, by week</div>
+      <div class="chart-sub">Lower is better. Target under 2 minutes.</div>
+      <div class="bar-chart full">
+        <div class="bar-col"><span class="bar-val">360m</span><div class="bar-fill a" style="height:92%"></div><span class="bar-lbl">Wk 12</span></div>
+        <div class="bar-col"><span class="bar-val">240m</span><div class="bar-fill a" style="height:62%"></div><span class="bar-lbl">Wk 13</span></div>
+        <div class="bar-col"><span class="bar-val">60m</span><div class="bar-fill a" style="height:16%"></div><span class="bar-lbl">Wk 14</span></div>
+        <div class="bar-col"><span class="bar-val">2m</span><div class="bar-fill g" style="height:5%"></div><span class="bar-lbl">Wk 15</span></div>
+        <div class="bar-col"><span class="bar-val">0.4m</span><div class="bar-fill g" style="height:3%"></div><span class="bar-lbl">Wk 16</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<div class="wgt-modal-overlay" id="createModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('createModal')"></div>
+  <div class="wgt-modal-dialog sm">
+    <header class="mdl-header">
+      <div class="mdl-title">Create 10 items in LN?</div>
+      <button class="mdl-close" onclick="closeWgtModal('createModal')" aria-label="Close">✕</button>
+    </header>
+    <div class="mdl-body">
+      <div style="font-size:14px;margin-bottom:12px">These 10 item codes will be written to LN. 1 skipped and 1 failed row are not included.</div>
+      <div id="createList" style="background:#f5f5f5;border-radius:6px;padding:12px;font-size:14px;line-height:1.7"></div>
+    </div>
+    <footer class="mdl-footer">
+      <button class="btn ter" onclick="closeWgtModal('createModal')">Cancel</button>
+      <button class="btn primary" onclick="confirmCreate()">Create 10 items</button>
+    </footer>
+  </div>
+</div>
+
+
+<div class="wgt-modal-overlay" id="mapModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('mapModal')"></div>
+  <div class="wgt-modal-dialog sm">
+    <header class="mdl-header">
+      <div class="mdl-title">Column mapping</div>
+      <button class="mdl-close" onclick="closeWgtModal('mapModal')" aria-label="Close">✕</button>
+    </header>
+    <div class="mdl-body">
+      <table class="map-tbl">
+        <thead><tr><th>Feed column</th><th>LN field</th></tr></thead>
+        <tbody>
+          <tr><td>item_code</td><td>Item</td></tr>
+          <tr><td>description</td><td>Description</td></tr>
+          <tr><td>inventory_unit</td><td>Inventory unit</td></tr>
+          <tr><td>country_of_origin</td><td>Country of origin</td></tr>
+          <tr><td>item_group</td><td>Item group</td></tr>
+          <tr><td>product_type</td><td>Product type</td></tr>
+          <tr><td>order_system</td><td>Order system</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="mdl-footer">
+      <button class="btn ter" onclick="closeWgtModal('mapModal')">Close</button>
+    </footer>
+  </div>
+</div>
+
+
+<div class="wgt-modal-overlay" id="gapModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('gapModal')"></div>
+  <div class="wgt-modal-dialog">
+    <header class="mdl-header">
+      <div class="mdl-title" id="gapModalTitle">Approve the proposed values</div>
+      <button class="mdl-close" onclick="closeWgtModal('gapModal')" aria-label="Close">✕</button>
+    </header>
+    <div class="mdl-body" id="gapModalBody"></div>
+    <footer class="mdl-footer">
+      <button class="btn ter" onclick="closeWgtModal('gapModal')" id="gapRouteBtn">Route</button>
+      <button class="btn sec" onclick="closeWgtModal('gapModal')" id="gapEditBtn">Edit values</button>
+      <button class="btn primary" onclick="approveGap()" id="gapApproveBtn">Approve and write</button>
+    </footer>
+  </div>
+</div>
+
+
+<div class="flow-modal" id="flowModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="flow-backdrop" onclick="HFCloseFlow()"></div>
+  <div class="flow-dialog">
+    <header class="flow-header">
+      <div>
+        <div class="flow-eyebrow">New item intake</div>
+        <div class="flow-title">The product feed creates the item. The agent makes it sellable.</div>
+      </div>
+      <button class="flow-close" onclick="HFCloseFlow()" aria-label="Close">✕</button>
+    </header>
+    <div class="flow-stage">
+      <div class="flow-row">
+        <div class="flow-row-h">
+          <span class="flow-row-eyebrow">Today</span>
+          <span class="flow-row-title">The product feed creates the LN item, the agent completes setup, the item is ready to sell.</span>
+        </div>
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="sn">1</div><div class="nn">Feed file lands</div><div class="nb">Product content system drops the file in LN.</div></div>
+          <div class="flow-node"><div class="sn">2</div><div class="nn">Item created in LN</div><div class="nb">Core fields only: code, description, UOM, origin, item group, product type, order system.</div></div>
+          <div class="flow-node"><div class="sn">3</div><div class="nn">5 setup checks</div><div class="nb">Sales, price book line, warehouse, purchase, standard cost.</div></div>
+          <div class="flow-node"><div class="sn">4</div><div class="nn">Agent proposes</div><div class="nb">Values copied from the most similar item. Routed to Marcus, Priya or Owen.</div></div>
+          <div class="flow-node"><div class="sn">5</div><div class="nn">Ready to sell</div><div class="nb">All 5 checks Met. CPQ and the retail feed pick up the item.</div></div>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-row-h">
+          <span class="flow-row-eyebrow">After PLM go-live</span>
+          <span class="flow-row-title">Engineering releases in PLM. Send to Production creates the LN item and its BOM. The feed only updates the fields it owns.</span>
+        </div>
+        <div class="flow-nodes">
+          <div class="flow-node"><div class="sn">1</div><div class="nn">Engineering release</div><div class="nb">A design engineer releases the revision in PLM.</div></div>
+          <div class="flow-node"><div class="sn">2</div><div class="nn">Send to Production</div><div class="nb">Creates the LN item and its BOM in one step.</div></div>
+          <div class="flow-node"><div class="sn">3</div><div class="nn">Same 5 checks</div><div class="nb">The agent runs the identical setup readiness checks.</div></div>
+          <div class="flow-node"><div class="sn">4</div><div class="nn">Agent proposes gaps</div><div class="nb">Same proposals, same approvals, same audit trail.</div></div>
+          <div class="flow-node"><div class="sn">5</div><div class="nn">Feed as updater</div><div class="nb">The product feed only updates the fields it owns: UPC, shipping dimensions, web eligibility.</div></div>
+        </div>
+        <div class="flow-note">After PLM go-live, engineering controls when an item exists. The product feed stops creating items and only updates the fields it owns.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="smp-launcher" aria-label="Open assistant" onclick="void 0">
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.7 9.8c0 2.1.8 4 2.2 5.3L0.7 17.3h7.1c.1 0 .2 0 .3 0 4.1 0 7.5-3.3 7.5-7.5s-3.3-7.5-7.5-7.5S0.7 5.7 0.7 9.8z" fill="#460daf"/>
+  </svg>
+</button>
+
+<div class="demo-controls" id="demoControls">
+  <button class="demo-btn" id="idsDemoPrev">◀</button>
+  <button class="demo-btn play" id="idsDemoPlay">⏸</button>
+  <button class="demo-btn" id="idsDemoNext">▶</button>
+  <button class="demo-btn" id="idsDemoStop">■</button>
+  <span class="demo-status" id="idsDemoStatus">Demo running</span>
+</div>
+<div class="caption-bar" id="capBar">
+  <div class="caption-step" id="capStep">Step 1 of 15</div>
+  <div id="capText">…</div>
+</div>
+
+<script>
+
+var FEED_ROWS = [
+  { code:'ARIA-52-MB',    desc:'Aria 52 inch smart fan, matte black',       unit:'EA', country:'VN', group:'FIN-FAN-SMART', outcome:'create' },
+  { code:'ARIA-52-BN',    desc:'Aria 52 inch smart fan, brushed nickel',    unit:'EA', country:'VN', group:'FIN-FAN-SMART', outcome:'create' },
+  { code:'ARIA-44-WH',    desc:'Aria 44 inch smart fan, white',             unit:'EA', country:'VN', group:'FIN-FAN-SMART', outcome:'create' },
+  { code:'ARIA-44-MB',    desc:'Aria 44 inch smart fan, matte black',       unit:'EA', country:'VN', group:'FIN-FAN-SMART', outcome:'create' },
+  { code:'COAST-52-FW',   desc:'Coastal 52 inch, fresh white',              unit:'EA', country:'MX', group:'FIN-FAN-OUT',   outcome:'create' },
+  { code:'COAST-60-FW',   desc:'Coastal 60 inch, fresh white',              unit:'EA', country:'MX', group:'FIN-FAN-OUT',   outcome:'create' },
+  { code:'ARIA-44-BN-A',  desc:'Aria 44 inch brushed nickel',               unit:'EA', country:'VN', group:'FIN-FAN-SMART', outcome:'skip',   reason:'Item already exists in LN' },
+  { code:'SUMMIT-60-BK',  desc:'Summit 60 inch outdoor, black',             unit:'EA', country:'MX', group:'FIN-FAN-OUT',   outcome:'create' },
+  { code:'ATLAS-96-BK',   desc:'Atlas 8 foot industrial, matte black',      unit:'EA', country:'VN', group:'FIN-FAN-IND',   outcome:'create' },
+  { code:'ATLAS-96-BN',   desc:'Atlas 8 foot industrial, brushed nickel',   unit:'EA', country:'VN', group:'FIN-FAN-IND',   outcome:'create' },
+  { code:'COAST-52-FW-NEW', desc:'Coastal 52 inch fresh white',             unit:'',   country:'MX', group:'FIN-FAN-OUT',   outcome:'fail',   reason:'Inventory unit blank on the feed row' },
+  { code:'COAST-44-BN',   desc:'Coastal 44 inch, brushed nickel',           unit:'EA', country:'MX', group:'FIN-FAN-OUT',   outcome:'create' }
+];
+
+var FEED_STATE = 'empty'; 
+var APPROVED = {};
+
+
+var GAPS = [
+  { code:'ARIA-44-MB', desc:'Aria 44 inch smart fan, matte black',
+    check:'Price book line',
+    read:'Created at 08:14. Priya approved the price book line at 09:02.',
+    fix:'Copy the price book line from ARIA-44-BN (Aria 44 inch brushed nickel): unit price 329.00, price group FAN-SMART-44, effective today.',
+    source:'ARIA-44-BN, Aria 44 inch brushed nickel',
+    owner:'Priya Shah', role:'Pricing manager',
+    approvedBy:'Priya Shah', approvedAt:'09:02' },
+  { code:'ARIA-44-WH', desc:'Aria 44 inch smart fan, white',
+    check:'Price book line',
+    read:'The feed created this item at 08:14, but it has no price book line, so it cannot be sold.',
+    fix:'Copy the price book line from ARIA-44-BN (Aria 44 inch brushed nickel): unit price 329.00, price group FAN-SMART-44, effective today.',
+    source:'ARIA-44-BN, Aria 44 inch brushed nickel',
+    owner:'Priya Shah', role:'Pricing manager' },
+  { code:'ARIA-52-MB', desc:'Aria 52 inch smart fan, matte black',
+    check:'Price book line and purchase data',
+    read:'Missing a price book line and a primary supplier. The agent found a very similar matte black 44 inch and a shared supplier.',
+    fix:'Price book line from ARIA-44-MB at the 52 inch tier (359.00). Primary supplier SUPP-ARIA-MFG with 14 day lead time.',
+    source:'ARIA-44-MB for price, SUPP-ARIA-MFG for supplier',
+    owner:'Marcus Lee', role:'Buyer' },
+  { code:'ARIA-52-BN', desc:'Aria 52 inch smart fan, brushed nickel',
+    check:'Price book line',
+    read:'No price book line. The matte black 52 inch is almost identical.',
+    fix:'Copy the price book line from ARIA-52-MB: unit price 359.00, price group FAN-SMART-52.',
+    source:'ARIA-52-MB, Aria 52 inch matte black',
+    owner:'Priya Shah', role:'Pricing manager' },
+  { code:'COAST-52-FW', desc:'Coastal 52 inch, fresh white',
+    check:'Warehouse data',
+    read:'No ship-from warehouse set, so inventory cannot land anywhere.',
+    fix:'Set ship-from WH-FIN-FG-01 with locations A-04 and A-05, copied from COAST-52-BN.',
+    source:'COAST-52-BN, Coastal 52 inch brushed nickel',
+    owner:'Owen Vance', role:'Manufacturing engineer' },
+  { code:'COAST-60-FW', desc:'Coastal 60 inch, fresh white',
+    check:'Sales data and price book line',
+    read:'Sales UOM and tax code are blank, and there is no price book line.',
+    fix:'Sales UOM EA, tax code TX-STD, price book line copied from COAST-60-BN at 419.00.',
+    source:'COAST-60-BN, Coastal 60 inch brushed nickel',
+    owner:'Priya Shah', role:'Pricing manager' },
+  { code:'SUMMIT-60-BK', desc:'Summit 60 inch outdoor, black',
+    check:'Price book line and standard cost',
+    read:'Price book line is missing. Standard cost is waiting on a BOM roll because this is a new assembly.',
+    fix:'Price book line from SUMMIT-60-WH at 299.00. Standard cost 118.40 proposed from the current BOM roll preview.',
+    source:'SUMMIT-60-WH for price, BOM roll preview for cost',
+    owner:'Owen Vance', role:'Manufacturing engineer' },
+  { code:'ATLAS-96-BK', desc:'Atlas 8 foot industrial, matte black',
+    check:'Purchase data',
+    read:'No primary supplier on the item, so a buyer cannot cut a PO against it.',
+    fix:'Primary supplier SUPP-ATLAS-MFG, 21 day lead time, minimum order quantity 10, copied from ATLAS-96-BN.',
+    source:'ATLAS-96-BN, Atlas 8 foot brushed nickel',
+    owner:'Marcus Lee', role:'Buyer' }
+];
+
+
+function setFeedState(s){ FEED_STATE = s; renderFeed(); }
+
+function renderFeed(){
+  var rows = document.getElementById('feedRows');
+  var cntRows = document.getElementById('cntRows');
+  var cntCreate = document.getElementById('cntCreate');
+  var cntCreateLbl = document.getElementById('cntCreateLbl');
+  var cntSkip = document.getElementById('cntSkip');
+  var cntFail = document.getElementById('cntFail');
+  var btnCheck = document.getElementById('btnCheck');
+  var btnCreate = document.getElementById('btnCreate');
+  var loaderFile = document.getElementById('loaderFile');
+  var feedAnswer = document.getElementById('feedAnswer');
+  var tabCountFeed = document.getElementById('tabCountFeed');
+
+  if(FEED_STATE==='empty'){
+    rows.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#6f6f76;padding:28px">No file loaded. Press Use the sample or Choose a CSV file.</td></tr>';
+    cntRows.textContent='0'; cntCreate.textContent='0'; cntSkip.textContent='0'; cntFail.textContent='0';
+    cntCreateLbl.textContent='Would create';
+    btnCheck.disabled = true; btnCreate.disabled = true;
+    loaderFile.className='loader-file empty'; loaderFile.textContent='No file loaded';
+    feedAnswer.textContent='Load a file to see rows and run checks.';
+    if(tabCountFeed) tabCountFeed.hidden = true;
+    return;
+  }
+
+  loaderFile.className='loader-file'; loaderFile.textContent='product_feed_2026-10-30_0814.csv';
+  cntRows.textContent='12';
+  if(tabCountFeed){ tabCountFeed.hidden = false; tabCountFeed.textContent='12'; }
+
+  rows.innerHTML = FEED_ROWS.map(function(r){
+    var result = '';
+    if(FEED_STATE==='loaded'){
+      result = '<span class="badge neu">Not checked</span>';
+    } else if(FEED_STATE==='checked'){
+      if(r.outcome==='create') result = '<span class="badge ok">Would create</span>';
+      else if(r.outcome==='skip') result = '<span class="badge wait">Skipped: '+r.reason+'</span>';
+      else result = '<span class="badge err">Failed: '+r.reason+'</span>';
+    } else if(FEED_STATE==='created'){
+      if(r.outcome==='create') result = '<span class="badge ok">Created</span>';
+      else if(r.outcome==='skip') result = '<span class="badge wait">Skipped: '+r.reason+'</span>';
+      else result = '<span class="badge err">Failed: '+r.reason+'</span>';
+    }
+    return '<tr>'+
+      '<td class="cell-item">'+r.code+'</td>'+
+      '<td class="cell-desc">'+r.desc+'</td>'+
+      '<td>'+(r.unit||'<span style="color:#c31014">blank</span>')+'</td>'+
+      '<td>'+r.country+'</td>'+
+      '<td>'+r.group+'</td>'+
+      '<td>'+result+'</td>'+
+    '</tr>';
+  }).join('');
+
+  if(FEED_STATE==='loaded'){
+    cntCreate.textContent='0'; cntSkip.textContent='0'; cntFail.textContent='0';
+    cntCreateLbl.textContent='Would create';
+    btnCheck.disabled = false; btnCreate.disabled = true;
+    feedAnswer.textContent='12 rows loaded, status Not checked. Press Check only to see what would happen.';
+  } else if(FEED_STATE==='checked'){
+    cntCreate.textContent='10'; cntSkip.textContent='1'; cntFail.textContent='1';
+    cntCreateLbl.textContent='Would create';
+    btnCheck.disabled = false; btnCreate.disabled = false;
+    feedAnswer.textContent='Check ran: 10 would create, 1 skipped, 1 failed. Press Create in LN to write the 10 items.';
+  } else if(FEED_STATE==='created'){
+    cntCreate.textContent='10'; cntSkip.textContent='1'; cntFail.textContent='1';
+    cntCreateLbl.textContent='Created';
+    btnCheck.disabled = false; btnCreate.disabled = true;
+    feedAnswer.textContent='10 items created in LN, read back from LN. 21 seconds to finish. Open Not sellable yet for the 7 items that need setup.';
+  }
+}
+
+function openCreateConfirm(){
+  var list = FEED_ROWS.filter(function(r){return r.outcome==='create';}).map(function(r){return r.code;});
+  document.getElementById('createList').innerHTML = list.map(function(c){return '<div>'+c+'</div>';}).join('');
+  openWgtModal('createModal');
+}
+function confirmCreate(){
+  closeWgtModal('createModal');
+  setFeedState('created');
+  
+  setTimeout(function(){ switchTab('notsellable'); }, 300);
+}
+
+
+function renderMissingBars(){
+  
+  var counts = { 'Price book line':5, 'Purchase data':0, 'Warehouse data':0, 'Sales data':0, 'Standard cost':0 };
+  GAPS.forEach(function(g){
+    var c = g.check.toLowerCase();
+    if(c.indexOf('purchase')>=0) counts['Purchase data']++;
+    if(c.indexOf('warehouse')>=0) counts['Warehouse data']++;
+    if(c.indexOf('sales')>=0) counts['Sales data']++;
+    if(c.indexOf('cost')>=0) counts['Standard cost']++;
+  });
+  var max = 0; Object.keys(counts).forEach(function(k){ if(counts[k]>max) max = counts[k]; });
+  var html = '';
+  Object.keys(counts).forEach(function(k){
+    var n = counts[k];
+    var pct = max>0 ? Math.max(6, Math.round(n/max*100)) : 0;
+    html += '<div class="mb-row">'+
+      '<div class="mb-lbl">'+k+'</div>'+
+      '<div class="mb-track"><div class="mb-fill'+(n===0?' zero':'')+'" style="width:'+pct+'%">'+n+'</div></div>'+
+      '<div class="mb-count">'+n+'</div>'+
+    '</div>';
+  });
+  document.getElementById('missingBars').innerHTML = html;
+}
+
+function renderGaps(){
+  var el = document.getElementById('gapList');
+  el.innerHTML = GAPS.map(function(s,i){
+    var approved = APPROVED[s.code] || s.approvedBy;
+    var badge, actions;
+    if(approved){
+      var who = s.approvedBy || 'approver';
+      var when = s.approvedAt ? (' at '+s.approvedAt) : '';
+      badge = '<span class="badge ok">Approved by '+who+when+'</span>';
+      actions =
+        '<button class="btn primary sm" disabled>Approve and write</button>'+
+        '<button class="btn sec sm" disabled>Edit values</button>'+
+        '<button class="btn ter sm" disabled>Route</button>';
+    } else {
+      badge = '<span class="badge wait">'+s.check+' Missing</span>';
+      actions =
+        '<button class="btn primary sm" onclick="openGap('+i+',\'approve\')">Approve and write</button>'+
+        '<button class="btn sec sm" onclick="openGap('+i+',\'edit\')">Edit values</button>'+
+        '<button class="btn ter sm" onclick="openGap('+i+',\'route\')">Route</button>';
+    }
+    return '<div class="gap-card" data-code="'+s.code+'">'+
+      '<div class="gap-head">'+
+        '<span class="gap-item"><span class="code">'+s.code+'</span>. '+s.desc+'</span>'+
+        badge+
+      '</div>'+
+      '<div class="gap-read"><b>In plain words:</b> '+s.read+'</div>'+
+      '<div class="gap-fix"><b>Agent proposal:</b> '+s.fix+'<div class="from">From: '+s.source+'. The agent never edits the item record itself.</div></div>'+
+      '<div class="gap-owner-row">'+
+        '<div><div class="gap-owner-k">Owner of next step</div><div class="gap-owner-v">'+s.owner+'</div><div style="font-size:13px;color:#6f6f76">'+s.role+'</div></div>'+
+        '<div class="gap-actions">'+actions+'</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+}
+
+var CURRENT_GAP = null;
+function openGap(idx, mode){
+  var s = GAPS[idx]; if(!s) return;
+  CURRENT_GAP = s;
+  var titles = { approve:'Approve the proposed values', edit:'Edit values', route:'Route to someone else' };
+  document.getElementById('gapModalTitle').textContent = titles[mode]||titles.approve;
+  var body = '';
+  body += '<div style="font-size:16px;font-weight:600;margin-bottom:10px"><span style="color:#0054b1">'+s.code+'</span>. '+s.desc+'</div>';
+  body += '<div style="font-size:14px;margin-bottom:10px"><b>Missing check:</b> '+s.check+'.</div>';
+  body += '<div style="font-size:14px;margin-bottom:12px;line-height:1.5"><b>In plain words:</b> '+s.read+'</div>';
+  body += '<div class="gap-fix" style="margin-bottom:12px"><b>Agent proposal:</b> '+s.fix+'<div class="from">Source: '+s.source+'.</div></div>';
+  body += '<div style="padding:12px;background:#f5f5f5;border-radius:6px;font-size:13px">'+
+    '<div style="font-weight:600;margin-bottom:6px">Will be written to the audit trail</div>'+
+    '<div>Approved by: '+s.owner+'. Reason: '+s.check.toLowerCase()+' from similar item. Target: '+s.code+'. Source: '+s.source+'.</div>'+
+    '</div>';
+  document.getElementById('gapModalBody').innerHTML = body;
+  openWgtModal('gapModal');
+}
+function approveGap(){
+  if(CURRENT_GAP){
+    APPROVED[CURRENT_GAP.code] = true;
+    document.getElementById('nsApproved').textContent = Object.keys(APPROVED).length;
+    renderGaps();
+  }
+  closeWgtModal('gapModal');
+}
+
+
+function switchTab(name){
+  document.querySelectorAll('.ctab').forEach(function(x){x.classList.remove('active');});
+  document.querySelectorAll('.tab-panel').forEach(function(x){x.classList.remove('active');});
+  var tb = document.querySelector('.ctab[data-tab="'+name+'"]');
+  var tp = document.querySelector('.tab-panel[data-panel="'+name+'"]');
+  if(tb) tb.classList.add('active');
+  if(tp) tp.classList.add('active');
+}
+document.querySelectorAll('.ctab').forEach(function(b){
+  b.addEventListener('click', function(){ switchTab(b.dataset.tab); });
+});
+
+
+function openWgtModal(id){ var el=document.getElementById(id); if(!el) return; el.classList.add('open'); el.setAttribute('aria-hidden','false'); }
+function closeWgtModal(id){ var el=document.getElementById(id); if(!el) return; el.classList.remove('open'); el.setAttribute('aria-hidden','true'); }
+window.openWgtModal=openWgtModal; window.closeWgtModal=closeWgtModal;
+window.openGap=openGap; window.approveGap=approveGap; window.confirmCreate=confirmCreate;
+
+
+document.getElementById('btnSample').addEventListener('click', function(){ setFeedState('loaded'); });
+document.getElementById('btnChoose').addEventListener('click', function(){ setFeedState('loaded'); });
+document.getElementById('btnCheck').addEventListener('click', function(){ setFeedState('checked'); });
+document.getElementById('btnCreate').addEventListener('click', openCreateConfirm);
+
+
+function HFOpenFlow(){ document.getElementById('flowModal').classList.add('open'); }
+function HFCloseFlow(){ document.getElementById('flowModal').classList.remove('open'); }
+window.HFOpenFlow=HFOpenFlow; window.HFCloseFlow=HFCloseFlow;
+
+
+var DEMO_STEPS = [
+  { caption:"I'm Dana Whitfield, VP of product engineering at Hunter Fan. The product feed now creates items the moment the file lands, and the agent completes setup so the items can be sold.", highlight:'.ws-titlebar' },
+  { caption:"Step 1, Product feed. One console with four numbered steps. The selected tab has a light blue fill and a blue border.", tab:'feed', highlight:'.console-tabs' },
+  { caption:"The feed loads top to bottom. Use the sample or Choose a CSV file loads product_feed_2026-10-30_0814.csv with 12 rows at status Not checked. Create in LN stays disabled until Check only has run.", tab:'feed', action:function(){ setFeedState('loaded'); }, highlight:'.loader-row' },
+  { caption:"Check only fills a Result on every row. 10 would create, 1 skipped because the item already exists, 1 failed because the inventory unit was blank. The counts strip shows rows in file, would create, skipped and failed.", tab:'feed', action:function(){ setFeedState('checked'); }, highlight:'.counts-strip' },
+  { caption:"Create in LN opens a centered confirm pop-out that lists the 10 final item codes. Create 10 items writes them, reads them back from LN, 21 seconds to finish, and moves us to Not sellable yet.", tab:'feed', action:function(){ openCreateConfirm(); }, highlight:'#createModal .wgt-modal-dialog' },
+  { caption:"Confirming marks each row Created and moves to the next step.", action:function(){ confirmCreate(); } },
+  { caption:"Step 2, Not sellable yet. 10 items created, 3 are ready to sell, 7 are not sellable yet, most often the price book line. The Items missing each check card shows one bar per check across the card width.", tab:'notsellable', highlight:'#missingBars' },
+  { caption:"Below are the 7 cards. Each card has the item code and name, the missing check in plain words, the agent proposal, the source item and the owner. The buttons open a centered pop-out filled from that card.", tab:'notsellable', highlight:'#gapList' },
+  { caption:"ARIA-44-MB was already approved by Priya Shah at 09:02, so its buttons are disabled. The next card is still open.", tab:'notsellable', action:function(){ openGap(1,'approve'); }, highlight:'#gapModal .wgt-modal-dialog' },
+  { caption:"Approving writes the audit trail and marks the card as approved.", action:function(){ approveGap(); } },
+  { caption:"Step 3, Item 360. Aria 44 inch matte black. Created in LN at 08:14, Ready to sell 09:03. Where it started names product feed, Oct 30 08:14, row 4.", tab:'item360', highlight:'.origin-strip' },
+  { caption:"All 5 setup checks are Met. The system lanes show LN created at 08:14, Ready to sell 09:03, CPQ quotable 09:12, retail feed picked up 09:20.", tab:'item360', highlight:'.sys-lanes' },
+  { caption:"Step 4, Insights. Minutes from feed file to item created is now under a minute. Hours from created to ready to sell is down to 3 hours. The most common missing check is the price book line.", tab:'insights', highlight:'.insights-grid' },
+  { caption:"Flow, at the top right of the title row, shows today's path and the path after PLM go-live.", action:function(){ HFOpenFlow(); } },
+  { caption:"After PLM go-live, engineering releases in PLM, Send to Production creates the LN item and its BOM, and the feed only updates the fields it owns: UPC, shipping dimensions, web eligibility.", action:function(){ HFCloseFlow(); } }
+];
+var demoIdx=0, demoRunning=false, demoTimer=null, demoPaused=false;
+function showStep(i){
+  document.querySelectorAll('.highlight').forEach(function(e){e.classList.remove('highlight');});
+  var s = DEMO_STEPS[i]; if(!s) return;
+  if(s.tab){ switchTab(s.tab); }
+  if(s.action){ try{ s.action(); }catch(e){} }
+  if(s.highlight){
+    setTimeout(function(){
+      var el = document.querySelector(s.highlight);
+      if(el){ el.classList.add('highlight'); el.scrollIntoView({behavior:'smooth',block:'center'}); }
+    }, 120);
+  }
+  document.getElementById('capText').textContent = s.caption;
+  document.getElementById('capStep').textContent = 'Step '+(i+1)+' of '+DEMO_STEPS.length;
+}
+function startDemo(){
+  if(demoRunning) return;
+  demoRunning=true; demoPaused=false; demoIdx=0;
+  
+  APPROVED = {}; document.getElementById('nsApproved').textContent='0';
+  setFeedState('empty');
+  switchTab('feed');
+  document.getElementById('demoControls').classList.add('visible');
+  document.getElementById('capBar').classList.add('visible');
+  document.getElementById('runDemoBtn').classList.add('running');
+  document.getElementById('runDemoLabel').textContent='Stop demo';
+  showStep(0);
+  tickDemo();
+}
+function tickDemo(){
+  clearTimeout(demoTimer);
+  if(!demoRunning || demoPaused) return;
+  demoTimer = setTimeout(function(){
+    if(demoIdx < DEMO_STEPS.length-1){ demoIdx++; showStep(demoIdx); tickDemo(); }
+    else stopDemo();
+  }, 7500);
+}
+function stopDemo(){
+  demoRunning=false; demoPaused=false; clearTimeout(demoTimer);
+  document.getElementById('demoControls').classList.remove('visible');
+  document.getElementById('capBar').classList.remove('visible');
+  document.getElementById('runDemoBtn').classList.remove('running');
+  document.getElementById('runDemoLabel').textContent='Run demo';
+  document.querySelectorAll('.highlight').forEach(function(e){e.classList.remove('highlight');});
+  closeWgtModal('gapModal'); closeWgtModal('createModal'); closeWgtModal('mapModal');
+}
+document.getElementById('runDemoBtn').addEventListener('click',function(){ demoRunning?stopDemo():startDemo(); });
+document.getElementById('idsDemoStop').addEventListener('click',stopDemo);
+document.getElementById('idsDemoPlay').addEventListener('click',function(){ demoPaused=!demoPaused; this.textContent=demoPaused?'▶':'⏸'; if(!demoPaused)tickDemo(); });
+document.getElementById('idsDemoNext').addEventListener('click',function(){ if(demoIdx<DEMO_STEPS.length-1){demoIdx++; showStep(demoIdx); tickDemo();} });
+document.getElementById('idsDemoPrev').addEventListener('click',function(){ if(demoIdx>0){demoIdx--; showStep(demoIdx); tickDemo();} });
+
+
+renderFeed();
+renderMissingBars();
+renderGaps();
+</script>
+
+
+</body>
+</html>

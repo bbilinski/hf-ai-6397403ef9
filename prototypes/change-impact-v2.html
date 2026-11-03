@@ -9,9 +9,10 @@
 
 
 
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hunter Fan — Engineering Change Impact Console</title>
+<title>Hunter Fan, Engineering Change Impact Console</title>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -84,7 +85,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
 .mh-icon-btn:hover{background:#28282a;color:#ffffff}
 .mh-logo-btn:has(img:not(.mh-logo-default), svg) .mh-logo-default{display:none}
 .mh-tabs{display:flex;align-items:center;flex:1;min-width:0;gap:4px}
-.mh-tab{display:inline-flex;align-items:center;gap:8px;height:32px;padding-inline:16px;background:#28282a;border-radius:4px;color:#ffffff;font-size:14px;font-weight:600;max-width:520px}
+.mh-tab{display:inline-flex;align-items:center;gap:8px;height:32px;padding-inline:16px;background:#28282a;border-radius:4px;color:#ffffff;font-size:14px;font-weight:600;max-width:620px}
 .mh-tab-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mh-tab-divider{width:1px;height:18px;background:rgba(255,255,255,0.3);flex-shrink:0}
 .mh-tab-close{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;color:#ffffff;padding:0}
@@ -180,29 +181,34 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
 .tbl td.wrap{white-space:normal}
 
 
-.cellbar{position:relative;display:flex;align-items:center;gap:8px}
-.cellbar-track{flex:1;height:6px;background:var(--ids-color-neutral-10);border-radius:3px;overflow:hidden;min-width:40px}
+.cellbar{position:relative;display:flex;align-items:center;gap:6px}
+.cellbar-track{flex:1;height:6px;background:var(--ids-color-neutral-10);border-radius:3px;overflow:hidden;min-width:24px}
 .cellbar-fill{height:100%;background:var(--ids-dv-01);border-radius:3px}
 .cellbar-fill.red{background:var(--red)}
 .cellbar-fill.amber{background:var(--amber)}
 .cellbar-fill.green{background:var(--green)}
-.cellbar-val{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;flex-shrink:0;min-width:60px;text-align:right}
+.cellbar-val{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;flex-shrink:0;text-align:right}
+
+
+.tbl.compact th,.tbl.compact td{padding:10px 6px;font-size:12.5px}
+.tbl.compact .cellbar-val{font-size:12px}
 
 
 .twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.twocol .card{display:flex;flex-direction:column}
+.twocol .card{display:flex;flex-direction:column;min-width:0}
 .twocol .card-head{flex-shrink:0}
-.twocol .tbl-wrap{padding:0 16px 16px}
+.twocol .tbl-wrap{padding:0 10px 16px;overflow-x:hidden}
 .topline{padding:10px 16px;background:var(--ids-color-neutral-10);font-size:12px;color:var(--text-dim);display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
 
 
-.openin{color:var(--accent);font-size:11px;font-weight:600;text-decoration:none;white-space:nowrap}
+.openin{color:var(--accent);font-size:11px;font-weight:600;text-decoration:none;white-space:nowrap;cursor:pointer}
 .openin:hover{text-decoration:underline}
 
 
 .queue-tbl td.ecn{font-weight:600;color:var(--text)}
 
 
+.approve-lede{background:var(--ids-color-action-weakest);border:1px solid var(--ids-color-action-weakest);border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:14px;color:var(--text);line-height:1.5}
 .approve-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .person-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;gap:14px;align-items:center}
 .person-ava{width:48px;height:48px;border-radius:50%;background:var(--ids-color-action-weakest);color:var(--ids-color-action);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
@@ -213,15 +219,35 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
 .approve-what{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px}
 .approve-what-eye{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;font-weight:600}
 .approve-what-main{font-size:20px;font-weight:600;color:var(--text);margin-top:6px;line-height:1.3}
-.approve-cta{display:flex;justify-content:center;margin-bottom:20px}
+.approve-cta{display:flex;justify-content:center;align-items:center;gap:14px;margin-bottom:20px}
+.notnow-link{background:none;border:0;color:var(--accent);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;padding:4px 8px}
+.notnow-link:hover{text-decoration:underline}
 
 
-.route-list{display:flex;flex-direction:column;gap:8px}
-.route-step{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--border);border-radius:6px;background:#fff}
-.route-step-num{width:26px;height:26px;border-radius:50%;background:var(--ids-color-action-weakest);color:var(--ids-color-action);font-weight:700;font-size:12px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
-.route-step-body{flex:1;min-width:0}
-.route-step-name{font-size:13px;font-weight:600;color:var(--text)}
-.route-step-sub{font-size:12px;color:var(--text-muted);margin-top:2px}
+.wf-legend{display:flex;gap:14px;flex-wrap:wrap;margin:8px 0 16px;font-size:12px;color:var(--text-dim)}
+.wf-legend-item{display:inline-flex;align-items:center;gap:6px}
+.wf-legend-swatch{width:12px;height:12px;border-radius:3px;border:1px solid var(--border)}
+.wf-legend-swatch.done{background:var(--ids-color-success-weak);border-color:var(--green)}
+.wf-legend-swatch.now{background:var(--ids-color-action-weakest);border-color:var(--accent)}
+.wf-legend-swatch.wait{background:#f9f9fa;border-color:var(--border)}
+
+.wf-line{display:flex;align-items:center;gap:0;overflow-x:auto;padding:8px 2px 14px}
+.wf-endpoint{width:36px;height:36px;border-radius:50%;border:2px solid var(--text-dim);background:#fff;color:var(--text-dim);display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;flex-shrink:0}
+.wf-connector{flex:0 0 24px;height:2px;background:var(--text-dim);min-width:16px}
+.wf-node{flex:0 0 auto;min-width:132px;max-width:160px}
+.wf-box{background:#f9f9fa;border:1px solid var(--border);border-radius:6px;padding:8px 10px;display:flex;flex-direction:column;gap:3px}
+.wf-box.done{background:var(--ids-color-success-weak);border-color:var(--green)}
+.wf-box.now{background:var(--ids-color-action-weakest);border-color:var(--accent)}
+.wf-box-name{font-size:12px;font-weight:700;color:var(--text);line-height:1.2}
+.wf-box-state{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.wf-box-state.done{color:var(--ids-color-success-stronger)}
+.wf-box-state.now{color:var(--ids-color-action-stronger)}
+.wf-box-state.wait{color:var(--text-muted)}
+.wf-box-who{font-size:11px;color:var(--text-dim)}
+.wf-stack{display:flex;flex-direction:column;gap:6px}
+.wf-stack-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;text-align:center;font-weight:600}
+
+.wf-caption{margin-top:4px;padding:12px 14px;background:var(--ids-color-action-weakest);border-radius:6px;font-size:13px;color:var(--text);line-height:1.5}
 
 
 .change-picker{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
@@ -230,26 +256,9 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
 .change-chip.active{border-color:var(--accent);background:var(--ids-color-action-weakest)}
 .change-chip-id{font-size:12px;font-weight:700;color:var(--text)}
 .change-chip-item{font-size:12px;color:var(--text-dim);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.change-chip-state{font-size:11px;color:var(--text-muted);margin-top:4px}
+.change-chip-state{font-size:11px;color:var(--text-muted);margin-top:4px;line-height:1.4;white-space:normal}
 
 .workflow-diagram{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px}
-.wf-row{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap}
-.wf-step{flex:1;min-width:140px;background:#f9f9fa;border:1px solid var(--border);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;position:relative}
-.wf-step.done{background:var(--ids-color-success-weak);border-color:var(--green)}
-.wf-step.now{background:var(--ids-color-action-weakest);border-color:var(--accent)}
-.wf-step-head{display:flex;align-items:center;justify-content:space-between;gap:6px}
-.wf-step-name{font-size:12px;font-weight:700;color:var(--text)}
-.wf-step-mark{font-size:11px;font-weight:600}
-.wf-step-mark.done{color:var(--ids-color-success-stronger)}
-.wf-step-mark.now{color:var(--ids-color-action-stronger)}
-.wf-step-mark.wait{color:var(--text-muted)}
-.wf-step-who{font-size:11px;color:var(--text-dim)}
-.wf-step-time{font-size:11px;color:var(--text-muted)}
-.wf-parallel{display:flex;flex-direction:column;gap:8px;flex:1;min-width:140px}
-.wf-parallel .wf-step{flex:0 0 auto}
-.wf-parallel-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;text-align:center;font-weight:600}
-.wf-arrow{display:flex;align-items:center;color:var(--text-muted);font-size:14px;flex-shrink:0}
-.wf-caption{margin-top:14px;padding:12px 14px;background:var(--ids-color-action-weakest);border-radius:6px;font-size:13px;color:var(--text);line-height:1.5}
 
 
 .wgt-modal-overlay{position:fixed;inset:0;z-index:250;display:none;align-items:center;justify-content:center}
@@ -333,7 +342,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
   </div>
   <div class="mh-tabs" role="tablist">
     <div class="mh-tab" role="tab" aria-selected="true" tabindex="0">
-      <span class="mh-tab-label">Engineering Change Impact Console</span>
+      <span class="mh-tab-label">Hunter Fan — Engineering Change Impact Console</span>
       <span class="mh-tab-divider" aria-hidden="true"></span>
       <button class="mh-tab-close" type="button" aria-label="Close tab">
         <svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path d="M9 10.06L13.22 14.28L14.28 13.22L10.06 9L14.28 4.78L13.22 3.72L9 7.94L4.78 3.72L3.72 4.78L7.94 9L3.72 13.22L4.78 14.28L9 10.06Z" fill="currentColor"/></svg>
@@ -342,6 +351,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
   </div>
   <div class="mh-end">
     <button class="mh-icon-btn" type="button" aria-label="Search"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 8C3.5 5.51 5.51 3.5 8 3.5C10.49 3.5 12.5 5.51 12.5 8C12.5 10.49 10.49 12.5 8 12.5C5.51 12.5 3.5 10.49 3.5 8ZM8 2C4.69 2 2 4.69 2 8C2 11.31 4.69 14 8 14C9.39 14 10.66 13.53 11.68 12.74L14.97 16.03L16.03 14.97L12.74 11.68C13.53 10.66 14 9.39 14 8C14 4.69 11.31 2 8 2Z" fill="currentColor"/></svg></button>
+    <button class="mh-icon-btn" type="button" aria-label="Bookmarks"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path d="M4.5 2.5h9v13l-4.5-3-4.5 3v-13z" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linejoin="round"/></svg></button>
     <button class="mh-icon-btn" type="button" aria-label="User profile"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 3C5.69 3 3 5.69 3 9C3 10.34 3.44 11.58 4.19 12.58C4.87 11.63 5.99 11 7.25 11H10.75C12.01 11 13.13 11.63 13.81 12.58C14.56 11.58 15 10.34 15 9C15 5.69 12.31 3 9 3ZM1.5 9C1.5 4.86 4.86 1.5 9 1.5C13.14 1.5 16.5 4.86 16.5 9C16.5 13.14 13.14 16.5 9 16.5C4.86 16.5 1.5 13.14 1.5 9ZM9 4.5C7.48 4.5 6.25 5.73 6.25 7.25C6.25 8.77 7.48 10 9 10C10.52 10 11.75 8.77 11.75 7.25C11.75 5.73 10.52 4.5 9 4.5Z" fill="currentColor"/></svg></button>
   </div>
 </header>
@@ -350,7 +360,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
 <div class="app-actions">
   <div>
     <div class="app-title">Engineering Change Impact Console</div>
-    <div class="app-subtitle">Infor PLM for Discrete · Industrial LN · Dana Whitfield, VP Product Engineering</div>
+    <div class="app-subtitle">Infor PLM for Discrete, Dana Whitfield, VP Product Engineering</div>
   </div>
   <div class="app-actions-right">
     <button class="flow-btn-launch" type="button" id="flowBtn" aria-label="How it works">
@@ -423,7 +433,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
         </div>
         <div class="hero-text">
           <div class="hero-eye">On hold</div>
-          <div class="hero-head">Hold ECN-2041: 27 open orders and 38 customers are blockers</div>
+          <div class="hero-head">Hold ECN-2041, 27 open orders and 38 customers are blockers</div>
         </div>
       </div>
       <div class="hero-right">
@@ -497,7 +507,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
         <div class="lever-counts">15 not started, 12 in process (whole orders)</div>
         <div class="lever-actions">
           <button class="btn primary" onclick="selectTab('approve')">Approve</button>
-          <button class="btn" onclick="openLN('tisfc001')">Open in LN</button>
+          <button class="btn" onclick="openPLM('MH-4410')">Open in PLM</button>
           <button class="btn" onclick="showLeverDetail('plant')">Details</button>
         </div>
       </div>
@@ -512,7 +522,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
         <div class="lever-counts">247 open lines, 38 customers</div>
         <div class="lever-actions">
           <button class="btn primary" onclick="selectTab('approve')">Approve</button>
-          <button class="btn" onclick="openLN('tdsls400')">Open in LN</button>
+          <button class="btn" onclick="openPLM('MH-4410')">Open in PLM</button>
           <button class="btn" onclick="showLeverDetail('customer')">Details</button>
         </div>
       </div>
@@ -529,16 +539,16 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
           <button class="btn link" onclick="showAll('orders')">Show all</button>
         </div>
         <div class="tbl-wrap">
-          <table class="tbl" aria-label="Open production orders">
-            <colgroup><col style="width:10%"><col style="width:23%"><col style="width:15%"><col style="width:9%"><col style="width:13%"><col style="width:30%"></colgroup>
+          <table class="tbl compact" aria-label="Open production orders">
+            <colgroup><col style="width:14%"><col style="width:22%"><col style="width:14%"><col style="width:9%"><col style="width:14%"><col style="width:27%"></colgroup>
             <thead>
               <tr>
                 <th>Order</th>
                 <th>Makes</th>
                 <th>Status</th>
-                <th class="r">Item qty</th>
-                <th>Item material</th>
-                <th class="r">Operations</th>
+                <th class="r">Qty</th>
+                <th class="r">Item material</th>
+                <th class="r">Order operations</th>
               </tr>
             </thead>
             <tbody id="ordersBody"></tbody>
@@ -583,6 +593,10 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
   
   <section class="tabpane" id="pane-approve">
 
+    <div class="approve-lede">
+      If you approve: ECN-2041 goes from Created to In Progress and its first step, Check Out, starts.
+    </div>
+
     <div class="approve-what">
       <div class="approve-what-eye">You are approving</div>
       <div class="approve-what-main">ECN-2041 holds MH-4410 revision C, moving motor housing to revision D</div>
@@ -609,6 +623,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
 
     <div class="approve-cta">
       <button class="btn big primary" type="button" onclick="approveAndLaunch()" id="approveBtn">Approve and launch PLM workflow</button>
+      <button class="notnow-link" type="button" onclick="selectTab('impact')">Not now</button>
     </div>
 
     <div class="card">
@@ -619,17 +634,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
         </div>
       </div>
       <div class="card-pad">
-        <div class="route-list">
-          <div class="route-step"><div class="route-step-num">1</div><div class="route-step-body"><div class="route-step-name">Check Out</div><div class="route-step-sub">Automatic</div></div></div>
-          <div class="route-step"><div class="route-step-num">2</div><div class="route-step-body"><div class="route-step-name">Review design</div><div class="route-step-sub">Cal Draper, design engineer</div></div></div>
-          <div class="route-step"><div class="route-step-num">3</div><div class="route-step-body"><div class="route-step-name">Approve design</div><div class="route-step-sub">Owen Vance, manufacturing engineer</div></div></div>
-          <div class="route-step"><div class="route-step-num">4</div><div class="route-step-body"><div class="route-step-name">Distribution and Modify, in parallel</div><div class="route-step-sub">Priya Shah (purchasing), Cal Draper</div></div></div>
-          <div class="route-step"><div class="route-step-num">5</div><div class="route-step-body"><div class="route-step-name">Check In</div><div class="route-step-sub">Automatic</div></div></div>
-          <div class="route-step"><div class="route-step-num">6</div><div class="route-step-body"><div class="route-step-name">Send to production</div><div class="route-step-sub">Owen Vance</div></div></div>
-          <div class="route-step"><div class="route-step-num">7</div><div class="route-step-body"><div class="route-step-name">Send to Document Management</div><div class="route-step-sub">Automatic</div></div></div>
-          <div class="route-step"><div class="route-step-num">8</div><div class="route-step-body"><div class="route-step-name">Launch workflow</div><div class="route-step-sub">Automatic</div></div></div>
-          <div class="route-step"><div class="route-step-num">9</div><div class="route-step-body"><div class="route-step-name">Workflow response</div><div class="route-step-sub">Dana Whitfield receives confirmation</div></div></div>
-        </div>
+        <div id="approveDiagram"></div>
       </div>
     </div>
   </section>
@@ -641,11 +646,17 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
 
     <div class="workflow-diagram">
       <div class="card-title" style="margin-bottom:4px" id="wfTitle">ECN-2041 route</div>
-      <div class="card-sub" style="margin-bottom:16px" id="wfSub">MH-4410 revision C to revision D</div>
+      <div class="card-sub" id="wfSub">MH-4410 revision C to revision D</div>
 
-      <div class="wf-row" id="wfRow"></div>
+      <div class="wf-caption" id="wfCaption" style="margin:12px 0 8px"></div>
 
-      <div class="wf-caption" id="wfCaption"></div>
+      <div class="wf-legend" aria-label="Legend">
+        <span class="wf-legend-item"><span class="wf-legend-swatch done"></span>Done</span>
+        <span class="wf-legend-item"><span class="wf-legend-swatch now"></span>Now</span>
+        <span class="wf-legend-item"><span class="wf-legend-swatch wait"></span>Not started</span>
+      </div>
+
+      <div class="wf-line" id="wfRow"></div>
     </div>
 
     <div class="card" id="wfTableWrap">
@@ -699,7 +710,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
     <div class="flow-body">
       <div class="flow-step"><div class="flow-step-num">1</div><div class="flow-step-txt">
         <div class="flow-step-name">Change queue</div>
-        <div class="flow-step-desc">Every open engineering change in a single list, with the item on hold, originator, type, status, and how many order and sales lines it touches. Pick one to scope the console.</div>
+        <div class="flow-step-desc">Every open engineering change in a single list, with the item on hold, originator, type, status, and how many order and sales lines it touches. Pick one to read its impact.</div>
       </div></div>
       <div class="flow-step"><div class="flow-step-num">2</div><div class="flow-step-txt">
         <div class="flow-step-name">Impact</div>
@@ -707,7 +718,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
       </div></div>
       <div class="flow-step"><div class="flow-step-num">3</div><div class="flow-step-txt">
         <div class="flow-step-name">Approve and launch</div>
-        <div class="flow-step-desc">Short. The change in one line, the two people in the first steps, one Approve button, and the route that will run after you approve.</div>
+        <div class="flow-step-desc">The change in one line, the two people in the first steps, one Approve button, and the route that will run after you approve.</div>
       </div></div>
       <div class="flow-step"><div class="flow-step-num">4</div><div class="flow-step-txt">
         <div class="flow-step-name">Workflow status</div>
@@ -732,7 +743,7 @@ body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16
       <div class="smp-onb-icon">✦</div>
       <div class="smp-onb-title">Ask about this change</div>
       <div class="smp-chips" style="width:100%;margin-top:8px">
-        <button class="smp-chip" onclick="askSmp('Which production orders carry the biggest dollar at stake?')">Which orders carry the biggest at-stake?</button>
+        <button class="smp-chip" onclick="askSmp('Which orders carry the most at stake?')">Which orders carry the most at stake?</button>
         <button class="smp-chip" onclick="askSmp('Show me the customer exposure as a chart')">Chart the customer exposure</button>
         <button class="smp-chip" onclick="askSmp('How much stock would need to be written off at the latest cutover?')">Stock write-off at latest cutover?</button>
       </div>
@@ -754,7 +765,7 @@ const QUEUE = [
   {id:"ECN-2041", item:"MH-4410 rev C", desc:"Motor housing, Aria 44\" smart fan", originator:"Dana Whitfield", type:"Design", status:"Created", olines:27, slines:247, active:true},
   {id:"ECN-2037", item:"LB-2208 rev B", desc:"LED driver board, Lumen pendant", originator:"Cal Draper", type:"Design", status:"In review", olines:9, slines:62},
   {id:"ECN-2033", item:"BL-4418 rev F", desc:"Fan blade pack, Aria 44\"", originator:"Owen Vance", type:"Routing", status:"Created", olines:12, slines:118},
-  {id:"ECN-2029", item:"GL-1109 rev A", desc:"Glass shade, Harbor sconce", originator:"Priya Shah", type:"Vendor", status:"On hold", olines:4, slines:28},
+  {id:"ECN-2029", item:"GL-1109 rev A", desc:"Glass shade, Bayview sconce", originator:"Priya Shah", type:"Vendor", status:"On hold", olines:4, slines:28},
   {id:"ECN-2024", item:"RC-7701 rev C", desc:"Remote receiver, smart fan line", originator:"Cal Draper", type:"Design", status:"In review", olines:18, slines:94},
   {id:"ECN-2018", item:"MT-3310 rev D", desc:"Motor shaft, Breeze 52\"", originator:"Dana Whitfield", type:"Routing", status:"Created", olines:6, slines:41}
 ];
@@ -779,16 +790,18 @@ const CUSTOMERS = [
   {sold:"Keystone Home", lines:8, left:140, value:1120}
 ];
 
+
 const WORKFLOW_STEPS = [
-  {id:"co", name:"Check Out", kind:"Automatic", who:"System"},
-  {id:"rd", name:"Review design", kind:"Review", who:"Cal Draper"},
-  {id:"ad", name:"Approve design", kind:"Approve", who:"Owen Vance"},
-  {id:"dm", name:"Distribution + Modify", kind:"Parallel", who:"Priya Shah, Cal Draper"},
-  {id:"ci", name:"Check In", kind:"Automatic", who:"System"},
-  {id:"sp", name:"Send to production", kind:"Hand-off", who:"Owen Vance"},
-  {id:"dm2", name:"Send to Document Management", kind:"Automatic", who:"System"},
-  {id:"lw", name:"Launch workflow", kind:"Automatic", who:"System"},
-  {id:"wr", name:"Workflow response", kind:"Notify", who:"Dana Whitfield"}
+  {id:"co",  name:"Check Out",                    kind:"System",             who:"System"},
+  {id:"rd",  name:"Review design",                kind:"User task, Review",  who:"Cal Draper"},
+  {id:"ad",  name:"Approve design",               kind:"User task, Approve", who:"Owen Vance"},
+  {id:"dm",  name:"Distribution + Modify",        kind:"System",             who:"System", stack:true,
+             parts:[{name:"Distribution", who:"System"},{name:"Modify", who:"System"}]},
+  {id:"ci",  name:"Check In",                     kind:"System",             who:"System"},
+  {id:"sp",  name:"Send to production",           kind:"System",             who:"System"},
+  {id:"dm2", name:"Send to Document Management",  kind:"System",             who:"System"},
+  {id:"lw",  name:"Launch workflow",              kind:"System",             who:"System"},
+  {id:"wr",  name:"Workflow response",            kind:"System",             who:"System"}
 ];
 
 
@@ -800,19 +813,21 @@ function selectTab(id){
   document.querySelectorAll(".steptab").forEach(t => t.classList.toggle("active", t.dataset.tab === id));
   document.querySelectorAll(".tabpane").forEach(p => p.classList.toggle("active", p.id === "pane-"+id));
   if(id === "status") paintStatus();
+  if(id === "approve") paintApproveDiagram();
 }
 
 
 function paintQueue(){
   const body = document.getElementById("queueBody");
   body.innerHTML = QUEUE.map(q => {
-    const statusCls = q.status === "Created" ? "amber" : q.status === "In review" ? "blue" : q.status === "On hold" ? "red" : "grey";
+    const statusCls = q.status === "Created" ? "amber" : q.status === "In review" ? "blue" : q.status === "On hold" ? "red" : q.status === "Launched" ? "green" : "grey";
+    const statusText = q.status === "Created" ? "Created, not launched" : q.status;
     return `<tr class="clickable" onclick="openFromQueue('${q.id}')">
       <td class="ecn">${q.id}</td>
-      <td title="${q.item} · ${q.desc}">${q.item} · ${q.desc}</td>
+      <td title="${q.item}, ${q.desc}">${q.item}, ${q.desc}</td>
       <td>${q.originator}</td>
       <td>${q.type}</td>
-      <td><span class="pill ${statusCls}">${q.status}</span></td>
+      <td><span class="pill ${statusCls}">${statusText}</span></td>
       <td class="r">${q.olines}</td>
       <td class="r">${q.slines}</td>
     </tr>`;
@@ -824,7 +839,7 @@ function openFromQueue(id){
     selectedChange = "ECN-2041";
     selectTab("impact");
   } else {
-    showPopout("Change scoped", id, `<p>${id} selected. The Impact tab shows ECN-2041 in this demo.</p>`);
+    showPopout(id, "", `<p>Not reviewed yet for impact.</p>`);
   }
 }
 
@@ -833,11 +848,10 @@ function fmt(n){ return "$" + n.toLocaleString(); }
 
 function paintOrders(){
   const body = document.getElementById("ordersBody");
-  const max = Math.max(...ORDERS.map(o => o.mat + o.ops));
+  const max = Math.max(...ORDERS.map(o => o.ops));
   body.innerHTML = ORDERS.map(o => {
-    const atStake = o.mat + o.ops;
-    const w = Math.round(atStake / max * 100);
-    const cls = atStake > 15000 ? "red" : atStake > 8000 ? "amber" : "green";
+    const w = Math.round(o.ops / max * 100);
+    const cls = o.ops > 5000 ? "red" : o.ops > 3000 ? "amber" : "green";
     const statusCls = o.status === "In process" ? "amber" : "grey";
     return `<tr class="clickable" onclick="showOrderDetail('${o.order}')">
       <td><a class="openin" onclick="event.stopPropagation();openLN('tisfc001')">${o.order}</a></td>
@@ -891,7 +905,7 @@ function closePopout(){
 }
 
 
-function miniBarChart(items, maxLabel){
+function miniBarChart(items){
   const max = Math.max(...items.map(i => i.v));
   return `<svg viewBox="0 0 400 160" style="width:100%;height:auto">
     ${items.map((it,i) => {
@@ -904,16 +918,15 @@ function miniBarChart(items, maxLabel){
         <text x="${x+bw/2}" y="${128-h}" font-size="9" fill="#161618" text-anchor="middle" font-weight="600">${it.vl||''}</text>
       </g>`;
     }).join('')}
-    
   </svg>`;
 }
 
 function showLeverDetail(key){
   const defs = {
-    material: {t:"Material committed — $4,700", s:"27 open order lines on MH-4410 rev C",
-      chart: miniBarChart(ORDERS.map(o=>({l:o.order.slice(-4),v:o.mat,vl:'$'+(o.mat/1000).toFixed(1)+'k',c:'#0054b1'})),"$14.4k"),
+    material: {t:"Material committed, $4,700", s:"27 open order lines on MH-4410 rev C",
+      chart: miniBarChart(ORDERS.map(o=>({l:o.order.slice(-4),v:o.mat,vl:'$'+(o.mat/1000).toFixed(1)+'k',c:'#0054b1'}))),
       tbl: ordersTable()},
-    stock: {t:"Stock exposure — $25,000", s:"628 on hand across 14 warehouses, at standard cost",
+    stock: {t:"Stock exposure, $25,000", s:"628 on hand across 14 warehouses, at standard cost",
       chart: miniBarChart([
         {l:"H2 Memphis",v:9800,vl:"$9.8k"},
         {l:"H3 Dallas",v:5400,vl:"$5.4k"},
@@ -928,11 +941,11 @@ function showLeverDetail(key){
         <tr><td>H5 Atlanta</td><td class="r">65</td><td class="r">$2,600</td><td><a class="openin" onclick="openLN('whinr110')">Open in LN</a></td></tr>
         <tr><td>10 other warehouses</td><td class="r">85</td><td class="r">$3,300</td><td><a class="openin" onclick="openLN('whinr110')">Open in LN</a></td></tr>
       </tbody></table>`},
-    plant: {t:"Work in the plant — $85,800", s:"15 not started, 12 in process, whole orders",
-      chart: miniBarChart(ORDERS.map(o=>({l:o.order.slice(-4),v:o.mat+o.ops,vl:'$'+((o.mat+o.ops)/1000).toFixed(1)+'k',c:'#da1217'})),"$21k"),
+    plant: {t:"Work in the plant, $85,800", s:"15 not started, 12 in process, whole orders",
+      chart: miniBarChart(ORDERS.map(o=>({l:o.order.slice(-4),v:o.mat+o.ops,vl:'$'+((o.mat+o.ops)/1000).toFixed(1)+'k',c:'#da1217'}))),
       tbl: ordersTable()},
-    customer: {t:"Customer commitments — $110,700", s:"247 open lines, 38 customers, top 3 hold 84 percent",
-      chart: miniBarChart(CUSTOMERS.slice(0,5).map(c=>({l:c.sold.split(" ")[0],v:c.value,vl:'$'+(c.value/1000).toFixed(1)+'k',c:'#da1217'})),"$52.9k"),
+    customer: {t:"Customer commitments, $110,700", s:"247 open lines, 38 customers, top 3 hold 84 percent",
+      chart: miniBarChart(CUSTOMERS.slice(0,5).map(c=>({l:c.sold.split(" ")[0],v:c.value,vl:'$'+(c.value/1000).toFixed(1)+'k',c:'#da1217'}))),
       tbl: customersTable()}
   };
   const d = defs[key];
@@ -952,7 +965,7 @@ function customersTable(){
 
 function showOrderDetail(id){
   const o = ORDERS.find(x => x.order === id) || ORDERS[0];
-  showPopout(`${o.order} — ${o.makes}`, `${o.status}, qty ${o.qty}`,
+  showPopout(`${o.order}, ${o.makes}`, `${o.status}, qty ${o.qty}`,
     `<div class="mdl-headline">${fmt(o.mat+o.ops)}</div>
      <div class="mdl-headline-sub">Total at stake, material plus operations</div>
      <div class="mdl-chart">${miniBarChart([
@@ -971,7 +984,7 @@ function showOrderDetail(id){
 
 function showCustomerDetail(sold){
   const c = CUSTOMERS.find(x => x.sold === sold) || CUSTOMERS[0];
-  showPopout(`${c.sold}`, `${c.lines} open lines, ${c.left.toLocaleString()} left to deliver`,
+  showPopout(`${c.sold}, ${fmt(c.value)}`, `${c.lines} open lines, ${c.left.toLocaleString()} left to deliver`,
     `<div class="mdl-headline">${fmt(c.value)}</div>
      <div class="mdl-headline-sub">Open commitment value</div>
      <div class="mdl-chart">${miniBarChart([
@@ -989,16 +1002,16 @@ function showCustomerDetail(sold){
 
 function showAll(which){
   if(which === "orders"){
-    showPopout("All open production orders — $85,800", "27 orders on MH-4410 rev C",
+    showPopout("All open production orders, $85,800", "Top 7 of 27 orders on MH-4410 rev C",
       `<div class="mdl-chart">${miniBarChart(ORDERS.map(o=>({l:o.order.slice(-4),v:o.mat+o.ops,vl:'$'+((o.mat+o.ops)/1000).toFixed(1)+'k',c:'#da1217'})))}</div>${ordersTable()}`);
   } else {
-    showPopout("All customers still to deliver to — $110,700", "38 customers, top 3 hold 84 percent",
+    showPopout("All customers still to deliver to, $110,700", "Top 7 of 38 customers, top 3 hold 84 percent",
       `<div class="mdl-chart">${miniBarChart(CUSTOMERS.map(c=>({l:c.sold.split(" ")[0].slice(0,6),v:c.value,vl:'$'+(c.value/1000).toFixed(1)+'k',c:'#da1217'})))}</div>${customersTable()}`);
   }
 }
 
-function openPLM(id){ showPopout("Open in PLM for Discrete", id, `<p>In the tenant this opens the PLM record ${id} in a new tab. Simulated here.</p>`); }
-function openLN(sess){ showPopout("Open in Infor LN", sess, `<p>In the tenant this opens LN session ${sess} in a new tab. Simulated here.</p>`); }
+function openPLM(id){ showPopout("Open in PLM for Discrete", id, `<p>This opens PLM record ${id} in a new tab.</p>`); }
+function openLN(sess){ showPopout("Open in Infor LN", sess, `<p>This opens LN session ${sess} in a new tab.</p>`); }
 
 
 function approveAndLaunch(){
@@ -1014,11 +1027,67 @@ function approveAndLaunch(){
 }
 
 
+function buildStatusDiagram(stateMap){
+  
+  let html = `<div class="wf-line">`;
+  html += `<div class="wf-endpoint" title="Start">Start</div>`;
+  html += `<div class="wf-connector"></div>`;
+  WORKFLOW_STEPS.forEach((s,i) => {
+    const st = stateMap[s.id] || "wait";
+    const label = st === "done" ? "Done" : st === "now" ? "Now" : "Not started";
+    if(s.stack){
+      html += `<div class="wf-node"><div class="wf-stack">
+        <div class="wf-stack-label">In parallel</div>
+        ${s.parts.map(p => `<div class="wf-box ${st}">
+          <div class="wf-box-name">${p.name}</div>
+          <div class="wf-box-state ${st}">${label}</div>
+          <div class="wf-box-who">${p.who}</div>
+        </div>`).join("")}
+      </div></div>`;
+    } else {
+      html += `<div class="wf-node"><div class="wf-box ${st}">
+        <div class="wf-box-name">${s.name}</div>
+        <div class="wf-box-state ${st}">${label}</div>
+        <div class="wf-box-who">${s.who}</div>
+      </div></div>`;
+    }
+    html += `<div class="wf-connector"></div>`;
+  });
+  html += `<div class="wf-endpoint" title="End">End</div>`;
+  html += `</div>`;
+  return html;
+}
+
+function paintApproveDiagram(){
+  const stateMap = {}; 
+  const target = document.getElementById("approveDiagram");
+  target.innerHTML = `
+    <div class="wf-legend" aria-label="Legend">
+      <span class="wf-legend-item"><span class="wf-legend-swatch done"></span>Done</span>
+      <span class="wf-legend-item"><span class="wf-legend-swatch now"></span>Now</span>
+      <span class="wf-legend-item"><span class="wf-legend-swatch wait"></span>Not started</span>
+    </div>
+    ${buildStatusDiagram(stateMap)}
+  `;
+}
+
+
 function paintChangePicker(){
   const picker = document.getElementById("changePicker");
   const changes = QUEUE.slice(0,4);
   picker.innerHTML = changes.map(c => {
-    const state = c.id === "ECN-2041" ? (launched ? "Launched · Review design in flight" : "Created · not launched") : (c.id === "ECN-2037" ? "In review · design" : c.id === "ECN-2033" ? "Created · not launched" : "On hold");
+    let state;
+    if(c.id === "ECN-2041"){
+      state = launched
+        ? `Review design, held by Cal Draper, 0 days`
+        : "Not launched, nothing started";
+    } else if(c.id === "ECN-2037"){
+      state = "Review design, held by Cal Draper, 2 days";
+    } else if(c.id === "ECN-2033"){
+      state = "Not launched, nothing started";
+    } else {
+      state = "Not launched, nothing started";
+    }
     return `<button class="change-chip ${c.id === selectedChange ? 'active' : ''}" onclick="pickChange('${c.id}')">
       <div class="change-chip-id">${c.id}</div>
       <div class="change-chip-item" title="${c.item}">${c.item}</div>
@@ -1043,75 +1112,41 @@ function paintWorkflow(){
   const tblHead = document.getElementById("wfTblHead");
   const tblBody = document.getElementById("wfTblBody");
 
+  let stateMap = {};
+
   if(selectedChange === "ECN-2041" && launched){
     title.textContent = "ECN-2041 route";
-    sub.textContent = "MH-4410 revision C to revision D · launched today";
-    
-    row.innerHTML = `
-      ${stepHtml("Check Out","Automatic","2 min","done")}
-      ${arrowHtml()}
-      ${stepHtml("Review design","Cal Draper","0h 12m","now")}
-      ${arrowHtml()}
-      ${stepHtml("Approve design","Owen Vance","Not started","wait")}
-      ${arrowHtml()}
-      <div class="wf-parallel">
-        <div class="wf-parallel-label">In parallel</div>
-        ${stepHtml("Distribution","Priya Shah","Not started","wait")}
-        ${stepHtml("Modify","Cal Draper","Not started","wait")}
-      </div>
-      ${arrowHtml()}
-      ${stepHtml("Check In","Automatic","Not started","wait")}
-      ${arrowHtml()}
-      ${stepHtml("Send to production","Owen Vance","Not started","wait")}
-      ${arrowHtml()}
-      ${stepHtml("Send to Doc Mgmt","Automatic","Not started","wait")}
-      ${arrowHtml()}
-      ${stepHtml("Launch workflow","Automatic","Not started","wait")}
-      ${arrowHtml()}
-      ${stepHtml("Workflow response","Dana Whitfield","Not started","wait")}
-    `;
+    sub.textContent = "MH-4410 revision C to revision D, launched today";
+    stateMap = {co:"done", rd:"now"};
     caption.textContent = "Check Out is done. Review design is with Cal Draper right now. Next is Owen Vance to approve.";
     tblTitle.textContent = "What happened";
     tblSub.textContent = "Steps taken so far on ECN-2041";
-    tblHead.innerHTML = `<tr><th>Step</th><th>Action</th><th>By</th><th>Date</th></tr>`;
-    const now = new Date();
-    const t0 = new Date(now.getTime() - 14*60000);
-    const t1 = new Date(now.getTime() - 12*60000);
-    tblBody.innerHTML = `
-      <tr><td>Launch workflow</td><td>Approve and launch</td><td>Dana Whitfield</td><td>${fmtDate(t0)}</td></tr>
-      <tr><td>Check Out</td><td>Completed</td><td>System</td><td>${fmtDate(t1)}</td></tr>
-      <tr><td>Review design</td><td>Started</td><td>Cal Draper</td><td>${fmtDate(now)}</td></tr>
-    `;
+  } else if(selectedChange === "ECN-2037"){
+    title.textContent = "ECN-2037 route";
+    sub.textContent = "LB-2208 revision B, in review";
+    stateMap = {co:"done", rd:"now"};
+    caption.textContent = "Check Out is done. Review design is with Cal Draper.";
+    tblTitle.textContent = "Steps";
+    tblSub.textContent = "The route for this change";
   } else {
-    
     title.textContent = `${selectedChange} route`;
-    sub.textContent = selectedChange === "ECN-2041" ? "MH-4410 revision C to revision D · not launched yet" : "Route defined, not launched";
-    row.innerHTML = WORKFLOW_STEPS.map((s,i) => {
-      const html = stepHtml(s.name, s.who, "Not started", "wait");
-      return i === WORKFLOW_STEPS.length-1 ? html : html + arrowHtml();
-    }).join("");
+    sub.textContent = selectedChange === "ECN-2041" ? "MH-4410 revision C to revision D, not launched yet" : "Route defined, not launched";
     caption.textContent = "Nothing has started yet. Approve on tab 3 to launch the route.";
     tblTitle.textContent = "Steps";
     tblSub.textContent = "The route that will run after approval";
-    tblHead.innerHTML = `<tr><th>Step</th><th>Kind</th><th>Who holds it</th><th></th></tr>`;
-    tblBody.innerHTML = WORKFLOW_STEPS.map(s => `<tr><td>${s.name}</td><td>${s.kind}</td><td>${s.who}</td><td></td></tr>`).join("");
   }
-}
 
-function stepHtml(name, who, time, markCls){
-  const stateCls = markCls === "done" ? "done" : markCls === "now" ? "now" : "";
-  const markLabel = markCls === "done" ? "Done" : markCls === "now" ? "Now" : "Not started";
-  return `<div class="wf-step ${stateCls}">
-    <div class="wf-step-head"><div class="wf-step-name">${name}</div><div class="wf-step-mark ${markCls}">${markLabel}</div></div>
-    <div class="wf-step-who">${who}</div>
-    <div class="wf-step-time">${time}</div>
-  </div>`;
-}
-function arrowHtml(){ return `<div class="wf-arrow">▸</div>`; }
+  row.innerHTML = buildStatusDiagram(stateMap).replace(/^<div class="wf-line">|<\/div>$/g,"");
+  
+  row.outerHTML = buildStatusDiagram(stateMap).replace(/class="wf-line"/, 'class="wf-line" id="wfRow"');
 
-function fmtDate(d){
-  const pad = n => String(n).padStart(2,'0');
-  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  
+  tblHead.innerHTML = `<tr><th>Step</th><th>Kind</th><th>Who holds it</th><th>State</th></tr>`;
+  tblBody.innerHTML = WORKFLOW_STEPS.map(s => {
+    const st = stateMap[s.id] || "wait";
+    const stLabel = st === "done" ? "Done" : st === "now" ? "Now" : "Not started";
+    return `<tr><td>${s.name}</td><td>${s.kind}</td><td>${s.who}</td><td>${stLabel}</td></tr>`;
+  }).join("");
 }
 
 function paintStatus(){
@@ -1168,7 +1203,6 @@ function closeSmp(){
   window.addEventListener("mouseup", () => dragging = false);
 })();
 
-const SMP_SUBJECTS = ["orders","customers","stock","plant","workflow"];
 let lastSubject = null;
 
 function askSmp(text){
@@ -1186,7 +1220,7 @@ function askSmp(text){
 
 function smpAnswer(q){
   const l = q.toLowerCase();
-  if(l.includes("order") && (l.includes("biggest") || l.includes("stake") || l.includes("dollar"))){
+  if(l.includes("order") && (l.includes("biggest") || l.includes("stake") || l.includes("dollar") || l.includes("most"))){
     lastSubject = "orders";
     return {subject:"orders", html:`PR-10418 holds the most: $21,000 at stake (material $14,400, operations $6,600). Top 5 orders account for 81 percent of the plant total of $85,800.<div class="smp-mini-chart">${miniBarChart(ORDERS.slice(0,5).map(o=>({l:o.order.slice(-4),v:o.mat+o.ops,vl:'$'+((o.mat+o.ops)/1000).toFixed(1)+'k',c:'#da1217'})))}</div>`};
   }
@@ -1196,7 +1230,7 @@ function smpAnswer(q){
   }
   if(l.includes("stock") || l.includes("write-off") || l.includes("writeoff") || l.includes("write off")){
     lastSubject = "stock";
-    return {subject:"stock", html:`Stock exposure is $25,000 at standard cost, 628 units across 14 warehouses. If you cut over immediately, the full $25,000 is at write-off risk. The agent recommends consuming through open orders first.`};
+    return {subject:"stock", html:`Stock exposure is $25,000 at standard cost, 628 units across 14 warehouses. If you cut over immediately, the full $25,000 is at write-off risk. Use it up through open orders first.`};
   }
   if(l.includes("workflow") || l.includes("route") || l.includes("step")){
     lastSubject = "workflow";
@@ -1217,7 +1251,7 @@ function smpFollowups(subject){
     stock: ["Which three customers hold 84 percent?","What is the breakdown of 27 orders by status?","Which step in the route runs after Review design?"],
     plant: ["Chart the customers still to deliver to","How much stock is at write-off risk?","Who holds Distribution and Modify in parallel?"],
     workflow: ["Which production order has the most material value?","Which customer carries the biggest commitment?","How many warehouses hold on-hand stock?"],
-    general: ["Which production orders carry the biggest dollar at stake?","Chart the customer exposure","How much stock would need to be written off?"]
+    general: ["Which orders carry the most at stake?","Chart the customer exposure","How much stock would need to be written off?"]
   };
   return pool[subject] || pool.general;
 }
@@ -1233,6 +1267,7 @@ function sendSmp(){
 paintQueue();
 paintOrders();
 paintCustomers();
+paintApproveDiagram();
 
 </script>
 </body>
