@@ -1,0 +1,1290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  
+  
+  
+
+
+<script>
+window.__EL_KEY__ = 'voice-cache';
+window.__VOICE_MANIFEST__ = {};
+window.__VOICE_TEXT_INDEX__ = {};
+window.__VOICE_PIPELINE__ = { version: "v1", voiceId: "UgBBYS2sOqTuMpoF3BR0", model: "eleven_v3" };
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Item Launch Workspace — Infor</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ids-color-background-default:#ffffff;
+  --ids-color-neutral-10:#f5f5f5;
+  --ids-color-neutral-20:#e0e0e1;
+  --ids-color-neutral-30:#c5c5c9;
+  --ids-color-neutral-90:#28282a;
+  --ids-color-neutral-100:#161618;
+  --ids-color-border-weak:#bbbbbf;
+  --ids-color-border-weaker:#e0e0e1;
+  --ids-color-fg-default:#161618;
+  --ids-color-fg-secondary:#3b3b3f;
+  --ids-color-fg-tertiary:#6f6f76;
+  --ids-color-action-default:#0072ed;
+  --ids-color-action-stronger:#0066d4;
+  --ids-color-action-weakest:#e6f1fd;
+  --ids-color-blue-10:#e6f1fd;
+  --ids-color-info-default:#0072ed;
+  --ids-color-info-weak:#e6f1fd;
+  --ids-color-success-default:#2ac371;
+  --ids-color-success-weak:#ebf9f1;
+  --ids-color-success-stronger:#156138;
+  --ids-color-warning-default:#f98300;
+  --ids-color-warning-weak:#fef2e5;
+  --ids-color-warning-stronger:#a14100;
+  --ids-color-error-default:#da1217;
+  --ids-color-error-weak:#fbe7e8;
+  --ids-color-error-stronger:#c31014;
+  --ids-color-accent-purple-weakest:#f1ebfc;
+  --ids-color-accent-purple-strong:#6c23c9;
+  --ids-ai-flat:#460daf;
+  --ids-font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,select,textarea{font-family:inherit}
+body{
+  font-family:var(--ids-font-family);
+  font-size:16px;color:#161618;background:#f5f5f5;line-height:1.3;-webkit-font-smoothing:antialiased;
+}
+.audible{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+
+.ids-masthead{height:40px;background:#000000;display:flex;align-items:center;padding-inline:8px;gap:8px;position:sticky;top:0;z-index:200}
+.mh-start{display:flex;align-items:center;gap:4px}
+.mh-logo-btn{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;border-radius:4px;padding:0}
+.mh-logo-btn:hover{background:#28282a}
+.mh-icon-btn{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;border-radius:4px;color:rgba(255,255,255,.8)}
+.mh-icon-btn:hover{background:#28282a;color:#ffffff}
+.mh-tabs{flex:1;display:flex;align-items:center;gap:4px;min-width:0}
+.mh-tab{height:32px;display:inline-flex;align-items:center;gap:8px;padding:0 4px 0 10px;background:#28282a;border-radius:4px;color:#ffffff;font-size:14px;max-width:620px}
+.mh-tab-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px}
+.mh-tab-divider{width:1px;height:16px;background:rgba(255,255,255,0.3);flex-shrink:0}
+.mh-tab-close{width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;color:rgba(255,255,255,.8);border-radius:2px;font-size:12px;padding:0}
+.mh-tab-close:hover{background:rgba(255,255,255,.12);color:#ffffff}
+.mh-end{display:flex;align-items:center;gap:4px}
+
+
+.ids-home-page{padding:16px 0 40px}
+.ws-titlebar{display:flex;align-items:center;justify-content:space-between;max-width:2240px;margin:0 auto 12px;gap:16px;padding:4px 48px}
+.ws-title{font-size:22px;font-weight:600;color:#161618}
+.ws-subtitle{font-size:14px;color:#6f6f76;margin-top:2px}
+.app-actions{display:flex;align-items:center;gap:8px}
+.run-demo-btn,.flow-btn-launch{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:4px;font-size:14px;font-weight:600;line-height:1;background:#0072ed;color:#ffffff;border:1px solid #0072ed;cursor:pointer;font-family:inherit;white-space:nowrap}
+.run-demo-btn:hover,.flow-btn-launch:hover{background:#0066d4;border-color:#0066d4}
+.flow-btn-launch{background:#ffffff;color:#0072ed}
+.flow-btn-launch:hover{background:#e6f1fd}
+.run-demo-btn.running{background:#da1217;border-color:#da1217}
+.run-demo-btn>svg,.flow-btn-launch>svg{width:14px;height:14px;flex-shrink:0}
+
+.hp-widgets{max-width:2240px;margin:0 auto;padding:0 48px 48px;display:flex;flex-direction:column;gap:16px}
+
+
+.ids-tabs{display:flex;gap:4px;border-bottom:1px solid #e0e0e1;background:#ffffff;padding:0 20px;border-radius:8px 8px 0 0}
+.ids-tab{background:none;border:0;padding:14px 18px;font-size:15px;font-weight:600;color:#6f6f76;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px;font-family:inherit}
+.ids-tab:hover{color:#161618}
+.ids-tab[aria-selected="true"]{color:#0072ed;border-bottom-color:#0072ed}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+
+.wgt-card{background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;overflow:hidden}
+.wgt-header{padding:16px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #e0e0e1}
+.wgt-title{font-size:16px;font-weight:600;color:#161618}
+.wgt-subtitle{font-size:13px;color:#6f6f76;margin-top:2px}
+.wgt-content{padding:20px}
+
+
+.hero-answer{font-size:22px;font-weight:600;line-height:1.35;color:#161618;padding:4px 0 16px}
+.hero-answer .accent{color:#0066d4}
+
+
+.launch-grid{display:grid;grid-template-columns:280px 1fr;gap:20px}
+.product-side{display:flex;flex-direction:column;gap:12px}
+.product-card{background:#f5f5f5;border:1px solid #e0e0e1;border-radius:8px;padding:14px;text-align:center}
+.product-img{width:100%;aspect-ratio:1;background:linear-gradient(135deg,#e0e0e1 0%,#f5f5f5 100%);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.product-img svg{width:60%;height:60%;color:#6f6f76}
+.product-code{font-family:'Source Code Pro',monospace;font-size:12px;color:#6f6f76}
+.product-name{font-size:14px;font-weight:600;color:#161618;margin-top:2px}
+.bom-grid-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:12px;background:#f5f5f5;border:1px solid #e0e0e1;border-radius:8px}
+.bom-tile{aspect-ratio:1;background:#ffffff;border:1px solid #e0e0e1;border-radius:4px;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer}
+.bom-tile:hover{border-color:#0072ed}
+.bom-tile svg{width:60%;height:60%;color:#6f6f76}
+.bom-tile .bom-num{position:absolute;top:2px;right:4px;font-size:9px;color:#6f6f76;font-weight:600}
+.bom-caption{font-size:12px;color:#6f6f76;text-align:center;padding:2px}
+
+.lanes{display:flex;flex-direction:column;gap:8px}
+.lane{display:grid;grid-template-columns:40px 1fr 220px 140px;gap:12px;align-items:center;padding:12px 14px;background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;min-height:62px}
+.lane.done{border-left:4px solid #2ac371}
+.lane.redline{border-left:4px solid #f98300}
+.lane.held{border-left:4px solid #0072ed}
+.lane.pending{opacity:0.6;border-left:4px solid #e0e0e1}
+.lane-num{width:28px;height:28px;border-radius:50%;background:#ebf9f1;color:#156138;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.lane.redline .lane-num{background:#fef2e5;color:#a14100}
+.lane.held .lane-num{background:#e6f1fd;color:#004a99}
+.lane.pending .lane-num{background:#f5f5f5;color:#6f6f76}
+.lane-body{min-width:0}
+.lane-title{font-size:14px;font-weight:600;color:#161618}
+.lane-detail{font-size:12px;color:#6f6f76;margin-top:2px}
+.lane-who{font-size:12px;color:#3b3b3f}
+.lane-who b{display:block;font-weight:600;color:#161618;font-size:13px}
+.lane-time{font-size:12px;color:#6f6f76;text-align:right}
+.lane-time b{display:block;color:#161618;font-weight:600;font-size:13px}
+
+
+.owner-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.owner-col{background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;overflow:hidden}
+.owner-head{padding:12px 16px;border-bottom:1px solid #e0e0e1;display:flex;align-items:center;gap:10px}
+.owner-chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600}
+.owner-chip.plm{background:#f1ebfc;color:#460daf}
+.owner-chip.ln{background:#e6f1fd;color:#004a99}
+.owner-chip.cs{background:#ebf9f1;color:#156138}
+.owner-chip.decide{background:#fef2e5;color:#a14100}
+.owner-count{margin-left:auto;font-size:13px;color:#6f6f76;font-weight:600}
+.field-row{padding:10px 16px;border-bottom:1px solid #e0e0e1;cursor:pointer;transition:background .1s}
+.field-row:last-child{border-bottom:0}
+.field-row:hover{background:#f5f5f5}
+.field-row.selected{background:#e6f1fd}
+.field-name{font-size:13px;font-weight:600;color:#161618}
+.field-why{font-size:12px;color:#6f6f76;margin-top:2px;line-height:1.4}
+
+
+.decide-card{background:#fef2e5;border:1px solid #f8c995;border-radius:8px;padding:14px 16px;margin-bottom:16px}
+.decide-head{font-size:14px;font-weight:600;color:#a14100;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.decide-list{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.decide-item{background:#ffffff;border:1px solid #f8c995;border-radius:6px;padding:10px 12px}
+.decide-item-name{font-size:13px;font-weight:600;color:#161618}
+.decide-item-sub{font-size:11px;color:#6f6f76;margin-top:2px;line-height:1.4}
+.decide-item-owner{font-size:11px;color:#a14100;margin-top:6px;font-weight:600}
+
+
+.ids-grid{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed}
+.ids-grid th{font-size:12px;font-weight:600;text-align:left;padding:10px 12px;border-bottom:1px solid #e0e0e1;white-space:nowrap;color:#3b3b3f;background:#ffffff;text-transform:uppercase;letter-spacing:.3px}
+.ids-grid th.r{text-align:right}
+.ids-grid td{padding:12px;height:48px;border-bottom:1px solid #e0e0e1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px}
+.ids-grid td.r{text-align:right;font-variant-numeric:lining-nums tabular-nums}
+.ids-grid tbody tr{cursor:pointer}
+.ids-grid tbody tr:hover{background:#f5f5f5}
+.item-code{font-family:'Source Code Pro',monospace;font-size:12px;color:#0066d4;font-weight:600}
+
+
+.pill{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600;white-space:nowrap}
+.pill.ok{background:#ebf9f1;color:#156138}
+.pill.warn{background:#fef2e5;color:#a14100}
+.pill.err{background:#fbe7e8;color:#c31014}
+.pill.info{background:#e6f1fd;color:#004a99}
+.pill.plm{background:#f1ebfc;color:#460daf}
+.pill.neutral{background:#f5f5f5;color:#3b3b3f}
+
+
+.ids-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:0 14px;border-radius:4px;border:1px solid transparent;font-size:14px;font-weight:600;cursor:pointer;background:none;color:#3b3b3f;font-family:inherit}
+.ids-button.primary{background:#0072ed;border-color:#0072ed;color:#ffffff}
+.ids-button.primary:hover{background:#0066d4;border-color:#0066d4}
+.ids-button.secondary{background:#ffffff;border-color:#0072ed;color:#0072ed}
+.ids-button.secondary:hover{background:#e6f1fd}
+.ids-button.tertiary{color:#0072ed}
+.ids-button.tertiary:hover{background:#f5f5f5}
+.ids-button.compact{min-height:26px;font-size:13px;padding:0 10px}
+
+
+.src-chip{display:inline-flex;align-items:center;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;background:#f5f5f5;color:#3b3b3f;border:1px solid #e0e0e1;margin-left:4px}
+.src-chip.plm{background:#f1ebfc;color:#460daf;border-color:#ddcbf7}
+.src-chip.ln{background:#e6f1fd;color:#004a99;border-color:#bedcfa}
+.src-chip.cs{background:#ebf9f1;color:#156138;border-color:#b8e4cb}
+
+
+.kpi-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.kpi-tile{background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;padding:20px}
+.kpi-tile.hero{background:linear-gradient(135deg,#e6f1fd 0%,#ffffff 60%);border-color:#bedcfa}
+.kpi-value{font-size:40px;font-weight:700;color:#161618;line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.kpi-label{font-size:14px;color:#3b3b3f;margin-top:6px;font-weight:500}
+.kpi-sub{font-size:12px;color:#6f6f76;margin-top:4px}
+
+
+.insights-grid{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.chart-card{background:#ffffff;border:1px solid #e0e0e1;border-radius:8px;padding:20px}
+.chart-title{font-size:16px;font-weight:600;color:#161618;margin-bottom:4px}
+.chart-sub{font-size:13px;color:#6f6f76;margin-bottom:16px}
+.bar-chart{display:flex;flex-direction:column;gap:14px;padding-top:8px}
+.bar-row{display:grid;grid-template-columns:80px 1fr 60px;align-items:center;gap:12px}
+.bar-label{font-size:13px;color:#3b3b3f;font-weight:500}
+.bar-track{height:28px;background:#f5f5f5;border-radius:4px;position:relative;overflow:hidden}
+.bar-fill{height:100%;background:#0072ed;border-radius:4px;display:flex;align-items:center;padding:0 10px;color:#ffffff;font-size:13px;font-weight:600}
+.bar-fill.compare{background:#c5c5c9;color:#161618}
+.bar-fill.held{background:#f98300}
+.bar-value{font-size:13px;color:#161618;font-weight:600;text-align:right}
+
+
+.compare-lanes{display:grid;grid-template-columns:1fr;gap:10px}
+.compare-row{display:grid;grid-template-columns:120px 1fr;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid #e0e0e1}
+.compare-row:last-child{border-bottom:0}
+.compare-label{font-size:13px;font-weight:600;color:#3b3b3f}
+.compare-bars{display:flex;flex-direction:column;gap:6px}
+.compare-bar{height:22px;background:#f5f5f5;border-radius:3px;position:relative;display:flex;align-items:center;gap:8px}
+.compare-bar .fill{height:100%;background:#0072ed;border-radius:3px;position:absolute;left:0;top:0}
+.compare-bar.old .fill{background:#c5c5c9}
+.compare-bar .cb-text{position:relative;z-index:1;padding-left:10px;font-size:12px;font-weight:600;color:#ffffff;text-shadow:0 0 2px rgba(0,0,0,.2)}
+.compare-bar.old .cb-text{color:#161618;text-shadow:none}
+
+
+.wgt-modal-overlay{position:fixed;inset:0;z-index:250;display:none;align-items:center;justify-content:center}
+.wgt-modal-overlay.open{display:flex}
+.wgt-modal-backdrop{position:absolute;inset:0;background:rgba(22,22,24,.6)}
+.wgt-modal-dialog{position:relative;background:#ffffff;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.4);width:min(720px,92vw);max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
+.mdl-header{padding:16px 22px;border-bottom:1px solid #e0e0e1;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.wgt-modal-title{font-size:18px;font-weight:600}
+.wgt-modal-close{width:30px;height:30px;border-radius:50%;border:1px solid #e0e0e1;background:#ffffff;cursor:pointer;font-size:14px}
+.mdl-body{padding:22px;overflow:auto}
+.value-row{display:grid;grid-template-columns:140px 1fr;gap:16px;padding:12px 0;border-bottom:1px dashed #e0e0e1;align-items:center}
+.value-row:last-child{border-bottom:0}
+.value-sys{font-size:13px;font-weight:600;color:#3b3b3f}
+.value-val{font-size:14px;color:#161618;font-family:'Source Code Pro',monospace}
+.value-note{font-size:12px;color:#6f6f76;margin-top:2px;font-family:inherit}
+.held-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:10px;background:#fef2e5;color:#a14100;font-size:11px;font-weight:600;margin-left:6px}
+
+
+.flow-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center}
+.flow-modal.open{display:flex}
+.flow-backdrop{position:absolute;inset:0;background:rgba(22,22,24,.72)}
+.flow-dialog{position:relative;background:#ffffff;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.4);width:min(1200px,94vw);max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
+.flow-header{padding:18px 24px;border-bottom:1px solid #e0e0e1;display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.flow-eyebrow{font-size:11px;color:#460daf;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.flow-title{font-size:20px;font-weight:700;margin:4px 0 0}
+.flow-subtitle{font-size:12px;color:#6f6f76;margin-top:2px}
+.flow-close{width:36px;height:36px;border-radius:50%;border:1px solid #e0e0e1;background:#ffffff;cursor:pointer;font-size:16px}
+.flow-stage{background:#f5f5f5;padding:40px 24px;position:relative;overflow-x:auto}
+.flow-canvas{position:relative;min-width:1000px}
+.flow-paths{position:absolute;inset:0;pointer-events:none}
+.flow-nodes{display:grid;grid-template-columns:repeat(4,1fr);gap:20px 24px;position:relative;z-index:2}
+.flow-node{background:#ffffff;border:2px solid #e0e0e1;border-radius:10px;padding:14px 10px;text-align:center;position:relative}
+.flow-node .stage-num{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;background:#ffffff;border:2px solid #bbbbbf;color:#3b3b3f;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.flow-node .stage-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-top:4px}
+.flow-node .stage-blurb{font-size:11px;color:#525257;line-height:1.4;margin-top:6px}
+.flow-node.active{border-color:#6c23c9;box-shadow:0 0 0 4px rgba(124,35,201,.22)}
+.flow-node.active .stage-num{background:#6c23c9;border-color:#6c23c9;color:#ffffff}
+.flow-node.done{border-color:#2ac371}
+.flow-node.done .stage-num{background:#2ac371;border-color:#2ac371;color:#ffffff}
+.flow-caption-bar{padding:16px 24px;border-top:1px solid #e0e0e1}
+.flow-step-label{font-size:11px;color:#6f6f76;text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:6px}
+.flow-step-text{font-size:14px;line-height:1.55;color:#161618}
+.flow-controls{padding:14px 24px;border-top:1px solid #e0e0e1;background:#f5f5f5;display:flex;align-items:center;gap:8px}
+.flow-progress{flex:1;height:6px;background:#e0e0e1;border-radius:3px;overflow:hidden;margin:0 14px}
+.flow-progress-fill{height:100%;background:#6c23c9;transition:width .4s}
+.flow-btn{padding:8px 14px;background:#ffffff;border:1px solid #e0e0e1;border-radius:6px;color:#3b3b3f;font-size:13px;cursor:pointer;font-weight:500}
+.flow-btn.primary{background:#6c23c9;color:#ffffff;border-color:#6c23c9}
+
+
+.demo-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:none;align-items:center;gap:6px;background:rgba(22,22,24,.95);border-radius:50px;padding:7px 10px;z-index:10000}
+.demo-controls.visible{display:flex}
+.demo-btn{width:38px;height:38px;border-radius:50%;border:none;background:transparent;color:#e0e0e1;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}
+.demo-btn.play{background:#0072ed;color:#ffffff;width:44px;height:44px}
+.demo-status{padding:0 12px;font-size:11px;color:#bbbbbf}
+.caption-bar{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);max-width:880px;width:88%;background:rgba(22,22,24,.95);border-radius:14px;padding:14px 24px;color:#f5f5f5;font-size:15px;line-height:1.5;text-align:center;z-index:9999;display:none}
+.caption-bar.visible{display:block}
+.caption-step{font-size:10px;color:#8e8e95;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+
+.highlight{outline:3px solid #6c23c9;outline-offset:3px;border-radius:8px}
+
+
+.audit-list{display:flex;flex-direction:column;gap:0}
+.audit-item{display:grid;grid-template-columns:120px 1fr auto;gap:14px;padding:10px 0;border-bottom:1px solid #e0e0e1;font-size:13px;align-items:center}
+.audit-item:last-child{border-bottom:0}
+.audit-time{font-size:12px;color:#6f6f76;font-family:'Source Code Pro',monospace}
+.audit-text{color:#161618}
+.audit-text b{color:#161618}
+</style>
+<style>
+html.sf-affordance [data-sf-live]:not([disabled]):hover{cursor:pointer!important;outline:2px solid #0072ed!important;outline-offset:2px!important}
+.sf-reveal-btn{display:none}
+</style>
+
+</head>
+<body>
+
+<header class="ids-masthead" role="banner">
+  <div class="mh-start">
+    <button class="mh-logo-btn" type="button" aria-label="Infor home"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAdCAYAAABWk2cPAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAHaADAAQAAAABAAAAHQAAAADeexZRAAABc0lEQVRIDe1WsU7DMBA9O+4ACpBIzG1+oIIPaKXyCYzd+ATWbnTrCH8AU2eWrukn8Ae0/QDqShkqNbY5WyRKJ+ykaZaclPic3N3zPfusI/An2yAI5OHwBJTeZd9ONirFKcBnmCRLHZPoFwJGUogYlIr0vC5B4BcEnhrQH9+PFcCoLrBiXAnw4OkslZSvxR8uOgkCgP3exSWkkKaRi0fRlg2HcDWfFz/9qyPFN/iUk8vZDK4XC6DdrnMA5upBez2Tndfvu7rm9s6ZdgYDqAKokZ1B8+VWUMjW90d4jOMKMZxcsUaXjWTqfJA6WCYXk0mendztIBmP87mN4gyqS0TXZyZys8lU67EReltQ6/0pY9jSW4Y1a5+WXmuqyhg2Qi/DtpMDMU2h1aL1BS/X69y2zN1LTJOdpt8YBdu6Mwgh7zTknGPP+3EGOANBPW9q9vQ2SZ4R+K1mYK4IecQkV0ebqRtvIcQ9gp+UaqXUijH2pVnVif0Cs8ZiV8EfxU8AAAAASUVORK5CYII=" width="28" height="28" alt="" aria-hidden="true"></button>
+    <button class="mh-icon-btn" type="button" aria-label="Application menu">
+      <svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path d="M4 4H6V6H4V4ZM8 4H10V6H8V4ZM12 4H14V6H12V4ZM4 8H6V10H4V8ZM8 8H10V10H8V8ZM12 8H14V10H12V8ZM4 12H6V14H4V12ZM8 12H10V14H8V12ZM12 12H14V14H12V12Z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="mh-tabs">
+    <div class="mh-tab">
+      <span class="mh-tab-label">Infor — New Item Launch Workspace</span>
+      <span class="mh-tab-divider"></span>
+      <button class="mh-tab-close" type="button" aria-label="Close tab">✕</button>
+    </div>
+  </div>
+  <div class="mh-end">
+    <button class="mh-icon-btn" type="button" aria-label="Search">
+      <svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 8C3.5 5.51 5.51 3.5 8 3.5C10.49 3.5 12.5 5.51 12.5 8C12.5 10.49 10.49 12.5 8 12.5C5.51 12.5 3.5 10.49 3.5 8ZM8 2C4.69 2 2 4.69 2 8C2 11.31 4.69 14 8 14C9.39 14 10.66 13.53 11.68 12.74L14.97 16.03L16.03 14.97L12.74 11.68C13.53 10.66 14 9.39 14 8C14 4.69 11.31 2 8 2Z" fill="currentColor"/></svg>
+    </button>
+    <button class="mh-icon-btn" type="button" aria-label="User profile">
+      <svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path d="M9 9a3 3 0 100-6 3 3 0 000 6zm0 1.5c-2.5 0-5 1.25-5 3.75V16h10v-1.75c0-2.5-2.5-3.75-5-3.75z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="ids-home-page">
+  <div class="ws-titlebar">
+    <div>
+      <div class="ws-title">New Item Launch Workspace</div>
+      <div class="ws-subtitle">Engineering starts the item in PLM. The agent runs review, approval and Send to Production, then holds any update that touches an engineering field.</div>
+    </div>
+    <div class="app-actions">
+      <button class="flow-btn-launch" id="flowBtn" type="button" onclick="openFlow()">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Flow
+      </button>
+      <button class="run-demo-btn" id="runDemoBtn" type="button" onclick="runDemo()">
+        <svg viewBox="0 0 14 14" fill="currentColor"><path d="M3 2v10l9-5z"/></svg>
+        <span id="runDemoLabel">Run demo</span>
+      </button>
+    </div>
+  </div>
+
+  <h1 class="audible">New item launch workspace</h1>
+
+  <div class="hp-widgets">
+
+    <div class="ids-tabs" role="tablist">
+      <button class="ids-tab" role="tab" aria-selected="true" onclick="switchTab(0,this)">Launch path</button>
+      <button class="ids-tab" role="tab" aria-selected="false" onclick="switchTab(1,this)">Field ownership</button>
+      <button class="ids-tab" role="tab" aria-selected="false" onclick="switchTab(2,this)">New items</button>
+      <button class="ids-tab" role="tab" aria-selected="false" onclick="switchTab(3,this)">Insights</button>
+    </div>
+
+    
+    <section class="tab-panel active" id="tab-0">
+      <div class="hero-answer">
+        The <span class="accent">Coastal 52 inch brushed nickel</span> went from new in PLM on Monday to buyable and sellable in LN on Wednesday. 2 content changes to engineering fields were held.
+      </div>
+
+      <div class="launch-grid">
+        <div class="product-side">
+          <div class="product-card">
+            <div class="product-img" title="Coastal 52 inch brushed nickel">
+              <svg viewBox="0 0 100 100" fill="currentColor"><circle cx="50" cy="50" r="8"/><ellipse cx="50" cy="25" rx="6" ry="20"/><ellipse cx="75" cy="50" rx="20" ry="6"/><ellipse cx="50" cy="75" rx="6" ry="20"/><ellipse cx="25" cy="50" rx="20" ry="6"/><circle cx="50" cy="50" r="4" fill="#f5f5f5"/></svg>
+            </div>
+            <div class="product-code">CF-COAST-52-BN</div>
+            <div class="product-name">Coastal 52 inch</div>
+            <div style="font-size:12px;color:#6f6f76;margin-top:2px">Brushed nickel</div>
+            <div style="margin-top:10px;display:flex;gap:4px;justify-content:center">
+              <span class="pill plm">PLM: Released</span>
+              <span class="pill ok">In LN</span>
+            </div>
+          </div>
+          <div style="font-size:12px;font-weight:600;color:#3b3b3f;padding:4px 2px">BOM: 14 lines</div>
+          <div class="bom-grid-tiles" title="14-line BOM">
+            <div class="bom-tile" title="Motor assembly"><span class="bom-num">01</span><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="#f5f5f5"/></svg></div>
+            <div class="bom-tile" title="Blade set, 5 blade"><span class="bom-num">02</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14 10L22 12L14 14L12 22L10 14L2 12L10 10Z"/></svg></div>
+            <div class="bom-tile" title="Blade bracket"><span class="bom-num">03</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="16" height="8"/><circle cx="8" cy="12" r="1" fill="currentColor"/><circle cx="16" cy="12" r="1" fill="currentColor"/></svg></div>
+            <div class="bom-tile" title="Light kit"><span class="bom-num">04</span><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="10" r="5"/><rect x="10" y="14" width="4" height="6"/></svg></div>
+            <div class="bom-tile" title="Housing, upper"><span class="bom-num">05</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6L18 6L16 14L8 14Z"/></svg></div>
+            <div class="bom-tile" title="Housing, lower"><span class="bom-num">06</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 10L16 10L18 18L6 18Z"/></svg></div>
+            <div class="bom-tile" title="Downrod, 4 inch"><span class="bom-num">07</span><svg viewBox="0 0 24 24" fill="currentColor"><rect x="11" y="2" width="2" height="20"/></svg></div>
+            <div class="bom-tile" title="Canopy"><span class="bom-num">08</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="12" rx="8" ry="4"/></svg></div>
+            <div class="bom-tile" title="Capacitor"><span class="bom-num">09</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="8" width="12" height="8" rx="1"/></svg></div>
+            <div class="bom-tile" title="Receiver, RF"><span class="bom-num">10</span><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="10" width="12" height="6" rx="1"/><path d="M9 10V6M15 10V6" stroke="currentColor" stroke-width="2"/></svg></div>
+            <div class="bom-tile" title="Remote, handheld"><span class="bom-num">11</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="4" width="8" height="16" rx="1"/><circle cx="12" cy="10" r="1" fill="currentColor"/></svg></div>
+            <div class="bom-tile" title="Hardware pack"><span class="bom-num">12</span><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="7" r="2"/><circle cx="17" cy="7" r="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
+            <div class="bom-tile" title="Globe, frosted"><span class="bom-num">13</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/></svg></div>
+            <div class="bom-tile" title="Carton, 52 inch"><span class="bom-num">14</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7L12 3L20 7V17L12 21L4 17Z"/></svg></div>
+          </div>
+        </div>
+
+        <div class="lanes">
+          <div class="lane done">
+            <div class="lane-num">1</div>
+            <div class="lane-body">
+              <div class="lane-title">Created in PLM</div>
+              <div class="lane-detail">Draft filled from the closest released item: CF-COAST-52-MB (matte black). 7 engineering fields matched, item code assigned.</div>
+            </div>
+            <div class="lane-who"><b>Cal Draper</b>Design engineer</div>
+            <div class="lane-time"><b>Monday</b>9:22 AM</div>
+          </div>
+
+          <div class="lane redline">
+            <div class="lane-num">2</div>
+            <div class="lane-body">
+              <div class="lane-title">Review</div>
+              <div class="lane-detail">1 redline: blade bracket drawing missing. Cal added the drawing; Owen passed the review on the second round.</div>
+            </div>
+            <div class="lane-who"><b>Owen Vance</b>Manufacturing engineer</div>
+            <div class="lane-time"><b>Tuesday</b>3:48 PM</div>
+          </div>
+
+          <div class="lane done">
+            <div class="lane-num">3</div>
+            <div class="lane-body">
+              <div class="lane-title">Approval</div>
+              <div class="lane-detail">Approved on the first round. Item moved to Released.</div>
+            </div>
+            <div class="lane-who"><b>Dana Whitfield</b>VP Product Engineering</div>
+            <div class="lane-time"><b>Wednesday</b>10:05 AM</div>
+          </div>
+
+          <div class="lane done">
+            <div class="lane-num">4</div>
+            <div class="lane-body">
+              <div class="lane-title">Released</div>
+              <div class="lane-detail">Lifecycle moved to Released. The item is now eligible for Send to Production.</div>
+            </div>
+            <div class="lane-who"><b>System</b>PLM</div>
+            <div class="lane-time"><b>Wednesday</b>10:06 AM</div>
+          </div>
+
+          <div class="lane done">
+            <div class="lane-num">5</div>
+            <div class="lane-body">
+              <div class="lane-title">Sent to LN</div>
+              <div class="lane-detail">Send to Production ran for the item and all 14 BOM lines. The blade bracket drawing went to document management.</div>
+            </div>
+            <div class="lane-who"><b>Agent</b>Approved by Dana</div>
+            <div class="lane-time"><b>Wednesday</b>2:10 PM</div>
+          </div>
+
+          <div class="lane done">
+            <div class="lane-num">6</div>
+            <div class="lane-body">
+              <div class="lane-title">LN setup filled</div>
+              <div class="lane-detail">The item exists in LN. 22 fields filled from item group defaults: cost, price, warehouse, planning and purchasing data.</div>
+            </div>
+            <div class="lane-who"><b>System</b>LN</div>
+            <div class="lane-time"><b>Wednesday</b>2:11 PM</div>
+          </div>
+
+          <div class="lane done">
+            <div class="lane-num">7</div>
+            <div class="lane-body">
+              <div class="lane-title">Content system told</div>
+              <div class="lane-detail">The agent told the product content system the item exists. Retail title, long description and images were created there.</div>
+            </div>
+            <div class="lane-who"><b>Priya Shah</b>Product content</div>
+            <div class="lane-time"><b>Thursday</b>8:30 AM</div>
+          </div>
+
+          <div class="lane held">
+            <div class="lane-num">8</div>
+            <div class="lane-body">
+              <div class="lane-title">Content fields back as updates</div>
+              <div class="lane-detail">UPC, shipping cube and shipping dimensions applied in LN. <b style="color:#a14100">2 changes held</b>: a new item description and a different item group. PLM owns both.</div>
+            </div>
+            <div class="lane-who"><b>Agent</b>Routed to Cal</div>
+            <div class="lane-time"><b>Thursday</b>11:15 AM</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px" class="wgt-card">
+        <div class="wgt-header">
+          <div><div class="wgt-title">Audit trail</div><div class="wgt-subtitle">Every approval, send, re-send and held change</div></div>
+        </div>
+        <div class="wgt-content">
+          <div class="audit-list">
+            <div class="audit-item">
+              <div class="audit-time">Mon 09:22</div>
+              <div class="audit-text">Cal Draper created CF-COAST-52-BN in PLM. Draft filled from CF-COAST-52-MB.</div>
+              <span class="src-chip plm">PLM</span>
+            </div>
+            <div class="audit-item">
+              <div class="audit-time">Tue 11:04</div>
+              <div class="audit-text">Owen Vance returned review with 1 redline: blade bracket drawing missing.</div>
+              <span class="src-chip plm">PLM</span>
+            </div>
+            <div class="audit-item">
+              <div class="audit-time">Tue 15:48</div>
+              <div class="audit-text">Cal attached blade bracket drawing. Owen passed review, round 2.</div>
+              <span class="src-chip plm">PLM</span>
+            </div>
+            <div class="audit-item">
+              <div class="audit-time">Wed 10:05</div>
+              <div class="audit-text"><b>Dana Whitfield approved</b> the item. Lifecycle moved to Released.</div>
+              <span class="src-chip plm">PLM</span>
+            </div>
+            <div class="audit-item">
+              <div class="audit-time">Wed 14:10</div>
+              <div class="audit-text">Agent ran Send to Production for the item and 14 BOM lines. Approved by Dana.</div>
+              <span class="src-chip ln">LN</span>
+            </div>
+            <div class="audit-item">
+              <div class="audit-time">Thu 11:15</div>
+              <div class="audit-text"><b>Held</b>: new item description from the content system. PLM owns this field; routed to Cal.</div>
+              <span class="src-chip cs">Content system</span>
+            </div>
+            <div class="audit-item">
+              <div class="audit-time">Thu 11:15</div>
+              <div class="audit-text"><b>Held</b>: item group change from the content system. PLM owns this field; routed to Cal.</div>
+              <span class="src-chip cs">Content system</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="tab-panel" id="tab-1">
+      <div class="hero-answer">
+        Every item field has one owner. <span class="accent">PLM owns 8 fields, LN owns 6, the content system owns 6</span>, and 3 are still being decided.
+      </div>
+
+      <div class="decide-card">
+        <div class="decide-head">
+          <svg viewBox="0 0 18 18" width="16" height="16" fill="currentColor"><path d="M9 1.5L1 15h16L9 1.5zm0 5v5M9 12v1.5"/></svg>
+          3 fields still need an owner
+        </div>
+        <div class="decide-list">
+          <div class="decide-item">
+            <div class="decide-item-name">Shipping weight</div>
+            <div class="decide-item-sub">Engineering weight in PLM or packaged weight from the content system. One owner only.</div>
+            <div class="decide-item-owner">Dana Whitfield decides</div>
+          </div>
+          <div class="decide-item">
+            <div class="decide-item-name">Country of origin</div>
+            <div class="decide-item-sub">PLM if engineering picks the factory, otherwise LN purchasing.</div>
+            <div class="decide-item-owner">Dana and Marcus decide</div>
+          </div>
+          <div class="decide-item">
+            <div class="decide-item-name">Tariff code</div>
+            <div class="decide-item-sub">Follows country of origin. Owner lands with the same decision.</div>
+            <div class="decide-item-owner">Dana and Marcus decide</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="owner-grid">
+        <div class="owner-col">
+          <div class="owner-head">
+            <span class="owner-chip plm">PLM</span>
+            <span style="font-size:13px;color:#6f6f76">Engineering fields</span>
+            <span class="owner-count">8</span>
+          </div>
+          <div class="field-row" onclick="openField('item-code')">
+            <div class="field-name">Item code</div>
+            <div class="field-why">PLM assigns the code at creation. Never overwritten by any other system.</div>
+          </div>
+          <div class="field-row" onclick="openField('item-description')">
+            <div class="field-name">Item description <span class="held-badge">held 1</span></div>
+            <div class="field-why">Engineering description. The retail title is separate and lives in the content system.</div>
+          </div>
+          <div class="field-row" onclick="openField('item-group')">
+            <div class="field-name">Item group <span class="held-badge">held 1</span></div>
+            <div class="field-why">Drives LN defaults for cost, planning and warehouse. Only engineering changes this.</div>
+          </div>
+          <div class="field-row" onclick="openField('product-type')">
+            <div class="field-name">Product type</div>
+            <div class="field-why">Manufactured, purchased or kit. Set in the business process.</div>
+          </div>
+          <div class="field-row" onclick="openField('product-class')">
+            <div class="field-name">Product class</div>
+            <div class="field-why">Ceiling fan, lighting, parts. Comes from the similar-item fill.</div>
+          </div>
+          <div class="field-row" onclick="openField('product-line')">
+            <div class="field-name">Product line</div>
+            <div class="field-why">Coastal, Aria, Summit, Atlas. Set at creation.</div>
+          </div>
+          <div class="field-row" onclick="openField('uom')">
+            <div class="field-name">Unit of measure</div>
+            <div class="field-why">Each, for finished fans. Set at creation.</div>
+          </div>
+          <div class="field-row" onclick="openField('bom')">
+            <div class="field-name">BOM</div>
+            <div class="field-why">14 lines. Sent to LN as part of Send to Production.</div>
+          </div>
+        </div>
+
+        <div class="owner-col">
+          <div class="owner-head">
+            <span class="owner-chip ln">LN</span>
+            <span style="font-size:13px;color:#6f6f76">Operational fields</span>
+            <span class="owner-count">6</span>
+          </div>
+          <div class="field-row" onclick="openField('cost')">
+            <div class="field-name">Cost</div>
+            <div class="field-why">Filled from item group defaults when PLM creates the item.</div>
+          </div>
+          <div class="field-row" onclick="openField('price')">
+            <div class="field-name">Price</div>
+            <div class="field-why">Set by LN price book. Not sent from PLM or the content system.</div>
+          </div>
+          <div class="field-row" onclick="openField('warehouse')">
+            <div class="field-name">Warehouse</div>
+            <div class="field-why">Stocking and allocation data from LN item defaults.</div>
+          </div>
+          <div class="field-row" onclick="openField('purchasing')">
+            <div class="field-name">Purchasing data</div>
+            <div class="field-why">Buyer, supplier and lead time. Marcus Lee maintains.</div>
+          </div>
+          <div class="field-row" onclick="openField('planning')">
+            <div class="field-name">Planning data</div>
+            <div class="field-why">Order policy, safety stock and lot size from LN defaults.</div>
+          </div>
+          <div class="field-row" onclick="openField('upc')">
+            <div class="field-name">UPC</div>
+            <div class="field-why">Barcode lives in LN. The content system sends it as an update, not a create.</div>
+          </div>
+        </div>
+
+        <div class="owner-col">
+          <div class="owner-head">
+            <span class="owner-chip cs">Content system</span>
+            <span style="font-size:13px;color:#6f6f76">Retail fields</span>
+            <span class="owner-count">6</span>
+          </div>
+          <div class="field-row" onclick="openField('shipping-cube')">
+            <div class="field-name">Shipping cube</div>
+            <div class="field-why">Packaged volume. Comes back to LN as an update.</div>
+          </div>
+          <div class="field-row" onclick="openField('shipping-dims')">
+            <div class="field-name">Shipping length, height, width</div>
+            <div class="field-why">Packaged dimensions. Sent to LN as updates only.</div>
+          </div>
+          <div class="field-row" onclick="openField('web-eligible')">
+            <div class="field-name">Web store eligibility</div>
+            <div class="field-why">Flag that releases the item to retailers and the web store.</div>
+          </div>
+          <div class="field-row" onclick="openField('retail-title')">
+            <div class="field-name">Retail title</div>
+            <div class="field-why">Marketing name. Stays in the content system. Never sent to LN.</div>
+          </div>
+          <div class="field-row" onclick="openField('retail-desc')">
+            <div class="field-name">Long description</div>
+            <div class="field-why">Marketing copy. Stays in the content system.</div>
+          </div>
+          <div class="field-row" onclick="openField('retail-images')">
+            <div class="field-name">Retail images</div>
+            <div class="field-why">Lifestyle photography. Stays in the content system.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="tab-panel" id="tab-2">
+      <div class="hero-answer">
+        <span class="accent">7 new fans in flight.</span> The Atlas 8 foot industrial is the oldest at the approval stage; the Coastal 52 inch brushed nickel is held waiting for Cal to answer 2 content updates.
+      </div>
+
+      <div class="wgt-card">
+        <table class="ids-grid">
+          <colgroup>
+            <col style="width:14%"><col style="width:22%"><col style="width:14%"><col style="width:8%"><col style="width:11%"><col style="width:11%"><col style="width:9%"><col style="width:11%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Item code</th>
+              <th>Description</th>
+              <th>Stage</th>
+              <th class="r">Days in stage</th>
+              <th>Launch date</th>
+              <th>Next step owner</th>
+              <th class="r">Rounds</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr onclick="void(0)">
+              <td class="item-code">CF-ATLAS-96-MB</td>
+              <td>Atlas 8 foot industrial, matte black</td>
+              <td><span class="pill warn">Approval</span></td>
+              <td class="r">6.2</td>
+              <td>Dec 18</td>
+              <td>Dana Whitfield</td>
+              <td class="r">R:2 A:1</td>
+              <td><span class="src-chip plm">PLM</span></td>
+            </tr>
+            <tr>
+              <td class="item-code">CF-SUMMIT-60-FW</td>
+              <td>Summit 60 inch outdoor, fresh white</td>
+              <td><span class="pill warn">Review</span></td>
+              <td class="r">4.1</td>
+              <td>Dec 20</td>
+              <td>Owen Vance</td>
+              <td class="r">R:2 A:0</td>
+              <td><span class="src-chip plm">PLM</span></td>
+            </tr>
+            <tr>
+              <td class="item-code">CF-ARIA-44-MB</td>
+              <td>Aria 44 inch smart fan, matte black</td>
+              <td><span class="pill info">Sent to LN</span></td>
+              <td class="r">3.0</td>
+              <td>Dec 15</td>
+              <td>Priya Shah</td>
+              <td class="r">R:1 A:1</td>
+              <td><span class="src-chip ln">LN</span></td>
+            </tr>
+            <tr>
+              <td class="item-code">CF-COAST-52-BN</td>
+              <td>Coastal 52 inch, brushed nickel</td>
+              <td><span class="pill info">Content fields back</span></td>
+              <td class="r">0.9</td>
+              <td>Dec 12</td>
+              <td>Cal Draper</td>
+              <td class="r">R:2 A:1</td>
+              <td><span class="src-chip cs">Content system</span></td>
+            </tr>
+            <tr>
+              <td class="item-code">CF-ARIA-44-FW</td>
+              <td>Aria 44 inch smart fan, fresh white</td>
+              <td><span class="pill ok">Review</span></td>
+              <td class="r">0.7</td>
+              <td>Jan 03</td>
+              <td>Owen Vance</td>
+              <td class="r">R:1 A:0</td>
+              <td><span class="src-chip plm">PLM</span></td>
+            </tr>
+            <tr>
+              <td class="item-code">CF-SUMMIT-60-BN</td>
+              <td>Summit 60 inch outdoor, brushed nickel</td>
+              <td><span class="pill ok">Created in PLM</span></td>
+              <td class="r">0.4</td>
+              <td>Jan 06</td>
+              <td>Cal Draper</td>
+              <td class="r">R:0 A:0</td>
+              <td><span class="src-chip plm">PLM</span></td>
+            </tr>
+            <tr>
+              <td class="item-code">CF-COAST-52-FW</td>
+              <td>Coastal 52 inch, fresh white</td>
+              <td><span class="pill ok">LN setup filled</span></td>
+              <td class="r">0.2</td>
+              <td>Jan 02</td>
+              <td>Priya Shah</td>
+              <td class="r">R:1 A:1</td>
+              <td><span class="src-chip ln">LN</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    
+    <section class="tab-panel" id="tab-3">
+      <div class="hero-answer">
+        Items reach LN <span class="accent">2.4 days after creation in PLM</span>, with review and approval inside that time. Review rounds are averaging 1.3 per item.
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi-tile hero">
+          <div class="kpi-value">2.4 days</div>
+          <div class="kpi-label">New in PLM to buyable in LN</div>
+          <div class="kpi-sub">Average across the last 4 weeks, with review and approval included.</div>
+        </div>
+        <div class="kpi-tile">
+          <div class="kpi-value">1.3</div>
+          <div class="kpi-label">Review rounds per item</div>
+          <div class="kpi-sub">1.0 approval rounds average</div>
+        </div>
+        <div class="kpi-tile">
+          <div class="kpi-value">11</div>
+          <div class="kpi-label">Content changes held this month</div>
+          <div class="kpi-sub">All PLM-owned fields</div>
+        </div>
+      </div>
+
+      <div class="insights-grid">
+        <div class="chart-card">
+          <div class="chart-title">New in PLM to buyable in LN, by week</div>
+          <div class="chart-sub">Days from new in PLM to buyable in LN.</div>
+          <div class="compare-lanes">
+            <div class="compare-row">
+              <div class="compare-label">Week of Oct 5</div>
+              <div class="compare-bars">
+                <div class="compare-bar"><div class="fill" style="width:36%"></div><span class="cb-text">PLM path: 2.9 days</span></div>
+                </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">Week of Oct 12</div>
+              <div class="compare-bars">
+                <div class="compare-bar"><div class="fill" style="width:32%"></div><span class="cb-text">PLM path: 2.6 days</span></div>
+                </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">Week of Oct 19</div>
+              <div class="compare-bars">
+                <div class="compare-bar"><div class="fill" style="width:30%"></div><span class="cb-text">PLM path: 2.4 days</span></div>
+                </div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">Week of Oct 26</div>
+              <div class="compare-bars">
+                <div class="compare-bar"><div class="fill" style="width:26%"></div><span class="cb-text">PLM path: 2.1 days</span></div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-title">Content changes held</div>
+          <div class="chart-sub">By engineering field, this month</div>
+          <div class="bar-chart">
+            <div class="bar-row">
+              <div class="bar-label">Item description</div>
+              <div class="bar-track"><div class="bar-fill held" style="width:84%">5 held</div></div>
+              <div class="bar-value">5</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">Item group</div>
+              <div class="bar-track"><div class="bar-fill held" style="width:50%">3 held</div></div>
+              <div class="bar-value">3</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">Product class</div>
+              <div class="bar-track"><div class="bar-fill held" style="width:34%">2 held</div></div>
+              <div class="bar-value">2</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">Unit of measure</div>
+              <div class="bar-track"><div class="bar-fill held" style="width:17%">1 held</div></div>
+              <div class="bar-value">1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px" class="chart-card">
+        <div class="chart-title">Review and approval rounds, per item</div>
+        <div class="chart-sub">Last 7 released fans. Most clear on 1 or 2 review rounds and 1 approval round.</div>
+        <div class="bar-chart">
+          <div class="bar-row">
+            <div class="bar-label">Coastal 52 BN</div>
+            <div class="bar-track"><div class="bar-fill" style="width:40%">Review: 2</div></div>
+            <div class="bar-value">A: 1</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Aria 44 MB</div>
+            <div class="bar-track"><div class="bar-fill" style="width:20%">Review: 1</div></div>
+            <div class="bar-value">A: 1</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Coastal 52 FW</div>
+            <div class="bar-track"><div class="bar-fill" style="width:20%">Review: 1</div></div>
+            <div class="bar-value">A: 1</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Summit 60 MB</div>
+            <div class="bar-track"><div class="bar-fill" style="width:40%">Review: 2</div></div>
+            <div class="bar-value">A: 1</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Atlas 96 FW</div>
+            <div class="bar-track"><div class="bar-fill" style="width:60%">Review: 3</div></div>
+            <div class="bar-value">A: 2</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+
+<div class="wgt-modal-overlay" id="fieldModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeField()"></div>
+  <div class="wgt-modal-dialog">
+    <header class="mdl-header">
+      <div>
+        <div style="font-size:11px;color:#6f6f76;text-transform:uppercase;letter-spacing:.4px;font-weight:600" id="fieldOwnerLabel">Owner</div>
+        <h2 class="wgt-modal-title" id="fieldTitle">Field</h2>
+      </div>
+      <button class="wgt-modal-close" type="button" onclick="closeField()" aria-label="Close">✕</button>
+    </header>
+    <div class="mdl-body" id="fieldBody"></div>
+  </div>
+</div>
+
+
+<div class="flow-modal" id="flowModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="flow-backdrop" onclick="closeFlow()"></div>
+  <div class="flow-dialog">
+    <header class="flow-header">
+      <div>
+        <div class="flow-eyebrow">New Item Launch — PLM to LN to Content</div>
+        <h2 class="flow-title">How a new fan reaches the shelf</h2>
+        <div class="flow-subtitle">From engineering creation to retail content</div>
+      </div>
+      <button class="flow-close" type="button" onclick="closeFlow()" aria-label="Close">✕</button>
+    </header>
+    <div class="flow-stage">
+      <div class="flow-canvas">
+        <svg class="flow-paths" id="flowPaths"></svg>
+        <div class="flow-nodes" id="flowNodes"></div>
+      </div>
+    </div>
+    <div class="flow-caption-bar">
+      <div class="flow-step-label" id="flowStepLabel">Stage 1 of 8</div>
+      <div class="flow-step-text" id="flowStepText">…</div>
+    </div>
+    <div class="flow-controls">
+      <button class="flow-btn" type="button" id="flowPrev" onclick="flowPrev()">◀ Prev</button>
+      <div class="flow-progress"><div class="flow-progress-fill" id="flowProgressFill" style="width:12.5%"></div></div>
+      <button class="flow-btn primary" type="button" id="flowNext" onclick="flowNext()">Next ▶</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="demo-controls" id="demoControls">
+  <button class="demo-btn" type="button" id="idsDemoPrev">◀</button>
+  <button class="demo-btn play" type="button" id="idsDemoPlay">⏸</button>
+  <button class="demo-btn" type="button" id="idsDemoNext">▶</button>
+  <button class="demo-btn" type="button" id="idsDemoStop">■</button>
+  <span class="demo-status" id="idsDemoStatus">Demo running</span>
+</div>
+<div class="caption-bar" id="capBar">
+  <div class="caption-step" id="capStep">Step 1 of 12</div>
+  <div id="capText">…</div>
+</div>
+
+<script>
+"use strict";
+
+
+function switchTab(idx, btn){
+  document.querySelectorAll(".ids-tab").forEach(function(t){ t.setAttribute("aria-selected","false"); });
+  btn.setAttribute("aria-selected","true");
+  document.querySelectorAll(".tab-panel").forEach(function(p,i){ p.classList.toggle("active", i===idx); });
+}
+window.switchTab = switchTab;
+
+
+const FIELD_DATA = {
+  "item-code":{owner:"PLM owns",title:"Item code",rows:[
+    {sys:"PLM",val:"CF-COAST-52-BN",note:"Assigned at creation"},
+    {sys:"LN",val:"CF-COAST-52-BN",note:"Received via Send to Production"},
+    {sys:"Content system",val:"CF-COAST-52-BN",note:"Received when agent told the system the item exists"}
+  ]},
+  "item-description":{owner:"PLM owns",title:"Item description",rows:[
+    {sys:"PLM",val:"Coastal 52 inch ceiling fan, brushed nickel",note:"Engineering description"},
+    {sys:"LN",val:"Coastal 52 inch ceiling fan, brushed nickel",note:"Matches PLM"},
+    {sys:"Content system",val:"Coastal Breeze 52 inch Low-Profile Fan, Brushed Nickel",note:"Change held. PLM owns this field. Routed to Cal Draper.",held:true}
+  ]},
+  "item-group":{owner:"PLM owns",title:"Item group",rows:[
+    {sys:"PLM",val:"CF-FINISHED",note:"Finished ceiling fan"},
+    {sys:"LN",val:"CF-FINISHED",note:"Drove 22 default fields when the item landed"},
+    {sys:"Content system",val:"RETAIL-FAN-STD",note:"Change held. PLM owns this field. Routed to Cal Draper.",held:true}
+  ]},
+  "product-type":{owner:"PLM owns",title:"Product type",rows:[
+    {sys:"PLM",val:"Manufactured",note:"Set in business process"},
+    {sys:"LN",val:"Manufactured",note:""}
+  ]},
+  "product-class":{owner:"PLM owns",title:"Product class",rows:[
+    {sys:"PLM",val:"Ceiling fan",note:""},
+    {sys:"LN",val:"Ceiling fan",note:""}
+  ]},
+  "product-line":{owner:"PLM owns",title:"Product line",rows:[
+    {sys:"PLM",val:"Coastal",note:""},
+    {sys:"LN",val:"Coastal",note:""}
+  ]},
+  "uom":{owner:"PLM owns",title:"Unit of measure",rows:[
+    {sys:"PLM",val:"EA",note:"Each"},
+    {sys:"LN",val:"EA",note:""}
+  ]},
+  "bom":{owner:"PLM owns",title:"BOM",rows:[
+    {sys:"PLM",val:"14 lines",note:"Blade bracket drawing added on review round 2"},
+    {sys:"LN",val:"14 lines",note:"All lines received"}
+  ]},
+  "cost":{owner:"LN owns",title:"Cost",rows:[
+    {sys:"LN",val:"$68.40",note:"Filled from item group defaults"},
+    {sys:"PLM",val:"not stored",note:"PLM does not hold cost"}
+  ]},
+  "price":{owner:"LN owns",title:"Price",rows:[
+    {sys:"LN",val:"$189.00",note:"Set by LN price book, not by PLM or the content system"}
+  ]},
+  "warehouse":{owner:"LN owns",title:"Warehouse data",rows:[
+    {sys:"LN",val:"ATL-DC, LAX-DC",note:"Filled from item defaults"}
+  ]},
+  "purchasing":{owner:"LN owns",title:"Purchasing data",rows:[
+    {sys:"LN",val:"Buyer: Marcus Lee, lead time 28 days",note:""}
+  ]},
+  "planning":{owner:"LN owns",title:"Planning data",rows:[
+    {sys:"LN",val:"Order policy: Lot-for-lot",note:"Filled from item defaults"}
+  ]},
+  "upc":{owner:"LN owns",title:"UPC",rows:[
+    {sys:"LN",val:"8 54219 00417 3",note:"Applied from the content system update on Thursday"},
+    {sys:"Content system",val:"8 54219 00417 3",note:"Source of the barcode"}
+  ]},
+  "shipping-cube":{owner:"Content system owns",title:"Shipping cube",rows:[
+    {sys:"Content system",val:"3.42 cubic feet",note:""},
+    {sys:"LN",val:"3.42 cubic feet",note:"Applied from Thursday update"}
+  ]},
+  "shipping-dims":{owner:"Content system owns",title:"Shipping length, height, width",rows:[
+    {sys:"Content system",val:"24 in x 24 in x 10 in",note:""},
+    {sys:"LN",val:"24 in x 24 in x 10 in",note:"Applied from Thursday update"}
+  ]},
+  "web-eligible":{owner:"Content system owns",title:"Web store eligibility",rows:[
+    {sys:"Content system",val:"Eligible",note:""},
+    {sys:"LN",val:"Eligible",note:""}
+  ]},
+  "retail-title":{owner:"Content system owns",title:"Retail title",rows:[
+    {sys:"Content system",val:"Coastal Breeze 52 inch Low-Profile Fan, Brushed Nickel",note:"Already shows on retailers and the web store"},
+    {sys:"PLM",val:"not stored",note:"Never sent to LN or PLM"},
+    {sys:"LN",val:"not stored",note:""}
+  ]},
+  "retail-desc":{owner:"Content system owns",title:"Long description",rows:[
+    {sys:"Content system",val:"Hugger-mount coastal-grade fan with reversible blades...",note:""}
+  ]},
+  "retail-images":{owner:"Content system owns",title:"Retail images",rows:[
+    {sys:"Content system",val:"6 lifestyle photos, 1 hero",note:""}
+  ]}
+};
+
+function openField(key){
+  const d = FIELD_DATA[key];
+  if(!d) return;
+  document.getElementById("fieldTitle").textContent = d.title;
+  document.getElementById("fieldOwnerLabel").textContent = d.owner;
+  const body = document.getElementById("fieldBody");
+  body.innerHTML = d.rows.map(function(r){
+    const chip = r.sys==="PLM" ? "plm" : r.sys==="LN" ? "ln" : "cs";
+    return "<div class=\"value-row\"><div class=\"value-sys\"><span class=\"src-chip "+chip+"\">"+r.sys+"</span></div><div><div class=\"value-val\">"+r.val+(r.held?" <span class=\"held-badge\">held</span>":"")+"</div>"+(r.note?"<div class=\"value-note\">"+r.note+"</div>":"")+"</div></div>";
+  }).join("");
+  const m = document.getElementById("fieldModal");
+  m.classList.add("open");
+  m.setAttribute("aria-hidden","false");
+  
+  document.querySelectorAll(".field-row").forEach(function(r){ r.classList.remove("selected"); });
+}
+function closeField(){
+  const m = document.getElementById("fieldModal");
+  m.classList.remove("open");
+  m.setAttribute("aria-hidden","true");
+}
+window.openField = openField;
+window.closeField = closeField;
+
+
+const FLOW_STAGES = [
+  {name:"Created in PLM", blurb:"Engineering creates the item. Draft filled from the closest released item.",
+    narration:"Stage one. An engineer creates the new fan in PLM. The agent fills the draft from the closest released item and names any missing field before the review."},
+  {name:"Review", blurb:"Manufacturing engineering reviews. Redlines return the item.",
+    narration:"Stage two. Manufacturing engineering reviews the item. Redlines send the item back to the engineer. More than one round is allowed."},
+  {name:"Approval", blurb:"Engineering leadership approves. The item becomes Released.",
+    narration:"Stage three. Engineering leadership approves. The item lifecycle moves to Released and is eligible for Send to Production."},
+  {name:"Send to Production", blurb:"Agent sends the item, the BOM and the drawing.",
+    narration:"Stage four. The agent runs Send to Production. The item and its BOM go to LN; drawings go to document management. A send failure is read in plain words and re-sent only after a person approves."},
+  {name:"Item in LN", blurb:"LN fills operational fields from item group defaults.",
+    narration:"Stage five. LN receives the item and the BOM. Cost, price, warehouse, planning and purchasing data fill from item group defaults. The item is now buyable and sellable."},
+  {name:"Content system told", blurb:"Agent tells the content system the item exists.",
+    narration:"Stage six. The agent tells the product content system the item exists. The content team then creates the retail title, long description and images."},
+  {name:"Content fields back", blurb:"Updates checked against the ownership map before they reach LN.",
+    narration:"Stage seven. Updates come back from the content system. Fields the content system owns go through; changes to engineering fields are held and routed to the field's owner."},
+  {name:"Audit written", blurb:"Every approval, send, re-send and held change is logged.",
+    narration:"Stage eight. Every approval, send, re-send and held change is written to an audit trail with who approved it and the call made."}
+];
+let flowIdx = 0;
+function buildFlow(){
+  const nodes = document.getElementById("flowNodes");
+  nodes.innerHTML = FLOW_STAGES.map(function(s,i){
+    return "<div class=\"flow-node"+(i===0?" active":"")+"\" data-i=\""+i+"\"><div class=\"stage-num\">"+(i+1)+"</div><div class=\"stage-name\">"+s.name+"</div><div class=\"stage-blurb\">"+s.blurb+"</div></div>";
+  }).join("");
+}
+function renderFlow(){
+  document.querySelectorAll(".flow-node").forEach(function(n,i){
+    n.classList.remove("active","done");
+    if(i < flowIdx) n.classList.add("done");
+    else if(i === flowIdx) n.classList.add("active");
+  });
+  document.getElementById("flowStepLabel").textContent = "Stage "+(flowIdx+1)+" of "+FLOW_STAGES.length;
+  document.getElementById("flowStepText").textContent = FLOW_STAGES[flowIdx].narration;
+  document.getElementById("flowProgressFill").style.width = ((flowIdx+1)/FLOW_STAGES.length*100)+"%";
+  drawFlowPaths();
+}
+function drawFlowPaths(){
+  const svg = document.getElementById("flowPaths");
+  const canvas = document.querySelector(".flow-canvas");
+  if(!canvas || !svg) return;
+  const cr = canvas.getBoundingClientRect();
+  const cw = canvas.scrollWidth, ch = canvas.scrollHeight;
+  svg.setAttribute("width",cw);
+  svg.setAttribute("height",ch);
+  svg.setAttribute("viewBox","0 0 "+cw+" "+ch);
+  svg.innerHTML = "";
+  const nodes = canvas.querySelectorAll(".flow-node");
+  const ns = "http://www.w3.org/2000/svg";
+  for(let i=0;i<nodes.length-1;i++){
+    const a = nodes[i].getBoundingClientRect(), b = nodes[i+1].getBoundingClientRect();
+    const ax = a.right - cr.left, ay = a.top + a.height/2 - cr.top;
+    const bx = b.left - cr.left, by = b.top + b.height/2 - cr.top;
+    let d;
+    if(Math.abs(ay-by) < 10){
+      d = "M "+ax+" "+ay+" L "+bx+" "+by;
+    } else {
+      
+      const aMidX = (nodes[i].getBoundingClientRect().left + nodes[i].getBoundingClientRect().right)/2 - cr.left;
+      const aBottom = nodes[i].getBoundingClientRect().bottom - cr.top;
+      const bMidX = (nodes[i+1].getBoundingClientRect().left + nodes[i+1].getBoundingClientRect().right)/2 - cr.left;
+      const bTop = nodes[i+1].getBoundingClientRect().top - cr.top;
+      const my = (aBottom + bTop)/2;
+      d = "M "+aMidX+" "+aBottom+" C "+aMidX+" "+my+" "+bMidX+" "+my+" "+bMidX+" "+bTop;
+    }
+    const p = document.createElementNS(ns,"path");
+    p.setAttribute("d",d);
+    p.setAttribute("fill","none");
+    p.setAttribute("stroke-width","2");
+    if(i < flowIdx) p.setAttribute("stroke","#2ac371");
+    else if(i === flowIdx) { p.setAttribute("stroke","#6c23c9"); p.setAttribute("stroke-dasharray","6 4"); }
+    else p.setAttribute("stroke","#bbbbbf");
+    svg.appendChild(p);
+  }
+}
+function openFlow(){
+  flowIdx = 0;
+  const m = document.getElementById("flowModal");
+  m.classList.add("open");
+  m.setAttribute("aria-hidden","false");
+  buildFlow();
+  setTimeout(renderFlow, 60);
+}
+function closeFlow(){
+  const m = document.getElementById("flowModal");
+  m.classList.remove("open");
+  m.setAttribute("aria-hidden","true");
+}
+function flowNext(){ if(flowIdx < FLOW_STAGES.length-1){ flowIdx++; renderFlow(); } else closeFlow(); }
+function flowPrev(){ if(flowIdx > 0){ flowIdx--; renderFlow(); } }
+window.openFlow = openFlow;
+window.closeFlow = closeFlow;
+window.flowNext = flowNext;
+window.flowPrev = flowPrev;
+window.addEventListener("resize", function(){ if(document.getElementById("flowModal").classList.contains("open")) drawFlowPaths(); });
+
+
+const STATE = { demo:{running:false,paused:false,epoch:0,idx:0}, voice:{picked:null} };
+
+function pickVoice(){
+  if(!window.speechSynthesis) return null;
+  const v = window.speechSynthesis.getVoices();
+  if(!v.length) return null;
+  const male = v.find(x => /^en/i.test(x.lang) && /(David|Mark|Guy|Ryan|Alex|Daniel|Michael)/i.test(x.name));
+  if(male) return male;
+  return v.find(x => /^en-US/i.test(x.lang)) || v.find(x => /^en/i.test(x.lang)) || v[0];
+}
+if(window.speechSynthesis){
+  STATE.voice.picked = pickVoice();
+  window.speechSynthesis.onvoiceschanged = function(){ STATE.voice.picked = pickVoice(); };
+}
+function renderCap(idx, total, text){
+  document.getElementById("capText").textContent = text;
+  document.getElementById("capStep").textContent = "Step "+(idx+1)+" of "+total;
+  document.getElementById("capBar").classList.add("visible");
+}
+function clearHi(){ document.querySelectorAll(".highlight").forEach(function(e){ e.classList.remove("highlight"); }); }
+function hi(sel){
+  clearHi();
+  if(!sel) return;
+  try{
+    const el = document.querySelector(sel);
+    if(el){ el.classList.add("highlight"); el.scrollIntoView({behavior:"smooth",block:"center"}); }
+  }catch(e){}
+}
+
+const DEMO_STEPS = [
+  {caption:"I'm Dana Whitfield, VP Product Engineering. Today a new fan starts in LN from the content system's file feed, and items missed data. The agent moves the start into PLM so engineering is the single source.", highlight:".ws-titlebar", action:function(){ document.querySelectorAll(".ids-tab")[0].click(); }},
+  {caption:"Here is the hero story. The Coastal 52 inch brushed nickel. New in PLM on Monday, buyable and sellable in LN on Wednesday, and 2 content changes to engineering fields were held.", highlight:".hero-answer"},
+  {caption:"On the left is the item image from PLM and the 14-line BOM as tiles. On the right is one lane per stage with when it was reached and who did it.", highlight:".launch-grid"},
+  {caption:"Cal Draper created the item in PLM on Monday morning. The agent filled the draft from the closest released item, CF-COAST-52-MB. Seven engineering fields matched.", highlight:".lane:nth-child(1)"},
+  {caption:"Owen's review returned one redline on Tuesday. The blade bracket drawing was missing. Cal added it and the review passed on round 2.", highlight:".lane:nth-child(2)"},
+  {caption:"I approved on Wednesday morning. Send to Production ran at 2:10 PM and LN received the item and all 14 BOM lines. LN then filled 22 more fields from the item group defaults.", highlight:".lane:nth-child(5)"},
+  {caption:"On Thursday the content system sent its update. Three fields it owns went through: UPC, shipping cube and shipping dimensions. Two changes to engineering fields were held and routed to Cal.", highlight:".lane:nth-child(8)"},
+  {caption:"Now the field ownership tab. Every item field has one owner. PLM owns 8. LN owns 6. The content system owns 6. Three are still being decided.", highlight:".ids-tabs", action:function(){ document.querySelectorAll(".ids-tab")[1].click(); }},
+  {caption:"These three fields need an owner. Shipping weight is engineering weight or packaged weight. Country of origin and tariff code depend on who picks the factory.", highlight:".decide-card"},
+  {caption:"Item description is a good example. PLM owns it. The content system tried to overwrite it with a retail title. The agent held the change because PLM owns this field.", highlight:".owner-col:first-child", action:function(){ openField("item-description"); }},
+  {caption:"Priya asked why her new description did not show in LN. The answer is right here. The retail title lives in the content system and already shows on retailers; the item description in LN comes from engineering.", highlight:"#fieldModal .mdl-body"},
+  {caption:"The new items tab lists every new fan in flight, worst first. The Atlas 8 foot industrial has been sitting at the approval stage for 6 days.", highlight:".ids-tabs", action:function(){ closeField(); document.querySelectorAll(".ids-tab")[2].click(); }},
+  {caption:"Review rounds and approval rounds show as a count on each row. Most items clear on one round, which is why the average sits at 1.3.", highlight:"#tab-2 .ids-grid"},
+  {caption:"And the insights tab. Items reach LN in 2.4 days, with review and approval inside that time.", highlight:".ids-tabs", action:function(){ document.querySelectorAll(".ids-tab")[3].click(); }},
+  {caption:"That is the workspace. Engineering owns creation. LN owns operations. The content system owns retail. The agent runs the path and holds anything that crosses an owner line.", highlight:".kpi-row"}
+];
+
+function showDemoUI(){
+  document.getElementById("demoControls").classList.add("visible");
+  document.getElementById("runDemoBtn").classList.add("running");
+  document.getElementById("runDemoLabel").textContent = "Stop demo";
+}
+function hideDemoUI(){
+  document.getElementById("demoControls").classList.remove("visible");
+  document.getElementById("capBar").classList.remove("visible");
+  document.getElementById("runDemoBtn").classList.remove("running");
+  document.getElementById("runDemoLabel").textContent = "Run demo";
+  clearHi();
+}
+
+function speakStep(idx, total, step){
+  const myEpoch = STATE.demo.epoch;
+  const stale = function(){ return STATE.demo.epoch !== myEpoch || !STATE.demo.running; };
+  try{if(window.speechSynthesis) window.speechSynthesis.cancel();}catch(e){}
+  if(step.action){ try{step.action();}catch(e){} }
+  if(step.highlight) setTimeout(function(){ if(!stale()) hi(step.highlight); }, 120);
+  renderCap(idx, total, step.caption);
+  return new Promise(function(resolve){
+    let done = false;
+    function finish(){ if(done) return; done=true; resolve(); }
+    const stalePoll = setInterval(function(){ if(stale()){ clearInterval(stalePoll); finish(); } }, 100);
+    if(!window.speechSynthesis){ setTimeout(finish, Math.max(4000, step.caption.length*58)); return; }
+    const voice = STATE.voice.picked || pickVoice();
+    const u = new SpeechSynthesisUtterance(step.caption);
+    if(voice){ u.voice = voice; u.lang = voice.lang||"en-US"; }
+    u.rate = 0.96; u.pitch = 0.95;
+    const minHold = Math.max(4000, step.caption.length*58);
+    const start = Date.now();
+    u.onend = function(){ const left = minHold - (Date.now()-start); if(left<=0) finish(); else setTimeout(finish, left); };
+    u.onerror = u.onend;
+    try{ window.speechSynthesis.speak(u); }catch(e){ setTimeout(finish, minHold); }
+    setTimeout(function(){ try{if(window.speechSynthesis) window.speechSynthesis.cancel();}catch(e){} finish(); }, 15000);
+  });
+}
+
+async function runDemo(){
+  if(STATE.demo.running){ stopDemo(); return; }
+  STATE.demo.running = true; STATE.demo.paused = false;
+  STATE.demo.idx = 0; STATE.demo.epoch++;
+  showDemoUI();
+  document.getElementById("idsDemoPlay").textContent = "⏸";
+  while(STATE.demo.running && STATE.demo.idx < DEMO_STEPS.length){
+    const i = STATE.demo.idx;
+    try{ await speakStep(i, DEMO_STEPS.length, DEMO_STEPS[i]); }catch(e){}
+    if(!STATE.demo.running) break;
+    while(STATE.demo.paused && STATE.demo.running){ await new Promise(function(r){setTimeout(r,150);}); }
+    if(STATE.demo.idx === i) STATE.demo.idx++;
+    await new Promise(function(r){setTimeout(r,200);});
+  }
+  stopDemo(false);
+}
+function stopDemo(reset){
+  STATE.demo.running = false; STATE.demo.paused = false; STATE.demo.epoch++;
+  if(reset !== false) STATE.demo.idx = 0;
+  try{if(window.speechSynthesis) window.speechSynthesis.cancel();}catch(e){}
+  hideDemoUI();
+}
+window.runDemo = runDemo;
+
+document.getElementById("idsDemoPlay").addEventListener("click", function(){
+  if(!STATE.demo.running){ runDemo(); return; }
+  STATE.demo.paused = !STATE.demo.paused;
+  this.textContent = STATE.demo.paused ? "▶" : "⏸";
+  document.getElementById("idsDemoStatus").textContent = STATE.demo.paused ? "Demo paused" : "Demo running";
+});
+document.getElementById("idsDemoStop").addEventListener("click", function(){ stopDemo(true); });
+document.getElementById("idsDemoNext").addEventListener("click", function(){
+  STATE.demo.epoch++;
+  STATE.demo.idx = Math.min(STATE.demo.idx+1, DEMO_STEPS.length-1);
+  try{if(window.speechSynthesis) window.speechSynthesis.cancel();}catch(e){}
+});
+document.getElementById("idsDemoPrev").addEventListener("click", function(){
+  STATE.demo.epoch++;
+  STATE.demo.idx = Math.max(0, STATE.demo.idx-1);
+  try{if(window.speechSynthesis) window.speechSynthesis.cancel();}catch(e){}
+});
+</script>
+</body>
+</html>

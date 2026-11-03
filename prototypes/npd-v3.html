@@ -1,0 +1,2201 @@
+<!doctype html>
+
+
+<html lang="en">
+<head>
+  
+  
+  
+
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hunter Fan, NPD Launch Readiness Console</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ids-color-background-default:#ffffff;
+  --ids-color-neutral-10:#f5f5f5;
+  --ids-color-neutral-20:#e0e0e1;
+  --ids-color-neutral-30:#c5c5c9;
+  --ids-color-neutral-90:#28282a;
+  --ids-color-border-weak:#bbbbbf;
+  --ids-color-border-weaker:#e0e0e1;
+  --ids-color-border-strong:#525257;
+  --ids-color-fg:#161618;
+  --ids-color-fg-secondary:#3b3b3f;
+  --ids-color-fg-tertiary:#6f6f76;
+  --ids-color-action:#0072ed;
+  --ids-color-action-stronger:#0066d4;
+  --ids-color-action-weakest:#e6f1fd;
+  --ids-color-success:#2ac371;
+  --ids-color-success-weak:#ebf9f1;
+  --ids-color-success-stronger:#156138;
+  --ids-color-warning:#f98300;
+  --ids-color-warning-weak:#fef2e5;
+  --ids-color-warning-stronger:#a14100;
+  --ids-color-error:#da1217;
+  --ids-color-error-weak:#fbe7e8;
+  --ids-color-error-stronger:#c31014;
+  --ids-color-info:#0072ed;
+  --ids-color-info-weak:#e6f1fd;
+  --ids-ai-flat:#460daf;
+  --ids-ai-strong:#3b1470;
+  --ids-color-purple-weak:#f1ebfc;
+  --accent:#0072ed;
+  --accent-2:#0066d4;
+  --red:#da1217;
+  --amber:#f98300;
+  --green:#2ac371;
+  --ai:#460daf;
+  --ai-strong:#3b1470;
+  --text:#161618;
+  --text-dim:#3b3b3f;
+  --text-muted:#6f6f76;
+  --border:#e0e0e1;
+  --panel:#ffffff;
+  --panel-2:#f5f5f5;
+  --bg:#f5f5f5;
+  --tile-bg:#ffffff;
+  --tile-border:#e0e0e1;
+  --accent-soft:#e6f1fd;
+  --overlay-bg:rgba(255,255,255,.96);
+  --overlay-border:#e0e0e1;
+  --caption-bg:rgba(22,22,24,.94);
+  --caption-text:#ffffff;
+  --shadow-lg:0 10px 30px rgba(0,0,0,.18);
+  --r-xs:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,select,textarea{font-family:inherit}
+body{
+  font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;
+  font-size:14px;color:var(--ids-color-fg);
+  background:#f5f5f5;line-height:1.35;
+  -webkit-font-smoothing:antialiased;
+}
+
+
+.ids-masthead{height:40px;background:#000000;display:flex;align-items:center;padding-inline:8px;gap:8px;position:sticky;top:0;z-index:200}
+.mh-start{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.mh-logo-btn,.mh-icon-btn{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;border-radius:4px;color:rgb(255 255 255 / 0.8);padding:0;font-size:0;line-height:0}
+.mh-logo-btn > *{font-size:16px;line-height:normal}
+.mh-icon-btn:hover{background:#28282a;color:#ffffff}
+.mh-tabs{display:flex;align-items:center;flex:1;min-width:0;gap:4px}
+.mh-tab{display:inline-flex;align-items:center;gap:8px;height:32px;padding-inline:16px;background:#28282a;border-radius:4px;color:#ffffff;font-size:14px;font-weight:600;max-width:620px}
+.mh-tab-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mh-tab-divider{width:1px;height:18px;background:rgba(255,255,255,0.3);flex-shrink:0}
+.mh-tab-close{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;color:#ffffff;padding:0}
+.mh-end{display:flex;align-items:center;flex-shrink:0;gap:4px;margin-left:auto}
+
+
+.app-actions{max-width:1680px;margin:0 auto;padding:20px 32px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.app-title{font-size:22px;font-weight:600;color:var(--ids-color-fg);letter-spacing:-0.1px}
+.app-subtitle{font-size:14px;color:var(--ids-color-fg-tertiary);margin-top:4px;line-height:1.4}
+.app-actions-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.run-demo-btn,.flow-btn-launch{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:var(--r-xs);font-size:13px;font-weight:600;line-height:1;background:var(--accent);color:#fff;border:1px solid var(--accent);cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0}
+.run-demo-btn:hover,.flow-btn-launch:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.run-demo-btn.running{background:var(--red);border-color:var(--red)}
+.run-demo-btn>svg,.flow-btn-launch>svg{flex-shrink:0;width:14px;height:14px}
+
+
+.ids-tabs-wrap{max-width:1680px;margin:0 auto;padding:0 32px;border-bottom:1px solid var(--ids-color-border-weaker);background:transparent}
+.ids-tabs{display:flex;align-items:center;gap:4px}
+.ids-tab{position:relative;display:inline-flex;align-items:center;height:40px;padding:0 18px;border:0;background:none;font-family:inherit;font-size:14px;font-weight:600;color:var(--ids-color-fg-secondary);cursor:pointer;border-radius:4px 4px 0 0}
+.ids-tab:hover{color:var(--ids-color-fg);background:var(--ids-color-neutral-10)}
+.ids-tab[aria-selected="true"]{color:var(--ids-color-action)}
+.ids-tab[aria-selected="true"]::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:3px;background:var(--ids-color-action);border-radius:2px 2px 0 0}
+.ids-tabpanel{display:none}
+.ids-tabpanel.active{display:block}
+
+.tab-headline{font-size:20px;font-weight:600;color:var(--ids-color-fg);margin:18px 32px 8px;max-width:1680px;line-height:1.35}
+.tab-headline-wrap{max-width:1680px;margin:0 auto;padding:0 32px}
+.tab-headline-wrap .tab-headline{margin:0 0 14px 0}
+
+
+.ids-home-page{padding:0 0 48px}
+.hp-widgets{max-width:1680px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;align-items:stretch}
+
+
+.hero-row{grid-column:1/-1;display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px}
+.hero-tile{background:#ffffff;border:1px solid var(--ids-color-border-weaker);border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;justify-content:center;gap:6px;min-height:150px}
+.hero-tile.primary{border-left:4px solid var(--ids-color-error);background:#ffffff}
+.hero-eyebrow{font-size:13px;font-weight:600;color:var(--ids-color-fg-tertiary);text-transform:uppercase;letter-spacing:0.5px}
+.hero-eyebrow.alert{color:var(--ids-color-error-stronger)}
+.hero-eyebrow.warn{color:var(--ids-color-warning-stronger)}
+.hero-value{font-size:40px;font-weight:700;line-height:1.05;color:var(--ids-color-fg);font-variant-numeric:lining-nums tabular-nums}
+.hero-value.lg{font-size:28px;color:var(--ids-color-fg)}
+.hero-value.red{color:var(--ids-color-error-stronger)}
+.hero-note{font-size:14px;color:var(--ids-color-fg-secondary);line-height:1.4}
+.hero-note.strong{font-weight:600}
+.hero-title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+
+.wgt-card{width:100%;height:100%;display:flex;flex-direction:column;background:#ffffff;border:1px solid var(--ids-color-border-weaker);border-radius:8px;overflow:hidden;position:relative}
+.wgt-header{flex-shrink:0;display:flex;align-items:flex-start;padding:14px 18px 10px;gap:8px;border-bottom:1px solid var(--ids-color-border-weaker)}
+.wgt-titles{display:flex;flex-direction:column;min-width:0;gap:2px;flex:1}
+.wgt-title{font-size:16px;font-weight:600;color:var(--ids-color-fg);line-height:1.25}
+.wgt-subtitle{font-size:13px;color:var(--ids-color-fg-tertiary);line-height:1.3}
+.wgt-actions{display:flex;align-items:center;gap:4px;margin-left:auto}
+.wgt-content{flex:1;overflow-y:auto;min-height:0;padding:14px 18px}
+.wgt-content.flush{padding:0}
+.wgt-footer{flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:12px 18px;border-top:1px solid var(--ids-color-border-weaker)}
+
+
+.hp-span2{grid-column:span 2}
+.hp-span3{grid-column:span 3}
+.hp-span4{grid-column:span 4}
+.hp-span6{grid-column:span 6}
+
+
+.ids-button{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:32px;padding:0 12px;border-radius:6px;border:1px solid transparent;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;background:none;color:var(--ids-color-fg-secondary);font-family:inherit}
+.ids-button.primary{background:var(--ids-color-action);border-color:var(--ids-color-action);color:#ffffff}
+.ids-button.primary:hover{background:var(--ids-color-action-stronger);border-color:var(--ids-color-action-stronger)}
+.ids-button.secondary{background:#ffffff;border-color:var(--ids-color-action);color:var(--ids-color-action)}
+.ids-button.secondary:hover{background:var(--ids-color-action-weakest)}
+.ids-button.tertiary{background:none;color:var(--ids-color-fg-secondary)}
+.ids-button.tertiary:hover{background:var(--ids-color-neutral-10)}
+.ids-button.compact{min-height:26px;padding:0 10px;font-size:13px}
+
+.ids-tag{display:inline-flex;align-items:center;gap:4px;height:22px;padding:0 8px;border-radius:4px;font-size:13px;font-weight:600;white-space:nowrap;background:var(--ids-color-neutral-20);border:1px solid var(--ids-color-neutral-20);color:var(--ids-color-fg)}
+.ids-tag.subtle-red{background:var(--ids-color-error-weak);border-color:var(--ids-color-error-weak);color:var(--ids-color-error-stronger)}
+.ids-tag.subtle-amber{background:var(--ids-color-warning-weak);border-color:var(--ids-color-warning-weak);color:var(--ids-color-warning-stronger)}
+.ids-tag.subtle-green{background:var(--ids-color-success-weak);border-color:var(--ids-color-success-weak);color:var(--ids-color-success-stronger)}
+.ids-tag.info{background:var(--ids-color-action-weakest);border-color:var(--ids-color-action-weakest);color:var(--ids-color-action-stronger)}
+.ids-tag.error{background:var(--ids-color-error);border-color:var(--ids-color-error);color:#ffffff}
+.ids-tag.success{background:var(--ids-color-success);border-color:var(--ids-color-success);color:var(--ids-color-fg)}
+.ids-tag.warning{background:var(--ids-color-warning);border-color:var(--ids-color-warning);color:var(--ids-color-fg)}
+.ids-tag.purple{background:var(--ids-ai-flat);border-color:var(--ids-ai-flat);color:#ffffff}
+.ids-tag.lg{height:26px;padding:0 10px;font-size:13px}
+
+
+.txt-sm{font-size:14px}
+.txt-xs{font-size:13px}
+.txt-tert{color:var(--ids-color-fg-tertiary)}
+.txt-sec{color:var(--ids-color-fg-secondary)}
+.num{font-variant-numeric:lining-nums tabular-nums}
+.stack{display:flex;flex-direction:column;gap:8px}
+.row-between{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.audible{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+
+.ids-grid{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+.ids-grid-th{font-size:13px;font-weight:600;color:var(--ids-color-fg-secondary);text-align:left;padding:10px 12px;border-bottom:1px solid var(--ids-color-border-weaker);white-space:nowrap;background:#f5f5f5;position:sticky;top:0}
+.ids-grid-th.r{text-align:right}
+.ids-grid-row{cursor:pointer}
+.ids-grid-row:hover .ids-grid-cell{background:var(--ids-color-action-weakest)}
+.ids-grid-cell{padding:10px 12px;border-bottom:1px solid var(--ids-color-border-weaker);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px}
+.ids-grid-cell.r{text-align:right;font-variant-numeric:lining-nums tabular-nums}
+
+
+.lane-item{padding:10px 0;border-bottom:1px solid var(--ids-color-border-weaker)}
+.lane-item:last-child{border-bottom:0}
+.lane-item.lane-highlight{background:var(--ids-color-error-weak);margin:0 -8px;padding:10px 8px;border-radius:4px;border-bottom:1px solid var(--ids-color-border-weaker)}
+.lane-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:12px}
+.lane-name{font-size:14px;font-weight:600;color:var(--ids-color-fg)}
+.lane-status{display:flex;align-items:center;gap:10px}
+.lane-bar{height:24px;border-radius:4px;background:var(--ids-color-neutral-20);width:100%;overflow:hidden;position:relative}
+.lane-bar-fill{height:100%;border-radius:4px;transition:width .3s}
+.lane-bar-fill.red{background:#f5c3c4}
+.lane-bar-fill.amber{background:#fcc888}
+.lane-bar-fill.green{background:#a1e4bf}
+.lane-label{font-size:13px;font-weight:700;min-width:52px;text-align:right}
+.lane-label.red{color:var(--ids-color-error-stronger)}
+.lane-label.amber{color:var(--ids-color-warning-stronger)}
+.lane-label.green{color:var(--ids-color-success-stronger)}
+.lane-note{font-size:13px;color:var(--ids-color-fg-tertiary);line-height:1.4;margin-top:2px}
+.lane-row-bar{display:flex;align-items:center;gap:12px}
+
+
+.rec-wrap{display:flex;gap:16px;align-items:center;margin-bottom:14px}
+.rec-ring{position:relative;width:96px;height:96px;flex-shrink:0}
+.rec-ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.rec-ring-pct{font-size:24px;font-weight:700;line-height:1}
+.rec-ring-lbl{font-size:13px;color:var(--ids-color-fg-tertiary);margin-top:2px;text-transform:uppercase;letter-spacing:0.4px}
+.rec-headline{font-size:15px;font-weight:600;color:var(--ids-color-error-stronger);margin-bottom:4px}
+.rec-body{font-size:14px;color:var(--ids-color-fg-secondary);line-height:1.45}
+.rec-blockers{list-style:decimal;padding-left:22px;margin:0}
+.rec-blockers li{font-size:14px;color:var(--ids-color-fg-secondary);line-height:1.5;padding:2px 0}
+.rec-blockers-title{font-size:13px;font-weight:600;color:var(--ids-color-fg-secondary);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px}
+
+
+.bom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bom-tile{background:#ffffff;border:2px solid var(--ids-color-border-weaker);border-radius:6px;padding:10px;display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:transform .12s,box-shadow .12s;gap:6px}
+.bom-tile:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(0,0,0,.08)}
+.bom-tile.ready{border-color:var(--ids-color-success)}
+.bom-tile.unconfirmed{border-color:var(--ids-color-error)}
+.bom-tile.unreleased{border-color:var(--ids-color-warning)}
+.bom-tile-img{width:100%;aspect-ratio:1.3;background:var(--ids-color-neutral-10);border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.bom-tile-img svg{display:block;width:70%;height:70%}
+.bom-tile-name{font-size:13px;font-weight:600;color:var(--ids-color-fg);text-align:center;line-height:1.25;width:100%}
+.bom-tile-status{font-size:13px;font-weight:600;text-align:center}
+.bom-tile.ready .bom-tile-status{color:var(--ids-color-success-stronger)}
+.bom-tile.unconfirmed .bom-tile-status{color:var(--ids-color-error-stronger)}
+.bom-tile.unreleased .bom-tile-status{color:var(--ids-color-warning-stronger)}
+
+
+.fan-render{width:100%;background:#f5f5f5;border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.fan-render svg{display:block;width:100%;height:100%}
+
+.rd-ring{position:relative;width:96px;height:96px;flex-shrink:0}
+.rd-ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.rd-ring-pct{font-size:24px;font-weight:700;line-height:1}
+.rd-ring-lbl{font-size:13px;color:var(--ids-color-fg-tertiary);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+
+.countdown-wrap{display:flex;align-items:baseline;gap:6px}
+.cd-num{font-size:40px;font-weight:700;line-height:1;color:var(--ids-color-error-stronger)}
+.cd-lbl{font-size:13px;color:var(--ids-color-fg-tertiary);line-height:1.2}
+
+.mdl-dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13px}
+.mdl-dl dt{color:var(--ids-color-fg-tertiary)}
+.mdl-dl dd{color:var(--ids-color-fg);font-weight:600}
+
+
+.filmstrip{display:flex;gap:6px;overflow-x:auto;padding:4px 0}
+.fs-frame{flex:0 0 76px;background:#f5f5f5;border:1px solid var(--border);border-radius:4px;padding:4px;display:flex;flex-direction:column;align-items:center}
+.fs-frame.current{border-color:var(--ids-color-action);border-width:2px}
+.fs-frame-img{width:100%;aspect-ratio:1;background:#fff;border-radius:2px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.fs-frame-img svg{display:block;width:85%;height:85%}
+.fs-frame-lbl{font-size:13px;color:var(--ids-color-fg-tertiary);margin-top:3px}
+
+
+.lc-timeline{display:flex;align-items:center;gap:0;padding:6px 0}
+.lc-step{flex:1;display:flex;flex-direction:column;align-items:center;position:relative}
+.lc-step::after{content:"";position:absolute;top:9px;left:50%;right:-50%;height:2px;background:var(--ids-color-neutral-20);z-index:0}
+.lc-step:last-child::after{display:none}
+.lc-step.done::after{background:var(--ids-color-success)}
+.lc-dot{width:18px;height:18px;border-radius:50%;background:var(--ids-color-neutral-20);border:2px solid #fff;z-index:1;position:relative}
+.lc-step.done .lc-dot{background:var(--ids-color-success)}
+.lc-step.current .lc-dot{background:var(--ids-color-action);box-shadow:0 0 0 3px rgba(0,114,237,.2)}
+.lc-lbl{font-size:13px;color:var(--ids-color-fg-secondary);margin-top:5px;font-weight:500;text-align:center;line-height:1.1}
+.lc-step.current .lc-lbl{color:var(--ids-color-action);font-weight:600}
+
+
+.ids-lv-body{display:flex;flex-direction:column}
+.ids-lv-item{display:flex;align-items:center;gap:12px;padding:10px 16px;border-top:1px solid var(--ids-color-border-weaker);cursor:pointer}
+.ids-lv-item:first-child{border-top:0}
+.ids-lv-item:hover{background:var(--ids-color-action-weakest)}
+.ids-lv-area{display:flex;flex-direction:column;min-width:0;flex:1;gap:2px}
+.ids-lv-title{font-size:14px;font-weight:600;color:var(--ids-color-fg)}
+.ids-lv-desc{font-size:13px;color:var(--ids-color-fg-secondary)}
+.badge-dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.badge-dot.red{background:var(--ids-color-error)}
+.badge-dot.amber{background:var(--ids-color-warning)}
+.badge-dot.green{background:var(--ids-color-success)}
+
+.ids-pb-track{height:8px;border-radius:4px;overflow:hidden;background:var(--ids-color-neutral-10);border:1px solid var(--ids-color-border-weak)}
+.ids-pb-fill{height:100%;background:var(--ids-color-action)}
+
+.hbar-list{display:flex;flex-direction:column;gap:8px}
+.hbar-row{display:grid;grid-template-columns:140px 1fr 70px;gap:8px;align-items:center;font-size:13px}
+.hbar-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar-track{height:14px;background:var(--ids-color-neutral-10);border-radius:2px;overflow:hidden}
+.hbar-fill{height:100%;background:var(--ids-color-action)}
+.hbar-val{text-align:right;font-variant-numeric:lining-nums tabular-nums;color:var(--ids-color-fg-secondary)}
+
+
+.action-card{background:#ffffff;border:1px solid var(--ids-color-border-weaker);border-radius:8px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.action-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.action-card-title{font-size:16px;font-weight:600;color:var(--ids-color-fg)}
+.action-card-sub{font-size:13px;color:var(--ids-color-fg-tertiary);margin-top:2px}
+.action-preview{background:var(--ids-color-neutral-10);border:1px solid var(--ids-color-border-weaker);border-radius:6px;padding:12px 14px;font-size:13px;color:var(--ids-color-fg-secondary);line-height:1.5}
+.action-preview-label{font-size:13px;font-weight:600;color:var(--ids-color-fg-tertiary);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px}
+.action-preview-kv{display:grid;grid-template-columns:120px 1fr;gap:4px 14px;font-size:13px}
+.action-preview-kv dt{color:var(--ids-color-fg-tertiary)}
+.action-preview-kv dd{color:var(--ids-color-fg);font-weight:600}
+.action-card-footer{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+
+
+.wgt-modal-overlay{position:fixed;inset:0;z-index:250;display:none;align-items:center;justify-content:center}
+.wgt-modal-overlay.open{display:flex}
+.wgt-modal-backdrop{position:absolute;inset:0;background:rgba(11,15,24,.72);backdrop-filter:blur(6px)}
+.wgt-modal-dialog{position:relative;background:#ffffff;color:var(--ids-color-fg);border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.4);width:min(1000px,75vw);max-width:75vw;max-height:75vh;display:flex;flex-direction:column;overflow:hidden}
+.mdl-header{padding:16px 20px;border-bottom:1px solid var(--ids-color-border-weaker);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-shrink:0}
+.wgt-modal-title{font-size:18px;font-weight:700;margin:0}
+.wgt-modal-close{width:32px;height:32px;border-radius:50%;border:1px solid var(--ids-color-border-weaker);background:#ffffff;color:var(--ids-color-fg-secondary);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.wgt-modal-close:hover{background:var(--ids-color-neutral-10)}
+.mdl-body{flex:1 1 auto;overflow:auto;padding:20px;width:100%}
+.mdl-footer{padding:14px 20px;border-top:1px solid var(--ids-color-border-weaker);display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-shrink:0}
+.mdl-section{margin-bottom:20px}
+.mdl-section:last-child{margin-bottom:0}
+.mdl-section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ids-color-fg-tertiary);margin-bottom:10px}
+.mdl-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.mdl-field label{display:block;font-size:13px;font-weight:600;color:var(--ids-color-fg-secondary);margin-bottom:4px}
+.mdl-field input,.mdl-field select,.mdl-field textarea{width:100%;height:34px;padding:0 10px;font-size:14px;border:1px solid var(--ids-color-border-weak);border-radius:6px;font-family:inherit;background:#ffffff}
+.mdl-field textarea{height:auto;min-height:70px;padding:8px 10px}
+.mdl-step-indicator{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.mdl-step{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ids-color-fg-tertiary)}
+.mdl-step-num{width:22px;height:22px;border-radius:50%;background:var(--ids-color-neutral-20);color:var(--ids-color-fg-secondary);font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.mdl-step.active .mdl-step-num{background:var(--ids-color-action);color:#ffffff}
+.mdl-step.done .mdl-step-num{background:var(--ids-color-success-stronger);color:#ffffff}
+.mdl-step-sep{width:20px;height:2px;background:var(--ids-color-neutral-20)}
+
+.chart-legend{display:flex;flex-direction:column;gap:6px}
+.chart-legend-item{display:flex;align-items:center;gap:8px;font-size:13px}
+.chart-legend-swatch{width:12px;height:12px;border-radius:2px}
+
+
+.smp-launcher{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:#ffffff;border:1px solid var(--ids-color-border-weaker);box-shadow:0 4px 12px rgba(0,0,0,.15);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;z-index:180}
+.smp-launcher:hover{box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.smp-panel{position:fixed;top:40px;right:0;bottom:0;width:min(420px,100vw);background:#ffffff;box-shadow:-4px 0 20px rgba(0,0,0,.15);z-index:190;display:none;flex-direction:column}
+.smp-panel.open{display:flex}
+.smp-toolbar{height:48px;background:#f5f5f5;border-bottom:1px solid var(--ids-color-border-weaker);display:flex;align-items:center;padding:0 16px;gap:8px;flex-shrink:0}
+.smp-toolbar-title{font-size:14px;font-weight:600;color:var(--ids-color-fg);flex:1}
+.smp-close{width:28px;height:28px;border:0;background:none;cursor:pointer;border-radius:4px;color:var(--ids-color-fg-secondary);display:inline-flex;align-items:center;justify-content:center}
+.smp-close:hover{background:var(--ids-color-neutral-20)}
+.smp-content{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.smp-onboarding{display:flex;flex-direction:column;align-items:center;padding:20px 0;gap:12px}
+.smp-onb-icon{width:56px;height:56px;border-radius:50%;background:var(--ids-color-purple-weak);color:var(--ids-ai-flat);display:inline-flex;align-items:center;justify-content:center;font-size:24px}
+.smp-onb-title{font-size:16px;font-weight:600;text-align:center}
+.smp-message-list{display:flex;flex-direction:column;gap:12px}
+.smp-message{display:flex;flex-direction:column;gap:4px}
+.smp-message.user{align-items:flex-end}
+.smp-bubble{max-width:90%;padding:10px 12px;border-radius:12px;font-size:14px;line-height:1.4}
+.smp-message.user .smp-bubble{background:var(--ids-color-action-weakest);color:var(--ids-color-fg)}
+.smp-message.ai .smp-bubble{background:var(--ids-color-neutral-10);color:var(--ids-color-fg)}
+.smp-suggestion-chip,.smp-followup-chip{padding:8px 12px;background:#ffffff;border:1px solid var(--ids-color-border-weak);border-radius:16px;font-size:13px;cursor:pointer;text-align:left;font-family:inherit;color:var(--ids-color-fg)}
+.smp-suggestion-chip:hover,.smp-followup-chip:hover{background:var(--ids-color-neutral-10);border-color:var(--ids-color-action)}
+.smp-chips{display:flex;flex-direction:column;gap:8px}
+.smp-chat-input-wrap{border-top:1px solid var(--ids-color-border-weaker);padding:12px 16px;flex-shrink:0}
+.smp-chat-input{width:100%;min-height:60px;padding:8px 12px;border:1px solid var(--ids-color-border-weak);border-radius:8px;font-family:inherit;font-size:14px;resize:none}
+.smp-input-row{display:flex;gap:8px;align-items:center;margin-top:8px}
+.smp-send-btn{padding:6px 14px;background:var(--ids-color-action);color:#ffffff;border:0;border-radius:6px;font-size:13px;cursor:pointer;font-family:inherit}
+.smp-warning{font-size:13px;color:var(--ids-color-fg-tertiary);text-align:center;margin-top:6px}
+
+
+.demo-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:none;align-items:center;gap:6px;background:var(--overlay-bg);border:1px solid var(--overlay-border);border-radius:50px;padding:7px 10px;z-index:10000;backdrop-filter:blur(10px);box-shadow:var(--shadow-lg)}
+.demo-controls.visible{display:flex}
+.demo-btn{width:38px;height:38px;border-radius:50%;border:0;background:transparent;color:var(--text-dim);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}
+.demo-btn:hover{background:var(--accent-soft);color:var(--accent)}
+.demo-btn.play{background:var(--accent);color:#fff;width:44px;height:44px;font-size:16px}
+.demo-status{padding:0 12px;font-size:13px;color:var(--text-muted)}
+.caption-bar{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);max-width:880px;width:88%;background:var(--caption-bg);border:1px solid var(--overlay-border);border-radius:14px;padding:14px 24px;color:var(--caption-text);font-size:15px;line-height:1.5;text-align:center;backdrop-filter:blur(10px);box-shadow:var(--shadow-lg);z-index:9999;display:none}
+.caption-bar.visible{display:block}
+.caption-step{font-size:13px;color:#bbbbbf;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.highlight{outline:2px solid var(--accent)!important;outline-offset:3px;box-shadow:0 0 0 6px rgba(0,114,237,.18)!important;border-radius:8px;position:relative;z-index:5}
+
+
+.flow-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center}
+.flow-modal.open{display:flex}
+.flow-backdrop{position:absolute;inset:0;background:rgba(11,15,24,.72);backdrop-filter:blur(6px)}
+.flow-dialog{position:relative;background:var(--panel);color:var(--text);border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.4);width:min(1200px,94vw);height:min(820px,95vh);display:flex;flex-direction:column;overflow:hidden}
+.flow-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-shrink:0}
+.flow-eyebrow{font-size:13px;color:var(--ai-strong);text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.flow-title{font-size:20px;font-weight:700;margin:4px 0 0}
+.flow-subtitle{font-size:13px;color:var(--text-muted);margin-top:2px}
+.flow-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--tile-bg);color:var(--text-dim);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.flow-stage{flex:1 1 auto;position:relative;background:var(--bg);overflow:hidden}
+.flow-canvas{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:55px 30px 30px;overflow:auto}
+.flow-hero{width:100%;max-width:1100px;background:#fff;border:2px solid var(--ids-color-error);border-radius:10px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.flow-hero-icon{width:44px;height:44px;border-radius:50%;background:var(--ids-color-error-weak);color:var(--ids-color-error-stronger);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.flow-hero-text{font-size:14px;font-weight:600;color:var(--ids-color-fg);line-height:1.4}
+.flow-paths{position:absolute;inset:0;pointer-events:none;z-index:1}
+.flow-nodes{position:relative;display:grid;gap:95px 18px;width:100%;max-width:1100px;z-index:2}
+.flow-node{background:var(--tile-bg);border:2px solid var(--tile-border);border-radius:10px;padding:12px 10px;text-align:center;transition:all .35s cubic-bezier(.2,.8,.2,1);position:relative}
+.flow-node.red{border-color:var(--ids-color-error);background:var(--ids-color-error-weak)}
+.flow-node.amber{border-color:var(--ids-color-warning)}
+.flow-node .stage-num{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;background:var(--tile-bg);border:2px solid var(--border);color:var(--text-dim);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.flow-node .stage-name{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-top:4px;line-height:1.3}
+.flow-node .stage-blurb{font-size:13px;color:var(--text-dim);line-height:1.4;margin-top:6px}
+.flow-node.active{border-color:var(--ai);box-shadow:0 0 0 4px rgba(70,13,175,.22),0 8px 24px rgba(0,0,0,.12);transform:translateY(-3px)}
+.flow-node.active .stage-num{background:var(--ai);border-color:var(--ai);color:#fff}
+.flow-node.done{border-color:var(--green)}
+.flow-node.done .stage-num{background:var(--green);border-color:var(--green);color:#fff}
+.flow-path{stroke:var(--border);stroke-width:2;fill:none}
+.flow-path.done{stroke:var(--green);stroke-width:2.5}
+.flow-path.active{stroke:var(--ai);stroke-width:3;stroke-dasharray:6 4;animation:flow-dash 1s linear infinite}
+@keyframes flow-dash{to{stroke-dashoffset:-20}}
+.flow-caption-bar{padding:18px 28px;border-top:1px solid var(--border);background:var(--panel);flex-shrink:0;min-height:110px}
+.flow-step-label{font-size:13px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:6px}
+.flow-step-text{font-size:14px;line-height:1.55;color:var(--text)}
+.flow-controls{padding:14px 24px;border-top:1px solid var(--border);background:var(--panel-2);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.flow-progress{flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden;margin:0 14px}
+.flow-progress-fill{height:100%;background:linear-gradient(90deg,var(--ai),var(--ai-strong));transition:width .4s}
+.flow-btn{padding:8px 14px;background:var(--panel);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);font-size:13px;cursor:pointer;font-family:inherit;font-weight:500}
+.flow-btn:hover{border-color:var(--accent);color:var(--text)}
+.flow-btn.primary{background:var(--ai);color:#fff;border-color:var(--ai);min-width:96px}
+.flow-btn.primary:hover{background:var(--ai-strong)}
+</style>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <symbol id="artFan" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="12" fill="#28282a"/>
+      <circle cx="100" cy="100" r="4" fill="#8e8e95"/>
+      <g fill="#28282a" opacity="0.92">
+        <ellipse cx="100" cy="48" rx="12" ry="42" transform="rotate(0 100 100)"/>
+        <ellipse cx="100" cy="48" rx="12" ry="42" transform="rotate(72 100 100)"/>
+        <ellipse cx="100" cy="48" rx="12" ry="42" transform="rotate(144 100 100)"/>
+        <ellipse cx="100" cy="48" rx="12" ry="42" transform="rotate(216 100 100)"/>
+        <ellipse cx="100" cy="48" rx="12" ry="42" transform="rotate(288 100 100)"/>
+      </g>
+      <rect x="94" y="104" width="12" height="26" fill="#3b3b3f"/>
+      <circle cx="100" cy="140" r="18" fill="#e0e0e1"/>
+      <rect x="92" y="140" width="16" height="24" rx="2" fill="#3b3b3f"/>
+      <circle cx="100" cy="170" r="6" fill="#f98300"/>
+    </symbol>
+    <symbol id="artMotor" viewBox="0 0 100 100">
+      <rect x="30" y="25" width="40" height="50" rx="4" fill="#28282a"/>
+      <rect x="35" y="30" width="30" height="8" fill="#525257"/>
+      <rect x="35" y="42" width="30" height="8" fill="#525257"/>
+      <rect x="35" y="54" width="30" height="8" fill="#525257"/>
+      <circle cx="50" cy="75" r="4" fill="#8e8e95"/>
+    </symbol>
+    <symbol id="artBlade" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="50" rx="14" ry="42" fill="#28282a"/>
+      <ellipse cx="50" cy="50" rx="6" ry="40" fill="#3b3b3f"/>
+      <circle cx="50" cy="88" r="4" fill="#8e8e95"/>
+    </symbol>
+    <symbol id="artBracket" viewBox="0 0 100 100">
+      <path d="M30 40 L50 25 L70 40 L65 70 L35 70 Z" fill="#8e8e95"/>
+      <circle cx="40" cy="60" r="3" fill="#28282a"/>
+      <circle cx="60" cy="60" r="3" fill="#28282a"/>
+    </symbol>
+    <symbol id="artLight" viewBox="0 0 100 100">
+      <path d="M30 40 Q50 30 70 40 L65 72 Q50 78 35 72 Z" fill="#f5f5f5" stroke="#bbbbbf" stroke-width="2"/>
+      <ellipse cx="50" cy="40" rx="20" ry="4" fill="#e0e0e1"/>
+      <circle cx="50" cy="55" r="7" fill="#ffd92b" opacity="0.8"/>
+    </symbol>
+    <symbol id="artRod" viewBox="0 0 100 100">
+      <rect x="46" y="15" width="8" height="70" fill="#525257"/>
+      <circle cx="50" cy="15" r="7" fill="#8e8e95"/>
+      <circle cx="50" cy="85" r="7" fill="#8e8e95"/>
+    </symbol>
+    <symbol id="artRemote" viewBox="0 0 100 100">
+      <rect x="25" y="35" width="50" height="30" rx="3" fill="#28282a"/>
+      <circle cx="40" cy="50" r="3" fill="#2ac371"/>
+      <rect x="48" y="46" width="20" height="4" fill="#8e8e95"/>
+      <rect x="48" y="54" width="14" height="4" fill="#525257"/>
+    </symbol>
+    <symbol id="artCap" viewBox="0 0 100 100">
+      <rect x="35" y="30" width="30" height="40" rx="4" fill="#ffd100"/>
+      <text x="50" y="55" font-size="14" font-weight="700" text-anchor="middle" fill="#28282a">4.5uF</text>
+    </symbol>
+    <symbol id="artHarness" viewBox="0 0 100 100">
+      <path d="M20 30 Q50 20 80 30 Q85 50 80 70 Q50 80 20 70 Q15 50 20 30 Z" fill="none" stroke="#da1217" stroke-width="3"/>
+      <path d="M22 32 Q50 22 78 32" fill="none" stroke="#f98300" stroke-width="2"/>
+      <path d="M22 68 Q50 78 78 68" fill="none" stroke="#28282a" stroke-width="2"/>
+      <circle cx="50" cy="50" r="6" fill="#8e8e95"/>
+    </symbol>
+    <symbol id="artCanopy" viewBox="0 0 100 100">
+      <path d="M25 70 Q50 25 75 70 Z" fill="#28282a"/>
+      <ellipse cx="50" cy="70" rx="25" ry="4" fill="#3b3b3f"/>
+    </symbol>
+  </defs>
+</svg>
+
+</head>
+<body>
+
+
+<header class="ids-masthead" role="banner">
+  <div class="mh-start">
+    <button class="mh-logo-btn" type="button" aria-label="Infor home"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAdCAYAAABWk2cPAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAHaADAAQAAAABAAAAHQAAAADeexZRAAABc0lEQVRIDe1WsU7DMBA9O+4ACpBIzG1+oIIPaKXyCYzd+ATWbnTrCH8AU2eWrukn8Ae0/QDqShkqNbY5WyRKJ+ykaZaclPic3N3zPfusI/An2yAI5OHwBJTeZd9ONirFKcBnmCRLHZPoFwJGUogYlIr0vC5B4BcEnhrQH9+PFcCoLrBiXAnw4OkslZSvxR8uOgkCgP3exSWkkKaRi0fRlg2HcDWfFz/9qyPFN/iUk8vZDK4XC6DdrnMA5upBez2Tndfvu7rm9s6ZdgYDqAKokZ1B8+VWUMjW90d4jOMKMZxcsUaXjWTqfJA6WCYXk0mendztIBmP87mN4gyqS0TXZyZys8lU67EReltQ6/0pY9jSW4Y1a5+WXmuqyhg2Qi/DtpMDMU2h1aL1BS/X69y2zN1LTJOdpt8YBdu6Mwgh7zTknGPP+3EGOANBPW9q9vQ2SZ4R+K1mYK4IecQkV0ebqRtvIcQ9gp+UaqXUijH2pVnVif0Cs8ZiV8EfxU8AAAAASUVORK5CYII=" width="28" height="28" alt="Infor" aria-hidden="true"></button>
+    <button class="mh-icon-btn" type="button" aria-label="Application menu">
+      <svg viewBox="0 0 18 18" width="18" height="18" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.5C9.82843 5.5 10.5 4.82843 10.5 4C10.5 3.17157 9.82843 2.5 9 2.5C8.17157 2.5 7.5 3.17157 7.5 4C7.5 4.82843 8.17157 5.5 9 5.5ZM10.5 9C10.5 9.82843 9.82843 10.5 9 10.5C8.17157 10.5 7.5 9.82843 7.5 9C7.5 8.17157 8.17157 7.5 9 7.5C9.82843 7.5 10.5 8.17157 10.5 9ZM10.5 14C10.5 14.8284 9.82843 15.5 9 15.5C8.17157 15.5 7.5 14.8284 7.5 14C7.5 13.1716 8.17157 12.5 9 12.5C9.82843 12.5 10.5 13.1716 10.5 14ZM15.5 9C15.5 9.82843 14.8284 10.5 14 10.5C13.1716 10.5 12.5 9.82843 12.5 9C12.5 8.17157 13.1716 7.5 14 7.5C14.8284 7.5 15.5 8.17157 15.5 9ZM14 15.5C14.8284 15.5 15.5 14.8284 15.5 14C15.5 13.1716 14.8284 12.5 14 12.5C13.1716 12.5 12.5 13.1716 12.5 14C12.5 14.8284 13.1716 15.5 14 15.5ZM15.5 4C15.5 4.82843 14.8284 5.5 14 5.5C13.1716 5.5 12.5 4.82843 12.5 4C12.5 3.17157 13.1716 2.5 14 2.5C14.8284 2.5 15.5 3.17157 15.5 4ZM4 10.5C4.82843 10.5 5.5 9.82843 5.5 9C5.5 8.17157 4.82843 7.5 4 7.5C3.17157 7.5 2.5 8.17157 2.5 9C2.5 9.82843 3.17157 10.5 4 10.5ZM5.5 14C5.5 14.8284 4.82843 15.5 4 15.5C3.17157 15.5 2.5 14.8284 2.5 14C2.5 13.1716 3.17157 12.5 4 12.5C4.82843 12.5 5.5 13.1716 5.5 14ZM4 5.5C4.82843 5.5 5.5 4.82843 5.5 4C5.5 3.17157 4.82843 2.5 4 2.5C3.17157 2.5 2.5 3.17157 2.5 4C2.5 4.82843 3.17157 5.5 4 5.5Z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="mh-tabs" role="tablist">
+    <div class="mh-tab" role="tab" aria-selected="true" tabindex="0">
+      <span class="mh-tab-label">Hunter Fan — NPD Launch Readiness Console</span>
+      <span class="mh-tab-divider" aria-hidden="true"></span>
+      <button class="mh-tab-close" type="button" aria-label="Close tab">
+        <svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path d="M9 10.06L13.22 14.28L14.28 13.22L10.06 9L14.28 4.78L13.22 3.72L9 7.94L4.78 3.72L3.72 4.78L7.94 9L3.72 13.22L4.78 14.28L9 10.06Z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mh-end">
+    <button class="mh-icon-btn" type="button" aria-label="Search"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 8C3.5 5.51 5.51 3.5 8 3.5C10.49 3.5 12.5 5.51 12.5 8C12.5 10.49 10.49 12.5 8 12.5C5.51 12.5 3.5 10.49 3.5 8ZM8 2C4.69 2 2 4.69 2 8C2 11.31 4.69 14 8 14C9.39 14 10.66 13.53 11.68 12.74L14.97 16.03L16.03 14.97L12.74 11.68C13.53 10.66 14 9.39 14 8C14 4.69 11.31 2 8 2Z" fill="currentColor"/></svg></button>
+    <button class="mh-icon-btn" type="button" aria-label="Bookmarks"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 4.75C3.5 3.23 4.73 2 6.25 2H11.75C13.27 2 14.5 3.23 14.5 4.75V17.17L13.33 16.37L9 13.41L4.67 16.37L3.5 17.17V4.75ZM6.25 3.5C5.56 3.5 5 4.06 5 4.75V14.33L8.58 11.88L9 11.59L9.42 11.88L13 14.33V4.75C13 4.06 12.44 3.5 11.75 3.5H6.25Z" fill="currentColor"/></svg></button>
+    <button class="mh-icon-btn" type="button" aria-label="User profile"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 3C5.69 3 3 5.69 3 9C3 10.34 3.44 11.58 4.19 12.58C4.87 11.63 5.99 11 7.25 11H10.75C12.01 11 13.13 11.63 13.81 12.58C14.56 11.58 15 10.34 15 9C15 5.69 12.31 3 9 3ZM9 15C7.59 15 6.29 14.51 5.26 13.69C5.64 12.98 6.39 12.5 7.25 12.5H10.75C11.61 12.5 12.36 12.98 12.74 13.69C11.71 14.51 10.41 15 9 15ZM1.5 9C1.5 4.86 4.86 1.5 9 1.5C13.14 1.5 16.5 4.86 16.5 9C16.5 13.14 13.14 16.5 9 16.5C4.86 16.5 1.5 13.14 1.5 9ZM9 4.5C7.48 4.5 6.25 5.73 6.25 7.25C6.25 8.77 7.48 10 9 10C10.52 10 11.75 8.77 11.75 7.25C11.75 5.73 10.52 4.5 9 4.5Z" fill="currentColor"/></svg></button>
+  </div>
+</header>
+
+
+<div class="app-actions">
+  <div>
+    <div class="app-title">NPD Launch Readiness Console</div>
+    <div class="app-subtitle">PLM for Discrete inside Infor LN. Can the new product launch on time?</div>
+  </div>
+  <div class="app-actions-right">
+    <button class="flow-btn-launch" type="button" id="flowBtn" aria-label="Open process flow walkthrough">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Flow</span>
+    </button>
+    <button class="run-demo-btn" type="button" id="runDemoBtn">
+      <svg viewBox="0 0 14 14" fill="none"><path d="M4 3v8l7-4-7-4z" fill="currentColor"/></svg>
+      <span id="runDemoLabel">Run demo</span>
+    </button>
+  </div>
+</div>
+
+
+<div class="ids-tabs-wrap">
+  <div class="ids-tabs" role="tablist" aria-label="Workspace sections">
+    <button class="ids-tab" role="tab" aria-selected="true" aria-controls="panel-products" id="tab-products" data-tab="products" onclick="switchTab('products')">Products in development</button>
+    <button class="ids-tab" role="tab" aria-selected="false" aria-controls="panel-p360" id="tab-p360" data-tab="p360" onclick="switchTab('p360')">Product 360</button>
+    <button class="ids-tab" role="tab" aria-selected="false" aria-controls="panel-actions" id="tab-actions" data-tab="actions" onclick="switchTab('actions')">Actions</button>
+    <button class="ids-tab" role="tab" aria-selected="false" aria-controls="panel-insights" id="tab-insights" data-tab="insights" onclick="switchTab('insights')">Insights</button>
+  </div>
+</div>
+
+
+<main class="ids-home-page">
+  <h1 class="audible">NPD Launch Readiness Workspace</h1>
+
+  
+  <section class="ids-tabpanel active" id="panel-products" role="tabpanel" aria-labelledby="tab-products">
+    <div class="tab-headline-wrap"><div class="tab-headline" id="productsHeadline">1 of 6 products is on hold: the Aria 44 matte black.</div></div>
+
+    <div class="hp-widgets">
+
+      
+      <div class="hero-row" role="group" aria-label="Launch readiness key metrics">
+        <div class="hero-tile primary">
+          <div class="hero-title-row">
+            <span class="ids-tag subtle-red lg">Hold</span>
+            <span class="hero-eyebrow">Recommendation</span>
+          </div>
+          <div class="hero-value lg">Hold the Aria 44 launch</div>
+          <div class="hero-note strong">3 blockers to clear</div>
+          <div class="hero-note">42 days to planned launch</div>
+        </div>
+        <div class="hero-tile">
+          <div class="hero-eyebrow warn">Est unit cost</div>
+          <div class="hero-value">$96</div>
+          <div class="hero-note">Target $86, over by 12%</div>
+        </div>
+        <div class="hero-tile">
+          <div class="hero-eyebrow warn">Suppliers confirmed</div>
+          <div class="hero-value">7 of 9</div>
+          <div class="hero-note">2 components open</div>
+        </div>
+      </div>
+
+      
+      <div class="hp-span6">
+        <section class="wgt-card" aria-label="Products in development">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <div class="wgt-title">Products in Development</div>
+              <div class="wgt-subtitle">Worst readiness first. Select a row to open Product 360.</div>
+            </div>
+          </div>
+          <div class="wgt-content flush">
+            <table class="ids-grid" aria-label="New products in development">
+              <colgroup>
+                <col style="width:24%"><col style="width:14%"><col style="width:16%"><col style="width:10%"><col style="width:12%"><col style="width:12%"><col style="width:12%">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="ids-grid-th">Product</th>
+                  <th class="ids-grid-th">Finish</th>
+                  <th class="ids-grid-th">Lead</th>
+                  <th class="ids-grid-th">Launch</th>
+                  <th class="ids-grid-th">Est cost</th>
+                  <th class="ids-grid-th">Readiness</th>
+                  <th class="ids-grid-th">Risk</th>
+                </tr>
+              </thead>
+              <tbody id="ecnBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </section>
+
+  
+  <section class="ids-tabpanel" id="panel-p360" role="tabpanel" aria-labelledby="tab-p360">
+    <div class="tab-headline-wrap"><div class="tab-headline" id="p360Headline">The Aria 44 inch is on hold: cost 12% over target, 2 suppliers unconfirmed, light kit BOM not released.</div></div>
+
+    <div class="hp-widgets">
+
+      
+      <div class="hp-span3">
+        <section class="wgt-card" aria-label="AI recommendation for Aria 44">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <div class="wgt-title" id="recTitle">Recommendation, Aria 44 matte black</div>
+              <div class="wgt-subtitle" id="recSubtitle">Smart ceiling fan, in development, Dana Whitfield</div>
+            </div>
+            <div class="wgt-actions">
+              <span class="ids-tag subtle-red">Hold</span>
+            </div>
+          </div>
+          <div class="wgt-content">
+            <div class="rec-wrap">
+              <div class="rec-ring">
+                <svg viewBox="0 0 42 42" width="96" height="96">
+                  <circle cx="21" cy="21" r="15.9155" fill="none" stroke="#e0e0e1" stroke-width="4"></circle>
+                  <circle cx="21" cy="21" r="15.9155" fill="none" stroke="#da1217" stroke-width="4" stroke-dasharray="54 46" stroke-dashoffset="25"></circle>
+                </svg>
+                <div class="rec-ring-center">
+                  <div class="rec-ring-pct" style="color:var(--ids-color-error-stronger)">54%</div>
+                  <div class="rec-ring-lbl">Ready</div>
+                </div>
+              </div>
+              <div style="flex:1">
+                <div class="rec-headline">Hold the Aria launch</div>
+                <div class="rec-body">Six weeks to planned launch and three blockers remain. The agent reads PLM items, BOMs and supplier links. It recommends, Dana still signs.</div>
+              </div>
+            </div>
+            <div class="rec-blockers-title">The three blockers</div>
+            <ol class="rec-blockers">
+              <li>Estimated cost $96, target $86, over by 12 percent</li>
+              <li>2 of 9 components without a confirmed supplier</li>
+              <li>Light kit sub-assembly has no released BOM revision</li>
+            </ol>
+          </div>
+          <div class="wgt-footer">
+            <button class="ids-button tertiary" type="button" onclick="showEcnDetail(selectedEcnId)">Open Product 360</button>
+            <button class="ids-button primary" type="button" onclick="goToActionsTab()">Propose next actions</button>
+          </div>
+        </section>
+      </div>
+
+      <div class="hp-span3">
+        <section class="wgt-card" aria-label="Five launch readiness lanes">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <div class="wgt-title">Impact Lanes</div>
+              <div class="wgt-subtitle" id="lanesSubtitle">Aria 44 matte black, five readiness checks</div>
+            </div>
+            <div class="wgt-actions">
+              <button class="ids-button tertiary compact" type="button" onclick="showLaneDrilldown()">Drill down</button>
+            </div>
+          </div>
+          <div class="wgt-content">
+            <div id="lanesBody"></div>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span4">
+        <section class="wgt-card" aria-label="BOM tile grid">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <div class="wgt-title">BOM, Aria 44</div>
+              <div class="wgt-subtitle">9 components, tile outlined by status, select to open part</div>
+            </div>
+          </div>
+          <div class="wgt-content">
+            <div class="bom-grid" id="bomGrid"></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="hp-span2">
+        <section class="wgt-card" aria-label="Product image, lifecycle and history">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <div class="wgt-title">Product 360, Aria 44 matte black</div>
+              <div class="wgt-subtitle">PN-FAN-ARIA-44-MB, Preliminary</div>
+            </div>
+            <div class="wgt-actions">
+              <span class="ids-tag subtle-red">Launch at risk</span>
+            </div>
+          </div>
+          <div class="wgt-content">
+            <div class="fan-render" style="height:180px">
+              <svg viewBox="0 0 200 200"><use href="#artFan"/></svg>
+            </div>
+            <div style="margin-top:14px">
+              <div class="mdl-section-title" style="margin-bottom:6px">Lifecycle</div>
+              <div class="lc-timeline">
+                <div class="lc-step done"><div class="lc-dot"></div><div class="lc-lbl">Concept</div></div>
+                <div class="lc-step done"><div class="lc-dot"></div><div class="lc-lbl">Design</div></div>
+                <div class="lc-step current"><div class="lc-dot"></div><div class="lc-lbl">Preliminary</div></div>
+                <div class="lc-step"><div class="lc-dot"></div><div class="lc-lbl">Released</div></div>
+                <div class="lc-step"><div class="lc-dot"></div><div class="lc-lbl">Sent to LN</div></div>
+              </div>
+            </div>
+            <div style="margin-top:14px">
+              <div class="mdl-section-title" style="margin-bottom:6px">Recent history</div>
+              <div class="stack" style="gap:6px">
+                <div class="txt-xs txt-sec">2026-05-28, Rev 0.4 released by Cal Draper</div>
+                <div class="txt-xs txt-sec">2026-05-22, UL listing confirmed by June Okafor</div>
+                <div class="txt-xs txt-sec">2026-05-18, Blade bracket cost estimate loaded from LN</div>
+                <div class="txt-xs txt-sec">2026-05-14, Light kit sub Rev 0.2 opened for redlining</div>
+                <div class="txt-xs txt-sec">2026-05-10, Capacitor Mfr pending (Priya Shah)</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </section>
+
+  
+  <section class="ids-tabpanel" id="panel-actions" role="tabpanel" aria-labelledby="tab-actions">
+    <div class="tab-headline-wrap"><div class="tab-headline">3 next actions clear the Aria blockers. Each runs only after you approve it.</div></div>
+
+    <div class="hp-widgets">
+      <div class="hp-span6">
+        <div class="action-card">
+          <div class="action-card-head">
+            <div>
+              <div class="action-card-title">1. Request supplier confirmation for the 2 open components</div>
+              <div class="action-card-sub">Owner Priya Shah. Clears the Suppliers lane from red.</div>
+            </div>
+            <span class="ids-tag subtle-red">Suppliers lane</span>
+          </div>
+          <div class="action-preview">
+            <div class="action-preview-label">What will run</div>
+            <dl class="action-preview-kv">
+              <dt>Agent tool</dt><dd>PLM for Discrete, ForwardTask</dd>
+              <dt>Task 1</dt><dd>Confirm supplier for PN-DRV-LED-01, candidates Cadran Electronics (preferred), Larkspur Microelectronics (alternate)</dd>
+              <dt>Task 2</dt><dd>Confirm Mfr qualification for PN-CAP-45UF with Larkspur Microelectronics</dd>
+              <dt>Routed to</dt><dd>Priya Shah, Supplier Quality</dd>
+            </dl>
+          </div>
+          <div class="action-card-footer">
+            <button class="ids-button tertiary" type="button" onclick="showSupplierModal()">Preview supplier list</button>
+            <button class="ids-button primary" type="button" onclick="approveAction('suppliers')">Approve and run</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hp-span6">
+        <div class="action-card">
+          <div class="action-card-head">
+            <div>
+              <div class="action-card-title">2. Forward the light kit BOM release task</div>
+              <div class="action-card-sub">Owner Owen Vance. Clears the BOM readiness lane from red.</div>
+            </div>
+            <span class="ids-tag subtle-red">BOM readiness lane</span>
+          </div>
+          <div class="action-preview">
+            <div class="action-preview-label">What will run</div>
+            <dl class="action-preview-kv">
+              <dt>Agent tool</dt><dd>PLM for Discrete, ForwardTask</dd>
+              <dt>Scope</dt><dd>PN-SUB-LIGHTKIT-01, release Rev 0.2 Preliminary to Rev 1.0 Released</dd>
+              <dt>Open items</dt><dd>Attach motor driver datasheet, confirm 4.5 uF capacitor Mfr</dd>
+              <dt>Target release</dt><dd>Week 24, after supplier confirmations</dd>
+              <dt>Routed to</dt><dd>Owen Vance, Design Engineering</dd>
+            </dl>
+          </div>
+          <div class="action-card-footer">
+            <button class="ids-button tertiary" type="button" onclick="showInventoryModal()">Preview release plan</button>
+            <button class="ids-button primary" type="button" onclick="approveAction('lightkit')">Approve and run</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hp-span6">
+        <div class="action-card">
+          <div class="action-card-head">
+            <div>
+              <div class="action-card-title">3. Send to production once all checks pass</div>
+              <div class="action-card-sub">Owner Dana Whitfield. Runs only when every lane is green.</div>
+            </div>
+            <span class="ids-tag subtle-amber">Release lane</span>
+          </div>
+          <div class="action-preview">
+            <div class="action-preview-label">What will run</div>
+            <dl class="action-preview-kv">
+              <dt>Agent tool</dt><dd>PLM for Discrete, SendtoProduction</dd>
+              <dt>Payload to LN</dt><dd>Item master, standard cost rollup, primary BOM (9 lines), routing (6 ops), approved vendor list, compliance docs</dd>
+              <dt>Pre-flight checks</dt><dd>Cost at or under target, 9 of 9 suppliers confirmed, all BOM revisions released, Energy Star acknowledged</dd>
+              <dt>Status</dt><dd>Blocked, waiting for actions 1 and 2</dd>
+            </dl>
+          </div>
+          <div class="action-card-footer">
+            <button class="ids-button tertiary" type="button" onclick="showRouteDialog('PRD-ARIA-44')">Preview send to production</button>
+            <button class="ids-button primary" type="button" disabled aria-disabled="true" title="Blocked, waiting for actions 1 and 2">Approve and run</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="ids-tabpanel" id="panel-insights" role="tabpanel" aria-labelledby="tab-insights">
+    <div class="tab-headline-wrap"><div class="tab-headline">Readiness and cost by product line.</div></div>
+
+    <div class="hp-widgets">
+      <div class="hp-span6">
+        <section class="wgt-card" aria-label="Readiness over time">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <div class="wgt-title">Readiness Over Time</div>
+              <div class="wgt-subtitle">All in-development products, last 10 weeks</div>
+            </div>
+            <div class="wgt-actions">
+              <button class="ids-button tertiary compact" type="button" onclick="showAccuracyModal()">Expand</button>
+            </div>
+          </div>
+          <div class="wgt-content">
+            <svg viewBox="0 0 1200 320" style="width:100%;height:auto" aria-label="Readiness trend">
+              <line x1="60" y1="40" x2="60" y2="280" stroke="#e0e0e1"/>
+              <line x1="60" y1="280" x2="1180" y2="280" stroke="#e0e0e1"/>
+              <line x1="60" y1="80" x2="1180" y2="80" stroke="#e0e0e1" stroke-dasharray="3 3"/>
+              <text x="54" y="84" font-size="13" fill="#6f6f76" text-anchor="end">90% launch band</text>
+              
+              <polyline points="60,260 184,245 308,228 432,210 556,195 680,180 804,165 928,155 1052,148 1180,142" fill="none" stroke="#da1217" stroke-width="2.5"/>
+              <circle cx="1180" cy="142" r="4" fill="#da1217"/>
+              
+              <polyline points="60,250 184,235 308,220 432,205 556,185 680,165 804,150 928,135 1052,120 1180,110" fill="none" stroke="#f98300" stroke-width="2.5"/>
+              <circle cx="1180" cy="110" r="4" fill="#f98300"/>
+              
+              <polyline points="60,245 184,228 308,210 432,190 556,170 680,155 804,138 928,122 1052,110 1180,100" fill="none" stroke="#2ac371" stroke-width="2.5"/>
+              <circle cx="1180" cy="100" r="4" fill="#2ac371"/>
+              <text x="60" y="305" font-size="13" fill="#6f6f76">W-10</text>
+              <text x="600" y="305" font-size="13" fill="#6f6f76">W-5</text>
+              <text x="1150" y="305" font-size="13" fill="#6f6f76">Now</text>
+            </svg>
+            <div class="chart-legend" style="margin-top:10px;flex-direction:row;gap:18px;flex-wrap:wrap">
+              <div class="chart-legend-item"><span class="chart-legend-swatch" style="background:#da1217"></span>Aria 44 smart (54%)</div>
+              <div class="chart-legend-item"><span class="chart-legend-swatch" style="background:#f98300"></span>Coastal 52 outdoor (71%)</div>
+              <div class="chart-legend-item"><span class="chart-legend-swatch" style="background:#2ac371"></span>Summit 60 outdoor (66%)</div>
+            </div>
+            <div class="txt-xs txt-sec" style="margin-top:8px">Launch band is 90%. Only Aria is tracking behind the glide path for its launch date.</div>
+          </div>
+        </section>
+      </div>
+
+      <div class="hp-span6">
+        <section class="wgt-card" aria-label="Cost against target by product line">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <div class="wgt-title">Cost Against Target</div>
+              <div class="wgt-subtitle">By product line</div>
+            </div>
+          </div>
+          <div class="wgt-content">
+            <svg viewBox="0 0 1200 300" style="width:100%;height:auto" aria-label="Cost vs target by product line">
+              
+              <line x1="600" y1="20" x2="600" y2="280" stroke="#525257" stroke-width="2" stroke-dasharray="5 4"/>
+              <text x="600" y="18" font-size="13" fill="#525257" text-anchor="middle" font-weight="600">Target</text>
+              
+              <g>
+                <text x="40" y="55" font-size="14" fill="#161618" font-weight="600">Aria 44 smart</text>
+                <rect x="600" y="40" width="144" height="26" fill="#f5c3c4" stroke="#da1217" stroke-width="1"/>
+                <text x="754" y="58" font-size="13" fill="#c31014" font-weight="700">+12% ($96 vs $86)</text>
+              </g>
+              
+              <g>
+                <text x="40" y="105" font-size="14" fill="#161618" font-weight="600">Coastal 52 outdoor</text>
+                <rect x="600" y="90" width="36" height="26" fill="#fcc888" stroke="#f98300" stroke-width="1"/>
+                <text x="646" y="108" font-size="13" fill="#a14100" font-weight="700">+3% ($113 vs $110)</text>
+              </g>
+              
+              <g>
+                <text x="40" y="155" font-size="14" fill="#161618" font-weight="600">Summit 60 outdoor</text>
+                <rect x="576" y="140" width="24" height="26" fill="#a1e4bf" stroke="#2ac371" stroke-width="1"/>
+                <text x="340" y="158" font-size="13" fill="#156138" font-weight="700" text-anchor="start">-2% ($147 vs $150)</text>
+              </g>
+              
+              <g>
+                <text x="40" y="205" font-size="14" fill="#161618" font-weight="600">Bayview 48 (released)</text>
+                <rect x="540" y="190" width="60" height="26" fill="#a1e4bf" stroke="#2ac371" stroke-width="1"/>
+                <text x="340" y="208" font-size="13" fill="#156138" font-weight="700" text-anchor="start">-5% ($76 vs $80)</text>
+              </g>
+              
+              <g>
+                <text x="40" y="255" font-size="14" fill="#161618" font-weight="600">Meridale 56</text>
+                <rect x="596" y="240" width="8" height="26" fill="#a1e4bf" stroke="#2ac371" stroke-width="1"/>
+                <text x="616" y="258" font-size="13" fill="#156138" font-weight="700">On target ($102 vs $102)</text>
+              </g>
+            </svg>
+            <div class="txt-xs txt-sec" style="margin-top:8px;padding-top:8px;border-top:1px solid var(--ids-color-border-weaker)">Portfolio: 3 in development, 2 recently released. Aria 44 is the only line over target by more than 5 percent.</div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<button class="smp-launcher" aria-label="Open Gen AI assistant" onclick="openSmartPanel()">
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.703125 9.84002C0.703125 11.8992 1.53966 13.7645 2.89121 15.1145L0.70893 17.2969L7.78649 17.2953C7.84488 17.2953 7.90288 17.2957 7.96252 17.2961C8.02568 17.2965 8.0907 17.2969 8.16003 17.2969C12.2756 17.2969 15.6166 13.9554 15.6166 9.84002C15.6166 5.72428 12.2756 2.38285 8.16003 2.38285C4.04443 2.38285 0.703125 5.72428 0.703125 9.84002ZM9.70965 4.63491C9.572 4.63491 9.45608 4.72692 9.41986 4.85806L8.93444 6.74613C8.89098 6.93088 8.78956 7.09895 8.65916 7.23443C8.5215 7.36919 8.35489 7.46481 8.16652 7.51263L6.28287 8.00022C6.15247 8.03428 6.05824 8.15309 6.05824 8.28858C6.05824 8.42406 6.15247 8.54217 6.28287 8.57622L8.16652 9.06381C8.35489 9.11163 8.5215 9.208 8.65916 9.34276C8.78956 9.47752 8.89098 9.64632 8.93444 9.83035L9.41986 11.7191C9.45608 11.8503 9.572 11.9416 9.70965 11.9416C9.8473 11.9416 9.96322 11.8503 9.99944 11.7191L10.4849 9.83035C10.5356 9.64632 10.6297 9.47752 10.7674 9.34276C10.8978 9.208 11.0717 9.11163 11.2528 9.06381L13.1437 8.57622C13.2741 8.54217 13.3611 8.42406 13.3611 8.28858C13.3611 8.15309 13.2741 8.03428 13.1437 8.00022L11.2528 7.51263C11.0717 7.46481 10.8978 7.36919 10.7674 7.23443C10.6297 7.09895 10.5356 6.93088 10.4849 6.74613L9.99944 4.85806C9.96322 4.72692 9.8473 4.63491 9.70965 4.63491Z" fill="#460daf"/>
+    </g>
+  </svg>
+</button>
+
+
+<aside class="smp-panel" id="smpPanel" aria-hidden="true">
+  <div class="smp-toolbar">
+    <span class="smp-toolbar-title">Launch Readiness Assistant</span>
+    <button class="smp-close" onclick="closeSmartPanel()" aria-label="Close Smart Panel">&#10006;</button>
+  </div>
+  <div class="smp-content" id="smpContent">
+    <div class="smp-onboarding" id="smpOnboarding">
+      <div class="smp-onb-icon">&#10022;</div>
+      <div class="smp-onb-title">How can I help with the Aria 44?</div>
+      <div class="txt-xs txt-tert" style="text-align:center">Ask about lanes, components, suppliers or release readiness.</div>
+      <div class="smp-chips" style="width:100%;margin-top:12px">
+        <button class="smp-suggestion-chip" onclick="askSmp('Can the Aria 44 launch on time?')">Can the Aria launch on time?</button>
+        <button class="smp-suggestion-chip" onclick="askSmp('Why is the supplier lane red?')">Why is the supplier lane red?</button>
+        <button class="smp-suggestion-chip" onclick="askSmp('What is blocking the light kit release?')">What blocks the light kit release?</button>
+        <button class="smp-suggestion-chip" onclick="askSmp('Forward a task to Priya Shah for the capacitor supplier')">Forward a task to Priya Shah</button>
+      </div>
+    </div>
+    <div class="smp-message-list" id="smpMessages" style="display:none"></div>
+  </div>
+  <div class="smp-chat-input-wrap">
+    <textarea class="smp-chat-input" placeholder="Ask about launch readiness..." id="smpInput"></textarea>
+    <div class="smp-input-row">
+      <button class="smp-send-btn" onclick="sendSmp()">Send</button>
+      <div class="smp-warning" style="flex:1;text-align:right">AI responses may be inaccurate, verify before acting</div>
+    </div>
+  </div>
+</aside>
+
+
+
+<div class="wgt-modal-overlay" id="modalEcnDetail" role="dialog" aria-modal="true" aria-labelledby="modalEcnDetailTitle" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalEcnDetail')"></div>
+  <div class="wgt-modal-dialog">
+    <div class="mdl-header">
+      <h2 class="wgt-modal-title" id="modalEcnDetailTitle">Product 360</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalEcnDetail')" aria-label="Close">&#10006;</button>
+    </div>
+    <div class="mdl-body" id="modalEcnDetailBody"></div>
+    <div class="mdl-footer">
+      <button class="ids-button tertiary" type="button" onclick="closeWgtModal('modalEcnDetail')">Close</button>
+      <button class="ids-button secondary" type="button" onclick="stageAsDraft()">Hold as draft</button>
+      <button class="ids-button primary" type="button" onclick="sendToApprovers()">Propose next actions</button>
+    </div>
+  </div>
+</div>
+
+<div class="wgt-modal-overlay" id="modalRoute" role="dialog" aria-modal="true" aria-labelledby="modalRouteTitle" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalRoute')"></div>
+  <div class="wgt-modal-dialog" style="width:min(720px,75vw)">
+    <div class="mdl-header">
+      <h2 class="wgt-modal-title" id="modalRouteTitle">Preview and run next actions</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalRoute')" aria-label="Close">&#10006;</button>
+    </div>
+    <div class="mdl-body">
+      <div class="mdl-section">
+        <div class="mdl-section-title">Scope</div>
+        <div class="mdl-grid-2">
+          <div class="mdl-field"><label>Product</label><input type="text" value="Aria 44 matte black" readonly></div>
+          <div class="mdl-field"><label>Lead</label><input type="text" value="Dana Whitfield" readonly></div>
+          <div class="mdl-field"><label>Action</label>
+            <select id="routeStrategy">
+              <option value="forward" selected>Forward tasks for the three blockers</option>
+              <option value="supplier">Request supplier confirmation only</option>
+              <option value="production">Send to production (preview only)</option>
+            </select>
+          </div>
+          <div class="mdl-field"><label>Target launch</label>
+            <select id="routeSla">
+              <option value="4">Hold 6 week target, work the blockers</option>
+              <option value="7">Slip 2 weeks, reset to Week 29</option>
+              <option value="14">Slip 4 weeks, reset to Week 31</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="mdl-section">
+        <div class="mdl-section-title">Tasks to forward</div>
+        <div class="stack" style="gap:6px">
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px"><input type="checkbox" checked> Priya Shah, confirm supplier on light kit motor driver</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px"><input type="checkbox" checked> Priya Shah, confirm Mfr on capacitor 4.5 uF</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px"><input type="checkbox" checked> Cal Draper, release light kit sub Rev 0.2 to Rev 1.0</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px"><input type="checkbox"> Owen Vance, value-engineer bracket to close cost gap</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:14px"><input type="checkbox"> June Okafor, chase Energy Star submission</label>
+        </div>
+      </div>
+      <div class="mdl-section">
+        <div class="mdl-section-title">Message</div>
+        <div class="mdl-field"><textarea id="routeMessage">The Aria 44 is six weeks from launch and three lanes are red. Tasks forwarded individually so each owner sees only what they own. Nothing reaches LN until the item is released.</textarea></div>
+      </div>
+    </div>
+    <div class="mdl-footer">
+      <button class="ids-button tertiary" type="button" onclick="closeWgtModal('modalRoute')">Cancel</button>
+      <button class="ids-button primary" type="button" onclick="commitRoute()">Run actions</button>
+    </div>
+  </div>
+</div>
+
+<div class="wgt-modal-overlay" id="modalLaneDrill" role="dialog" aria-modal="true" aria-labelledby="modalLaneDrillTitle" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalLaneDrill')"></div>
+  <div class="wgt-modal-dialog">
+    <div class="mdl-header">
+      <h2 class="wgt-modal-title" id="modalLaneDrillTitle">Lane drill-down, Aria 44 matte black</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalLaneDrill')" aria-label="Close">&#10006;</button>
+    </div>
+    <div class="mdl-body">
+      <div class="mdl-section">
+        <div class="mdl-section-title">Filter by lane</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="ids-button secondary compact" type="button" onclick="filterLane('all')" id="laneChipAll">All lanes</button>
+          <button class="ids-button tertiary compact" type="button" onclick="filterLane('cost')">Cost</button>
+          <button class="ids-button tertiary compact" type="button" onclick="filterLane('supplier')">Suppliers</button>
+          <button class="ids-button tertiary compact" type="button" onclick="filterLane('bom')">BOM readiness</button>
+          <button class="ids-button tertiary compact" type="button" onclick="filterLane('compliance')">Compliance</button>
+          <button class="ids-button tertiary compact" type="button" onclick="filterLane('release')">Release</button>
+        </div>
+      </div>
+      <div class="mdl-section">
+        <div class="mdl-section-title">Rules applied</div>
+        <div class="hbar-list" id="laneConfList">
+          <div class="hbar-row"><div class="hbar-name">Cost</div><div class="hbar-track"><div class="hbar-fill" style="width:88%;background:var(--ids-color-error)"></div></div><div class="hbar-val">Red</div></div>
+          <div class="hbar-row"><div class="hbar-name">Suppliers</div><div class="hbar-track"><div class="hbar-fill" style="width:78%;background:var(--ids-color-error)"></div></div><div class="hbar-val">Red</div></div>
+          <div class="hbar-row"><div class="hbar-name">BOM readiness</div><div class="hbar-track"><div class="hbar-fill" style="width:92%;background:var(--ids-color-error)"></div></div><div class="hbar-val">Red</div></div>
+          <div class="hbar-row"><div class="hbar-name">Compliance</div><div class="hbar-track"><div class="hbar-fill" style="width:75%;background:var(--ids-color-warning)"></div></div><div class="hbar-val">Amber</div></div>
+          <div class="hbar-row"><div class="hbar-name">Release</div><div class="hbar-track"><div class="hbar-fill" style="width:70%;background:var(--ids-color-warning)"></div></div><div class="hbar-val">Amber</div></div>
+        </div>
+      </div>
+      <div class="mdl-section">
+        <div class="mdl-section-title">Evidence</div>
+        <table class="ids-grid" id="laneDrillTable">
+          <thead><tr><th class="ids-grid-th">Lane</th><th class="ids-grid-th">Signal</th><th class="ids-grid-th">Source</th><th class="ids-grid-th r">Impact</th></tr></thead>
+          <tbody id="laneDrillBody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="mdl-footer">
+      <button class="ids-button tertiary" type="button" onclick="closeWgtModal('modalLaneDrill')">Close</button>
+      <button class="ids-button primary" type="button" onclick="acceptLaneAnalysis()">Accept analysis</button>
+    </div>
+  </div>
+</div>
+
+<div class="wgt-modal-overlay" id="modalApprover" role="dialog" aria-modal="true" aria-labelledby="modalApproverTitle" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalApprover')"></div>
+  <div class="wgt-modal-dialog" style="width:min(760px,75vw)">
+    <div class="mdl-header">
+      <h2 class="wgt-modal-title" id="modalApproverTitle">Component detail</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalApprover')" aria-label="Close">&#10006;</button>
+    </div>
+    <div class="mdl-body" id="modalApproverBody"></div>
+    <div class="mdl-footer">
+      <button class="ids-button tertiary" type="button" onclick="approverDecide('escalate')">Escalate to Dana</button>
+      <button class="ids-button secondary" type="button" onclick="approverDecide('reject')">Reject</button>
+      <button class="ids-button primary" type="button" onclick="approverDecide('approve')">Mark ready</button>
+    </div>
+  </div>
+</div>
+
+<div class="wgt-modal-overlay" id="modalInventory" role="dialog" aria-modal="true" aria-labelledby="modalInventoryTitle" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalInventory')"></div>
+  <div class="wgt-modal-dialog" style="width:min(780px,75vw)">
+    <div class="mdl-header">
+      <h2 class="wgt-modal-title" id="modalInventoryTitle">Request light kit revision release</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalInventory')" aria-label="Close">&#10006;</button>
+    </div>
+    <div class="mdl-body">
+      <div class="mdl-step-indicator" id="invStepInd">
+        <div class="mdl-step done" data-step="1"><span class="mdl-step-num">1</span><span>Scope</span></div>
+        <div class="mdl-step-sep"></div>
+        <div class="mdl-step active" data-step="2"><span class="mdl-step-num">2</span><span>Plan</span></div>
+        <div class="mdl-step-sep"></div>
+        <div class="mdl-step" data-step="3"><span class="mdl-step-num">3</span><span>Confirm</span></div>
+      </div>
+      <div class="mdl-section">
+        <div class="mdl-section-title">Scope, PN-SUB-LIGHTKIT-01 Rev 0.2</div>
+        <table class="ids-grid">
+          <thead><tr><th class="ids-grid-th">Line</th><th class="ids-grid-th">State</th><th class="ids-grid-th">Owner</th><th class="ids-grid-th">What is needed</th></tr></thead>
+          <tbody>
+            <tr class="ids-grid-row"><td class="ids-grid-cell">LED array</td><td class="ids-grid-cell"><span class="ids-tag subtle-green">Ready</span></td><td class="ids-grid-cell">Cal Draper</td><td class="ids-grid-cell">None</td></tr>
+            <tr class="ids-grid-row"><td class="ids-grid-cell">Diffuser</td><td class="ids-grid-cell"><span class="ids-tag subtle-green">Ready</span></td><td class="ids-grid-cell">Cal Draper</td><td class="ids-grid-cell">None</td></tr>
+            <tr class="ids-grid-row"><td class="ids-grid-cell">Motor driver</td><td class="ids-grid-cell"><span class="ids-tag subtle-red">Spec doc missing</span></td><td class="ids-grid-cell">Owen Vance</td><td class="ids-grid-cell">Driver datasheet</td></tr>
+            <tr class="ids-grid-row"><td class="ids-grid-cell">Harness</td><td class="ids-grid-cell"><span class="ids-tag subtle-green">Ready</span></td><td class="ids-grid-cell">Cal Draper</td><td class="ids-grid-cell">None</td></tr>
+            <tr class="ids-grid-row"><td class="ids-grid-cell">Capacitor 4.5 uF</td><td class="ids-grid-cell"><span class="ids-tag subtle-amber">Supplier open</span></td><td class="ids-grid-cell">Priya Shah</td><td class="ids-grid-cell">Mfr confirmation</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mdl-section">
+        <div class="mdl-section-title">Plan, release to Rev 1.0</div>
+        <div class="mdl-field"><label>Target release date</label>
+          <select id="invWindow">
+            <option value="week24" selected>Week 24, after supplier confirmations</option>
+            <option value="week22">Week 22, parallel with cost review</option>
+            <option value="week26">Hold until driver spec is loaded</option>
+          </select>
+        </div>
+        <div class="mdl-field" style="margin-top:12px"><label>Note to Owen Vance</label>
+          <textarea id="invNotes">Please attach the motor driver datasheet to PN-SUB-LIGHTKIT-01 and move the revision to Released. Priya will have supplier confirmations on both open parts by end of week.</textarea>
+        </div>
+      </div>
+    </div>
+    <div class="mdl-footer">
+      <button class="ids-button tertiary" type="button" onclick="closeWgtModal('modalInventory')">Cancel</button>
+      <button class="ids-button primary" type="button" onclick="commitInventoryPlan()">Forward release request</button>
+    </div>
+  </div>
+</div>
+
+<div class="wgt-modal-overlay" id="modalSupplier" role="dialog" aria-modal="true" aria-labelledby="modalSupplierTitle" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalSupplier')"></div>
+  <div class="wgt-modal-dialog">
+    <div class="mdl-header">
+      <h2 class="wgt-modal-title" id="modalSupplierTitle">Supplier comparison, light kit motor driver</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalSupplier')" aria-label="Close">&#10006;</button>
+    </div>
+    <div class="mdl-body">
+      <div class="mdl-section">
+        <table class="ids-grid">
+          <thead>
+            <tr>
+              <th class="ids-grid-th">Vendor</th>
+              <th class="ids-grid-th">Status</th>
+              <th class="ids-grid-th r">Unit cost</th>
+              <th class="ids-grid-th">Lead time</th>
+              <th class="ids-grid-th">Qual</th>
+              <th class="ids-grid-th">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="ids-grid-row">
+              <td class="ids-grid-cell">Cadran Electronics</td>
+              <td class="ids-grid-cell"><span class="ids-tag subtle-amber">Candidate</span></td>
+              <td class="ids-grid-cell r num">$8.40</td>
+              <td class="ids-grid-cell">21 days</td>
+              <td class="ids-grid-cell">In progress</td>
+              <td class="ids-grid-cell"><button class="ids-button primary compact" onclick="supplierAction('cadran','select')">Select preferred</button></td>
+            </tr>
+            <tr class="ids-grid-row">
+              <td class="ids-grid-cell">Larkspur Microelectronics</td>
+              <td class="ids-grid-cell"><span class="ids-tag subtle-amber">Candidate</span></td>
+              <td class="ids-grid-cell r num">$9.10</td>
+              <td class="ids-grid-cell">14 days</td>
+              <td class="ids-grid-cell">Submitted</td>
+              <td class="ids-grid-cell"><button class="ids-button tertiary compact" onclick="supplierAction('larkspur','alt')">Set alternate</button></td>
+            </tr>
+            <tr class="ids-grid-row">
+              <td class="ids-grid-cell">Grovemarsh Semi</td>
+              <td class="ids-grid-cell"><span class="ids-tag">New</span></td>
+              <td class="ids-grid-cell r num">$7.90</td>
+              <td class="ids-grid-cell">28 days</td>
+              <td class="ids-grid-cell">Not started</td>
+              <td class="ids-grid-cell"><button class="ids-button tertiary compact" onclick="supplierAction('grovemarsh','rfq')">Send RFQ</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="mdl-footer">
+      <button class="ids-button tertiary" type="button" onclick="closeWgtModal('modalSupplier')">Close</button>
+      <button class="ids-button primary" type="button" onclick="commitSupplierBulk()">Request supplier confirmation</button>
+    </div>
+  </div>
+</div>
+
+<div class="wgt-modal-overlay" id="modalCustomerNotice" role="dialog" aria-modal="true" aria-labelledby="modalCustNoticeTitle" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalCustomerNotice')"></div>
+  <div class="wgt-modal-dialog" style="width:min(740px,75vw)">
+    <div class="mdl-header">
+      <h2 class="wgt-modal-title" id="modalCustNoticeTitle">Compliance item</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalCustomerNotice')" aria-label="Close">&#10006;</button>
+    </div>
+    <div class="mdl-body" id="modalCustNoticeBody"></div>
+    <div class="mdl-footer">
+      <button class="ids-button tertiary" type="button" onclick="closeWgtModal('modalCustomerNotice')">Cancel</button>
+      <button class="ids-button secondary" type="button" onclick="saveCustDraft()">Save draft</button>
+      <button class="ids-button primary" type="button" onclick="commitCustNotice()">Attach to item</button>
+    </div>
+  </div>
+</div>
+
+<div class="wgt-modal-overlay" id="modalAccuracy" role="dialog" aria-modal="true" aria-labelledby="modalAccuracyTitle" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalAccuracy')"></div>
+  <div class="wgt-modal-dialog">
+    <div class="mdl-header">
+      <h2 class="wgt-modal-title" id="modalAccuracyTitle">Readiness insights</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalAccuracy')" aria-label="Close">&#10006;</button>
+    </div>
+    <div class="mdl-body">
+      <div class="mdl-section">
+        <div class="mdl-section-title">Window</div>
+        <div style="display:flex;gap:6px">
+          <button class="ids-button tertiary compact" onclick="accuracyWindow(30)">4 weeks</button>
+          <button class="ids-button secondary compact" onclick="accuracyWindow(90)" id="accWinBtn">10 weeks</button>
+          <button class="ids-button tertiary compact" onclick="accuracyWindow(365)">Full lifecycle</button>
+        </div>
+      </div>
+      <div class="mdl-section">
+        <svg viewBox="0 0 400 180" style="width:100%;height:auto" id="accuracyChart">
+          <line x1="30" y1="30" x2="30" y2="150" stroke="#e0e0e1"/>
+          <line x1="30" y1="150" x2="390" y2="150" stroke="#e0e0e1"/>
+          <line x1="30" y1="50" x2="390" y2="50" stroke="#e0e0e1" stroke-dasharray="3 3"/>
+          <text x="24" y="53" font-size="13" fill="#6f6f76" text-anchor="end">90% band</text>
+          <polyline points="30,135 70,122 110,108 150,96 190,88 230,80 270,75 310,72 350,70 390,68" fill="none" stroke="#460daf" stroke-width="2.5"/>
+          <polyline points="30,145 70,140 110,130 150,120 190,110 230,100 270,95 310,90 350,86 390,82" fill="none" stroke="#40bdbe" stroke-width="2" stroke-dasharray="4 3"/>
+          <text x="200" y="20" font-size="13" fill="#161618" text-anchor="middle" font-weight="600" id="accuracyChartTitle">Aria 44 readiness: 21% to 54%</text>
+        </svg>
+        <div class="chart-legend" style="margin-top:12px">
+          <div class="chart-legend-item"><span class="chart-legend-swatch" style="background:#460daf"></span>Overall readiness</div>
+          <div class="chart-legend-item"><span class="chart-legend-swatch" style="background:#40bdbe"></span>Cost lane</div>
+        </div>
+      </div>
+      <div class="mdl-section">
+        <div class="mdl-section-title">Cost vs target by product line</div>
+        <table class="ids-grid">
+          <thead><tr><th class="ids-grid-th">Line</th><th class="ids-grid-th r">Est unit cost</th><th class="ids-grid-th r">Target</th><th class="ids-grid-th r">Delta</th></tr></thead>
+          <tbody id="accuracyTableBody">
+            <tr class="ids-grid-row"><td class="ids-grid-cell">Aria 44 smart</td><td class="ids-grid-cell r num">$96</td><td class="ids-grid-cell r num">$86</td><td class="ids-grid-cell r num">+12%</td></tr>
+            <tr class="ids-grid-row"><td class="ids-grid-cell">Coastal 52</td><td class="ids-grid-cell r num">$113</td><td class="ids-grid-cell r num">$110</td><td class="ids-grid-cell r num">+3%</td></tr>
+            <tr class="ids-grid-row"><td class="ids-grid-cell">Summit 60 outdoor</td><td class="ids-grid-cell r num">$147</td><td class="ids-grid-cell r num">$150</td><td class="ids-grid-cell r num">-2%</td></tr>
+            <tr class="ids-grid-row"><td class="ids-grid-cell">Bayview 48 (released)</td><td class="ids-grid-cell r num">$76</td><td class="ids-grid-cell r num">$80</td><td class="ids-grid-cell r num">-5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="mdl-footer">
+      <button class="ids-button tertiary" type="button" onclick="closeWgtModal('modalAccuracy')">Close</button>
+      <button class="ids-button primary" type="button" onclick="acknowledgeAccuracy()">Acknowledge</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="flow-modal" id="flowModal" role="dialog" aria-modal="true" aria-labelledby="flowTitle" aria-hidden="true">
+  <div class="flow-backdrop" onclick="CIICloseFlow()"></div>
+  <div class="flow-dialog">
+    <header class="flow-header">
+      <div>
+        <div class="flow-eyebrow">NPD Launch Readiness Agent</div>
+        <h2 class="flow-title" id="flowTitle">Is the Aria 44 ready to launch</h2>
+        <div class="flow-subtitle">Five readiness lanes, one hero verdict, approve each action</div>
+      </div>
+      <button class="flow-close" onclick="CIICloseFlow()" aria-label="Close flow walkthrough">&#10006;</button>
+    </header>
+    <div class="flow-stage">
+      <div class="flow-canvas" id="flowCanvas">
+        <div class="flow-hero">
+          <div class="flow-hero-icon">
+            <svg viewBox="0 0 18 18" width="22" height="22" fill="currentColor"><path d="M9 3C5.69 3 3 5.69 3 9C3 12.31 5.69 15 9 15C12.31 15 15 12.31 15 9C15 5.69 12.31 3 9 3ZM10 13H8V11H10V13ZM9.75 10L10 5H8L8.25 10H9.75Z"/></svg>
+          </div>
+          <div class="flow-hero-text">The Aria 44 inch is on hold: cost 12 percent over target, 2 suppliers unconfirmed, light kit BOM not released.</div>
+        </div>
+        <svg class="flow-paths" id="flowPaths"></svg>
+        <div class="flow-nodes" id="flowNodes"></div>
+      </div>
+    </div>
+    <div class="flow-caption-bar">
+      <div class="flow-step-label" id="flowStepLabel">Stage 1 of 5</div>
+      <div class="flow-step-text" id="flowStepText">...</div>
+    </div>
+    <div class="flow-controls">
+      <button class="flow-btn" id="flowPrev">&#9664; Prev</button>
+      <button class="flow-btn" id="flowPlay">&#10074;&#10074; Pause</button>
+      <div class="flow-progress"><div class="flow-progress-fill" id="flowProgressFill" style="width:0%"></div></div>
+      <button class="flow-btn primary" id="flowNext">Next &#9654;</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="demo-controls" id="demoControls">
+  <button class="demo-btn" id="idsDemoPrev" title="Previous step">&#9664;</button>
+  <button class="demo-btn play" id="idsDemoPlay" title="Pause / resume">&#10074;&#10074;</button>
+  <button class="demo-btn" id="idsDemoNext" title="Next step">&#9654;</button>
+  <button class="demo-btn" id="idsDemoStop" title="Stop demo">&#9632;</button>
+  <span class="demo-status" id="idsDemoStatus">Demo running</span>
+</div>
+<div class="caption-bar" id="capBar">
+  <div class="caption-step" id="capStep">Step 1 of 24</div>
+  <div id="capText">...</div></div><script>
+"use strict";
+
+const __ctx = {};
+function publishContext(name, data){ (__ctx[name] || []).forEach(f => f(data)); }
+function subscribeContext(name, fn){ (__ctx[name] = __ctx[name] || []).push(fn); }
+
+
+function switchTab(key){
+  document.querySelectorAll(".ids-tab").forEach(t => {
+    const on = t.dataset.tab === key;
+    t.setAttribute("aria-selected", on ? "true" : "false");
+  });
+  document.querySelectorAll(".ids-tabpanel").forEach(p => p.classList.remove("active"));
+  const panel = document.getElementById("panel-" + key);
+  if(panel) panel.classList.add("active");
+}
+function goToActionsTab(){ switchTab("actions"); }
+
+
+const ECN_LIST = [
+  {id:"PRD-ARIA-44", name:"Aria 44 smart fan", sponsor:"Dana Whitfield", target:"Matte black", scope:"Smart ceiling fan", worst:"red", days:42, status:"preliminary",
+   from:"Concept Rev 0.1", to:"Preliminary Rev 0.4", effective:"2026-07-10",
+   costDelta:"$96 est", portfolio:"Target $86, +12%",
+   readiness:54,
+   lanes:{cost:"red",supplier:"red",bom:"red",compliance:"amber",release:"amber"},
+   summary:"Three lanes block launch. Cost is 12 percent over target, light kit motor driver and capacitor have no confirmed supplier, light kit sub has no released revision."},
+  {id:"PRD-ARIA-44-BN", name:"Aria 44 smart fan", sponsor:"Dana Whitfield", target:"Brushed nickel", scope:"Smart ceiling fan", worst:"red", days:42, status:"preliminary",
+   from:"Concept Rev 0.1", to:"Preliminary Rev 0.3", effective:"2026-07-24",
+   costDelta:"$94 est", portfolio:"Target $86, +9%",
+   readiness:58,
+   lanes:{cost:"amber",supplier:"red",bom:"red",compliance:"amber",release:"amber"},
+   summary:"Finish variant inherits most Aria blockers. Finish samples still in review with Cal Draper."},
+  {id:"PRD-ARIA-44-FW", name:"Aria 44 smart fan", sponsor:"Dana Whitfield", target:"Fresh white", scope:"Smart ceiling fan", worst:"amber", days:56, status:"concept",
+   from:"Concept Rev 0.1", to:"Concept Rev 0.2", effective:"2026-07-31",
+   costDelta:"$93 est", portfolio:"Target $86, +8%",
+   readiness:62,
+   lanes:{cost:"amber",supplier:"amber",bom:"amber",compliance:"green",release:"amber"},
+   summary:"Earliest Aria variant. Finish samples not yet sourced; BOM still inherits from matte black."},
+  {id:"PRD-SUMMIT-60", name:"Summit 60 outdoor fan", sponsor:"Owen Vance", target:"Matte black", scope:"Summit 60 outdoor", worst:"amber", days:98, status:"design",
+   from:"Design Rev 0.1", to:"Design Rev 0.3", effective:"2026-09-04",
+   costDelta:"$147 est", portfolio:"Target $150, -2%",
+   readiness:66,
+   lanes:{cost:"green",supplier:"amber",bom:"amber",compliance:"amber",release:"amber"},
+   summary:"Cost on target. One wet-location compliance test still open; motor supplier qualification underway."},
+  {id:"PRD-COAST-52", name:"Coastal 52 outdoor fan", sponsor:"Owen Vance", target:"Fresh white", scope:"Coastal 52 outdoor", worst:"amber", days:84, status:"design",
+   from:"Design Rev 0.2", to:"Design Rev 0.5", effective:"2026-08-21",
+   costDelta:"$113 est", portfolio:"Target $110, +3%",
+   readiness:71,
+   lanes:{cost:"amber",supplier:"green",bom:"amber",compliance:"green",release:"amber"},
+   summary:"Design review in good shape. Two sub-BOMs still in redlining, no supplier gaps."},
+  {id:"PRD-COAST-52-BN", name:"Coastal 52 outdoor fan", sponsor:"Owen Vance", target:"Brushed nickel", scope:"Coastal 52 outdoor", worst:"green", days:84, status:"design",
+   from:"Design Rev 0.2", to:"Design Rev 0.4", effective:"2026-08-21",
+   costDelta:"$111 est", portfolio:"Target $110, +1%",
+   readiness:78,
+   lanes:{cost:"green",supplier:"green",bom:"amber",compliance:"green",release:"amber"},
+   summary:"Furthest along. Just needs the shared Coastal BOM to release and this finish is ready."}
+];
+
+const APPROVERS = {
+  blade: {role:"Component", name:"Blade set (5)", lane:"BOM",
+          detail:"Five bamboo-composite blades. Northmark Composites confirmed as preferred, Cadran as alternate. Revision 1.0 released on 2026-05-28 by Cal Draper. No open items.",
+          blockers:[], tag:"Ready", tagCls:"subtle-green",
+          svg:"artBlade"},
+  motor: {role:"Component", name:"Motor housing", lane:"BOM",
+          detail:"DC brushless motor with die-cast housing. Ferrostone Metals confirmed preferred supplier, matte black powder coat specified. Rev 1.0 released, cost per unit $28.40.",
+          blockers:[], tag:"Ready", tagCls:"subtle-green",
+          svg:"artMotor"},
+  bracket: {role:"Component", name:"Blade bracket", lane:"Cost",
+          detail:"Die-cast aluminium bracket, five per fan. Cost estimated at $3.80 per bracket, $19 per fan. Owen Vance is reviewing whether a stamped bracket could close the $10 gap on total unit cost.",
+          blockers:["Open value-engineering review"], tag:"Cost gap", tagCls:"subtle-amber",
+          svg:"artBracket"},
+  light: {role:"Sub-assembly", name:"Light kit", lane:"BOM readiness",
+          detail:"Light kit sub PN-SUB-LIGHTKIT-01 is at Rev 0.2 Preliminary. Four of five sub-components complete; motor driver spec document missing and capacitor supplier not yet confirmed. Owen Vance holds the redline.",
+          blockers:["Driver datasheet missing","Capacitor Mfr pending","Revision 0.2 not released"], tag:"Revision open", tagCls:"subtle-amber",
+          svg:"artLight"},
+  driver: {role:"Component", name:"Light kit motor driver", lane:"Suppliers",
+          detail:"No preferred supplier set. Two candidates in play: Cadran Electronics at $8.40 (21 day lead) and Larkspur Microelectronics at $9.10 (14 day lead). Priya Shah is driving qualification; a confirmation here moves the Suppliers lane from red to amber.",
+          blockers:["No preferred supplier","Qualification samples outstanding"], tag:"Supplier open", tagCls:"subtle-red",
+          svg:"artRemote"},
+  cap: {role:"Component", name:"Capacitor 4.5 uF", lane:"Suppliers",
+          detail:"Standard metal-film capacitor. Larkspur Microelectronics submitted samples; Mfr qualification still pending. Priya Shah expects confirmation within the week.",
+          blockers:["Mfr qualification pending"], tag:"Supplier open", tagCls:"subtle-red",
+          svg:"artCap"},
+  harness: {role:"Component", name:"Wiring harness", lane:"BOM",
+          detail:"UL-recognised wiring harness. Grovemarsh Elastomers confirmed preferred supplier, Rev 1.0 released.",
+          blockers:[], tag:"Ready", tagCls:"subtle-green",
+          svg:"artHarness"},
+  rod: {role:"Component", name:"Downrod", lane:"BOM",
+          detail:"6-inch steel downrod, matte black finish. Ferrostone Metals confirmed. Rev 1.0 released.",
+          blockers:[], tag:"Ready", tagCls:"subtle-green",
+          svg:"artRod"},
+  canopy: {role:"Component", name:"Canopy", lane:"BOM",
+          detail:"Steel ceiling canopy, matte black finish. Ferrostone Metals confirmed. Rev 1.0 released.",
+          blockers:[], tag:"Ready", tagCls:"subtle-green",
+          svg:"artCanopy"}
+};
+
+const CUSTOMERS = {
+  ul: {name:"UL listing", contract:"E-287441", req:"Attach UL certificate to item", cycle:"Complete",
+       template:"UL listing E-287441 attached to PN-FAN-ARIA-44-MB. Confirmed by June Okafor on 2026-05-22. Covers Aria 44 inch smart fan in all three finishes."},
+  energy: {name:"Energy Star rating", contract:"ES-2026-ARIA", req:"Attach submission acknowledgement", cycle:"Pending review",
+       template:"Energy Star submission ES-2026-ARIA filed 2026-05-14. Air flow and efficacy data loaded against PN-FAN-ARIA-44-MB. Awaiting EPA acknowledgement."},
+  fcc: {name:"FCC Part 15 (receiver)", contract:"CAD-FCC-2025-118", req:"Supplier declaration on file", cycle:"Confirmed",
+       template:"FCC Part 15 declaration from Cadran Electronics (receiver module) attached to item PN-FAN-ARIA-44-MB. Covers all Aria 44 finishes."}
+};
+
+
+let selectedEcnId = "PRD-ARIA-44";
+
+function paintEcnQueue(){
+  const body = document.getElementById("ecnBody");
+  body.innerHTML = ECN_LIST.map(e => {
+    const rcls = e.readiness >= 75 ? "subtle-green" : e.readiness >= 50 ? "subtle-amber" : "subtle-red";
+    const riskLbl = e.worst === "red" ? "High" : e.worst === "amber" ? "Medium" : "Low";
+    const riskColor = e.worst === "red" ? "var(--ids-color-error-stronger)" : e.worst === "amber" ? "var(--ids-color-warning-stronger)" : "var(--ids-color-success-stronger)";
+    return `<tr class="ids-grid-row" onclick="selectEcnAndOpen('${e.id}')" title="${e.id}, ${e.scope}">
+      <td class="ids-grid-cell" style="font-weight:600">${e.name}</td>
+      <td class="ids-grid-cell">${e.target}</td>
+      <td class="ids-grid-cell">${e.sponsor}</td>
+      <td class="ids-grid-cell num">${e.days}d</td>
+      <td class="ids-grid-cell num">${e.costDelta}</td>
+      <td class="ids-grid-cell"><span class="ids-tag ${rcls}">${e.readiness}%</span></td>
+      <td class="ids-grid-cell" style="font-weight:700;color:${riskColor}">${riskLbl}</td>
+    </tr>`;
+  }).join("");
+}
+
+const BOM_TILES = [
+  {key:"motor",   name:"Motor housing",     status:"ready",       svg:"artMotor",   label:"Ready"},
+  {key:"blade",   name:"Blade set (5)",     status:"ready",       svg:"artBlade",   label:"Ready"},
+  {key:"bracket", name:"Blade bracket",     status:"ready",       svg:"artBracket", label:"Ready"},
+  {key:"light",   name:"Light kit sub",     status:"unreleased",  svg:"artLight",   label:"Revision open"},
+  {key:"driver",  name:"Motor driver",      status:"unconfirmed", svg:"artRemote",  label:"Supplier open"},
+  {key:"cap",     name:"Capacitor 4.5 uF",  status:"unconfirmed", svg:"artCap",     label:"Supplier open"},
+  {key:"rod",     name:"Downrod 6 in",      status:"ready",       svg:"artRod",     label:"Ready"},
+  {key:"canopy",  name:"Canopy",            status:"ready",       svg:"artCanopy",  label:"Ready"},
+  {key:"harness", name:"Wiring harness",    status:"ready",       svg:"artHarness", label:"Ready"}
+];
+function paintBomGrid(){
+  const grid = document.getElementById("bomGrid");
+  if(!grid) return;
+  grid.innerHTML = BOM_TILES.map(t => `
+    <div class="bom-tile ${t.status}" onclick="showApproverDecision('${t.key}')" title="${t.name}">
+      <div class="bom-tile-img"><svg viewBox="0 0 100 100"><use href="#${t.svg}"/></svg></div>
+      <div class="bom-tile-name">${t.name}</div>
+      <div class="bom-tile-status">${t.label}</div>
+    </div>
+  `).join("");
+}
+
+function paintLanes(ecn){
+  const isFirst = ecn.id === ECN_LIST[0].id;
+  const laneDefs = [
+    {k:"cost", name:"Cost", note:"PLM est $96 vs target $86, over by 12%"},
+    {k:"supplier", name:"Suppliers", note:"7 of 9 suppliers confirmed, 2 components open"},
+    {k:"bom", name:"BOM readiness", note:"11 of 12 BOM revisions released, light kit unreleased"},
+    {k:"compliance", name:"Compliance", note:"UL listed, Energy Star pending"},
+    {k:"release", name:"Release", note:"Not sent to LN yet"}
+  ];
+  const laneWidths = {red:85, amber:55, green:30};
+  const lanes = ecn.lanes;
+  document.getElementById("lanesBody").innerHTML = laneDefs.map(def => {
+    const st = lanes[def.k];
+    const label = st === "red" ? "Red" : st === "amber" ? "Amber" : "Green";
+    const hiCls = st === "red" ? " lane-highlight" : "";
+    return `<div class="lane-item${hiCls}">
+      <div class="lane-top">
+        <div class="lane-name">${def.name}</div>
+        <div class="lane-status">
+          <span class="lane-label ${st}">${label}</span>
+        </div>
+      </div>
+      <div class="lane-row-bar">
+        <div class="lane-bar"><div class="lane-bar-fill ${st}" style="width:${laneWidths[st]}%"></div></div>
+      </div>
+      <div class="lane-note">${isFirst ? def.note : (def.k === "cost" ? `${ecn.costDelta}, ${ecn.portfolio}` : NOT_REVIEWED)}</div>
+    </div>`;
+  }).join("");
+}
+
+const NOT_REVIEWED = "Not reviewed yet for this product";
+let p360Base = null;
+function paintP360(ecn){
+  const panel = document.getElementById("panel-p360");
+  const cards = panel.querySelectorAll(".wgt-card");
+  const rec = cards[0], lanes = cards[1], bom = cards[2], prod = cards[3];
+  const acts = document.getElementById("panel-actions");
+  const head = document.getElementById("p360Headline");
+  if(!p360Base) p360Base = {head:head.innerHTML, rec:rec.innerHTML, lanes:lanes.querySelector("#lanesSubtitle").textContent, bom:bom.innerHTML, prod:prod.innerHTML, acts:acts.innerHTML};
+  head.innerHTML = p360Base.head;
+  rec.innerHTML = p360Base.rec;
+  lanes.querySelector("#lanesSubtitle").textContent = p360Base.lanes;
+  bom.innerHTML = p360Base.bom;
+  prod.innerHTML = p360Base.prod;
+  acts.innerHTML = p360Base.acts;
+  if(ecn.id === ECN_LIST[0].id) return;
+  const r = ecn.readiness;
+  const color = r >= 75 ? "var(--ids-color-success-stronger)" : "var(--ids-color-warning-stronger)";
+  const stroke = r >= 75 ? "#2ac371" : "#ff8d00";
+  head.textContent = `${ecn.name}, ${ecn.target}: ${r}% ready, in progress.`;
+  rec.querySelector("#recTitle").textContent = `Recommendation, ${ecn.name}, ${ecn.target}`;
+  rec.querySelector("#recSubtitle").textContent = `${ecn.scope}, in development, ${ecn.sponsor}`;
+  rec.querySelector(".wgt-actions").innerHTML = `<span class="ids-tag">In progress</span>`;
+  const ring = rec.querySelectorAll(".rec-ring circle")[1];
+  ring.setAttribute("stroke-dasharray", `${r} ${100 - r}`);
+  ring.setAttribute("stroke", stroke);
+  const pct = rec.querySelector(".rec-ring-pct");
+  pct.textContent = `${r}%`;
+  pct.style.color = color;
+  rec.querySelector(".rec-headline").textContent = `${ecn.name}, ${ecn.target}: in progress`;
+  rec.querySelector(".rec-headline").style.color = color;
+  rec.querySelector(".rec-body").textContent = ecn.summary;
+  rec.querySelector(".rec-blockers-title").textContent = "What is open";
+  const laneNames = {cost:"Cost",supplier:"Suppliers",bom:"BOM readiness",compliance:"Compliance",release:"Release"};
+  const open = Object.keys(ecn.lanes).filter(k => k !== "cost" && ecn.lanes[k] !== "green").map(k => `<li>${laneNames[k]}: ${ecn.lanes[k]}</li>`).join("");
+  rec.querySelector(".rec-blockers").innerHTML = `<li>Estimated cost ${ecn.costDelta}, ${ecn.portfolio}</li>${open}`;
+  bom.querySelector(".wgt-title").textContent = `BOM, ${ecn.name}, ${ecn.target}`;
+  bom.querySelector(".wgt-subtitle").textContent = "";
+  bom.querySelector(".wgt-content").innerHTML = `<div class="txt-sm txt-sec">${NOT_REVIEWED}</div>`;
+  prod.querySelector(".wgt-title").textContent = `Product 360, ${ecn.name}, ${ecn.target}`;
+  prod.querySelector(".wgt-subtitle").textContent = `${ecn.id}, ${ecn.status}`;
+  prod.querySelector(".wgt-actions").innerHTML = `<span class="ids-tag">In progress</span>`;
+  prod.querySelector(".wgt-content").innerHTML = `<div class="txt-sm txt-sec">${NOT_REVIEWED}</div>`;
+  acts.querySelector(".tab-headline").textContent = NOT_REVIEWED;
+  acts.querySelector(".hp-widgets").innerHTML = "";
+  const subEl = lanes.querySelector("#lanesSubtitle");
+  subEl.textContent = `${ecn.scope}, ${ecn.target}, five readiness checks`;
+}
+
+function selectEcn(id){
+  selectedEcnId = id;
+  publishContext("ecn.selected", {id});
+}
+function selectEcnAndOpen(id){
+  selectEcn(id);
+  switchTab("p360");
+}
+
+subscribeContext("ecn.selected", d => {
+  const ecn = ECN_LIST.find(e => e.id === d.id);
+  if(!ecn) return;
+  paintP360(ecn);
+  paintLanes(ecn);
+});
+
+paintEcnQueue();
+paintBomGrid();
+paintLanes(ECN_LIST[0]);
+paintP360(ECN_LIST[0]);
+
+
+function openWgtModal(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.classList.add("open");
+  el.setAttribute("aria-hidden","false");
+}
+function closeWgtModal(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.classList.remove("open");
+  el.setAttribute("aria-hidden","true");
+}
+
+function showEcnDetail(id){
+  const ecn = ECN_LIST.find(e => e.id === id) || ECN_LIST[0];
+  document.getElementById("modalEcnDetailTitle").textContent = `${ecn.scope}, ${ecn.target}`;
+  const laneNames = {cost:"Cost",supplier:"Suppliers",bom:"BOM readiness",compliance:"Compliance",release:"Release"};
+  const laneRows = Object.entries(ecn.lanes).map(([k,v]) => {
+    const cls = v === "red" ? "subtle-red" : v === "amber" ? "subtle-amber" : "subtle-green";
+    return `<tr class="ids-grid-row"><td class="ids-grid-cell">${laneNames[k]}</td><td class="ids-grid-cell"><span class="ids-tag ${cls}">${v}</span></td></tr>`;
+  }).join("");
+  document.getElementById("modalEcnDetailBody").innerHTML = `
+    <div class="mdl-section">
+      <div class="mdl-section-title">Product</div>
+      <div style="display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:center">
+        <div class="fan-render" style="height:160px"><svg viewBox="0 0 200 200"><use href="#artFan"/></svg></div>
+        <dl class="mdl-dl">
+          <dt>Item</dt><dd>${ecn.id}</dd>
+          <dt>Lead</dt><dd>${ecn.sponsor}</dd>
+          <dt>Scope</dt><dd>${ecn.scope}</dd>
+          <dt>Finish</dt><dd>${ecn.target}</dd>
+          <dt>Planned launch</dt><dd>${ecn.effective}</dd>
+          <dt>Lifecycle stage</dt><dd><span class="ids-tag">${ecn.status}</span></dd>
+          <dt>Readiness</dt><dd>${ecn.readiness}%</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="mdl-section">
+      <div class="mdl-section-title">Cost</div>
+      <dl class="mdl-dl">
+        <dt>Current estimate</dt><dd>${ecn.costDelta}</dd>
+        <dt>Target</dt><dd>${ecn.portfolio}</dd>
+      </dl>
+    </div>
+    <div class="mdl-section">
+      <div class="mdl-section-title">Lane snapshot</div>
+      <table class="ids-grid"><thead><tr><th class="ids-grid-th">Lane</th><th class="ids-grid-th">State</th></tr></thead><tbody>${laneRows}</tbody></table>
+    </div>
+    <div class="mdl-section">
+      <div class="mdl-section-title">Recommendation</div>
+      <p class="txt-sm txt-sec" style="line-height:1.5">${ecn.summary}</p>
+    </div>`;
+  selectedEcnId = id;
+  openWgtModal("modalEcnDetail");
+}
+
+function stageAsDraft(){
+  publishContext("ecn.staged", {id:selectedEcnId, status:"draft"});
+  closeWgtModal("modalEcnDetail");
+}
+subscribeContext("ecn.staged", d => {
+  const row = ECN_LIST.find(e => e.id === d.id);
+  if(row){ row.status = "held"; paintEcnQueue(); }
+});
+
+function sendToApprovers(){
+  closeWgtModal("modalEcnDetail");
+  goToActionsTab();
+}
+
+function showRouteDialog(id){
+  selectedEcnId = id;
+  openWgtModal("modalRoute");
+}
+function commitRoute(){
+  const strategy = document.getElementById("routeStrategy").value;
+  const sla = document.getElementById("routeSla").value;
+  publishContext("ecn.routed", {id:selectedEcnId, strategy, sla});
+  closeWgtModal("modalRoute");
+}
+subscribeContext("ecn.routed", d => {
+  const row = ECN_LIST.find(e => e.id === d.id);
+  if(row){ row.status = "actions sent"; paintEcnQueue(); }
+});
+
+function approveAction(which){
+  publishContext("action.approved", {which});
+  
+  const btns = document.querySelectorAll(`#panel-actions .action-card .action-card-footer .ids-button.primary`);
+  
+}
+
+function showLaneDrilldown(){
+  filterLane("all");
+  openWgtModal("modalLaneDrill");
+}
+function filterLane(which){
+  if(selectedEcnId !== ECN_LIST[0].id){
+    document.getElementById("laneDrillBody").innerHTML = `<tr class="ids-grid-row"><td class="ids-grid-cell" colspan="4">${NOT_REVIEWED}</td></tr>`;
+    return;
+  }
+  const rows = [
+    {lane:"cost", signal:"Estimate over target", source:"PLM item cost vs LN standard cost", impact:"+$10/unit, +12%"},
+    {lane:"cost", signal:"Blade bracket margin", source:"Costing engine, die-cast rollup", impact:"$19/fan"},
+    {lane:"supplier", signal:"Motor driver unconfirmed", source:"PLM supplier link, PN-DRV-LED-01", impact:"No preferred"},
+    {lane:"supplier", signal:"Capacitor Mfr pending", source:"PLM supplier link, PN-CAP-45UF", impact:"Qual outstanding"},
+    {lane:"bom", signal:"Light kit sub unreleased", source:"PLM BOM revision history", impact:"Rev 0.2 Preliminary"},
+    {lane:"bom", signal:"Driver datasheet missing", source:"PLM documents, PN-SUB-LIGHTKIT-01", impact:"1 doc open"},
+    {lane:"compliance", signal:"Energy Star pending", source:"Compliance tracker, ES-2026-ARIA", impact:"Awaiting EPA"},
+    {lane:"compliance", signal:"UL listing attached", source:"UL file E-287441", impact:"Confirmed"},
+    {lane:"release", signal:"Not yet sent to LN", source:"PLM lifecycle history", impact:"Preliminary stage"},
+    {lane:"release", signal:"CPQ not configured", source:"CPQ model workspace", impact:"After release"}
+  ];
+  const filtered = which === "all" ? rows : rows.filter(r => r.lane === which);
+  document.getElementById("laneDrillBody").innerHTML = filtered.map(r =>
+    `<tr class="ids-grid-row"><td class="ids-grid-cell">${r.lane}</td><td class="ids-grid-cell">${r.signal}</td><td class="ids-grid-cell">${r.source}</td><td class="ids-grid-cell r">${r.impact}</td></tr>`
+  ).join("");
+}
+function acceptLaneAnalysis(){
+  publishContext("lane.analysis.accepted", {id:selectedEcnId});
+  closeWgtModal("modalLaneDrill");
+}
+
+function showApproverDecision(key){
+  const a = APPROVERS[key];
+  if(!a) return;
+  document.getElementById("modalApproverTitle").textContent = `${a.name}, ${a.role}`;
+  document.getElementById("modalApproverBody").innerHTML = `
+    <div class="mdl-section">
+      <div style="display:grid;grid-template-columns:160px 1fr;gap:16px;align-items:center">
+        <div style="height:140px;background:var(--ids-color-neutral-10);border-radius:8px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 100 100" width="110" height="110"><use href="#${a.svg}"/></svg>
+        </div>
+        <dl class="mdl-dl">
+          <dt>Component</dt><dd>${a.name}</dd>
+          <dt>Role</dt><dd>${a.role}</dd>
+          <dt>Readiness lane</dt><dd>${a.lane}</dd>
+          <dt>State</dt><dd><span class="ids-tag ${a.tagCls}">${a.tag}</span></dd>
+        </dl>
+      </div>
+    </div>
+    <div class="mdl-section">
+      <div class="mdl-section-title">What the agent sees</div>
+      <p class="txt-sm txt-sec" style="line-height:1.5">${a.detail}</p>
+    </div>
+    ${a.blockers.length ? `<div class="mdl-section">
+      <div class="mdl-section-title">Open items</div>
+      <ul style="padding-left:18px;font-size:14px;color:var(--ids-color-fg-secondary);line-height:1.6">
+        ${a.blockers.map(b => `<li>${b}</li>`).join("")}
+      </ul>
+    </div>` : ""}
+    <div class="mdl-section">
+      <div class="mdl-field"><label>Note to Dana</label><textarea id="apprComment" placeholder="Add context for the launch review"></textarea></div>
+    </div>`;
+  document.getElementById("modalApprover").dataset.role = key;
+  openWgtModal("modalApprover");
+}
+function approverDecide(action){
+  const key = document.getElementById("modalApprover").dataset.role;
+  const tag = action === "approve" ? "Ready" : action === "reject" ? "Rejected" : "Escalated";
+  const tagCls = action === "approve" ? "subtle-green" : action === "reject" ? "subtle-red" : "subtle-amber";
+  publishContext("approver.decision", {key, action, tag, tagCls});
+  closeWgtModal("modalApprover");
+}
+subscribeContext("approver.decision", d => {
+  if(d.action === "approve"){
+    const tile = document.querySelector(`.bom-tile[onclick*="'${d.key}'"]`);
+    if(tile){
+      tile.classList.remove("unconfirmed","unreleased");
+      tile.classList.add("ready");
+      const status = tile.querySelector(".bom-tile-status");
+      if(status) status.textContent = "Ready";
+    }
+  }
+});
+
+function showInventoryModal(){ openWgtModal("modalInventory"); }
+function commitInventoryPlan(){
+  const window = document.getElementById("invWindow").value;
+  publishContext("inventory.plan.committed", {window});
+  closeWgtModal("modalInventory");
+}
+subscribeContext("inventory.plan.committed", d => {
+  const laneRows = document.querySelectorAll("#lanesBody .lane-item");
+  if(laneRows[2]){
+    const fill = laneRows[2].querySelector(".lane-bar-fill");
+    const label = laneRows[2].querySelector(".lane-label");
+    fill.className = "lane-bar-fill amber"; fill.style.width = "55%";
+    label.textContent = "Amber"; label.className = "lane-label amber";
+  }
+});
+
+function showSupplierModal(){ openWgtModal("modalSupplier"); }
+function supplierAction(vendor, action){
+  publishContext("supplier.action", {vendor, action});
+}
+function commitSupplierBulk(){
+  publishContext("supplier.action", {vendor:"cadran", action:"select"});
+  closeWgtModal("modalSupplier");
+}
+subscribeContext("supplier.action", d => {
+  if(d.action !== "select") return;
+  const laneRows = document.querySelectorAll("#lanesBody .lane-item");
+  if(laneRows[1]){
+    const fill = laneRows[1].querySelector(".lane-bar-fill");
+    const label = laneRows[1].querySelector(".lane-label");
+    fill.className = "lane-bar-fill amber"; fill.style.width = "55%";
+    label.textContent = "Amber"; label.className = "lane-label amber";
+  }
+  const driverTile = document.querySelector('.bom-tile[onclick*="\'driver\'"]');
+  if(driverTile){
+    driverTile.classList.remove("unconfirmed");
+    driverTile.classList.add("ready");
+    const status = driverTile.querySelector(".bom-tile-status");
+    if(status) status.textContent = "Ready";
+  }
+});
+
+let currentCustomer = "ul";
+function showCustomerNotice(key){
+  currentCustomer = key;
+  const c = CUSTOMERS[key];
+  document.getElementById("modalCustNoticeTitle").textContent = c.name;
+  document.getElementById("modalCustNoticeBody").innerHTML = `
+    <div class="mdl-section">
+      <div class="mdl-section-title">Document</div>
+      <dl class="mdl-dl">
+        <dt>Reference</dt><dd>${c.contract}</dd>
+        <dt>Requirement</dt><dd>${c.req}</dd>
+        <dt>Status</dt><dd>${c.cycle}</dd>
+      </dl>
+    </div>
+    <div class="mdl-section">
+      <div class="mdl-section-title">Note on the item</div>
+      <div class="mdl-field"><label>Reference tag</label><input type="text" value="PN-FAN-ARIA-44-MB, ${c.contract}"></div>
+      <div class="mdl-field" style="margin-top:10px"><label>Body</label><textarea id="custBody" style="min-height:120px">${c.template}</textarea></div>
+    </div>`;
+  openWgtModal("modalCustomerNotice");
+}
+function saveCustDraft(){ publishContext("customer.notice", {key:currentCustomer, state:"draft"}); closeWgtModal("modalCustomerNotice"); }
+function commitCustNotice(){ publishContext("customer.notice", {key:currentCustomer, state:"sent"}); closeWgtModal("modalCustomerNotice"); }
+
+function showAccuracyModal(){ openWgtModal("modalAccuracy"); }
+function accuracyWindow(days){ publishContext("accuracy.window", {days}); }
+subscribeContext("accuracy.window", d => {
+  const titleEl = document.getElementById("accuracyChartTitle");
+  const btns = document.querySelectorAll("#modalAccuracy .mdl-section:first-child .ids-button");
+  btns.forEach(b => { b.classList.remove("secondary"); b.classList.add("tertiary"); });
+  if(d.days === 30){
+    if(btns[0]){ btns[0].classList.add("secondary"); btns[0].classList.remove("tertiary"); }
+    if(titleEl) titleEl.textContent = "Aria 44 readiness, last 4 weeks, 44% to 54%";
+  } else if(d.days === 365){
+    if(btns[2]){ btns[2].classList.add("secondary"); btns[2].classList.remove("tertiary"); }
+    if(titleEl) titleEl.textContent = "Aria 44 readiness, full lifecycle, 8% to 54%";
+  } else {
+    if(btns[1]){ btns[1].classList.add("secondary"); btns[1].classList.remove("tertiary"); }
+    if(titleEl) titleEl.textContent = "Aria 44 readiness: 21% to 54%";
+  }
+});
+function acknowledgeAccuracy(){ publishContext("accuracy.acknowledged", {ts:Date.now()}); closeWgtModal("modalAccuracy"); }
+
+
+function openSmartPanel(){
+  document.getElementById("smpPanel").classList.add("open");
+  document.getElementById("smpPanel").setAttribute("aria-hidden","false");
+  document.querySelector(".smp-launcher").style.display = "none";
+}
+function closeSmartPanel(){
+  document.getElementById("smpPanel").classList.remove("open");
+  document.getElementById("smpPanel").setAttribute("aria-hidden","true");
+  document.querySelector(".smp-launcher").style.display = "";
+}
+function askSmp(text){
+  document.getElementById("smpOnboarding").style.display = "none";
+  const list = document.getElementById("smpMessages");
+  list.style.display = "flex";
+  const aiResp = smpAnswer(text);
+  list.innerHTML += `<div class="smp-message user"><div class="smp-bubble">${text}</div></div>
+    <div class="smp-message ai"><div class="smp-bubble">${aiResp}</div></div>
+    <div class="smp-chips">
+      <button class="smp-followup-chip" onclick="askSmp('Forward release request for the light kit sub to Owen Vance')">Forward release request to Owen</button>
+      <button class="smp-followup-chip" onclick="askSmp('Compare Cadran and Larkspur for the motor driver')">Compare driver suppliers</button>
+    </div>`;
+  publishContext("smp.query", {text});
+  list.scrollTop = list.scrollHeight;
+}
+function smpAnswer(q){
+  const l = q.toLowerCase();
+  if(l.includes("launch") && l.includes("on time")) return "Not yet. The Aria 44 is on hold with three red lanes: cost is 12 percent over target at $96 vs $86, two of nine components have no confirmed supplier (the light kit motor driver and the 4.5 uF capacitor), and the light kit sub-assembly has no released BOM revision. It also has not been sent to LN yet. The agent recommends Hold.";
+  if(l.includes("supplier") && l.includes("red")) return "Two of the nine components have no confirmed supplier. The light kit motor driver has no preferred vendor set, with Cadran Electronics and Larkspur Microelectronics as candidates. The capacitor 4.5 uF has Larkspur submitted but Mfr qualification is still pending. Priya Shah is driving both.";
+  if(l.includes("light kit")) return "Light kit sub PN-SUB-LIGHTKIT-01 is at Rev 0.2 Preliminary. Four of five sub-components are complete but the motor driver datasheet is missing and the capacitor Mfr is unconfirmed. Owen Vance holds the redline. Once the datasheet is attached and the capacitor is confirmed, the revision can go to Released.";
+  if(l.includes("priya") || l.includes("forward")) return "Draft task prepared. Owner Priya Shah, subject: Confirm supplier for Aria 44 light kit motor driver. Ready to run as a PLM for Discrete ForwardTask action. Dana still approves before it fires.";
+  if(l.includes("cost")) return "Current estimate is $96 against a target of $86, over by 12 percent. The biggest contributors are the die-cast blade bracket at $19 per fan and the motor housing at $28.40. Owen Vance is reviewing a stamped bracket alternative that could close the gap.";
+  return "The Aria 44 is on hold with three red lanes (cost, suppliers, BOM readiness) and two amber (compliance, release). Ask about any lane, or ask the agent to forward a task to Priya, Cal or Owen.";
+}
+function sendSmp(){
+  const input = document.getElementById("smpInput");
+  if(input.value.trim()){ askSmp(input.value.trim()); input.value = ""; }
+}
+
+
+const STATE = {
+  demo:{running:false, paused:false, epoch:0, idx:0, total:0},
+  voice:{ready:false, picked:null},
+  flow:{open:false, idx:0, paused:false, epoch:0, audio:null}
+};
+function pickVoice(){
+  const v = window.speechSynthesis && window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+  if(!v.length) return null;
+  const male = ["David","James","Guy","Ryan","Mark","Daniel","Alex","Michael","Bruce"];
+  for(const n of male){
+    const hit = v.find(x => x.name && x.name.includes(n) && /^en/i.test(x.lang));
+    if(hit) return hit;
+  }
+  return v.find(x => /^en/i.test(x.lang)) || v[0];
+}
+function synthEleven(text){var __VOICE_BASE__="https://starforge.ai.infor.com";return new Promise(function(resolve,reject){var idx=window.__VOICE_TEXT_INDEX__||{};var mfst=window.__VOICE_MANIFEST__||{};var k=idx[String(text).trim().replace(/\s+/g," ")];var h=k&&mfst[k];if(!h){reject(new Error("voice cache miss"));return;}fetch(__VOICE_BASE__+"/api/voice/"+h,{method:"GET"}).then(function(r){if(!r.ok)throw new Error("voice "+r.status);return r.blob();}).then(function(blob){resolve(URL.createObjectURL(blob));}).catch(reject);});}
+function renderCaption(idx, total, text){
+  document.getElementById("capText").textContent = text;
+  document.getElementById("capStep").textContent = `Step ${idx+1} of ${total}`;
+  document.getElementById("capBar").classList.add("visible");
+}
+let __demoOpenModalId = null;
+function clearHighlights(){
+  document.querySelectorAll(".highlight").forEach(e => e.classList.remove("highlight"));
+  if(__demoOpenModalId){ closeWgtModal(__demoOpenModalId); __demoOpenModalId = null; }
+}
+function highlight(sel, stayId){
+  if(__demoOpenModalId && __demoOpenModalId !== stayId){
+    let staysInside = false;
+    if(sel){
+      try{
+        const target = document.querySelector(sel);
+        const modalEl = document.getElementById(__demoOpenModalId);
+        staysInside = !!(target && modalEl && modalEl.contains(target));
+      }catch(e){}
+    }
+    if(!staysInside){ closeWgtModal(__demoOpenModalId); __demoOpenModalId = null; }
+  }
+  document.querySelectorAll(".highlight").forEach(e => e.classList.remove("highlight"));
+  if(!sel) return;
+  try{
+    const el = document.querySelector(sel);
+    if(el){ el.classList.add("highlight"); el.scrollIntoView({behavior:"smooth", block:"center"}); }
+  }catch(e){}
+}
+function speakAndShow(idx, total, step){
+  const myEpoch = STATE.demo.epoch;
+  const stale = () => STATE.demo.epoch !== myEpoch || !STATE.demo.running;
+  try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}
+  if(window.__currentAudio){ try{window.__currentAudio.pause();}catch(e){} window.__currentAudio = null; }
+  if(step.tab) switchTab(step.tab);
+  if(step.open) openWgtModal(step.open);
+  if(step.action) try{ step.action(); }catch(e){}
+  setTimeout(() => {
+    if(!stale()){
+      highlight(step.highlight || null, step.open || null);
+      if(step.open) __demoOpenModalId = step.open;
+    }
+  }, 80);
+  renderCaption(idx, total, step.caption);
+  return new Promise(resolve => {
+    let done = false;
+    const finish = () => {
+      if(done) return; done = true;
+      if(step.close){
+        const idToClose = step.close === true ? __demoOpenModalId : step.close;
+        if(idToClose){ closeWgtModal(idToClose); if(idToClose === __demoOpenModalId) __demoOpenModalId = null; }
+      }
+      resolve();
+    };
+    const stalePoll = setInterval(() => { if(stale()){ clearInterval(stalePoll); finish(); } }, 100);
+    const key = window.__EL_KEY__;
+    if(key){
+      synthEleven(step.caption).then(url => {
+        if(stale()){ try{URL.revokeObjectURL(url);}catch(e){} return finish(); }
+        const a = new Audio(url); window.__currentAudio = a;
+        a.addEventListener("ended", () => { try{URL.revokeObjectURL(url);}catch(e){} finish(); }, {once:true});
+        a.addEventListener("error", () => { try{URL.revokeObjectURL(url);}catch(e){} if(stale()) return finish(); fallback(); }, {once:true});
+        a.play().catch(() => { try{URL.revokeObjectURL(url);}catch(e){} if(stale()) return finish(); fallback(); });
+      }).catch(() => { if(stale()) return finish(); fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      { setTimeout(finish,Math.max(3600, step.caption.length*56)); return; }
+    }
+  });
+}
+
+
+const DEMO_STEPS = [
+  {tab:"products", caption:"I'm Dana Whitfield, VP of Product Engineering at Hunter Fan. We're moving every new fan through PLM for Discrete inside LN.", highlight:".app-title"},
+  {tab:"products", caption:"The headline is simple. One of six products is on hold: the Aria 44 matte black. Six weeks out, three blockers.", highlight:"#productsHeadline"},
+  {tab:"products", caption:"Three tiles. Hold the Aria 44 launch. $96 est unit cost against a target of $86. 7 of 9 suppliers confirmed.", highlight:".hero-row"},
+  {tab:"products", caption:"Products in Development, worst readiness first. Aria 44 matte black is on top. Let's select it.", highlight:'[aria-label="Products in development"]'},
+  {tab:"p360", caption:"Product 360 for the Aria 44. The headline names the three blockers: cost 12% over target, 2 suppliers unconfirmed, light kit BOM not released.", highlight:"#p360Headline"},
+  {tab:"p360", caption:"The agent reads PLM items, BOMs and supplier links. It calls Hold. The three numbered blockers are right there.", highlight:'[aria-label="AI recommendation for Aria 44"]'},
+  {tab:"p360", caption:"Impact Lanes on the right. The three red lanes are highlighted. Cost, Suppliers, BOM readiness. Compliance and Release are amber.", highlight:'[aria-label="Five launch readiness lanes"]'},
+  {tab:"p360", caption:"The BOM as nine tiles. Each one outlined by status. Red for supplier open, amber for revision open, green for ready.", highlight:'[aria-label="BOM tile grid"]'},
+  {tab:"p360", caption:"The light kit tile is amber. Rev 0.2, Preliminary, unreleased. Let's open it.", highlight:'.bom-tile.unreleased', action:() => showApproverDecision("light"), open:"modalApprover"},
+  {tab:"p360", caption:"Cal Draper has the sub at Rev 0.2. The driver datasheet is missing and the capacitor supplier is unconfirmed. The agent names what's open.", open:"modalApprover", highlight:"#modalApproverBody"},
+  {tab:"p360", caption:"Close this, we'll handle it through an approved action rather than a direct edit.", close:"modalApprover", highlight:"#modalApprover .mdl-footer .ids-button.tertiary"},
+  {tab:"p360", caption:"The driver tile is red. No preferred supplier. Open it to see what the agent sees.", highlight:'.bom-tile.unconfirmed', action:() => showApproverDecision("driver"), open:"modalApprover"},
+  {tab:"p360", caption:"Two candidates in play: Cadran Electronics and Larkspur Microelectronics. Priya Shah is driving qualification.", open:"modalApprover", highlight:"#modalApproverBody"},
+  {tab:"p360", caption:"Close and let the agent propose the right next action.", close:"modalApprover", highlight:"#modalApprover .mdl-footer .ids-button.tertiary"},
+  {tab:"p360", caption:"Lifecycle on the right. Concept done, Design done, Preliminary current. Released and Sent to LN are what we're working toward.", highlight:'[aria-label="Product image, lifecycle and history"]'},
+  {tab:"p360", caption:"Lane drill-down. Each lane shows its rule and its evidence. Not opinion, data from PLM and LN.", highlight:'[aria-label="Five launch readiness lanes"] .ids-button', open:"modalLaneDrill", action:showLaneDrilldown},
+  {tab:"p360", caption:"Filter to just the Suppliers lane. Two signals, two source records, every claim traceable.", open:"modalLaneDrill", action:() => filterLane("supplier"), highlight:"#laneDrillBody"},
+  {tab:"p360", caption:"Accept the analysis. We're not committing a launch, we're committing that we read what the agent put in front of us.", close:"modalLaneDrill", highlight:"#modalLaneDrill .mdl-footer .ids-button.primary"},
+  {tab:"actions", caption:"Actions tab. Three next actions clear the Aria blockers. Each runs only after you approve it.", highlight:"#panel-actions .tab-headline"},
+  {tab:"actions", caption:"Action one. Request supplier confirmation for the two open components. Owned by Priya Shah.", highlight:"#panel-actions .action-card:nth-of-type(1)"},
+  {tab:"actions", caption:"Preview the supplier list before approving. The agent lists Cadran as preferred and Larkspur as alternate.", open:"modalSupplier", action:showSupplierModal, highlight:"#modalSupplier tbody tr:first-child"},
+  {tab:"actions", caption:"Close the preview. The approve-and-run button on the action card is what fires the ForwardTask.", close:"modalSupplier", highlight:"#modalSupplier .mdl-footer .ids-button.tertiary"},
+  {tab:"actions", caption:"Action two. Forward the light kit BOM release task to Owen Vance. Preview the release plan.", highlight:"#panel-actions .action-card:nth-of-type(2)", open:"modalInventory", action:showInventoryModal},
+  {tab:"actions", caption:"Target release Week 24, after supplier confirmations. The note to Owen is drafted. We read it, then we send.", open:"modalInventory", highlight:"#invNotes"},
+  {tab:"actions", caption:"Forward the request. The BOM readiness lane behind us will show the pending state immediately.", close:"modalInventory", highlight:"#modalInventory .mdl-footer .ids-button.primary"},
+  {tab:"actions", caption:"Action three. Send to production. Blocked until actions one and two finish. The agent will not fire this out of order.", highlight:"#panel-actions .action-card:nth-of-type(3)"},
+  {tab:"actions", caption:"Preview what would reach LN. Item master, standard cost rollup, primary BOM, routing, approved vendor list, compliance docs.", open:"modalRoute", action:() => showRouteDialog("PRD-ARIA-44"), highlight:"#modalRoute .mdl-section:first-child"},
+  {tab:"actions", caption:"Close the preview. The actions are drafted. Nothing has been sent without approval.", close:"modalRoute", highlight:"#modalRoute .mdl-footer .ids-button.tertiary"},
+  {tab:"insights", caption:"Insights tab. Readiness over time for every product in development. Aria is tracking behind the glide path.", highlight:'[aria-label="Readiness over time"]'},
+  {tab:"insights", caption:"Zoom the chart. The purple line is overall readiness, the teal line is the cost lane trending in parallel.", open:"modalAccuracy", action:showAccuracyModal, highlight:"#accuracyChart"},
+  {tab:"insights", caption:"Cost against target table. Aria 44 is the outlier at plus 12 percent. The portfolio view keeps us honest.", open:"modalAccuracy", highlight:"#accuracyTableBody"},
+  {tab:"insights", caption:"Acknowledge the insight. The number stays visible on the dashboard; we've just told the agent we saw it.", close:"modalAccuracy", highlight:"#modalAccuracy .mdl-footer .ids-button.primary"},
+  {tab:"insights", caption:"Cost against target by product line, full width. Aria 44 is the only line more than five percent over.", highlight:'[aria-label="Cost against target by product line"]'},
+  {tab:"products", caption:"That's the loop. Four tabs, one product in focus, five lanes, three approved actions. The Aria launches when the lanes are green.", highlight:".hero-row"}
+];
+STATE.demo.total = DEMO_STEPS.length;
+
+function showDemoUI(){ document.getElementById("demoControls").classList.add("visible"); const b = document.getElementById("runDemoBtn"); const l = document.getElementById("runDemoLabel"); if(b) b.classList.add("running"); if(l) l.textContent = "Stop demo"; }
+function hideDemoUI(){ document.getElementById("demoControls").classList.remove("visible"); document.getElementById("capBar").classList.remove("visible"); const b = document.getElementById("runDemoBtn"); const l = document.getElementById("runDemoLabel"); if(b) b.classList.remove("running"); if(l) l.textContent = "Run demo"; }
+
+async function runDemo(startIdx){
+  if(STATE.demo.running) return;
+  if(selectedEcnId !== ECN_LIST[0].id) selectEcn(ECN_LIST[0].id);
+  STATE.demo.running = true; STATE.demo.paused = false;
+  STATE.demo.idx = (typeof startIdx === "number" && startIdx >= 0) ? Math.min(startIdx, DEMO_STEPS.length-1) : 0;
+  STATE.demo.epoch++;
+  showDemoUI();
+  document.getElementById("idsDemoPlay").textContent = "\u23F8";
+  document.getElementById("idsDemoStatus").textContent = "Demo running";
+  while(STATE.demo.running && STATE.demo.idx < DEMO_STEPS.length){
+    const i = STATE.demo.idx;
+    try{ await speakAndShow(i, DEMO_STEPS.length, DEMO_STEPS[i]); }catch(e){ console.error(e); }
+    if(!STATE.demo.running) break;
+    if(STATE.demo.paused){
+      await new Promise(res => { const tick = () => { if(!STATE.demo.paused || !STATE.demo.running) res(); else setTimeout(tick, 150); }; tick(); });
+      if(!STATE.demo.running) break;
+    }
+    if(STATE.demo.idx === i) STATE.demo.idx = i + 1;
+    await new Promise(r => setTimeout(r, 180));
+  }
+  stopDemo(false);
+}
+function stopDemo(reset){
+  STATE.demo.running = false; STATE.demo.paused = false; STATE.demo.epoch++;
+  if(reset !== false) STATE.demo.idx = 0;
+  if(window.__currentAudio){ try{window.__currentAudio.pause();}catch(e){} window.__currentAudio = null; }
+  try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}
+  clearHighlights();
+  document.querySelectorAll(".wgt-modal-overlay.open").forEach(el => closeWgtModal(el.id));
+  __demoOpenModalId = null;
+  hideDemoUI();
+}
+function pauseResume(){
+  if(!STATE.demo.running){ runDemo(); return; }
+  STATE.demo.paused = !STATE.demo.paused;
+  document.getElementById("idsDemoPlay").textContent = STATE.demo.paused ? "\u25B6" : "\u23F8";
+  document.getElementById("idsDemoStatus").textContent = STATE.demo.paused ? "Demo paused" : "Demo running";
+}
+function nextStep(){
+  if(!STATE.demo.running){ runDemo(Math.min(STATE.demo.idx+1, DEMO_STEPS.length-1)); return; }
+  STATE.demo.epoch++; STATE.demo.idx = Math.min(STATE.demo.idx+1, DEMO_STEPS.length-1);
+  if(window.__currentAudio){ try{window.__currentAudio.pause();}catch(e){} window.__currentAudio = null; }
+  try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}
+}
+function prevStep(){
+  if(!STATE.demo.running){ runDemo(Math.max(0, STATE.demo.idx-1)); return; }
+  STATE.demo.epoch++; STATE.demo.idx = Math.max(STATE.demo.idx-1, 0);
+  if(window.__currentAudio){ try{window.__currentAudio.pause();}catch(e){} window.__currentAudio = null; }
+  try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}
+}
+
+document.getElementById("runDemoBtn").addEventListener("click", () => { if(STATE.demo.running) stopDemo(); else runDemo(); });
+document.getElementById("idsDemoPlay").addEventListener("click", pauseResume);
+document.getElementById("idsDemoStop").addEventListener("click", () => stopDemo(true));
+document.getElementById("idsDemoNext").addEventListener("click", nextStep);
+document.getElementById("idsDemoPrev").addEventListener("click", prevStep);
+if(window.speechSynthesis){
+  if(window.speechSynthesis.getVoices().length){ STATE.voice.picked = pickVoice(); STATE.voice.ready = true; }
+  window.speechSynthesis.onvoiceschanged = () => { STATE.voice.picked = pickVoice(); STATE.voice.ready = true; };
+}
+
+
+const CII_FLOW_STEPS = [
+  {stage:1, name:"Cost", status:"red", blurb:"Est $96 vs target $86",
+   narration:"Cost lane. The agent reads the PLM item cost and the LN standard cost and compares them against the launch target. Aria 44 is at $96 against a target of $86, twelve percent over. The rule is red, the hero line says cost twelve percent over target."},
+  {stage:2, name:"Suppliers", status:"red", blurb:"2 of 9 components unconfirmed",
+   narration:"Suppliers lane. The agent reads supplier links on every component. Nine components in the Aria 44 BOM, seven confirmed, two open. The light kit motor driver has no preferred vendor and the capacitor is pending Mfr qualification. The hero line says two suppliers unconfirmed."},
+  {stage:3, name:"BOM readiness", status:"red", blurb:"Light kit sub Rev 0.2 unreleased",
+   narration:"BOM readiness lane. The agent reads BOM revision state. Eleven of twelve subs are at a released revision; the light kit sub is still at Rev 0.2 Preliminary with the driver datasheet missing. The hero line says light kit BOM not released."},
+  {stage:4, name:"Compliance", status:"amber", blurb:"UL listed, Energy Star pending",
+   narration:"Compliance lane. The agent reads attached documents. UL file E-287441 confirmed, FCC Part 15 declaration on file, California Title 20 data loaded. Energy Star submission filed but awaiting EPA. That's amber, not red. Launch is possible once Energy Star closes."},
+  {stage:5, name:"Release", status:"amber", blurb:"Not yet sent to LN",
+   narration:"Release lane. The Aria 44 is still at Preliminary stage inside PLM for Discrete. It has not been sent to LN yet, and CPQ has not been configured. On send the item master, BOM, routing and approved vendor list reach LN together, but only once the three red lanes close. That's the whole verdict."}
+];
+
+function CIIBuildFlowNodes(){
+  const nodes = document.getElementById("flowNodes");
+  nodes.innerHTML = "";
+  CII_FLOW_STEPS.forEach((s,i) => {
+    const node = document.createElement("div");
+    node.className = "flow-node " + s.status;
+    node.innerHTML = `<div class="stage-num">${i+1}</div><div class="stage-name">${s.name}</div><div class="stage-blurb">${s.blurb}</div>`;
+    nodes.appendChild(node);
+  });
+  nodes.style.gridTemplateColumns = `repeat(${CII_FLOW_STEPS.length},1fr)`;
+}
+function CIIDrawFlowPaths(){
+  const canvas = document.querySelector(".flow-canvas");
+  const svg = document.getElementById("flowPaths");
+  if(!canvas || !svg) return;
+  const cr = canvas.getBoundingClientRect();
+  if(!cr.width) return;
+  const cw = Math.max(canvas.scrollWidth, cr.width);
+  const ch = Math.max(canvas.scrollHeight, cr.height);
+  svg.setAttribute("width", cw); svg.setAttribute("height", ch);
+  svg.setAttribute("viewBox", `0 0 ${cw} ${ch}`);
+  svg.style.width = cw + "px"; svg.style.height = ch + "px";
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  const nodes = canvas.querySelectorAll(".flow-node");
+  const ns = "http://www.w3.org/2000/svg";
+  function geom(el){
+    const r = el.getBoundingClientRect();
+    return { left:r.left-cr.left+canvas.scrollLeft, right:r.right-cr.left+canvas.scrollLeft,
+             top:r.top-cr.top+canvas.scrollTop, bottom:r.bottom-cr.top+canvas.scrollTop,
+             cx:(r.left+r.right)/2-cr.left+canvas.scrollLeft, cy:(r.top+r.bottom)/2-cr.top+canvas.scrollTop };
+  }
+  function curve(a,b){
+    if(Math.abs(b.cy-a.cy) < 12){
+      const ltr = b.cx > a.cx;
+      const sx = ltr ? a.right : a.left;
+      const ex = ltr ? b.left : b.right;
+      return `M ${sx} ${a.cy} L ${ex} ${b.cy}`;
+    }
+    const sx=a.cx, sy=a.bottom, ex=b.cx, ey=b.top;
+    const mid=(sy+ey)/2;
+    return `M ${sx} ${sy} C ${sx} ${mid}, ${ex} ${mid}, ${ex} ${ey}`;
+  }
+  for(let i = 0; i < nodes.length-1; i++){
+    const src = nodes[i];
+    const dst = nodes[i+1];
+    if(!src || !dst) continue;
+    const a = geom(src), b = geom(dst);
+    const path = document.createElementNS(ns, "path");
+    path.setAttribute("d", curve(a,b));
+    path.setAttribute("class", "flow-path" + (i < STATE.flow.idx ? " done" : (i === STATE.flow.idx ? " active" : "")));
+    svg.appendChild(path);
+  }
+}
+function CIIRenderFlow(){
+  const nodes = document.querySelectorAll(".flow-canvas .flow-node");
+  nodes.forEach((n,i) => {
+    n.classList.remove("active","done");
+    if(i < STATE.flow.idx) n.classList.add("done");
+    else if(i === STATE.flow.idx) n.classList.add("active");
+  });
+  const step = CII_FLOW_STEPS[STATE.flow.idx];
+  document.getElementById("flowStepLabel").textContent = `Stage ${STATE.flow.idx+1} of ${CII_FLOW_STEPS.length}`;
+  document.getElementById("flowStepText").textContent = step.narration;
+  document.getElementById("flowProgressFill").style.width = ((STATE.flow.idx+1)/CII_FLOW_STEPS.length*100) + "%";
+  CIIDrawFlowPaths();
+}
+function CIIOpenFlow(){
+  STATE.flow.open = true; STATE.flow.idx = 0; STATE.flow.epoch++;
+  document.getElementById("flowModal").classList.add("open");
+  document.getElementById("flowModal").setAttribute("aria-hidden","false");
+  CIIBuildFlowNodes();
+  setTimeout(() => { CIIRenderFlow(); CIIPlayFlowNarration(); }, 100);
+}
+function CIICloseFlow(){
+  STATE.flow.open = false; STATE.flow.epoch++;
+  if(STATE.flow.audio){ try{STATE.flow.audio.pause();}catch(e){} STATE.flow.audio = null; }
+  try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}
+  document.getElementById("flowModal").classList.remove("open");
+  document.getElementById("flowModal").setAttribute("aria-hidden","true");
+}
+function CIIPlayFlowNarration(){
+  const myEpoch = STATE.flow.epoch;
+  const step = CII_FLOW_STEPS[STATE.flow.idx];
+  if(!step) return;
+  try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){}
+  if(STATE.flow.audio){ try{STATE.flow.audio.pause();}catch(e){} STATE.flow.audio = null; }
+  const key = window.__EL_KEY__;
+  if(key){
+    synthEleven(step.narration).then(url => {
+      if(STATE.flow.epoch !== myEpoch || !STATE.flow.open){ try{URL.revokeObjectURL(url);}catch(e){} return; }
+      const a = new Audio(url); STATE.flow.audio = a;
+      a.addEventListener("ended", () => {
+        try{URL.revokeObjectURL(url);}catch(e){}
+        if(STATE.flow.epoch === myEpoch && STATE.flow.open && !STATE.flow.paused && STATE.flow.idx < CII_FLOW_STEPS.length-1){
+          STATE.flow.idx++; CIIRenderFlow(); CIIPlayFlowNarration();
+        }
+      }, {once:true});
+      a.addEventListener("error", () => { try{URL.revokeObjectURL(url);}catch(e){} CIIFlowFallback(step, myEpoch); }, {once:true});
+      a.play().catch(() => { try{URL.revokeObjectURL(url);}catch(e){} CIIFlowFallback(step, myEpoch); });
+    }).catch(() => CIIFlowFallback(step, myEpoch));
+  } else {
+    CIIFlowFallback(step, myEpoch);
+  }
+}
+function CIIFlowFallback(step, myEpoch){
+  if(!("speechSynthesis" in window)){
+    setTimeout(() => {
+      if(STATE.flow.epoch === myEpoch && STATE.flow.open && !STATE.flow.paused && STATE.flow.idx < CII_FLOW_STEPS.length-1){
+        STATE.flow.idx++; CIIRenderFlow(); CIIPlayFlowNarration();
+      }
+    }, Math.max(4000, step.narration.length*55));
+    return;
+  }
+  if(!STATE.voice.picked) STATE.voice.picked = pickVoice();
+  const u = new SpeechSynthesisUtterance(step.narration);
+  if(STATE.voice.picked){ u.voice = STATE.voice.picked; u.lang = STATE.voice.picked.lang || "en-US"; } else { u.lang = "en-US"; }
+  u.rate = 0.98; u.pitch = 1.0;
+  u.onend = () => {
+    if(STATE.flow.epoch === myEpoch && STATE.flow.open && !STATE.flow.paused && STATE.flow.idx < CII_FLOW_STEPS.length-1){
+      STATE.flow.idx++; CIIRenderFlow(); CIIPlayFlowNarration();
+    }
+  };
+  try{ window.speechSynthesis.speak(u); }catch(e){}
+}
+
+document.getElementById("flowBtn").addEventListener("click", CIIOpenFlow);
+document.getElementById("flowPrev").addEventListener("click", () => {
+  if(STATE.flow.idx > 0){ STATE.flow.epoch++; STATE.flow.idx--; CIIRenderFlow(); CIIPlayFlowNarration(); }
+});
+document.getElementById("flowNext").addEventListener("click", () => {
+  if(STATE.flow.idx < CII_FLOW_STEPS.length-1){ STATE.flow.epoch++; STATE.flow.idx++; CIIRenderFlow(); CIIPlayFlowNarration(); }
+});
+document.getElementById("flowPlay").addEventListener("click", () => {
+  STATE.flow.paused = !STATE.flow.paused;
+  document.getElementById("flowPlay").textContent = STATE.flow.paused ? "\u25B6 Play" : "\u23F8 Pause";
+  if(!STATE.flow.paused){ CIIPlayFlowNarration(); }
+  else { if(STATE.flow.audio){ try{STATE.flow.audio.pause();}catch(e){} } try{ if(window.speechSynthesis) window.speechSynthesis.cancel(); }catch(e){} }
+});
+window.addEventListener("resize", () => { if(STATE.flow.open) CIIDrawFlowPaths(); });
+
+</script>
+</body>
+</html>

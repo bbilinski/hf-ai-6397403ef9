@@ -1,0 +1,1239 @@
+<!doctype html>
+
+
+<html lang="en">
+<head>
+  
+  
+  
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hunter Fan — Engineering Change Impact Console</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ids-color-background-default:#ffffff;
+  --ids-color-neutral-10:#f5f5f5;
+  --ids-color-neutral-20:#e0e0e1;
+  --ids-color-neutral-30:#c5c5c9;
+  --ids-color-neutral-90:#28282a;
+  --ids-color-border-weak:#bbbbbf;
+  --ids-color-border-weaker:#e0e0e1;
+  --ids-color-border-strong:#525257;
+  --ids-color-fg:#161618;
+  --ids-color-fg-secondary:#3b3b3f;
+  --ids-color-fg-tertiary:#6f6f76;
+  --ids-color-action:#0072ed;
+  --ids-color-action-stronger:#0066d4;
+  --ids-color-action-weakest:#e6f1fd;
+  --ids-color-success:#2ac371;
+  --ids-color-success-weak:#ebf9f1;
+  --ids-color-success-stronger:#156138;
+  --ids-color-warning:#f98300;
+  --ids-color-warning-weak:#fef2e5;
+  --ids-color-warning-stronger:#a14100;
+  --ids-color-error:#da1217;
+  --ids-color-error-weak:#fbe7e8;
+  --ids-color-error-stronger:#c31014;
+  --ids-color-info:#0072ed;
+  --ids-color-info-weak:#e6f1fd;
+  --ids-ai-flat:#460daf;
+  --ids-ai-strong:#3b1470;
+  --ids-color-purple-weak:#f1ebfc;
+  --ids-color-teal:#39a9aa;
+  --ids-dv-01:#0054b1;
+  --ids-dv-02:#40bdbe;
+  --ids-dv-03:#7928e1;
+  --ids-dv-04:#bbbbbf;
+  --accent:#0072ed;
+  --accent-2:#0066d4;
+  --red:#da1217;
+  --amber:#f98300;
+  --green:#2ac371;
+  --ai:#460daf;
+  --ai-strong:#3b1470;
+  --text:#161618;
+  --text-dim:#3b3b3f;
+  --text-muted:#6f6f76;
+  --border:#e0e0e1;
+  --panel:#ffffff;
+  --panel-2:#f5f5f5;
+  --bg:#f5f5f5;
+  --tile-bg:#ffffff;
+  --tile-border:#e0e0e1;
+  --accent-soft:#e6f1fd;
+  --overlay-bg:rgba(255,255,255,.96);
+  --overlay-border:#e0e0e1;
+  --caption-bg:rgba(22,22,24,.94);
+  --caption-text:#ffffff;
+  --shadow-lg:0 10px 30px rgba(0,0,0,.18);
+  --r-xs:6px;
+  --t-sm:13px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,select,textarea{font-family:inherit}
+body{font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;font-size:16px;color:var(--ids-color-fg);background:var(--ids-color-neutral-10);line-height:1.25;-webkit-font-smoothing:antialiased;}
+
+
+.ids-masthead{height:40px;background:#000000;display:flex;align-items:center;padding-inline:8px;gap:8px;position:sticky;top:0;z-index:200}
+.mh-start{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.mh-logo-btn,.mh-icon-btn{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;border-radius:4px;color:rgb(255 255 255 / 0.8);padding:0}
+.mh-icon-btn:hover{background:#28282a;color:#ffffff}
+.mh-logo-btn:has(img:not(.mh-logo-default), svg) .mh-logo-default{display:none}
+.mh-tabs{display:flex;align-items:center;flex:1;min-width:0;gap:4px}
+.mh-tab{display:inline-flex;align-items:center;gap:8px;height:32px;padding-inline:16px;background:#28282a;border-radius:4px;color:#ffffff;font-size:14px;font-weight:600;max-width:520px}
+.mh-tab-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mh-tab-divider{width:1px;height:18px;background:rgba(255,255,255,0.3);flex-shrink:0}
+.mh-tab-close{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;color:#ffffff;padding:0}
+.mh-end{display:flex;align-items:center;flex-shrink:0;gap:4px;margin-left:auto}
+
+.app-actions{max-width:2240px;margin:0 auto;padding:20px 48px 12px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.app-title{font-size:22px;font-weight:600;color:var(--ids-color-fg)}
+.app-subtitle{font-size:13px;color:var(--ids-color-fg-tertiary);margin-top:2px}
+.app-actions-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.flow-btn-launch{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:var(--r-xs);font-size:var(--t-sm);font-weight:500;line-height:1;background:var(--accent);color:#fff;border:1px solid var(--accent);cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0}
+.flow-btn-launch:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.flow-btn-launch>svg{flex-shrink:0;width:14px;height:14px}
+
+
+.console{max-width:1600px;margin:0 auto;padding:0 48px 48px}
+
+
+.steptabs{display:flex;background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px}
+.steptab{flex:1;display:flex;align-items:center;gap:10px;padding:14px 18px;background:#fff;border:0;border-right:1px solid var(--border);cursor:pointer;font-family:inherit;text-align:left;font-size:13px;color:var(--text-dim)}
+.steptab:last-child{border-right:0}
+.steptab:hover{background:var(--ids-color-neutral-10)}
+.steptab.active{background:var(--ids-color-action-weakest);color:var(--ids-color-action);font-weight:600}
+.steptab-num{width:26px;height:26px;border-radius:50%;background:var(--ids-color-neutral-20);color:var(--text-dim);font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.steptab.active .steptab-num{background:var(--ids-color-action);color:#fff}
+.steptab.done .steptab-num{background:var(--green);color:#fff}
+.steptab-labels{display:flex;flex-direction:column;min-width:0}
+.steptab-name{font-weight:600;line-height:1.2;font-size:14px;color:var(--text)}
+.steptab.active .steptab-name{color:var(--ids-color-action)}
+.steptab-sub{font-size:11px;color:var(--text-muted);line-height:1.3;margin-top:2px}
+
+.tabpane{display:none}
+.tabpane.active{display:block}
+
+
+.card{background:#fff;border:1px solid transparent;border-radius:8px;box-shadow:0 0 8px rgba(0,0,0,.08)}
+.card-pad{padding:16px}
+.card-head{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card-title{font-size:16px;font-weight:600;color:var(--text)}
+.card-sub{font-size:13px;color:var(--text-muted);margin-top:2px}
+
+
+.hero{background:linear-gradient(90deg,#fbe7e8 0%,#fef2e5 100%);border:1px solid var(--ids-color-error-weak);border-radius:10px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:16px}
+.hero-left{display:flex;align-items:center;gap:16px;min-width:0}
+.hero-icon{width:44px;height:44px;border-radius:50%;background:#fff;color:var(--red);display:inline-flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:1px solid var(--ids-color-error-weak)}
+.hero-text{min-width:0}
+.hero-eye{font-size:11px;color:var(--ids-color-error-stronger);text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.hero-head{font-size:18px;font-weight:700;color:var(--text);margin-top:2px}
+.hero-right{display:flex;gap:8px;flex-shrink:0}
+
+
+.countstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.countcard{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+.countcard-lbl{font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;font-weight:600}
+.countcard-val{font-size:28px;font-weight:700;color:var(--text);line-height:1.1;margin-top:4px}
+.countcard-sub{font-size:12px;color:var(--text-muted);margin-top:2px}
+
+
+.levers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.lever{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:8px;position:relative}
+.lever.blocker{border-color:var(--ids-color-error-weak);box-shadow:0 0 0 2px var(--ids-color-error-weak)}
+.lever-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.lever-name{font-size:13px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.3px}
+.lever-choice{font-size:13px;color:var(--text-dim);line-height:1.4}
+.lever-fig{font-size:24px;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;line-height:1.1}
+.lever-counts{font-size:12px;color:var(--text-muted)}
+.lever-actions{display:flex;gap:6px;margin-top:auto;flex-wrap:wrap}
+
+
+.pill{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 9px;border-radius:11px;font-size:11px;font-weight:600;white-space:nowrap}
+.pill.red{background:var(--ids-color-error-weak);color:var(--ids-color-error-stronger)}
+.pill.amber{background:var(--ids-color-warning-weak);color:var(--ids-color-warning-stronger)}
+.pill.green{background:var(--ids-color-success-weak);color:var(--ids-color-success-stronger)}
+.pill.blue{background:var(--ids-color-action-weakest);color:var(--ids-color-action-stronger)}
+.pill.grey{background:var(--ids-color-neutral-20);color:var(--text-dim)}
+.pill.dot::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:28px;padding:0 10px;border-radius:6px;border:1px solid var(--border);background:#fff;color:var(--text-dim);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
+.btn:hover{background:var(--ids-color-neutral-10)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.btn.big{height:36px;padding:0 18px;font-size:14px}
+.btn.link{border:0;background:none;color:var(--accent);padding:0;height:auto}
+.btn.link:hover{text-decoration:underline;background:none}
+
+
+.tbl{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+.tbl th{text-align:left;padding:10px 10px;border-bottom:1px solid var(--border);font-weight:600;color:var(--text);background:#fff;font-size:12px;text-transform:uppercase;letter-spacing:.3px;color:var(--text-muted);white-space:nowrap}
+.tbl td{padding:10px 10px;border-bottom:1px solid var(--border);font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbl td.r,.tbl th.r{text-align:right;font-variant-numeric:tabular-nums}
+.tbl tr.clickable{cursor:pointer}
+.tbl tr.clickable:hover td{background:var(--ids-color-neutral-10)}
+.tbl td.wrap{white-space:normal}
+
+
+.cellbar{position:relative;display:flex;align-items:center;gap:8px}
+.cellbar-track{flex:1;height:6px;background:var(--ids-color-neutral-10);border-radius:3px;overflow:hidden;min-width:40px}
+.cellbar-fill{height:100%;background:var(--ids-dv-01);border-radius:3px}
+.cellbar-fill.red{background:var(--red)}
+.cellbar-fill.amber{background:var(--amber)}
+.cellbar-fill.green{background:var(--green)}
+.cellbar-val{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;flex-shrink:0;min-width:60px;text-align:right}
+
+
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.twocol .card{display:flex;flex-direction:column}
+.twocol .card-head{flex-shrink:0}
+.twocol .tbl-wrap{padding:0 16px 16px}
+.topline{padding:10px 16px;background:var(--ids-color-neutral-10);font-size:12px;color:var(--text-dim);display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
+
+
+.openin{color:var(--accent);font-size:11px;font-weight:600;text-decoration:none;white-space:nowrap}
+.openin:hover{text-decoration:underline}
+
+
+.queue-tbl td.ecn{font-weight:600;color:var(--text)}
+
+
+.approve-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.person-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;gap:14px;align-items:center}
+.person-ava{width:48px;height:48px;border-radius:50%;background:var(--ids-color-action-weakest);color:var(--ids-color-action);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
+.person-info{min-width:0}
+.person-role{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;font-weight:600}
+.person-name{font-size:16px;font-weight:600;color:var(--text);margin-top:2px}
+.person-job{font-size:12px;color:var(--text-dim);margin-top:2px}
+.approve-what{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px}
+.approve-what-eye{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;font-weight:600}
+.approve-what-main{font-size:20px;font-weight:600;color:var(--text);margin-top:6px;line-height:1.3}
+.approve-cta{display:flex;justify-content:center;margin-bottom:20px}
+
+
+.route-list{display:flex;flex-direction:column;gap:8px}
+.route-step{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--border);border-radius:6px;background:#fff}
+.route-step-num{width:26px;height:26px;border-radius:50%;background:var(--ids-color-action-weakest);color:var(--ids-color-action);font-weight:700;font-size:12px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.route-step-body{flex:1;min-width:0}
+.route-step-name{font-size:13px;font-weight:600;color:var(--text)}
+.route-step-sub{font-size:12px;color:var(--text-muted);margin-top:2px}
+
+
+.change-picker{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.change-chip{background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;text-align:left;font-family:inherit}
+.change-chip:hover{border-color:var(--accent)}
+.change-chip.active{border-color:var(--accent);background:var(--ids-color-action-weakest)}
+.change-chip-id{font-size:12px;font-weight:700;color:var(--text)}
+.change-chip-item{font-size:12px;color:var(--text-dim);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.change-chip-state{font-size:11px;color:var(--text-muted);margin-top:4px}
+
+.workflow-diagram{background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px}
+.wf-row{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap}
+.wf-step{flex:1;min-width:140px;background:#f9f9fa;border:1px solid var(--border);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;position:relative}
+.wf-step.done{background:var(--ids-color-success-weak);border-color:var(--green)}
+.wf-step.now{background:var(--ids-color-action-weakest);border-color:var(--accent)}
+.wf-step-head{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.wf-step-name{font-size:12px;font-weight:700;color:var(--text)}
+.wf-step-mark{font-size:11px;font-weight:600}
+.wf-step-mark.done{color:var(--ids-color-success-stronger)}
+.wf-step-mark.now{color:var(--ids-color-action-stronger)}
+.wf-step-mark.wait{color:var(--text-muted)}
+.wf-step-who{font-size:11px;color:var(--text-dim)}
+.wf-step-time{font-size:11px;color:var(--text-muted)}
+.wf-parallel{display:flex;flex-direction:column;gap:8px;flex:1;min-width:140px}
+.wf-parallel .wf-step{flex:0 0 auto}
+.wf-parallel-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;text-align:center;font-weight:600}
+.wf-arrow{display:flex;align-items:center;color:var(--text-muted);font-size:14px;flex-shrink:0}
+.wf-caption{margin-top:14px;padding:12px 14px;background:var(--ids-color-action-weakest);border-radius:6px;font-size:13px;color:var(--text);line-height:1.5}
+
+
+.wgt-modal-overlay{position:fixed;inset:0;z-index:250;display:none;align-items:center;justify-content:center}
+.wgt-modal-overlay.open{display:flex}
+.wgt-modal-backdrop{position:absolute;inset:0;background:rgba(11,15,24,.72);backdrop-filter:blur(6px)}
+.wgt-modal-dialog{position:relative;background:#fff;color:var(--text);border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.4);width:min(1000px,90vw);max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
+.mdl-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-shrink:0}
+.mdl-title{font-size:16px;font-weight:700}
+.mdl-sub{font-size:12px;color:var(--text-muted);margin-top:3px}
+.mdl-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:#fff;color:var(--text-dim);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mdl-close:hover{background:var(--ids-color-neutral-10)}
+.mdl-body{flex:1;overflow:auto;padding:20px}
+.mdl-footer{padding:12px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-shrink:0;background:#f9f9fa}
+.mdl-headline{font-size:28px;font-weight:700;color:var(--text);margin-bottom:4px}
+.mdl-headline-sub{font-size:13px;color:var(--text-muted);margin-bottom:16px}
+.mdl-chart{background:#f9f9fa;border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px}
+
+
+.smp-launcher{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:#fff;border:1px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,.15);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;z-index:180}
+.smp-launcher:hover{box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.smp-panel{position:fixed;top:80px;right:24px;width:380px;height:520px;min-width:300px;min-height:360px;max-width:90vw;max-height:85vh;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.2);z-index:190;display:none;flex-direction:column;overflow:hidden;resize:both}
+.smp-panel.open{display:flex}
+.smp-toolbar{height:44px;background:#f5f5f5;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0;cursor:move;user-select:none}
+.smp-toolbar-title{font-size:13px;font-weight:600;color:var(--text);flex:1}
+.smp-close{width:26px;height:26px;border:0;background:none;cursor:pointer;border-radius:4px;color:var(--text-dim);display:inline-flex;align-items:center;justify-content:center;font-size:16px}
+.smp-close:hover{background:var(--ids-color-neutral-20)}
+.smp-content{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+.smp-onboarding{display:flex;flex-direction:column;align-items:center;padding:16px 0;gap:10px}
+.smp-onb-icon{width:48px;height:48px;border-radius:50%;background:var(--ids-color-purple-weak);color:var(--ids-ai-flat);display:inline-flex;align-items:center;justify-content:center;font-size:22px}
+.smp-onb-title{font-size:15px;font-weight:600;text-align:center}
+.smp-message{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
+.smp-message.user{align-items:flex-end}
+.smp-bubble{max-width:90%;padding:9px 11px;border-radius:10px;font-size:13px;line-height:1.45}
+.smp-message.user .smp-bubble{background:var(--ids-color-action-weakest);color:var(--text)}
+.smp-message.ai .smp-bubble{background:var(--ids-color-neutral-10);color:var(--text)}
+.smp-chip{padding:7px 11px;background:#fff;border:1px solid var(--border);border-radius:14px;font-size:12px;cursor:pointer;text-align:left;font-family:inherit;color:var(--text)}
+.smp-chip:hover{background:var(--ids-color-neutral-10);border-color:var(--accent)}
+.smp-chips{display:flex;flex-direction:column;gap:6px}
+.smp-input-wrap{border-top:1px solid var(--border);padding:10px 12px;flex-shrink:0}
+.smp-input{width:100%;min-height:48px;padding:7px 10px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:13px;resize:none}
+.smp-input-row{display:flex;gap:8px;align-items:center;margin-top:6px}
+.smp-send{padding:6px 12px;background:var(--accent);color:#fff;border:0;border-radius:5px;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600}
+.smp-mini-chart{background:#f9f9fa;border:1px solid var(--border);border-radius:6px;padding:10px;margin-top:4px}
+
+
+.flow-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center}
+.flow-modal.open{display:flex}
+.flow-backdrop{position:absolute;inset:0;background:rgba(11,15,24,.72);backdrop-filter:blur(6px)}
+.flow-dialog{position:relative;background:#fff;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.4);width:min(900px,92vw);max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
+.flow-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-shrink:0}
+.flow-title{font-size:18px;font-weight:700;margin:0}
+.flow-sub{font-size:12px;color:var(--text-muted);margin-top:3px}
+.flow-body{flex:1;overflow:auto;padding:22px}
+.flow-step{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.flow-step:last-child{border-bottom:0}
+.flow-step-num{width:30px;height:30px;border-radius:50%;background:var(--ids-color-action-weakest);color:var(--accent);font-weight:700;font-size:13px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.flow-step-txt{flex:1}
+.flow-step-name{font-size:14px;font-weight:600;color:var(--text)}
+.flow-step-desc{font-size:13px;color:var(--text-dim);margin-top:4px;line-height:1.5}
+
+.audible{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+@media (max-width:1200px){
+  .levers{grid-template-columns:repeat(2,1fr)}
+  .countstrip{grid-template-columns:repeat(2,1fr)}
+  .twocol{grid-template-columns:1fr}
+  .change-picker{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+
+</head>
+<body>
+
+
+<header class="ids-masthead" role="banner">
+  <div class="mh-start">
+    <button class="mh-logo-btn" type="button" aria-label="Infor home"><img class="mh-logo-default" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAdCAYAAABWk2cPAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAHaADAAQAAAABAAAAHQAAAADeexZRAAABc0lEQVRIDe1WsU7DMBA9O+4ACpBIzG1+oIIPaKXyCYzd+ATWbnTrCH8AU2eWrukn8Ae0/QDqShkqNbY5WyRKJ+ykaZaclPic3N3zPfusI/An2yAI5OHwBJTeZd9ONirFKcBnmCRLHZPoFwJGUogYlIr0vC5B4BcEnhrQH9+PFcCoLrBiXAnw4OkslZSvxR8uOgkCgP3exSWkkKaRi0fRlg2HcDWfFz/9qyPFN/iUk8vZDK4XC6DdrnMA5upBez2Tndfvu7rm9s6ZdgYDqAKokZ1B8+VWUMjW90d4jOMKMZxcsUaXjWTqfJA6WCYXk0mendztIBmP87mN4gyqS0TXZyZys8lU67EReltQ6/0pY9jSW4Y1a5+WXmuqyhg2Qi/DtpMDMU2h1aL1BS/X69y2zN1LTJOdpt8YBdu6Mwgh7zTknGPP+3EGOANBPW9q9vQ2SZ4R+K1mYK4IecQkV0ebqRtvIcQ9gp+UaqXUijH2pVnVif0Cs8ZiV8EfxU8AAAAASUVORK5CYII=" width="28" height="28" alt="" aria-hidden="true"></button>
+    <button class="mh-icon-btn" type="button" aria-label="Application menu">
+      <svg viewBox="0 0 18 18" width="18" height="18" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.5C9.82843 5.5 10.5 4.82843 10.5 4C10.5 3.17157 9.82843 2.5 9 2.5C8.17157 2.5 7.5 3.17157 7.5 4C7.5 4.82843 8.17157 5.5 9 5.5ZM10.5 9C10.5 9.82843 9.82843 10.5 9 10.5C8.17157 10.5 7.5 9.82843 7.5 9C7.5 8.17157 8.17157 7.5 9 7.5C9.82843 7.5 10.5 8.17157 10.5 9ZM10.5 14C10.5 14.8284 9.82843 15.5 9 15.5C8.17157 15.5 7.5 14.8284 7.5 14C7.5 13.1716 8.17157 12.5 9 12.5C9.82843 12.5 10.5 13.1716 10.5 14ZM15.5 9C15.5 9.82843 14.8284 10.5 14 10.5C13.1716 10.5 12.5 9.82843 12.5 9C12.5 8.17157 13.1716 7.5 14 7.5C14.8284 7.5 15.5 8.17157 15.5 9ZM14 15.5C14.8284 15.5 15.5 14.8284 15.5 14C15.5 13.1716 14.8284 12.5 14 12.5C13.1716 12.5 12.5 13.1716 12.5 14C12.5 14.8284 13.1716 15.5 14 15.5ZM15.5 4C15.5 4.82843 14.8284 5.5 14 5.5C13.1716 5.5 12.5 4.82843 12.5 4C12.5 3.17157 13.1716 2.5 14 2.5C14.8284 2.5 15.5 3.17157 15.5 4ZM4 10.5C4.82843 10.5 5.5 9.82843 5.5 9C5.5 8.17157 4.82843 7.5 4 7.5C3.17157 7.5 2.5 8.17157 2.5 9C2.5 9.82843 3.17157 10.5 4 10.5ZM5.5 14C5.5 14.8284 4.82843 15.5 4 15.5C3.17157 15.5 2.5 14.8284 2.5 14C2.5 13.1716 3.17157 12.5 4 12.5C4.82843 12.5 5.5 13.1716 5.5 14ZM4 5.5C4.82843 5.5 5.5 4.82843 5.5 4C5.5 3.17157 4.82843 2.5 4 2.5C3.17157 2.5 2.5 3.17157 2.5 4C2.5 4.82843 3.17157 5.5 4 5.5Z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="mh-tabs" role="tablist">
+    <div class="mh-tab" role="tab" aria-selected="true" tabindex="0">
+      <span class="mh-tab-label">Engineering Change Impact Console</span>
+      <span class="mh-tab-divider" aria-hidden="true"></span>
+      <button class="mh-tab-close" type="button" aria-label="Close tab">
+        <svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path d="M9 10.06L13.22 14.28L14.28 13.22L10.06 9L14.28 4.78L13.22 3.72L9 7.94L4.78 3.72L3.72 4.78L7.94 9L3.72 13.22L4.78 14.28L9 10.06Z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mh-end">
+    <button class="mh-icon-btn" type="button" aria-label="Search"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 8C3.5 5.51 5.51 3.5 8 3.5C10.49 3.5 12.5 5.51 12.5 8C12.5 10.49 10.49 12.5 8 12.5C5.51 12.5 3.5 10.49 3.5 8ZM8 2C4.69 2 2 4.69 2 8C2 11.31 4.69 14 8 14C9.39 14 10.66 13.53 11.68 12.74L14.97 16.03L16.03 14.97L12.74 11.68C13.53 10.66 14 9.39 14 8C14 4.69 11.31 2 8 2Z" fill="currentColor"/></svg></button>
+    <button class="mh-icon-btn" type="button" aria-label="User profile"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 3C5.69 3 3 5.69 3 9C3 10.34 3.44 11.58 4.19 12.58C4.87 11.63 5.99 11 7.25 11H10.75C12.01 11 13.13 11.63 13.81 12.58C14.56 11.58 15 10.34 15 9C15 5.69 12.31 3 9 3ZM1.5 9C1.5 4.86 4.86 1.5 9 1.5C13.14 1.5 16.5 4.86 16.5 9C16.5 13.14 13.14 16.5 9 16.5C4.86 16.5 1.5 13.14 1.5 9ZM9 4.5C7.48 4.5 6.25 5.73 6.25 7.25C6.25 8.77 7.48 10 9 10C10.52 10 11.75 8.77 11.75 7.25C11.75 5.73 10.52 4.5 9 4.5Z" fill="currentColor"/></svg></button>
+  </div>
+</header>
+
+
+<div class="app-actions">
+  <div>
+    <div class="app-title">Engineering Change Impact Console</div>
+    <div class="app-subtitle">Infor PLM for Discrete · Industrial LN · Dana Whitfield, VP Product Engineering</div>
+  </div>
+  <div class="app-actions-right">
+    <button class="flow-btn-launch" type="button" id="flowBtn" aria-label="How it works">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Flow</span>
+    </button>
+  </div>
+</div>
+
+<main class="console">
+  <h1 class="audible">Engineering Change Impact Console</h1>
+
+  
+  <div class="steptabs" role="tablist">
+    <button class="steptab active" data-tab="queue" onclick="selectTab('queue')">
+      <span class="steptab-num">1</span>
+      <span class="steptab-labels"><span class="steptab-name">Change queue</span><span class="steptab-sub">Open changes awaiting review</span></span>
+    </button>
+    <button class="steptab" data-tab="impact" onclick="selectTab('impact')">
+      <span class="steptab-num">2</span>
+      <span class="steptab-labels"><span class="steptab-name">Impact</span><span class="steptab-sub">Four levers, what is at stake</span></span>
+    </button>
+    <button class="steptab" data-tab="approve" onclick="selectTab('approve')">
+      <span class="steptab-num">3</span>
+      <span class="steptab-labels"><span class="steptab-name">Approve and launch</span><span class="steptab-sub">You decide, then it runs</span></span>
+    </button>
+    <button class="steptab" data-tab="status" onclick="selectTab('status')">
+      <span class="steptab-num">4</span>
+      <span class="steptab-labels"><span class="steptab-name">Workflow status</span><span class="steptab-sub">Where the launched route stands</span></span>
+    </button>
+  </div>
+
+  
+  <section class="tabpane active" id="pane-queue">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Open engineering changes</div>
+          <div class="card-sub">Six changes created and not launched. Click a row to open it on Impact.</div>
+        </div>
+      </div>
+      <div style="padding:0 16px 16px">
+        <table class="tbl queue-tbl" aria-label="Change queue">
+          <colgroup><col style="width:14%"><col style="width:22%"><col style="width:16%"><col style="width:14%"><col style="width:10%"><col style="width:12%"><col style="width:12%"></colgroup>
+          <thead>
+            <tr>
+              <th>ECN</th>
+              <th>Item on hold</th>
+              <th>Originator</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th class="r">Order lines</th>
+              <th class="r">Sales lines</th>
+            </tr>
+          </thead>
+          <tbody id="queueBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="tabpane" id="pane-impact">
+
+    
+    <div class="hero">
+      <div class="hero-left">
+        <div class="hero-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 20h20L12 2z" stroke-linejoin="round"/><path d="M12 10v5M12 17v.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="hero-text">
+          <div class="hero-eye">On hold</div>
+          <div class="hero-head">Hold ECN-2041: 27 open orders and 38 customers are blockers</div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <button class="btn big primary" type="button" onclick="selectTab('approve')">Accept and launch PLM workflow</button>
+      </div>
+    </div>
+
+    
+    <div class="countstrip">
+      <div class="countcard">
+        <div class="countcard-lbl">Open production orders</div>
+        <div class="countcard-val">27</div>
+        <div class="countcard-sub">15 not started, 12 in process</div>
+      </div>
+      <div class="countcard">
+        <div class="countcard-lbl">Parent items</div>
+        <div class="countcard-val">3</div>
+        <div class="countcard-sub">Aria 44" matte black, brushed nickel, fresh white</div>
+      </div>
+      <div class="countcard">
+        <div class="countcard-lbl">Work centers</div>
+        <div class="countcard-val">6</div>
+        <div class="countcard-sub">Motor assy, housing paint, final assy</div>
+      </div>
+      <div class="countcard">
+        <div class="countcard-lbl">Open sales order lines</div>
+        <div class="countcard-val">247</div>
+        <div class="countcard-sub">38 customers, top 3 hold 84%</div>
+      </div>
+    </div>
+
+    
+    <div class="levers">
+      <div class="lever">
+        <div class="lever-head">
+          <div class="lever-name">Material committed</div>
+          <span class="pill amber dot">Watch</span>
+        </div>
+        <div class="lever-choice">Carry it, or re-plan the open orders</div>
+        <div class="lever-fig">$4,700</div>
+        <div class="lever-counts">27 open order lines on MH-4410 rev C</div>
+        <div class="lever-actions">
+          <button class="btn primary" onclick="selectTab('approve')">Approve</button>
+          <button class="btn" onclick="openPLM('MH-4410')">Open in PLM</button>
+          <button class="btn" onclick="showLeverDetail('material')">Details</button>
+        </div>
+      </div>
+
+      <div class="lever">
+        <div class="lever-head">
+          <div class="lever-name">Stock exposure</div>
+          <span class="pill green dot">Ready</span>
+        </div>
+        <div class="lever-choice">Use it up first, or write it off</div>
+        <div class="lever-fig">$25,000</div>
+        <div class="lever-counts">628 on hand across 14 warehouses</div>
+        <div class="lever-actions">
+          <button class="btn primary" onclick="selectTab('approve')">Approve</button>
+          <button class="btn" onclick="openPLM('MH-4410')">Open in PLM</button>
+          <button class="btn" onclick="showLeverDetail('stock')">Details</button>
+        </div>
+      </div>
+
+      <div class="lever blocker">
+        <div class="lever-head">
+          <div class="lever-name">Work in the plant</div>
+          <span class="pill red dot">Blocker</span>
+        </div>
+        <div class="lever-choice">Flip what has not started, split what has</div>
+        <div class="lever-fig">$85,800</div>
+        <div class="lever-counts">15 not started, 12 in process (whole orders)</div>
+        <div class="lever-actions">
+          <button class="btn primary" onclick="selectTab('approve')">Approve</button>
+          <button class="btn" onclick="openLN('tisfc001')">Open in LN</button>
+          <button class="btn" onclick="showLeverDetail('plant')">Details</button>
+        </div>
+      </div>
+
+      <div class="lever blocker">
+        <div class="lever-head">
+          <div class="lever-name">Customer commitments</div>
+          <span class="pill red dot">Blocker</span>
+        </div>
+        <div class="lever-choice">Deliver as is, or tell them first</div>
+        <div class="lever-fig">$110,700</div>
+        <div class="lever-counts">247 open lines, 38 customers</div>
+        <div class="lever-actions">
+          <button class="btn primary" onclick="selectTab('approve')">Approve</button>
+          <button class="btn" onclick="openLN('tdsls400')">Open in LN</button>
+          <button class="btn" onclick="showLeverDetail('customer')">Details</button>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="twocol">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Open production orders</div>
+            <div class="card-sub">Ranked by what is at stake</div>
+          </div>
+          <button class="btn link" onclick="showAll('orders')">Show all</button>
+        </div>
+        <div class="tbl-wrap">
+          <table class="tbl" aria-label="Open production orders">
+            <colgroup><col style="width:10%"><col style="width:23%"><col style="width:15%"><col style="width:9%"><col style="width:13%"><col style="width:30%"></colgroup>
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Makes</th>
+                <th>Status</th>
+                <th class="r">Item qty</th>
+                <th>Item material</th>
+                <th class="r">Operations</th>
+              </tr>
+            </thead>
+            <tbody id="ordersBody"></tbody>
+          </table>
+        </div>
+        <div class="topline">
+          <span>Top 5 orders are 81% of $85,800</span>
+          <button class="btn link" onclick="showAll('orders')">Show all</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Customers still to deliver to</div>
+            <div class="card-sub">Open sales lines against MH-4410 rev C</div>
+          </div>
+          <button class="btn link" onclick="showAll('customers')">Show all</button>
+        </div>
+        <div class="tbl-wrap">
+          <table class="tbl" aria-label="Customers still to deliver to">
+            <colgroup><col style="width:34%"><col style="width:14%"><col style="width:20%"><col style="width:32%"></colgroup>
+            <thead>
+              <tr>
+                <th>Sold-to</th>
+                <th class="r">Lines</th>
+                <th class="r">Left to deliver</th>
+                <th class="r">Value</th>
+              </tr>
+            </thead>
+            <tbody id="customersBody"></tbody>
+          </table>
+        </div>
+        <div class="topline">
+          <span>Top 3 are 84% of $110,700</span>
+          <button class="btn link" onclick="showAll('customers')">Show all</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="tabpane" id="pane-approve">
+
+    <div class="approve-what">
+      <div class="approve-what-eye">You are approving</div>
+      <div class="approve-what-main">ECN-2041 holds MH-4410 revision C, moving motor housing to revision D</div>
+    </div>
+
+    <div class="approve-wrap">
+      <div class="person-card">
+        <div class="person-ava">CD</div>
+        <div class="person-info">
+          <div class="person-role">Reviews the design</div>
+          <div class="person-name">Cal Draper</div>
+          <div class="person-job">Design engineer</div>
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="person-ava">OV</div>
+        <div class="person-info">
+          <div class="person-role">Approves the design</div>
+          <div class="person-name">Owen Vance</div>
+          <div class="person-job">Manufacturing engineer</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="approve-cta">
+      <button class="btn big primary" type="button" onclick="approveAndLaunch()" id="approveBtn">Approve and launch PLM workflow</button>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">What runs if you approve</div>
+          <div class="card-sub">PLM for Discrete route for MH-4410 rev D</div>
+        </div>
+      </div>
+      <div class="card-pad">
+        <div class="route-list">
+          <div class="route-step"><div class="route-step-num">1</div><div class="route-step-body"><div class="route-step-name">Check Out</div><div class="route-step-sub">Automatic</div></div></div>
+          <div class="route-step"><div class="route-step-num">2</div><div class="route-step-body"><div class="route-step-name">Review design</div><div class="route-step-sub">Cal Draper, design engineer</div></div></div>
+          <div class="route-step"><div class="route-step-num">3</div><div class="route-step-body"><div class="route-step-name">Approve design</div><div class="route-step-sub">Owen Vance, manufacturing engineer</div></div></div>
+          <div class="route-step"><div class="route-step-num">4</div><div class="route-step-body"><div class="route-step-name">Distribution and Modify, in parallel</div><div class="route-step-sub">Priya Shah (purchasing), Cal Draper</div></div></div>
+          <div class="route-step"><div class="route-step-num">5</div><div class="route-step-body"><div class="route-step-name">Check In</div><div class="route-step-sub">Automatic</div></div></div>
+          <div class="route-step"><div class="route-step-num">6</div><div class="route-step-body"><div class="route-step-name">Send to production</div><div class="route-step-sub">Owen Vance</div></div></div>
+          <div class="route-step"><div class="route-step-num">7</div><div class="route-step-body"><div class="route-step-name">Send to Document Management</div><div class="route-step-sub">Automatic</div></div></div>
+          <div class="route-step"><div class="route-step-num">8</div><div class="route-step-body"><div class="route-step-name">Launch workflow</div><div class="route-step-sub">Automatic</div></div></div>
+          <div class="route-step"><div class="route-step-num">9</div><div class="route-step-body"><div class="route-step-name">Workflow response</div><div class="route-step-sub">Dana Whitfield receives confirmation</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="tabpane" id="pane-status">
+
+    <div class="change-picker" id="changePicker"></div>
+
+    <div class="workflow-diagram">
+      <div class="card-title" style="margin-bottom:4px" id="wfTitle">ECN-2041 route</div>
+      <div class="card-sub" style="margin-bottom:16px" id="wfSub">MH-4410 revision C to revision D</div>
+
+      <div class="wf-row" id="wfRow"></div>
+
+      <div class="wf-caption" id="wfCaption"></div>
+    </div>
+
+    <div class="card" id="wfTableWrap">
+      <div class="card-head">
+        <div>
+          <div class="card-title" id="wfTblTitle">What happened</div>
+          <div class="card-sub" id="wfTblSub">Steps taken on this change</div>
+        </div>
+      </div>
+      <div style="padding:0 16px 16px">
+        <table class="tbl" id="wfTable" aria-label="Workflow log">
+          <colgroup><col style="width:28%"><col style="width:28%"><col style="width:22%"><col style="width:22%"></colgroup>
+          <thead id="wfTblHead"></thead>
+          <tbody id="wfTblBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<div class="wgt-modal-overlay" id="popout" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closePopout()"></div>
+  <div class="wgt-modal-dialog">
+    <div class="mdl-header">
+      <div>
+        <div class="mdl-title" id="popTitle">Detail</div>
+        <div class="mdl-sub" id="popSub"></div>
+      </div>
+      <button class="mdl-close" onclick="closePopout()" aria-label="Close">✕</button>
+    </div>
+    <div class="mdl-body" id="popBody"></div>
+    <div class="mdl-footer">
+      <button class="btn" onclick="closePopout()">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="flow-modal" id="flowModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="flow-backdrop" onclick="closeFlow()"></div>
+  <div class="flow-dialog">
+    <div class="flow-header">
+      <div>
+        <div class="flow-title">How this console works</div>
+        <div class="flow-sub">From queue to launched workflow in four steps</div>
+      </div>
+      <button class="mdl-close" onclick="closeFlow()" aria-label="Close">✕</button>
+    </div>
+    <div class="flow-body">
+      <div class="flow-step"><div class="flow-step-num">1</div><div class="flow-step-txt">
+        <div class="flow-step-name">Change queue</div>
+        <div class="flow-step-desc">Every open engineering change in a single list, with the item on hold, originator, type, status, and how many order and sales lines it touches. Pick one to scope the console.</div>
+      </div></div>
+      <div class="flow-step"><div class="flow-step-num">2</div><div class="flow-step-txt">
+        <div class="flow-step-name">Impact</div>
+        <div class="flow-step-desc">Four levers side by side: material committed, stock exposure, work in the plant, customer commitments. Each shows the choice in words, the dollar figure, counts, and a status. Blockers are marked.</div>
+      </div></div>
+      <div class="flow-step"><div class="flow-step-num">3</div><div class="flow-step-txt">
+        <div class="flow-step-name">Approve and launch</div>
+        <div class="flow-step-desc">Short. The change in one line, the two people in the first steps, one Approve button, and the route that will run after you approve.</div>
+      </div></div>
+      <div class="flow-step"><div class="flow-step-num">4</div><div class="flow-step-txt">
+        <div class="flow-step-name">Workflow status</div>
+        <div class="flow-step-desc">Pick a change and read where its route stands. Done, now, or not started per step, with who holds it and how long. One plain line says what is next.</div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+
+<button class="smp-launcher" aria-label="Open assistant" onclick="openSmp()">
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.7 9.84c0 2.06.84 3.92 2.19 5.27L.71 17.3h7.08c.06 0 .11 0 .17 0h.2c4.12 0 7.46-3.34 7.46-7.46 0-4.12-3.34-7.46-7.46-7.46-4.12 0-7.46 3.34-7.46 7.46zm9.01-5.2c-.14 0-.25.09-.29.22l-.49 1.89c-.04.18-.14.35-.27.49-.14.14-.31.23-.49.28l-1.88.49c-.13.03-.23.15-.23.29 0 .13.1.25.23.29l1.88.49c.19.05.35.14.49.28.13.14.24.3.28.49l.49 1.89c.04.13.15.22.29.22.14 0 .25-.09.29-.22l.49-1.89c.05-.18.14-.35.28-.49.13-.13.3-.23.49-.28l1.89-.49c.13-.03.23-.15.23-.29 0-.13-.1-.25-.23-.29l-1.89-.49c-.18-.05-.35-.14-.49-.28-.13-.13-.23-.3-.28-.49l-.49-1.89c-.04-.13-.15-.22-.29-.22z" fill="#4600AF"/></svg>
+</button>
+
+<aside class="smp-panel" id="smpPanel" aria-hidden="true">
+  <div class="smp-toolbar" id="smpToolbar">
+    <span class="smp-toolbar-title">Change Impact Assistant</span>
+    <button class="smp-close" onclick="closeSmp()" aria-label="Close">✕</button>
+  </div>
+  <div class="smp-content" id="smpContent">
+    <div class="smp-onboarding" id="smpOnboarding">
+      <div class="smp-onb-icon">✦</div>
+      <div class="smp-onb-title">Ask about this change</div>
+      <div class="smp-chips" style="width:100%;margin-top:8px">
+        <button class="smp-chip" onclick="askSmp('Which production orders carry the biggest dollar at stake?')">Which orders carry the biggest at-stake?</button>
+        <button class="smp-chip" onclick="askSmp('Show me the customer exposure as a chart')">Chart the customer exposure</button>
+        <button class="smp-chip" onclick="askSmp('How much stock would need to be written off at the latest cutover?')">Stock write-off at latest cutover?</button>
+      </div>
+    </div>
+  </div>
+  <div class="smp-input-wrap">
+    <textarea class="smp-input" id="smpInput" placeholder="Ask about ECN-2041..."></textarea>
+    <div class="smp-input-row">
+      <button class="smp-send" onclick="sendSmp()">Send</button>
+    </div>
+  </div>
+</aside>
+
+<script>
+"use strict";
+
+
+const QUEUE = [
+  {id:"ECN-2041", item:"MH-4410 rev C", desc:"Motor housing, Aria 44\" smart fan", originator:"Dana Whitfield", type:"Design", status:"Created", olines:27, slines:247, active:true},
+  {id:"ECN-2037", item:"LB-2208 rev B", desc:"LED driver board, Lumen pendant", originator:"Cal Draper", type:"Design", status:"In review", olines:9, slines:62},
+  {id:"ECN-2033", item:"BL-4418 rev F", desc:"Fan blade pack, Aria 44\"", originator:"Owen Vance", type:"Routing", status:"Created", olines:12, slines:118},
+  {id:"ECN-2029", item:"GL-1109 rev A", desc:"Glass shade, Harbor sconce", originator:"Priya Shah", type:"Vendor", status:"On hold", olines:4, slines:28},
+  {id:"ECN-2024", item:"RC-7701 rev C", desc:"Remote receiver, smart fan line", originator:"Cal Draper", type:"Design", status:"In review", olines:18, slines:94},
+  {id:"ECN-2018", item:"MT-3310 rev D", desc:"Motor shaft, Breeze 52\"", originator:"Dana Whitfield", type:"Routing", status:"Created", olines:6, slines:41}
+];
+
+const ORDERS = [
+  {order:"PR-10418", makes:"Aria 44\" matte black", status:"In process", qty:120, mat:14400, ops:6600},
+  {order:"PR-10419", makes:"Aria 44\" matte black", status:"In process", qty:96, mat:11520, ops:5280},
+  {order:"PR-10422", makes:"Aria 44\" brushed nickel", status:"In process", qty:72, mat:8640, ops:3960},
+  {order:"PR-10428", makes:"Aria 44\" fresh white", status:"Not started", qty:60, mat:7200, ops:3300},
+  {order:"PR-10431", makes:"Aria 44\" brushed nickel", status:"In process", qty:48, mat:5760, ops:2640},
+  {order:"PR-10435", makes:"Aria 44\" fresh white", status:"Not started", qty:36, mat:4320, ops:1980},
+  {order:"PR-10438", makes:"Aria 44\" matte black", status:"Not started", qty:36, mat:4320, ops:1980}
+];
+
+const CUSTOMERS = [
+  {sold:"Beacon Home Centers", lines:94, left:1890, value:52920},
+  {sold:"Lantern Hardware Co.", lines:62, left:1240, value:24800},
+  {sold:"Rivergate Builders", lines:21, left:720, value:14940},
+  {sold:"Hearth & Haven", lines:18, left:410, value:8200},
+  {sold:"Northline Supply", lines:14, left:320, value:5120},
+  {sold:"Westbrook Lighting", lines:11, left:260, value:2860},
+  {sold:"Keystone Home", lines:8, left:140, value:1120}
+];
+
+const WORKFLOW_STEPS = [
+  {id:"co", name:"Check Out", kind:"Automatic", who:"System"},
+  {id:"rd", name:"Review design", kind:"Review", who:"Cal Draper"},
+  {id:"ad", name:"Approve design", kind:"Approve", who:"Owen Vance"},
+  {id:"dm", name:"Distribution + Modify", kind:"Parallel", who:"Priya Shah, Cal Draper"},
+  {id:"ci", name:"Check In", kind:"Automatic", who:"System"},
+  {id:"sp", name:"Send to production", kind:"Hand-off", who:"Owen Vance"},
+  {id:"dm2", name:"Send to Document Management", kind:"Automatic", who:"System"},
+  {id:"lw", name:"Launch workflow", kind:"Automatic", who:"System"},
+  {id:"wr", name:"Workflow response", kind:"Notify", who:"Dana Whitfield"}
+];
+
+
+let launched = false;
+let selectedChange = "ECN-2041";
+
+
+function selectTab(id){
+  document.querySelectorAll(".steptab").forEach(t => t.classList.toggle("active", t.dataset.tab === id));
+  document.querySelectorAll(".tabpane").forEach(p => p.classList.toggle("active", p.id === "pane-"+id));
+  if(id === "status") paintStatus();
+}
+
+
+function paintQueue(){
+  const body = document.getElementById("queueBody");
+  body.innerHTML = QUEUE.map(q => {
+    const statusCls = q.status === "Created" ? "amber" : q.status === "In review" ? "blue" : q.status === "On hold" ? "red" : "grey";
+    return `<tr class="clickable" onclick="openFromQueue('${q.id}')">
+      <td class="ecn">${q.id}</td>
+      <td title="${q.item} · ${q.desc}">${q.item} · ${q.desc}</td>
+      <td>${q.originator}</td>
+      <td>${q.type}</td>
+      <td><span class="pill ${statusCls}">${q.status}</span></td>
+      <td class="r">${q.olines}</td>
+      <td class="r">${q.slines}</td>
+    </tr>`;
+  }).join("");
+}
+
+function openFromQueue(id){
+  if(id === "ECN-2041"){
+    selectedChange = "ECN-2041";
+    selectTab("impact");
+  } else {
+    showPopout("Change scoped", id, `<p>${id} selected. The Impact tab shows ECN-2041 in this demo.</p>`);
+  }
+}
+
+
+function fmt(n){ return "$" + n.toLocaleString(); }
+
+function paintOrders(){
+  const body = document.getElementById("ordersBody");
+  const max = Math.max(...ORDERS.map(o => o.mat + o.ops));
+  body.innerHTML = ORDERS.map(o => {
+    const atStake = o.mat + o.ops;
+    const w = Math.round(atStake / max * 100);
+    const cls = atStake > 15000 ? "red" : atStake > 8000 ? "amber" : "green";
+    const statusCls = o.status === "In process" ? "amber" : "grey";
+    return `<tr class="clickable" onclick="showOrderDetail('${o.order}')">
+      <td><a class="openin" onclick="event.stopPropagation();openLN('tisfc001')">${o.order}</a></td>
+      <td title="${o.makes}">${o.makes}</td>
+      <td><span class="pill ${statusCls}">${o.status}</span></td>
+      <td class="r">${o.qty}</td>
+      <td class="r">${fmt(o.mat)}</td>
+      <td class="r">
+        <div class="cellbar">
+          <div class="cellbar-track"><div class="cellbar-fill ${cls}" style="width:${w}%"></div></div>
+          <span class="cellbar-val">${fmt(o.ops)}</span>
+        </div>
+      </td>
+    </tr>`;
+  }).join("");
+}
+
+function paintCustomers(){
+  const body = document.getElementById("customersBody");
+  const max = Math.max(...CUSTOMERS.map(c => c.value));
+  body.innerHTML = CUSTOMERS.map(c => {
+    const w = Math.round(c.value / max * 100);
+    const cls = c.value > 20000 ? "red" : c.value > 7000 ? "amber" : "green";
+    return `<tr class="clickable" onclick="showCustomerDetail('${c.sold.replace(/'/g,"\\'")}')">
+      <td title="${c.sold}"><a class="openin" onclick="event.stopPropagation();openLN('tdsls400')">${c.sold}</a></td>
+      <td class="r">${c.lines}</td>
+      <td class="r">${c.left.toLocaleString()}</td>
+      <td class="r">
+        <div class="cellbar">
+          <div class="cellbar-track"><div class="cellbar-fill ${cls}" style="width:${w}%"></div></div>
+          <span class="cellbar-val">${fmt(c.value)}</span>
+        </div>
+      </td>
+    </tr>`;
+  }).join("");
+}
+
+
+function showPopout(title, sub, html){
+  document.getElementById("popTitle").textContent = title;
+  document.getElementById("popSub").textContent = sub || "";
+  document.getElementById("popBody").innerHTML = html;
+  const el = document.getElementById("popout");
+  el.classList.add("open");
+  el.setAttribute("aria-hidden","false");
+}
+function closePopout(){
+  const el = document.getElementById("popout");
+  el.classList.remove("open");
+  el.setAttribute("aria-hidden","true");
+}
+
+
+function miniBarChart(items, maxLabel){
+  const max = Math.max(...items.map(i => i.v));
+  return `<svg viewBox="0 0 400 160" style="width:100%;height:auto">
+    ${items.map((it,i) => {
+      const h = Math.round(it.v / max * 110);
+      const x = 20 + i * (360/items.length);
+      const bw = (360/items.length) - 10;
+      return `<g>
+        <rect x="${x}" y="${130-h}" width="${bw}" height="${h}" fill="${it.c||'#0054b1'}"/>
+        <text x="${x+bw/2}" y="148" font-size="9" fill="#6f6f76" text-anchor="middle">${it.l}</text>
+        <text x="${x+bw/2}" y="${128-h}" font-size="9" fill="#161618" text-anchor="middle" font-weight="600">${it.vl||''}</text>
+      </g>`;
+    }).join('')}
+    
+  </svg>`;
+}
+
+function showLeverDetail(key){
+  const defs = {
+    material: {t:"Material committed — $4,700", s:"27 open order lines on MH-4410 rev C",
+      chart: miniBarChart(ORDERS.map(o=>({l:o.order.slice(-4),v:o.mat,vl:'$'+(o.mat/1000).toFixed(1)+'k',c:'#0054b1'})),"$14.4k"),
+      tbl: ordersTable()},
+    stock: {t:"Stock exposure — $25,000", s:"628 on hand across 14 warehouses, at standard cost",
+      chart: miniBarChart([
+        {l:"H2 Memphis",v:9800,vl:"$9.8k"},
+        {l:"H3 Dallas",v:5400,vl:"$5.4k"},
+        {l:"H4 Reno",v:3900,vl:"$3.9k"},
+        {l:"H5 Atlanta",v:2600,vl:"$2.6k"},
+        {l:"Others",v:3300,vl:"$3.3k"}
+      ]),
+      tbl: `<table class="tbl"><thead><tr><th>Warehouse</th><th class="r">On hand</th><th class="r">Value</th><th></th></tr></thead><tbody>
+        <tr><td>H2 Memphis</td><td class="r">245</td><td class="r">$9,800</td><td><a class="openin" onclick="openLN('whinr110')">Open in LN</a></td></tr>
+        <tr><td>H3 Dallas</td><td class="r">135</td><td class="r">$5,400</td><td><a class="openin" onclick="openLN('whinr110')">Open in LN</a></td></tr>
+        <tr><td>H4 Reno</td><td class="r">98</td><td class="r">$3,900</td><td><a class="openin" onclick="openLN('whinr110')">Open in LN</a></td></tr>
+        <tr><td>H5 Atlanta</td><td class="r">65</td><td class="r">$2,600</td><td><a class="openin" onclick="openLN('whinr110')">Open in LN</a></td></tr>
+        <tr><td>10 other warehouses</td><td class="r">85</td><td class="r">$3,300</td><td><a class="openin" onclick="openLN('whinr110')">Open in LN</a></td></tr>
+      </tbody></table>`},
+    plant: {t:"Work in the plant — $85,800", s:"15 not started, 12 in process, whole orders",
+      chart: miniBarChart(ORDERS.map(o=>({l:o.order.slice(-4),v:o.mat+o.ops,vl:'$'+((o.mat+o.ops)/1000).toFixed(1)+'k',c:'#da1217'})),"$21k"),
+      tbl: ordersTable()},
+    customer: {t:"Customer commitments — $110,700", s:"247 open lines, 38 customers, top 3 hold 84 percent",
+      chart: miniBarChart(CUSTOMERS.slice(0,5).map(c=>({l:c.sold.split(" ")[0],v:c.value,vl:'$'+(c.value/1000).toFixed(1)+'k',c:'#da1217'})),"$52.9k"),
+      tbl: customersTable()}
+  };
+  const d = defs[key];
+  showPopout(d.t, d.s, `<div class="mdl-chart">${d.chart}</div>${d.tbl}`);
+}
+
+function ordersTable(){
+  return `<table class="tbl"><thead><tr><th>Order</th><th>Makes</th><th>Status</th><th class="r">Qty</th><th class="r">At stake</th><th></th></tr></thead><tbody>
+    ${ORDERS.map(o=>`<tr><td>${o.order}</td><td>${o.makes}</td><td>${o.status}</td><td class="r">${o.qty}</td><td class="r">${fmt(o.mat+o.ops)}</td><td><a class="openin" onclick="openLN('tisfc001')">Open in LN</a></td></tr>`).join('')}
+  </tbody></table>`;
+}
+function customersTable(){
+  return `<table class="tbl"><thead><tr><th>Sold-to</th><th class="r">Lines</th><th class="r">Left</th><th class="r">Value</th><th></th></tr></thead><tbody>
+    ${CUSTOMERS.map(c=>`<tr><td>${c.sold}</td><td class="r">${c.lines}</td><td class="r">${c.left.toLocaleString()}</td><td class="r">${fmt(c.value)}</td><td><a class="openin" onclick="openLN('tdsls400')">Open in LN</a></td></tr>`).join('')}
+  </tbody></table>`;
+}
+
+function showOrderDetail(id){
+  const o = ORDERS.find(x => x.order === id) || ORDERS[0];
+  showPopout(`${o.order} — ${o.makes}`, `${o.status}, qty ${o.qty}`,
+    `<div class="mdl-headline">${fmt(o.mat+o.ops)}</div>
+     <div class="mdl-headline-sub">Total at stake, material plus operations</div>
+     <div class="mdl-chart">${miniBarChart([
+       {l:"Material",v:o.mat,vl:fmt(o.mat),c:'#0054b1'},
+       {l:"Operations",v:o.ops,vl:fmt(o.ops),c:'#da1217'}
+     ])}</div>
+     <table class="tbl"><thead><tr><th>Field</th><th>Value</th><th></th></tr></thead><tbody>
+       <tr><td>Order</td><td>${o.order}</td><td><a class="openin" onclick="openLN('tisfc001')">Open in LN</a></td></tr>
+       <tr><td>Makes</td><td>${o.makes}</td><td></td></tr>
+       <tr><td>Status</td><td>${o.status}</td><td></td></tr>
+       <tr><td>Item quantity</td><td>${o.qty}</td><td></td></tr>
+       <tr><td>Item material</td><td>${fmt(o.mat)}</td><td><a class="openin" onclick="openLN('ticst002')">Open in LN</a></td></tr>
+       <tr><td>Order operations</td><td>${fmt(o.ops)}</td><td><a class="openin" onclick="openLN('ticst002')">Open in LN</a></td></tr>
+     </tbody></table>`);
+}
+
+function showCustomerDetail(sold){
+  const c = CUSTOMERS.find(x => x.sold === sold) || CUSTOMERS[0];
+  showPopout(`${c.sold}`, `${c.lines} open lines, ${c.left.toLocaleString()} left to deliver`,
+    `<div class="mdl-headline">${fmt(c.value)}</div>
+     <div class="mdl-headline-sub">Open commitment value</div>
+     <div class="mdl-chart">${miniBarChart([
+       {l:"Lines",v:c.lines,vl:c.lines,c:'#0054b1'},
+       {l:"Left",v:c.left/10,vl:c.left.toLocaleString(),c:'#40bdbe'},
+       {l:"Value",v:c.value/500,vl:fmt(c.value),c:'#da1217'}
+     ])}</div>
+     <table class="tbl"><thead><tr><th>Field</th><th>Value</th><th></th></tr></thead><tbody>
+       <tr><td>Sold-to</td><td>${c.sold}</td><td><a class="openin" onclick="openLN('tccom130')">Open in LN</a></td></tr>
+       <tr><td>Open lines</td><td>${c.lines}</td><td><a class="openin" onclick="openLN('tdsls400')">Open in LN</a></td></tr>
+       <tr><td>Left to deliver</td><td>${c.left.toLocaleString()}</td><td></td></tr>
+       <tr><td>Value</td><td>${fmt(c.value)}</td><td></td></tr>
+     </tbody></table>`);
+}
+
+function showAll(which){
+  if(which === "orders"){
+    showPopout("All open production orders — $85,800", "27 orders on MH-4410 rev C",
+      `<div class="mdl-chart">${miniBarChart(ORDERS.map(o=>({l:o.order.slice(-4),v:o.mat+o.ops,vl:'$'+((o.mat+o.ops)/1000).toFixed(1)+'k',c:'#da1217'})))}</div>${ordersTable()}`);
+  } else {
+    showPopout("All customers still to deliver to — $110,700", "38 customers, top 3 hold 84 percent",
+      `<div class="mdl-chart">${miniBarChart(CUSTOMERS.map(c=>({l:c.sold.split(" ")[0].slice(0,6),v:c.value,vl:'$'+(c.value/1000).toFixed(1)+'k',c:'#da1217'})))}</div>${customersTable()}`);
+  }
+}
+
+function openPLM(id){ showPopout("Open in PLM for Discrete", id, `<p>In the tenant this opens the PLM record ${id} in a new tab. Simulated here.</p>`); }
+function openLN(sess){ showPopout("Open in Infor LN", sess, `<p>In the tenant this opens LN session ${sess} in a new tab. Simulated here.</p>`); }
+
+
+function approveAndLaunch(){
+  launched = true;
+  document.getElementById("approveBtn").textContent = "Workflow launched";
+  document.getElementById("approveBtn").classList.remove("primary");
+  document.getElementById("approveBtn").disabled = true;
+  
+  const row = QUEUE.find(q => q.id === "ECN-2041");
+  if(row) row.status = "Launched";
+  paintQueue();
+  selectTab("status");
+}
+
+
+function paintChangePicker(){
+  const picker = document.getElementById("changePicker");
+  const changes = QUEUE.slice(0,4);
+  picker.innerHTML = changes.map(c => {
+    const state = c.id === "ECN-2041" ? (launched ? "Launched · Review design in flight" : "Created · not launched") : (c.id === "ECN-2037" ? "In review · design" : c.id === "ECN-2033" ? "Created · not launched" : "On hold");
+    return `<button class="change-chip ${c.id === selectedChange ? 'active' : ''}" onclick="pickChange('${c.id}')">
+      <div class="change-chip-id">${c.id}</div>
+      <div class="change-chip-item" title="${c.item}">${c.item}</div>
+      <div class="change-chip-state">${state}</div>
+    </button>`;
+  }).join("");
+}
+
+function pickChange(id){
+  selectedChange = id;
+  paintChangePicker();
+  paintWorkflow();
+}
+
+function paintWorkflow(){
+  const title = document.getElementById("wfTitle");
+  const sub = document.getElementById("wfSub");
+  const row = document.getElementById("wfRow");
+  const caption = document.getElementById("wfCaption");
+  const tblTitle = document.getElementById("wfTblTitle");
+  const tblSub = document.getElementById("wfTblSub");
+  const tblHead = document.getElementById("wfTblHead");
+  const tblBody = document.getElementById("wfTblBody");
+
+  if(selectedChange === "ECN-2041" && launched){
+    title.textContent = "ECN-2041 route";
+    sub.textContent = "MH-4410 revision C to revision D · launched today";
+    
+    row.innerHTML = `
+      ${stepHtml("Check Out","Automatic","2 min","done")}
+      ${arrowHtml()}
+      ${stepHtml("Review design","Cal Draper","0h 12m","now")}
+      ${arrowHtml()}
+      ${stepHtml("Approve design","Owen Vance","Not started","wait")}
+      ${arrowHtml()}
+      <div class="wf-parallel">
+        <div class="wf-parallel-label">In parallel</div>
+        ${stepHtml("Distribution","Priya Shah","Not started","wait")}
+        ${stepHtml("Modify","Cal Draper","Not started","wait")}
+      </div>
+      ${arrowHtml()}
+      ${stepHtml("Check In","Automatic","Not started","wait")}
+      ${arrowHtml()}
+      ${stepHtml("Send to production","Owen Vance","Not started","wait")}
+      ${arrowHtml()}
+      ${stepHtml("Send to Doc Mgmt","Automatic","Not started","wait")}
+      ${arrowHtml()}
+      ${stepHtml("Launch workflow","Automatic","Not started","wait")}
+      ${arrowHtml()}
+      ${stepHtml("Workflow response","Dana Whitfield","Not started","wait")}
+    `;
+    caption.textContent = "Check Out is done. Review design is with Cal Draper right now. Next is Owen Vance to approve.";
+    tblTitle.textContent = "What happened";
+    tblSub.textContent = "Steps taken so far on ECN-2041";
+    tblHead.innerHTML = `<tr><th>Step</th><th>Action</th><th>By</th><th>Date</th></tr>`;
+    const now = new Date();
+    const t0 = new Date(now.getTime() - 14*60000);
+    const t1 = new Date(now.getTime() - 12*60000);
+    tblBody.innerHTML = `
+      <tr><td>Launch workflow</td><td>Approve and launch</td><td>Dana Whitfield</td><td>${fmtDate(t0)}</td></tr>
+      <tr><td>Check Out</td><td>Completed</td><td>System</td><td>${fmtDate(t1)}</td></tr>
+      <tr><td>Review design</td><td>Started</td><td>Cal Draper</td><td>${fmtDate(now)}</td></tr>
+    `;
+  } else {
+    
+    title.textContent = `${selectedChange} route`;
+    sub.textContent = selectedChange === "ECN-2041" ? "MH-4410 revision C to revision D · not launched yet" : "Route defined, not launched";
+    row.innerHTML = WORKFLOW_STEPS.map((s,i) => {
+      const html = stepHtml(s.name, s.who, "Not started", "wait");
+      return i === WORKFLOW_STEPS.length-1 ? html : html + arrowHtml();
+    }).join("");
+    caption.textContent = "Nothing has started yet. Approve on tab 3 to launch the route.";
+    tblTitle.textContent = "Steps";
+    tblSub.textContent = "The route that will run after approval";
+    tblHead.innerHTML = `<tr><th>Step</th><th>Kind</th><th>Who holds it</th><th></th></tr>`;
+    tblBody.innerHTML = WORKFLOW_STEPS.map(s => `<tr><td>${s.name}</td><td>${s.kind}</td><td>${s.who}</td><td></td></tr>`).join("");
+  }
+}
+
+function stepHtml(name, who, time, markCls){
+  const stateCls = markCls === "done" ? "done" : markCls === "now" ? "now" : "";
+  const markLabel = markCls === "done" ? "Done" : markCls === "now" ? "Now" : "Not started";
+  return `<div class="wf-step ${stateCls}">
+    <div class="wf-step-head"><div class="wf-step-name">${name}</div><div class="wf-step-mark ${markCls}">${markLabel}</div></div>
+    <div class="wf-step-who">${who}</div>
+    <div class="wf-step-time">${time}</div>
+  </div>`;
+}
+function arrowHtml(){ return `<div class="wf-arrow">▸</div>`; }
+
+function fmtDate(d){
+  const pad = n => String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+function paintStatus(){
+  paintChangePicker();
+  paintWorkflow();
+}
+
+
+function openFlow(){
+  document.getElementById("flowModal").classList.add("open");
+  document.getElementById("flowModal").setAttribute("aria-hidden","false");
+}
+function closeFlow(){
+  document.getElementById("flowModal").classList.remove("open");
+  document.getElementById("flowModal").setAttribute("aria-hidden","true");
+}
+document.getElementById("flowBtn").addEventListener("click", openFlow);
+
+
+function openSmp(){
+  const p = document.getElementById("smpPanel");
+  p.classList.add("open");
+  p.setAttribute("aria-hidden","false");
+  document.querySelector(".smp-launcher").style.display = "none";
+}
+function closeSmp(){
+  const p = document.getElementById("smpPanel");
+  p.classList.remove("open");
+  p.setAttribute("aria-hidden","true");
+  document.querySelector(".smp-launcher").style.display = "";
+}
+
+
+(function(){
+  const bar = document.getElementById("smpToolbar");
+  const panel = document.getElementById("smpPanel");
+  let dragging = false, startX, startY, origLeft, origTop;
+  bar.addEventListener("mousedown", e => {
+    if(e.target.classList.contains("smp-close")) return;
+    dragging = true;
+    const r = panel.getBoundingClientRect();
+    panel.style.left = r.left + "px";
+    panel.style.top = r.top + "px";
+    panel.style.right = "auto";
+    startX = e.clientX; startY = e.clientY;
+    origLeft = r.left; origTop = r.top;
+    e.preventDefault();
+  });
+  window.addEventListener("mousemove", e => {
+    if(!dragging) return;
+    panel.style.left = (origLeft + e.clientX - startX) + "px";
+    panel.style.top = (origTop + e.clientY - startY) + "px";
+  });
+  window.addEventListener("mouseup", () => dragging = false);
+})();
+
+const SMP_SUBJECTS = ["orders","customers","stock","plant","workflow"];
+let lastSubject = null;
+
+function askSmp(text){
+  document.getElementById("smpOnboarding").style.display = "none";
+  const content = document.getElementById("smpContent");
+  const reply = smpAnswer(text);
+  const chips = smpFollowups(reply.subject);
+  content.innerHTML += `
+    <div class="smp-message user"><div class="smp-bubble">${text}</div></div>
+    <div class="smp-message ai"><div class="smp-bubble">${reply.html}</div></div>
+    <div class="smp-chips">${chips.map(c => `<button class="smp-chip" onclick="askSmp('${c.replace(/'/g,"\\'")}')">${c}</button>`).join("")}</div>
+  `;
+  content.scrollTop = content.scrollHeight;
+}
+
+function smpAnswer(q){
+  const l = q.toLowerCase();
+  if(l.includes("order") && (l.includes("biggest") || l.includes("stake") || l.includes("dollar"))){
+    lastSubject = "orders";
+    return {subject:"orders", html:`PR-10418 holds the most: $21,000 at stake (material $14,400, operations $6,600). Top 5 orders account for 81 percent of the plant total of $85,800.<div class="smp-mini-chart">${miniBarChart(ORDERS.slice(0,5).map(o=>({l:o.order.slice(-4),v:o.mat+o.ops,vl:'$'+((o.mat+o.ops)/1000).toFixed(1)+'k',c:'#da1217'})))}</div>`};
+  }
+  if(l.includes("customer") && (l.includes("chart") || l.includes("exposure") || l.includes("expos"))){
+    lastSubject = "customers";
+    return {subject:"customers", html:`Customer commitments total $110,700 across 247 open lines and 38 customers. Top 3 hold 84 percent.<div class="smp-mini-chart">${miniBarChart(CUSTOMERS.slice(0,5).map(c=>({l:c.sold.split(" ")[0].slice(0,6),v:c.value,vl:'$'+(c.value/1000).toFixed(1)+'k',c:'#da1217'})))}</div>`};
+  }
+  if(l.includes("stock") || l.includes("write-off") || l.includes("writeoff") || l.includes("write off")){
+    lastSubject = "stock";
+    return {subject:"stock", html:`Stock exposure is $25,000 at standard cost, 628 units across 14 warehouses. If you cut over immediately, the full $25,000 is at write-off risk. The agent recommends consuming through open orders first.`};
+  }
+  if(l.includes("workflow") || l.includes("route") || l.includes("step")){
+    lastSubject = "workflow";
+    return {subject:"workflow", html:`Nine steps. Check Out is automatic, then Cal Draper reviews, then Owen Vance approves, then Distribution and Modify run in parallel, then Check In, Send to production, Send to Document Management, Launch workflow, Workflow response.`};
+  }
+  if(l.includes("plant") || l.includes("process")){
+    lastSubject = "plant";
+    return {subject:"plant", html:`Work in the plant is $85,800 on whole orders: 15 not started, 12 in process. 15 can be flipped to rev D cleanly. The 12 in process would need to be split.`};
+  }
+  lastSubject = "general";
+  return {subject:"general", html:`ECN-2041 holds MH-4410 revision C. Material $4,700, stock $25,000, plant $85,800, customers $110,700. Two blockers: plant and customers.`};
+}
+
+function smpFollowups(subject){
+  const pool = {
+    orders: ["How much stock would need to be written off?","Which customers are the top three?","When is Review design expected to finish?"],
+    customers: ["Which production order carries the most dollars?","How much stock sits in warehouse H2 Memphis?","Who approves the design in the route?"],
+    stock: ["Which three customers hold 84 percent?","What is the breakdown of 27 orders by status?","Which step in the route runs after Review design?"],
+    plant: ["Chart the customers still to deliver to","How much stock is at write-off risk?","Who holds Distribution and Modify in parallel?"],
+    workflow: ["Which production order has the most material value?","Which customer carries the biggest commitment?","How many warehouses hold on-hand stock?"],
+    general: ["Which production orders carry the biggest dollar at stake?","Chart the customer exposure","How much stock would need to be written off?"]
+  };
+  return pool[subject] || pool.general;
+}
+
+function sendSmp(){
+  const input = document.getElementById("smpInput");
+  if(input.value.trim()){ askSmp(input.value.trim()); input.value = ""; }
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+paintQueue();
+paintOrders();
+paintCustomers();
+
+</script>
+</body>
+</html>

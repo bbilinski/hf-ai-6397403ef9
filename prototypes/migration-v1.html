@@ -1,0 +1,1708 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  
+  
+  
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hunter Fan — Windchill to PLM Migration Desk</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ids-color-background-default:#ffffff;
+  --ids-color-neutral-10:#f5f5f5;
+  --ids-color-neutral-20:#e0e0e1;
+  --ids-color-neutral-30:#c5c5c9;
+  --ids-color-neutral-90:#28282a;
+  --ids-color-border-weak:#bbbbbf;
+  --ids-color-border-weaker:#e0e0e1;
+  --ids-color-border-strong:#525257;
+  --ids-color-fg-default:#161618;
+  --ids-color-fg-secondary:#3b3b3f;
+  --ids-color-fg-tertiary:#6f6f76;
+  --ids-color-action-default:#0072ed;
+  --ids-color-action-stronger:#0066d4;
+  --ids-color-action-weakest:#e6f1fd;
+  --ids-color-success-default:#2ac371;
+  --ids-color-success-weak:#ebf9f1;
+  --ids-color-success-stronger:#156138;
+  --ids-color-warning-default:#f98300;
+  --ids-color-warning-weak:#fef2e5;
+  --ids-color-warning-stronger:#a14100;
+  --ids-color-error-default:#da1217;
+  --ids-color-error-weak:#fbe7e8;
+  --ids-color-info-default:#0072ed;
+  --ids-color-info-weak:#e6f1fd;
+  --ids-color-caution-default:#ffd100;
+  --ids-ai-flat:#460daf;
+  --ids-color-purple-weakest:#f1ebfc;
+  --ids-color-dv1:#0054b1;
+  --ids-color-dv2:#40bdbe;
+  --ids-color-dv3:#7928e1;
+  --ids-color-dv4:#bbbbbf;
+  --ids-font-family:'Source Sans 3','Source Sans Pro',Arial,sans-serif;
+  --accent:#0072ed;
+  --accent-2:#0066d4;
+  --ai:#7928e1;
+  --ai-strong:#460daf;
+  --red:#da1217;
+  --amber:#f98300;
+  --green:#2ac371;
+  --text:#161618;
+  --text-dim:#3b3b3f;
+  --text-muted:#6f6f76;
+  --border:#e0e0e1;
+  --panel:#ffffff;
+  --panel-2:#f5f5f5;
+  --bg:#f5f5f5;
+  --tile-bg:#ffffff;
+  --tile-border:#e0e0e1;
+  --overlay-bg:rgba(255,255,255,0.96);
+  --overlay-border:#e0e0e1;
+  --caption-bg:rgba(22,22,24,0.94);
+  --caption-text:#ffffff;
+  --accent-soft:#e6f1fd;
+  --shadow-lg:0 10px 40px rgba(0,0,0,0.18);
+  --r-xs:6px;
+  --t-sm:13px;
+  --mono:'Source Sans 3',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ids-font-family);font-size:16px;color:var(--ids-color-fg-default);background:var(--ids-color-neutral-10);line-height:1.25;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:inherit}
+.audible{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.ids-masthead{height:40px;background:#000000;display:flex;align-items:center;padding-inline:8px;gap:8px;position:sticky;top:0;z-index:200}
+.mh-start{display:flex;align-items:center;flex-shrink:0;gap:4px}
+.mh-logo-btn,.mh-icon-btn{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;border-radius:4px;color:rgb(255 255 255 / 0.8);padding:0}
+.mh-icon-btn:hover{background:#28282a;color:#ffffff}
+.mh-logo-btn:has(img:not(.mh-logo-default), svg) .mh-logo-default{display:none}
+.mh-tabs{display:flex;align-items:center;flex:1;min-width:0;gap:4px}
+.mh-tab{display:inline-flex;align-items:center;gap:8px;height:32px;padding-inline:16px;background:#28282a;border-radius:4px;color:#ffffff;font-size:14px;font-weight:600;max-width:520px}
+.mh-tab-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mh-tab-divider{width:1px;height:18px;background:rgba(255,255,255,0.3);flex-shrink:0}
+.mh-tab-close{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;color:#ffffff;padding:0;flex-shrink:0}
+.mh-end{display:flex;align-items:center;flex-shrink:0;gap:4px;margin-left:auto}
+
+.ids-home-page{padding:0 24px 40px}
+.hp-title-row{max-width:2240px;margin:0 auto;padding:16px 120px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hp-title{font-size:20px;font-weight:600;color:var(--ids-color-fg-default)}
+.hp-subtitle{font-size:14px;color:var(--ids-color-fg-tertiary);margin-top:2px}
+.app-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+
+
+.hp-tabs-bar{max-width:2240px;margin:0 auto;padding:0 120px 12px;display:flex;gap:4px;border-bottom:1px solid var(--ids-color-border-weaker)}
+.hp-tab-btn{height:40px;padding:0 18px;background:none;border:0;border-bottom:3px solid transparent;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:var(--ids-color-fg-tertiary);display:inline-flex;align-items:center;gap:8px}
+.hp-tab-btn:hover{color:var(--ids-color-fg-default)}
+.hp-tab-btn.active{color:var(--ids-color-action-default);border-bottom-color:var(--ids-color-action-default)}
+.hp-tab-count{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:20px;padding:0 6px;background:var(--ids-color-neutral-20);border-radius:9999px;font-size:12px;font-weight:700;color:var(--ids-color-fg-secondary)}
+.hp-tab-btn.active .hp-tab-count{background:var(--ids-color-action-weakest);color:var(--ids-color-action-stronger)}
+
+.hp-widgets{max-width:2240px;margin:0 auto;padding-inline:120px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:auto;grid-auto-rows:368px;column-gap:16px;row-gap:12px;align-items:stretch;padding-bottom:88px}
+.hp-span2{grid-column:span 2}
+.hp-span3{grid-column:span 3}
+.hp-span4{grid-column:span 4}
+.hp-span6{grid-column:span 6}
+.hp-rowspan2{grid-row:span 2}
+.hp-ribbon{grid-column:1/-1;display:flex;flex-wrap:nowrap;gap:16px;justify-content:center}
+
+.hp-tab-pane{display:none}
+.hp-tab-pane.active{display:contents}
+
+.wgt-card{width:100%;height:100%;display:flex;flex-direction:column;background:#ffffff;border:1px solid transparent;border-radius:8px;box-shadow:0 0 8px rgba(0,0,0,.1);position:relative;overflow:hidden}
+.wgt-card.borderless{background:none;border-color:transparent;box-shadow:none;overflow:visible}
+.wgt-header{min-height:60px;flex-shrink:0;display:flex;align-items:center;padding:8px 16px;gap:8px}
+.wgt-titles{display:flex;flex-direction:column;min-width:0;gap:2px;flex:1}
+.wgt-title{font-size:20px;font-weight:400;color:var(--ids-color-fg-default);line-height:1.2;white-space:normal;overflow-wrap:anywhere}
+.wgt-subtitle{font-size:14px;font-weight:400;color:var(--ids-color-fg-tertiary);line-height:1.2}
+.wgt-actions{display:flex;align-items:center;gap:4px;margin-left:auto;flex-shrink:0}
+.wgt-content{flex:1;overflow-y:auto;min-height:0;padding:0 16px 16px}
+.wgt-content.flush{padding:0}
+.wgt-content.no-scroll{overflow:hidden}
+.wgt-empty-state{display:flex;align-items:center;justify-content:center;height:100%;padding:16px;color:var(--ids-color-fg-tertiary);font-size:14px;text-align:center}
+
+.wgt-kpi-tile{width:172px;height:176px;flex-shrink:0;zoom:var(--sf-kpi-z,1);background:#ffffff;border:1px solid transparent;border-radius:8px;box-shadow:0 0 8px rgba(0,0,0,.1)}
+.wgt-kpi{display:flex;flex-direction:column;padding:16px;gap:4px;height:100%;justify-content:center}
+.wgt-kpi-trend{font-size:14px;font-weight:600;display:flex;align-items:center;gap:4px;height:24px}
+.wgt-kpi-trend.improve,.wgt-kpi-trend.positive{color:var(--ids-color-success-stronger)}
+.wgt-kpi-trend.negative{color:var(--ids-color-error-default)}
+.wgt-kpi-icon{height:24px;display:flex;align-items:center}
+.status-circle{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.status-circle.info{background:rgba(0,114,237,.1);color:var(--ids-color-action-default)}
+.status-circle.success{background:var(--ids-color-success-weak);color:var(--ids-color-success-stronger)}
+.status-circle.warning{background:var(--ids-color-warning-weak);color:var(--ids-color-warning-stronger)}
+.status-circle.error{background:var(--ids-color-error-weak);color:var(--ids-color-error-default)}
+.status-circle.purple{background:var(--ids-color-purple-weakest);color:var(--ids-ai-flat)}
+.wgt-kpi-value{font-size:40px;font-weight:600;line-height:1;color:var(--ids-color-fg-default);font-variant-numeric:lining-nums tabular-nums}
+.wgt-kpi-title{font-size:12px;font-weight:600;color:var(--ids-color-fg-secondary);line-height:1.25}
+.wgt-kpi-subtitle{font-size:10px;font-weight:400;color:var(--ids-color-fg-tertiary);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.ids-button{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:34px;padding-inline:12px;border-radius:8px;border:1px solid transparent;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;background:none;color:var(--ids-color-fg-secondary);font-family:inherit}
+.ids-button.primary{background:var(--ids-color-action-default);border-color:var(--ids-color-action-default);color:#ffffff}
+.ids-button.primary:hover{background:var(--ids-color-action-stronger);border-color:var(--ids-color-action-stronger)}
+.ids-button.secondary{background:#ffffff;border-color:var(--ids-color-action-default);color:var(--ids-color-action-default)}
+.ids-button.secondary:hover{background:var(--ids-color-action-weakest)}
+.ids-button.tertiary{background:none;border-color:transparent;color:var(--ids-color-fg-secondary)}
+.ids-button.tertiary:hover{background:var(--ids-color-neutral-10)}
+.ids-button.danger{background:#ffffff;border-color:var(--ids-color-error-default);color:var(--ids-color-error-default)}
+.ids-button.danger:hover{background:var(--ids-color-error-weak)}
+
+.ids-tag{display:inline-flex;align-items:center;gap:4px;height:26px;padding-inline:8px;border-radius:9999px;font-size:13px;font-weight:400;white-space:nowrap;background:var(--ids-color-neutral-20);color:var(--ids-color-fg-default)}
+.ids-tag.info{background:var(--ids-color-info-default);color:#ffffff}
+.ids-tag.success{background:var(--ids-color-success-default);color:var(--ids-color-fg-default)}
+.ids-tag.warning{background:var(--ids-color-warning-default);color:var(--ids-color-fg-default)}
+.ids-tag.error{background:var(--ids-color-error-default);color:#ffffff}
+.ids-tag.purple{background:var(--ids-ai-flat);color:#ffffff}
+.ids-tag.neutral{background:var(--ids-color-neutral-20);color:var(--ids-color-fg-default)}
+
+.ids-grid{width:100%;border-collapse:collapse;font-size:14px}
+.ids-grid-th{font-size:13px;font-weight:600;color:var(--ids-color-fg-default);text-align:left;padding:0 8px;height:36px;border-bottom:1px solid var(--ids-color-border-weaker);white-space:nowrap;background:#ffffff;position:sticky;top:0}
+.ids-grid-th.r{text-align:right}
+.ids-grid-row{height:36px}
+.ids-grid-row:hover .ids-grid-cell{background:rgb(230 241 253)}
+.ids-grid-cell{padding:0 8px;height:36px;border-bottom:1px solid var(--ids-color-border-weaker);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px;font-size:14px}
+.ids-grid-cell.r{text-align:right;font-variant-numeric:lining-nums tabular-nums}
+.ids-grid-cell.mono{font-variant-numeric:lining-nums tabular-nums}
+
+.ids-lv-body{display:flex;flex-direction:column}
+.ids-lv-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-top:1px solid var(--ids-color-border-weaker)}
+.ids-lv-item:first-child{border-top:0}
+.ids-lv-item:hover{background:rgb(230 241 253)}
+.ids-lv-area{display:flex;flex-direction:column;min-width:0;flex:1;gap:2px}
+.ids-lv-title{font-size:14px;font-weight:600;color:var(--ids-color-fg-default);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ids-lv-desc{font-size:13px;color:var(--ids-color-fg-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ids-lv-meta{font-size:13px;color:var(--ids-color-fg-tertiary);flex-shrink:0}
+.ids-hyperlink{color:var(--ids-color-action-stronger);font-weight:600;text-decoration:underline;cursor:pointer;background:none;border:0;padding:0;font-family:inherit;font-size:inherit}
+.ids-hyperlink:hover{color:#004a99}
+
+.ids-pb-label{font-size:13px;color:var(--ids-color-fg-default);margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+.ids-pb-track{height:8px;border-radius:4px;overflow:hidden;background:var(--ids-color-neutral-20)}
+.ids-pb-fill{height:100%;background:var(--ids-color-action-default);transition:width 250ms}
+.ids-pb-fill.success{background:var(--ids-color-success-default)}
+.ids-pb-fill.purple{background:var(--ids-ai-flat)}
+.ids-pb-fill.warning{background:var(--ids-color-warning-default)}
+.ids-pb-fill.error{background:var(--ids-color-error-default)}
+
+.myday{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;padding:16px;text-align:center}
+.ids-avatar{width:80px;height:80px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#0054b1;color:#ffffff;font-size:32px;font-weight:400;box-shadow:0 0 0 5px var(--ids-color-neutral-10);flex-shrink:0}
+.myday-greeting{font-size:28px;line-height:1.1;font-weight:400}
+.myday-greeting b{font-weight:700}
+.myday-date{font-size:13px;color:var(--ids-color-fg-tertiary)}
+
+.ai-rec{display:flex;flex-direction:column;gap:10px;height:100%}
+.ai-rec-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--ids-color-purple-weakest);color:var(--ids-ai-flat);border-radius:9999px;font-size:12px;font-weight:600;align-self:flex-start}
+.ai-rec-gauge{display:flex;align-items:center;gap:12px}
+.ai-rec-gauge-svg{flex-shrink:0}
+.ai-rec-gauge-info{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ai-rec-conf{font-size:20px;font-weight:600;color:var(--ids-ai-flat)}
+.ai-rec-conf-lbl{font-size:12px;color:var(--ids-color-fg-tertiary)}
+.ai-rec-rationale{font-size:13px;color:var(--ids-color-fg-secondary);line-height:1.35}
+.ai-rec-evidence{display:flex;flex-wrap:wrap;gap:4px 12px}
+.ai-rec-evidence-item{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--ids-color-action-stronger);text-decoration:underline;cursor:pointer;background:none;border:0;padding:0;font-family:inherit}
+.ai-rec-actions{display:flex;gap:6px;margin-top:auto;flex-wrap:wrap}
+
+.stages{display:flex;flex-direction:column;gap:10px}
+.stage-row{display:flex;align-items:flex-start;gap:10px;padding:8px;border-radius:6px}
+.stage-dot{width:22px;height:22px;border-radius:50%;background:#ffffff;border:2px solid var(--ids-color-border-strong);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.stage-row.done .stage-dot{background:var(--ids-color-action-default);border-color:var(--ids-color-action-default);color:#ffffff}
+.stage-row.active .stage-dot{border-color:var(--ids-color-action-default);background:#ffffff}
+.stage-body{flex:1;min-width:0}
+.stage-name{font-size:14px;font-weight:600}
+.stage-desc{font-size:12px;color:var(--ids-color-fg-tertiary);margin-top:2px}
+
+.wgt-modal-overlay{position:fixed;inset:0;z-index:250;display:none;align-items:center;justify-content:center}
+.wgt-modal-overlay.open{display:flex}
+.wgt-modal-backdrop{position:absolute;inset:0;background:rgba(11,15,24,.72);backdrop-filter:blur(6px)}
+.wgt-modal-dialog{position:relative;background:#ffffff;border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,.4);width:min(1100px,75vw);max-width:75vw;max-height:75vh;display:flex;flex-direction:column;overflow:hidden}
+.mdl-header{padding:16px 20px;border-bottom:1px solid var(--ids-color-border-weaker);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-shrink:0}
+.wgt-modal-title{font-size:18px;font-weight:700;color:var(--ids-color-fg-default)}
+.wgt-modal-close{width:32px;height:32px;border-radius:50%;border:1px solid var(--ids-color-border-weaker);background:#ffffff;color:var(--ids-color-fg-secondary);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mdl-body{flex:1;overflow:auto;padding:20px;width:100%}
+.mdl-footer{padding:14px 20px;border-top:1px solid var(--ids-color-border-weaker);display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-shrink:0}
+.mdl-2col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.mdl-section{display:flex;flex-direction:column;gap:8px}
+.mdl-section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:var(--ids-color-fg-tertiary)}
+.mdl-code{font-family:'Source Sans 3',monospace;font-size:12px;background:var(--ids-color-neutral-10);border:1px solid var(--ids-color-border-weaker);border-radius:4px;padding:12px;overflow:auto;max-height:340px;white-space:pre;color:var(--ids-color-fg-default)}
+.mdl-facts{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:13px}
+.mdl-facts dt{color:var(--ids-color-fg-tertiary)}
+.mdl-facts dd{color:var(--ids-color-fg-default);font-weight:600}
+.field-row{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.field-label{font-size:13px;font-weight:600;color:var(--ids-color-fg-default)}
+.field-input{width:100%;height:34px;padding:0 10px;border:1px solid var(--ids-color-border-weak);border-radius:6px;font-size:14px;font-family:inherit;background:#ffffff}
+.field-input:focus{outline:none;border-color:var(--ids-color-action-default);box-shadow:0 0 0 2px rgba(0,114,237,0.2)}
+select.field-input{cursor:pointer}
+textarea.field-input{height:auto;min-height:72px;padding:8px 10px}
+
+.run-demo-btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:6px;font-size:13px;font-weight:600;background:var(--accent);color:#fff;border:1px solid var(--accent);cursor:pointer;font-family:inherit;white-space:nowrap}
+.run-demo-btn:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.run-demo-btn.running{background:var(--red);border-color:var(--red)}
+.flow-btn-launch{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:6px;font-size:13px;font-weight:600;background:var(--accent);color:#fff;border:1px solid var(--accent);cursor:pointer;font-family:inherit;white-space:nowrap}
+.flow-btn-launch:hover{background:var(--accent-2);border-color:var(--accent-2)}
+
+.demo-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:none;align-items:center;gap:6px;background:var(--overlay-bg);border:1px solid var(--overlay-border);border-radius:50px;padding:7px 10px;z-index:10021;backdrop-filter:blur(10px);box-shadow:var(--shadow-lg)}
+.demo-controls.visible{display:flex}
+.demo-btn{width:38px;height:38px;border-radius:50%;border:none;background:transparent;color:var(--text-dim);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}
+.demo-btn:hover{background:var(--accent-soft);color:var(--accent)}
+.demo-btn.play{background:var(--accent);color:#fff;width:44px;height:44px;font-size:16px}
+.demo-status{padding:0 12px;font-size:11px;color:var(--text-muted)}
+.caption-bar{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);max-width:880px;width:88%;background:var(--caption-bg);border:1px solid var(--overlay-border);border-radius:14px;padding:14px 24px;color:var(--caption-text);font-size:15px;line-height:1.5;text-align:center;backdrop-filter:blur(10px);box-shadow:var(--shadow-lg);z-index:10020;display:none}
+.caption-bar.visible{display:block}
+.caption-step{font-size:10px;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.highlight{outline:2px solid var(--accent)!important;outline-offset:3px;box-shadow:0 0 0 6px rgba(0,114,237,.18)!important;border-radius:8px;position:relative;z-index:5}
+
+.flow-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center}
+.flow-modal.open{display:flex}
+.flow-backdrop{position:absolute;inset:0;background:rgba(11,15,24,.72);backdrop-filter:blur(6px)}
+.flow-dialog{position:relative;background:var(--panel);border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.4);width:min(1200px,94vw);height:min(820px,95vh);display:flex;flex-direction:column;overflow:hidden}
+.flow-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-shrink:0}
+.flow-eyebrow{font-size:11px;color:var(--ai-strong);text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.flow-title{font-size:20px;font-weight:700;margin:4px 0 0}
+.flow-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px}
+.flow-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--tile-bg);color:var(--text-dim);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.flow-stage{flex:1;position:relative;background:var(--bg);overflow:hidden}
+.flow-canvas{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:55px 30px 30px;overflow:auto}
+.flow-paths{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.flow-nodes{position:relative;display:grid;gap:95px 18px;width:100%;max-width:1100px;z-index:2}
+.flow-node{background:var(--tile-bg);border:2px solid var(--tile-border);border-radius:10px;padding:12px 10px;text-align:center;transition:all .35s;position:relative}
+.flow-node .stage-num{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;background:var(--tile-bg);border:2px solid var(--border);color:var(--text-dim);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.flow-node .stage-name{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-top:4px;line-height:1.3}
+.flow-node .stage-blurb{font-size:10.5px;color:var(--text-dim);line-height:1.4;margin-top:6px}
+.flow-node.active{border-color:var(--ai);box-shadow:0 0 0 4px rgba(124,97,255,.22);transform:translateY(-3px)}
+.flow-node.active .stage-num{background:var(--ai);border-color:var(--ai);color:#fff}
+.flow-node.done{border-color:var(--green)}
+.flow-node.done .stage-num{background:var(--green);border-color:var(--green);color:#fff}
+.flow-outcomes{margin-top:20px;width:100%;max-width:620px;background:var(--tile-bg);border:2px solid var(--tile-border);border-radius:10px;padding:16px;text-align:center;position:relative;z-index:2}
+.flow-outcomes.active{border-color:var(--ai);box-shadow:0 0 0 4px rgba(124,97,255,.22)}
+.flow-outcomes .stage-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.flow-outcomes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.flow-outcome-stat{padding:8px 4px;background:var(--bg);border-radius:6px}
+.flow-outcome-stat .num{font-weight:700;font-size:18px;color:var(--ai-strong)}
+.flow-outcome-stat .lbl{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin-top:3px}
+.flow-path{stroke:var(--border);stroke-width:2;fill:none}
+.flow-path.done{stroke:var(--green);stroke-width:2.5}
+.flow-path.active{stroke:var(--ai);stroke-width:3;stroke-dasharray:6 4;animation:flow-dash 1s linear infinite}
+@keyframes flow-dash{to{stroke-dashoffset:-20}}
+.flow-caption-bar{padding:18px 28px;border-top:1px solid var(--border);background:var(--panel);flex-shrink:0;min-height:110px}
+.flow-step-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:6px}
+.flow-step-text{font-size:14px;line-height:1.55}
+.flow-app-callout{font-size:12px;color:var(--ai-strong);margin-top:8px;display:flex;align-items:center;gap:6px}
+.flow-app-callout::before{content:"→";font-weight:700}
+.flow-controls{padding:14px 24px;border-top:1px solid var(--border);background:var(--panel-2);display:flex;align-items:center;gap:8px}
+.flow-progress{flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden;margin:0 14px}
+.flow-progress-fill{height:100%;background:linear-gradient(90deg,var(--ai),var(--ai-strong));transition:width .4s}
+.flow-btn{padding:8px 14px;background:var(--panel);border:1px solid var(--border);border-radius:6px;color:var(--text-dim);font-size:13px;cursor:pointer;font-family:inherit;font-weight:500;white-space:nowrap}
+.flow-btn.primary{background:var(--ai);color:#fff;border-color:var(--ai);min-width:96px}
+
+.smp-launcher{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:#ffffff;border:1px solid var(--ids-color-border-weak);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:180}
+.smp-launcher:hover{box-shadow:0 6px 16px rgba(0,0,0,0.2)}
+.smp-panel{position:fixed;top:40px;right:0;bottom:0;width:400px;background:#ffffff;border-left:1px solid var(--ids-color-border-weaker);box-shadow:-4px 0 12px rgba(0,0,0,0.08);z-index:190;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 250ms}
+.smp-panel.open{transform:translateX(0)}
+.smp-toolbar{height:48px;background:#f5f5f5;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid var(--ids-color-border-weaker);flex-shrink:0}
+.smp-toolbar-title{font-size:14px;font-weight:600}
+.smp-close{width:28px;height:28px;background:none;border:0;cursor:pointer;color:var(--ids-color-fg-secondary);border-radius:4px;display:flex;align-items:center;justify-content:center}
+.smp-content{flex:1;overflow-y:auto;display:flex;flex-direction:column;padding:16px;gap:12px}
+.smp-onboarding{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;margin-top:32px}
+.smp-chat-input{display:flex;gap:8px;background:#ffffff;border:1px solid var(--ids-color-border-weak);border-radius:8px;padding:8px}
+.smp-chat-input input{flex:1;border:0;font-size:14px;font-family:inherit;background:none;outline:none}
+.smp-chat-input button{background:var(--ids-ai-flat);border:0;color:#ffffff;width:32px;height:32px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.smp-chips{display:flex;flex-wrap:wrap;gap:6px}
+.smp-suggestion-chip,.smp-followup-chip{padding:6px 12px;background:var(--ids-color-purple-weakest);color:var(--ids-ai-flat);border:1px solid transparent;border-radius:9999px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.smp-message-list{display:flex;flex-direction:column;gap:12px;flex:1}
+.smp-message{display:flex;flex-direction:column}
+.smp-message.user{align-items:flex-end}
+.smp-bubble{max-width:85%;padding:10px 12px;border-radius:12px;font-size:13px;line-height:1.4}
+.smp-message.user .smp-bubble{background:var(--ids-color-action-default);color:#ffffff}
+.smp-message.ai .smp-bubble{background:var(--ids-color-neutral-10);color:var(--ids-color-fg-default)}
+.smp-warning{font-size:11px;color:var(--ids-color-fg-tertiary);text-align:center;padding:4px}
+
+
+.hero-headline{font-size:22px;font-weight:600;line-height:1.3;color:var(--ids-color-fg-default);margin:0 0 14px}
+.readiness-wrap{display:flex;flex-direction:column;gap:14px;padding:4px 0}
+.readiness-row{display:grid;grid-template-columns:220px 1fr 110px;gap:14px;align-items:center}
+.readiness-label{font-size:14px;font-weight:600;color:var(--ids-color-fg-default)}
+.readiness-sub{font-size:12px;color:var(--ids-color-fg-tertiary);display:block;font-weight:400;margin-top:2px}
+.readiness-track{height:28px;background:var(--ids-color-neutral-10);border-radius:4px;overflow:hidden;position:relative}
+.readiness-fill{height:100%;display:flex;align-items:center;padding:0 10px;font-size:13px;font-weight:700;color:#ffffff;white-space:nowrap;min-width:34px}
+.readiness-fill.ready{background:var(--ids-color-success-default);color:var(--ids-color-fg-default)}
+.readiness-fill.dupe{background:var(--ids-color-warning-default);color:var(--ids-color-fg-default)}
+.readiness-fill.miss{background:var(--ids-color-warning-default);color:var(--ids-color-fg-default)}
+.readiness-fill.broken{background:var(--ids-color-error-default)}
+.readiness-fill.loop{background:#7a1317}
+.readiness-count{text-align:right;font-size:14px;font-weight:700;color:var(--ids-color-fg-default);font-variant-numeric:tabular-nums}
+
+
+.pane-headline{font-size:20px;font-weight:600;color:var(--ids-color-fg-default);line-height:1.3}
+.pane-sub{font-size:14px;color:var(--ids-color-fg-tertiary);margin-top:4px}
+
+
+.wave-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;padding:12px 0}
+.wave-stat{display:flex;flex-direction:column;gap:2px}
+.wave-stat-val{font-size:28px;font-weight:700;font-variant-numeric:tabular-nums}
+.wave-stat-lbl{font-size:12px;color:var(--ids-color-fg-tertiary)}
+
+
+.conf-pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:9999px;font-size:12px;font-weight:600}
+.conf-high{background:var(--ids-color-success-weak);color:var(--ids-color-success-stronger)}
+.conf-med{background:var(--ids-color-warning-weak);color:var(--ids-color-warning-stronger)}
+.conf-low{background:var(--ids-color-error-weak);color:var(--ids-color-error-default)}
+
+.stack{display:flex;flex-direction:column;gap:8px}
+.row{display:flex;align-items:center;gap:8px}
+.row-between{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.txt-sec{color:var(--ids-color-fg-secondary)}
+.txt-tert{color:var(--ids-color-fg-tertiary)}
+.txt-sm{font-size:13px}
+.txt-xs{font-size:12px}
+.num{font-variant-numeric:lining-nums tabular-nums}
+.link-rows{display:flex;flex-direction:column}
+.link-row{display:flex;align-items:center;gap:8px;padding:8px 8px;background:none;border:0;cursor:pointer;font-size:14px;font-weight:600;color:var(--ids-color-fg-default);font-family:inherit;text-align:left;border-radius:4px;width:100%}
+.link-row:hover{background:var(--ids-color-neutral-10)}
+.link-row svg{flex-shrink:0;color:var(--ids-color-fg-secondary)}
+
+.split-view{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-height:0}
+.split-pane{display:flex;flex-direction:column;gap:8px;min-width:0}
+.split-pane-title{font-size:12px;font-weight:700;text-transform:uppercase;color:var(--ids-color-fg-tertiary);letter-spacing:0.4px}
+
+
+.load-bar{height:40px;display:flex;border-radius:6px;overflow:hidden;background:var(--ids-color-neutral-10);margin:10px 0 6px}
+.load-seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700}
+.load-seg.loaded{background:var(--ids-color-success-default);color:var(--ids-color-fg-default)}
+.load-seg.held{background:var(--ids-color-warning-default);color:var(--ids-color-fg-default)}
+.load-seg.skipped{background:var(--ids-color-error-default)}
+.load-legend{display:flex;gap:16px;font-size:12px;color:var(--ids-color-fg-secondary);flex-wrap:wrap}
+.legend-sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:4px;vertical-align:middle}
+
+</style>
+<style data-sf-repair="masthead-logo">
+.mh-logo-btn{font-size:0;line-height:0}.mh-logo-btn > *{font-size:16px;line-height:normal}
+</style>
+<style data-sf-repair="kpi-centre">
+.hp-ribbon > .wgt-kpi-tile, .hp-ribbon > .wgt-kpi{display:flex;flex-direction:column;justify-content:center}
+</style>
+<style data-sf-repair="workspace-zoom">
+main.ids-home-page{zoom:0.77!important}
+@media (min-width:1920px){main.ids-home-page{zoom:0.7742!important}}
+@media (min-width:1960px){main.ids-home-page{zoom:0.7903!important}}
+@media (min-width:2000px){main.ids-home-page{zoom:0.8065!important}}
+@media (min-width:2040px){main.ids-home-page{zoom:0.8226!important}}
+@media (min-width:2080px){main.ids-home-page{zoom:0.8387!important}}
+@media (min-width:2120px){main.ids-home-page{zoom:0.8548!important}}
+@media (min-width:2160px){main.ids-home-page{zoom:0.8710!important}}
+@media (min-width:2200px){main.ids-home-page{zoom:0.8871!important}}
+@media (min-width:2240px){main.ids-home-page{zoom:0.9032!important}}
+main.ids-home-page .hp-widgets{max-width:none!important;width:min(2480px,100%)!important;box-sizing:border-box!important;padding-left:120px!important;padding-right:120px!important;margin-left:auto!important;margin-right:auto!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;column-gap:16px!important;row-gap:12px!important;grid-auto-rows:322px!important;grid-template-rows:auto!important;}
+.hp-ribbon{display:flex!important;flex-wrap:nowrap!important;justify-content:center!important;gap:16px!important}
+.hp-ribbon > .wgt-kpi-tile{flex:0 0 172px!important;width:172px!important;min-width:0!important;max-width:none!important;height:176px!important;zoom:var(--sf-kpi-z,1)}
+</style>
+<script data-sf-repair="kpi-half-column">(function(){function fit(){var g=document.querySelector('.hp-widgets');if(!g)return;var c=parseFloat(getComputedStyle(g).gridTemplateColumns.split(' ')[0]);if(!(c>16))return;var z=(c-16)/344;var rs=document.querySelectorAll('.hp-ribbon');for(var i=0;i<rs.length;i++)rs[i].style.setProperty('--sf-kpi-z',String(z));}
+function start(){fit();window.addEventListener('resize',fit);var g=document.querySelector('.hp-widgets');if(g&&window.ResizeObserver)new ResizeObserver(fit).observe(g);}
+window.__sfKpiFit=fit;if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();})();</script>
+<style data-sf-repair="demo-controls-z">
+.demo-controls,#demoControls{z-index:10041!important}
+.caption-bar,#capBar{z-index:10040!important}
+html.sf-demo-on .wgt-modal-overlay.open,html.sf-demo-on .flow-modal.open{padding-bottom:var(--sf-demo-clear,220px)!important;box-sizing:border-box!important}
+html.sf-demo-on .wgt-modal-overlay.open .wgt-modal-dialog,html.sf-demo-on .flow-modal.open .flow-modal-dialog,html.sf-demo-on .flow-modal.open>.flow-dialog{max-height:calc(100vh - var(--sf-demo-clear,220px) - 32px)!important}
+</style>
+<script data-sf-repair="demo-controls-clear">(function(){
+  function vis(el){if(!el)return false;var cs=getComputedStyle(el);if(cs.display==='none'||cs.visibility==='hidden'||+cs.opacity===0)return false;var r=el.getBoundingClientRect();return r.width>0&&r.height>0;}
+  function update(){var c=document.querySelector('.demo-controls,#demoControls');var on=vis(c);var root=document.documentElement;
+    if(!on){root.classList.remove('sf-demo-on');return;}
+    var topY=c.getBoundingClientRect().top;var cap=document.querySelector('.caption-bar,#capBar');if(vis(cap))topY=Math.min(topY,cap.getBoundingClientRect().top);
+    var clear=Math.max(0,Math.ceil(window.innerHeight-topY)+16);root.style.setProperty('--sf-demo-clear',clear+'px');root.classList.add('sf-demo-on');}
+  function start(){update();var mo=new MutationObserver(update);mo.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','style'],childList:true,characterData:true});window.addEventListener('resize',update);}
+  window.__sfDemoClear=update;if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();</script>
+<style data-sf-repair="kpi-zoom-parity">
+
+html body .hp-ribbon{--sf-kpi-z:1!important;display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-content:flex-start!important;gap:16px!important}
+html body .hp-ribbon > .wgt-kpi-tile{flex:0 0 172px!important;width:172px!important;min-width:172px!important;max-width:172px!important;height:176px!important;min-height:176px!important;zoom:1!important;overflow:hidden!important}
+html body .hp-ribbon > .wgt-kpi-tile .wgt-kpi{min-width:0!important}
+</style>
+
+</head>
+<body>
+
+<header class="ids-masthead" role="banner">
+  <div class="mh-start">
+    <button class="mh-logo-btn" type="button" aria-label="Infor home"><img class="mh-logo-default" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAdCAYAAABWk2cPAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAHaADAAQAAAABAAAAHQAAAADeexZRAAABc0lEQVRIDe1WsU7DMBB9O+4ACpBIzG1+oIIPaKXyCYzd+ATWbnTrCH8AU2eWrukn8Ae0/QDqShkqNbY5WyRKJ+ykaZaclPic3N3zPfusI/An2yAI5OHwBJTeZd9ONirFKcBnmCRLHZPoFwJGUogYlIr0vC5B4BcEnhrQH9+PFcCoLrBiXAnw4OkslZSvxR8uOgkCgP3exSWkkKaRi0fRlg2HcDWfFz/9qyPFN/iUk8vZDK4XC6DdrnMA5upBez2Tndfvu7rm9s6ZdgYDqAKokZ1B8+VWUMjW90d4jOMKMZxcsUaXjWTqfJA6WCYXk0mendztIBmP87mN4gyqS0TXZyZys8lU67EReltQ6/0pY9jSW4Y1a5+WXmuqyhg2Qi/DtpMDMU2h1aL1BS/X69y2zN1LTJOdpt8YBdu6Mwgh7zTknGPP+3EGOANBPW9q9vQ2SZ4R+K1mYK4IecQkV0ebqRtvIcQ9gp+UaqXUijH2pVnVif0Cs8ZiV8EfxU8AAAAASUVORK5CYII=" width="28" height="28" alt="" aria-hidden="true"></button>
+    <button class="mh-icon-btn" type="button" aria-label="Application menu">
+      <svg viewBox="0 0 18 18" width="18" height="18" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.5C9.82843 5.5 10.5 4.82843 10.5 4C10.5 3.17157 9.82843 2.5 9 2.5C8.17157 2.5 7.5 3.17157 7.5 4C7.5 4.82843 8.17157 5.5 9 5.5ZM10.5 9C10.5 9.82843 9.82843 10.5 9 10.5C8.17157 10.5 7.5 9.82843 7.5 9C7.5 8.17157 8.17157 7.5 9 7.5C9.82843 7.5 10.5 8.17157 10.5 9ZM10.5 14C10.5 14.8284 9.82843 15.5 9 15.5C8.17157 15.5 7.5 14.8284 7.5 14C7.5 13.1716 8.17157 12.5 9 12.5C9.82843 12.5 10.5 13.1716 10.5 14ZM15.5 9C15.5 9.82843 14.8284 10.5 14 10.5C13.1716 10.5 12.5 9.82843 12.5 9C12.5 8.17157 13.1716 7.5 14 7.5C14.8284 7.5 15.5 8.17157 15.5 9ZM14 15.5C14.8284 15.5 15.5 14.8284 15.5 14C15.5 13.1716 14.8284 12.5 14 12.5C13.1716 12.5 12.5 13.1716 12.5 14C12.5 14.8284 13.1716 15.5 14 15.5ZM15.5 4C15.5 4.82843 14.8284 5.5 14 5.5C13.1716 5.5 12.5 4.82843 12.5 4C12.5 3.17157 13.1716 2.5 14 2.5C14.8284 2.5 15.5 3.17157 15.5 4ZM4 10.5C4.82843 10.5 5.5 9.82843 5.5 9C5.5 8.17157 4.82843 7.5 4 7.5C3.17157 7.5 2.5 8.17157 2.5 9C2.5 9.82843 3.17157 10.5 4 10.5ZM5.5 14C5.5 14.8284 4.82843 15.5 4 15.5C3.17157 15.5 2.5 14.8284 2.5 14C2.5 13.1716 3.17157 12.5 4 12.5C4.82843 12.5 5.5 13.1716 5.5 14ZM4 5.5C4.82843 5.5 5.5 4.82843 5.5 4C5.5 3.17157 4.82843 2.5 4 2.5C3.17157 2.5 2.5 3.17157 2.5 4C2.5 4.82843 3.17157 5.5 4 5.5Z" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="mh-tabs" role="tablist">
+    <div class="mh-tab" role="tab" aria-selected="true">
+      <span class="mh-tab-label">Hunter Fan — Windchill to PLM Migration Desk</span>
+      <span class="mh-tab-divider" aria-hidden="true"></span>
+      <button class="mh-tab-close" type="button" aria-label="Close tab">
+        <svg viewBox="0 0 18 18" width="18" height="18" fill="none" aria-hidden="true"><path d="M9 10.06L13.22 14.28L14.28 13.22L10.06 9L14.28 4.78L13.22 3.72L9 7.94L4.78 3.72L3.72 4.78L7.94 9L3.72 13.22L4.78 14.28L9 10.06Z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mh-end">
+    <button class="mh-icon-btn" type="button" aria-label="Search"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 8C3.5 5.51 5.51 3.5 8 3.5C10.49 3.5 12.5 5.51 12.5 8C12.5 10.49 10.49 12.5 8 12.5C5.51 12.5 3.5 10.49 3.5 8ZM8 2C4.69 2 2 4.69 2 8C2 11.31 4.69 14 8 14C9.39 14 10.66 13.53 11.68 12.74L14.97 16.03L16.03 14.97L12.74 11.68C13.53 10.66 14 9.39 14 8C14 4.69 11.31 2 8 2Z" fill="currentColor"/></svg></button>
+    <button class="mh-icon-btn" type="button" aria-label="Bookmarks"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 4.75C3.5 3.23 4.73 2 6.25 2H11.75C13.27 2 14.5 3.23 14.5 4.75V17.17L13.33 16.37L9 13.41L4.67 16.37L3.5 17.17V4.75ZM6.25 3.5C5.56 3.5 5 4.06 5 4.75V14.33L8.58 11.88L9 11.59L9.42 11.88L13 14.33V4.75C13 4.06 12.44 3.5 11.75 3.5H6.25Z" fill="currentColor"/></svg></button>
+    <button class="mh-icon-btn" type="button" aria-label="User profile"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 3C5.69 3 3 5.69 3 9C3 10.34 3.44 11.58 4.19 12.58C4.87 11.63 5.99 11 7.25 11H10.75C12.01 11 13.13 11.63 13.81 12.58C14.56 11.58 15 10.34 15 9C15 5.69 12.31 3 9 3ZM1.5 9C1.5 4.86 4.86 1.5 9 1.5C13.14 1.5 16.5 4.86 16.5 9C16.5 13.14 13.14 16.5 9 16.5C4.86 16.5 1.5 13.14 1.5 9ZM9 4.5C7.48 4.5 6.25 5.73 6.25 7.25C6.25 8.77 7.48 10 9 10C10.52 10 11.75 8.77 11.75 7.25C11.75 5.73 10.52 4.5 9 4.5Z" fill="currentColor"/></svg></button>
+  </div>
+</header>
+
+<main class="ids-home-page">
+  <h1 class="audible">Windchill to PLM Migration Desk</h1>
+  <div class="hp-title-row">
+    <div>
+      <div class="hp-title">Windchill to PLM Migration Desk</div>
+      <div class="hp-subtitle">Hunter Fan · Infor LN with PLM for Discrete · Wave 1 Coastal ceiling fans</div>
+    </div>
+    <div class="app-actions">
+      <button class="flow-btn-launch" id="flowBtn" type="button" aria-label="Open flow walkthrough">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Flow</span>
+      </button>
+      <button class="run-demo-btn" id="runDemoBtn" type="button">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M3 2v10l9-5-9-5z" fill="currentColor"/></svg>
+        <span id="runDemoLabel">Run demo</span>
+      </button>
+    </div>
+  </div>
+
+  
+  <nav class="hp-tabs-bar" role="tablist" aria-label="Migration desk tabs">
+    <button class="hp-tab-btn active" role="tab" data-tab="waves" onclick="switchTab('waves')">Waves <span class="hp-tab-count">4</span></button>
+    <button class="hp-tab-btn" role="tab" data-tab="mapping" onclick="switchTab('mapping')">Mapping <span class="hp-tab-count">42</span></button>
+    <button class="hp-tab-btn" role="tab" data-tab="exceptions" onclick="switchTab('exceptions')">Exceptions <span class="hp-tab-count">138</span></button>
+    <button class="hp-tab-btn" role="tab" data-tab="load" onclick="switchTab('load')">Load <span class="hp-tab-count">Fri</span></button>
+  </nav>
+
+  <div class="hp-widgets">
+
+    
+    <div class="hp-ribbon" role="group" aria-label="Wave 1 Coastal key metrics">
+      <div class="wgt-kpi-tile">
+        <div class="wgt-kpi">
+          <div class="wgt-kpi-icon"><span class="status-circle success"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.03 7.28L8.53 11.78L8 12.31L7.47 11.78L4.97 9.28L6.03 8.22L8 10.19L11.97 6.22L13.03 7.28Z" fill="currentColor"/></svg></span></div>
+          <div class="wgt-kpi-value">1,102</div>
+          <div class="wgt-kpi-title">Parts ready to load</div>
+          <div class="wgt-kpi-subtitle">of 1,240 Coastal parts</div>
+        </div>
+      </div>
+      <div class="wgt-kpi-tile">
+        <div class="wgt-kpi">
+          <div class="wgt-kpi-icon"><span class="status-circle warning"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.92 2.97C10.05 1.53 7.95 1.53 7.08 2.97L1.24 12.58C0.33 14.08 1.41 16 3.17 16H14.83C16.59 16 17.67 14.08 16.76 12.58L10.92 2.97ZM8 6.5H10L9.75 10.5H8.25L8 6.5ZM8 11.5H10V13.5H8V11.5Z" fill="currentColor"/></svg></span></div>
+          <div class="wgt-kpi-value">138</div>
+          <div class="wgt-kpi-title">Held with a reason</div>
+          <div class="wgt-kpi-subtitle">owner assigned to each</div>
+        </div>
+      </div>
+      <div class="wgt-kpi-tile">
+        <div class="wgt-kpi">
+          <div class="wgt-kpi-icon"><span class="status-circle info"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path d="M4 3h10v12H4z M6 6h6M6 9h6M6 12h4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></span></div>
+          <div class="wgt-kpi-value">3,860</div>
+          <div class="wgt-kpi-title">BOM lines</div>
+          <div class="wgt-kpi-subtitle">across 1,240 parts</div>
+        </div>
+      </div>
+      <div class="wgt-kpi-tile">
+        <div class="wgt-kpi">
+          <div class="wgt-kpi-icon"><span class="status-circle purple"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path d="M9 2L11 7L16 8L11 9L9 14L7 9L2 8L7 7L9 2Z" fill="currentColor"/></svg></span></div>
+          <div class="wgt-kpi-value">410</div>
+          <div class="wgt-kpi-title">Drawings linked</div>
+          <div class="wgt-kpi-subtitle">Windchill document export</div>
+        </div>
+      </div>
+      <div class="wgt-kpi-tile">
+        <div class="wgt-kpi">
+          <div class="wgt-kpi-icon"><span class="status-circle success"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.03 7.28L8.53 11.78L8 12.31L7.47 11.78L4.97 9.28L6.03 8.22L8 10.19L11.97 6.22L13.03 7.28Z" fill="currentColor"/></svg></span></div>
+          <div class="wgt-kpi-value">42 / 42</div>
+          <div class="wgt-kpi-title">Mappings confirmed</div>
+          <div class="wgt-kpi-subtitle">by Priya Shah</div>
+        </div>
+      </div>
+      <div class="wgt-kpi-tile">
+        <div class="wgt-kpi">
+          <div class="wgt-kpi-icon"><span class="status-circle info"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path d="M9 3v6l4 2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></span></div>
+          <div class="wgt-kpi-value">Fri</div>
+          <div class="wgt-kpi-title">Target load date</div>
+          <div class="wgt-kpi-subtitle">Dana Whitfield approves</div>
+        </div>
+      </div>
+      <div class="wgt-kpi-tile">
+        <div class="wgt-kpi">
+          <div class="wgt-kpi-icon"><span class="status-circle warning"><svg viewBox="0 0 18 18" width="18" height="18" fill="none"><path d="M9 3L15 15H3L9 3Z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M9 7v3M9 12v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+          <div class="wgt-kpi-value">11</div>
+          <div class="wgt-kpi-title">For Cal Draper to fix</div>
+          <div class="wgt-kpi-subtitle">9 broken BOMs, 2 loops</div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="hp-tab-pane active" id="pane-waves">
+
+      
+      <div class="hp-span6" style="grid-row:span 2">
+        <section class="wgt-card" aria-label="Wave 1 readiness">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <h2 class="wgt-title">Wave 1 can load 1,102 of 1,240 Coastal parts on Friday; 138 are held with a reason and an owner</h2>
+              <p class="wgt-subtitle">Readiness by check · Windchill part and BOM export plus the Coastal engineering spreadsheet</p>
+            </div>
+            <div class="wgt-actions">
+              <span class="ids-tag info">Wave 1 Coastal</span>
+              <button class="ids-button secondary" type="button" onclick="switchTab('load')">Open load preview</button>
+            </div>
+          </div>
+          <div class="wgt-content">
+            <div class="readiness-wrap">
+              <div class="readiness-row">
+                <div class="readiness-label">Ready to load<span class="readiness-sub">Parts, BOMs and drawings that pass every check</span></div>
+                <div class="readiness-track"><div class="readiness-fill ready" style="width:88.9%">1,102 parts</div></div>
+                <div class="readiness-count">88.9%</div>
+              </div>
+              <div class="readiness-row">
+                <div class="readiness-label">Duplicates<span class="readiness-sub">Same part in Windchill and the Coastal spreadsheet</span></div>
+                <div class="readiness-track"><div class="readiness-fill dupe" style="width:7.7%">96</div></div>
+                <div class="readiness-count">7.7%</div>
+              </div>
+              <div class="readiness-row">
+                <div class="readiness-label">Missing unit of measure<span class="readiness-sub">Agent fills from the item group default</span></div>
+                <div class="readiness-track"><div class="readiness-fill miss" style="width:2.5%">31</div></div>
+                <div class="readiness-count">2.5%</div>
+              </div>
+              <div class="readiness-row">
+                <div class="readiness-label">BOM references a missing part<span class="readiness-sub">Routed to Cal Draper, design engineer</span></div>
+                <div class="readiness-track"><div class="readiness-fill broken" style="width:0.7%">9</div></div>
+                <div class="readiness-count">0.7%</div>
+              </div>
+              <div class="readiness-row">
+                <div class="readiness-label">Circular BOM<span class="readiness-sub">Routed to Cal Draper for an engineering decision</span></div>
+                <div class="readiness-track"><div class="readiness-fill loop" style="width:0.2%">2</div></div>
+                <div class="readiness-count">0.2%</div>
+              </div>
+            </div>
+            <div class="row-between" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--ids-color-border-weaker)">
+              <div class="txt-sm txt-sec">Sources read today at 06:14 by the agent: <b>CoastalParts_Windchill_2026-04.csv</b> · <b>CoastalBOM_Windchill_2026-04.csv</b> · <b>CoastalDrawings_Windchill_2026-04.csv</b> · <b>Coastal_master_v18.xlsx</b></div>
+              <button class="ids-button tertiary" onclick="showAuditModal()">View audit trail</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span4 hp-rowspan2">
+        <section class="wgt-card" aria-label="All migration waves">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <h2 class="wgt-title">Four waves, one product line each</h2>
+              <p class="wgt-subtitle">Record counts, readiness and load date</p>
+            </div>
+          </div>
+          <div class="wgt-content flush">
+            <table class="ids-grid" aria-label="Migration waves">
+              <thead>
+                <tr>
+                  <th class="ids-grid-th">Wave</th>
+                  <th class="ids-grid-th r">Parts</th>
+                  <th class="ids-grid-th r">BOM lines</th>
+                  <th class="ids-grid-th r">Drawings</th>
+                  <th class="ids-grid-th">Readiness</th>
+                  <th class="ids-grid-th">Load date</th>
+                </tr>
+              </thead>
+              <tbody id="wavesBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span2">
+        <section class="wgt-card borderless" aria-label="My day">
+          <div class="wgt-header"><div class="wgt-titles"><h2 class="wgt-title">My Day</h2></div></div>
+          <div class="wgt-content">
+            <div class="myday">
+              <span class="ids-avatar" aria-label="Priya Shah">PS</span>
+              <p class="myday-greeting">Hello, <b>Priya</b></p>
+              <p class="myday-date">Data lead · Oct 8, 2026</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span2">
+        <section class="wgt-card" aria-label="Wave 1 at a glance">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <h2 class="wgt-title">Wave 1 Coastal</h2>
+              <p class="wgt-subtitle">52 inch ceiling fan family · 4 finishes</p>
+            </div>
+          </div>
+          <div class="wgt-content">
+            <div class="wave-grid">
+              <div class="wave-stat"><div class="wave-stat-val num">1,240</div><div class="wave-stat-lbl">Parts</div></div>
+              <div class="wave-stat"><div class="wave-stat-val num">3,860</div><div class="wave-stat-lbl">BOM lines</div></div>
+              <div class="wave-stat"><div class="wave-stat-val num">410</div><div class="wave-stat-lbl">Drawings</div></div>
+            </div>
+            <div style="padding:4px 0 0;border-top:1px solid var(--ids-color-border-weaker)">
+              <div class="txt-xs txt-tert" style="margin:10px 0 4px">Finishes in scope</div>
+              <div class="row" style="flex-wrap:wrap;gap:6px">
+                <span class="ids-tag neutral">Matte black</span>
+                <span class="ids-tag neutral">Brushed nickel</span>
+                <span class="ids-tag neutral">Fresh white</span>
+                <span class="ids-tag neutral">Driftwood</span>
+              </div>
+              <div class="txt-xs txt-tert" style="margin:10px 0 4px">Item families</div>
+              <div class="row" style="flex-wrap:wrap;gap:6px">
+                <span class="ids-tag neutral">Motor</span>
+                <span class="ids-tag neutral">Blade set</span>
+                <span class="ids-tag neutral">Light kit</span>
+                <span class="ids-tag neutral">Housing</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span4">
+        <section class="wgt-card" aria-label="Agent recommendation">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <h2 class="wgt-title">Agent recommendation</h2>
+              <p class="wgt-subtitle">Priya asked: "can wave 1 load on Friday?"</p>
+            </div>
+            <div class="wgt-actions"><span class="ids-tag purple">Human approves</span></div>
+          </div>
+          <div class="wgt-content no-scroll">
+            <div class="ai-rec">
+              <div class="ai-rec-gauge">
+                <svg class="ai-rec-gauge-svg" width="64" height="64" viewBox="0 0 72 72">
+                  <circle cx="36" cy="36" r="30" fill="none" stroke="#e0e0e1" stroke-width="8"/>
+                  <circle cx="36" cy="36" r="30" fill="none" stroke="#460daf" stroke-width="8" stroke-dasharray="167.5 188.5" stroke-dashoffset="47" transform="rotate(-90 36 36)" stroke-linecap="round"/>
+                  <text x="36" y="41" text-anchor="middle" font-size="15" font-weight="700" fill="#460daf">88.9%</text>
+                </svg>
+                <div class="ai-rec-gauge-info">
+                  <div class="ai-rec-conf">Load 1,102 on Friday</div>
+                  <div class="ai-rec-conf-lbl">Hold 138 with a reason and an owner</div>
+                </div>
+              </div>
+              <p class="ai-rec-rationale">Parts and BOMs that pass every check can load as planned. The 96 duplicates have a proposed merge; the 31 missing units will take the item group default. The 9 broken references and 2 loops need an engineering decision before they can go in.</p>
+              <div class="ai-rec-evidence">
+                <button class="ai-rec-evidence-item" type="button" onclick="showEvidence('wcpart')">Windchill part export</button>
+                <button class="ai-rec-evidence-item" type="button" onclick="showEvidence('wcbom')">Windchill BOM export</button>
+                <button class="ai-rec-evidence-item" type="button" onclick="showEvidence('sheet')">Coastal_master_v18.xlsx</button>
+                <button class="ai-rec-evidence-item" type="button" onclick="showEvidence('rulebook')">Mapping rules confirmed</button>
+              </div>
+              <div class="ai-rec-actions">
+                <button class="ids-button primary" type="button" onclick="switchTab('load')">Open load preview</button>
+                <button class="ids-button secondary" type="button" onclick="switchTab('exceptions')">Review 138 held</button>
+                <button class="ids-button tertiary" type="button" onclick="switchTab('mapping')">See mapping</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+    
+    <div class="hp-tab-pane" id="pane-mapping">
+
+      
+      <div class="hp-span6" style="grid-row:span 2">
+        <section class="wgt-card" aria-label="Mapping overview">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <h2 class="wgt-title">Every legacy column is pointed at a PLM field; 42 of 42 are confirmed by Priya</h2>
+              <p class="wgt-subtitle">The agent proposes the mapping and shows a sample; a person confirms it once</p>
+            </div>
+            <div class="wgt-actions">
+              <button class="ids-button secondary" onclick="exportMapping()">Export mapping sheet</button>
+            </div>
+          </div>
+          <div class="wgt-content flush">
+            <table class="ids-grid" aria-label="Column to field mapping">
+              <thead>
+                <tr>
+                  <th class="ids-grid-th">Legacy column</th>
+                  <th class="ids-grid-th">PLM field</th>
+                  <th class="ids-grid-th">Transformation</th>
+                  <th class="ids-grid-th">Sample</th>
+                  <th class="ids-grid-th r">Confidence</th>
+                  <th class="ids-grid-th">Status</th>
+                </tr>
+              </thead>
+              <tbody id="mappingBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span2">
+        <section class="wgt-card" aria-label="Target entities">
+          <div class="wgt-header"><div class="wgt-titles"><h2 class="wgt-title">Target entities in PLM</h2></div></div>
+          <div class="wgt-content">
+            <div class="stack" style="gap:14px">
+              <div>
+                <div class="ids-pb-label"><span>Item</span><span class="num">18 / 18 columns</span></div>
+                <div class="ids-pb-track"><div class="ids-pb-fill success" style="width:100%"></div></div>
+              </div>
+              <div>
+                <div class="ids-pb-label"><span>BOM line</span><span class="num">14 / 14 columns</span></div>
+                <div class="ids-pb-track"><div class="ids-pb-fill success" style="width:100%"></div></div>
+              </div>
+              <div>
+                <div class="ids-pb-label"><span>Document</span><span class="num">10 / 10 columns</span></div>
+                <div class="ids-pb-track"><div class="ids-pb-fill success" style="width:100%"></div></div>
+              </div>
+            </div>
+            <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--ids-color-border-weaker)">
+              <div class="txt-xs txt-tert" style="margin-bottom:6px">Source files</div>
+              <div class="txt-sm" style="line-height:1.6">CoastalParts (Windchill) · CoastalBOM (Windchill) · CoastalDrawings (Windchill) · Coastal_master_v18.xlsx</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span2">
+        <section class="wgt-card" aria-label="Confidence">
+          <div class="wgt-header"><div class="wgt-titles"><h2 class="wgt-title">Confidence spread</h2><p class="wgt-subtitle">Across 42 mapped columns</p></div></div>
+          <div class="wgt-content">
+            <div class="stack" style="gap:14px;margin-top:6px">
+              <div>
+                <div class="ids-pb-label"><span>High (95% and above)</span><span class="num">36</span></div>
+                <div class="ids-pb-track"><div class="ids-pb-fill success" style="width:85.7%"></div></div>
+              </div>
+              <div>
+                <div class="ids-pb-label"><span>Medium (85 to 94%)</span><span class="num">5</span></div>
+                <div class="ids-pb-track"><div class="ids-pb-fill warning" style="width:11.9%"></div></div>
+              </div>
+              <div>
+                <div class="ids-pb-label"><span>Low (below 85%)</span><span class="num">1</span></div>
+                <div class="ids-pb-track"><div class="ids-pb-fill error" style="width:2.4%"></div></div>
+              </div>
+            </div>
+            <div style="margin-top:14px;padding:10px 12px;background:var(--ids-color-purple-weakest);border-radius:6px">
+              <div class="txt-xs" style="color:var(--ids-ai-flat);font-weight:700;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">Agent note</div>
+              <div class="txt-sm txt-sec">The lone low-confidence column is "Life Cycle" from the Coastal spreadsheet. The agent proposed a mapping to the item status code; Priya confirmed it with an edit.</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span2">
+        <section class="wgt-card" aria-label="Who confirmed what">
+          <div class="wgt-header"><div class="wgt-titles"><h2 class="wgt-title">Who confirmed what</h2></div></div>
+          <div class="wgt-content flush">
+            <div class="ids-lv-body">
+              <div class="ids-lv-item">
+                <div class="ids-lv-area"><div class="ids-lv-title">Priya Shah</div><div class="ids-lv-desc">Confirmed 42 mappings · data lead</div></div>
+                <span class="ids-tag success">42</span>
+              </div>
+              <div class="ids-lv-item">
+                <div class="ids-lv-area"><div class="ids-lv-title">Cal Draper</div><div class="ids-lv-desc">Confirmed Material and Finish columns</div></div>
+                <span class="ids-tag info">2</span>
+              </div>
+              <div class="ids-lv-item">
+                <div class="ids-lv-area"><div class="ids-lv-title">Owen Vance</div><div class="ids-lv-desc">Confirmed UoM and routing fields</div></div>
+                <span class="ids-tag info">3</span>
+              </div>
+              <div class="ids-lv-item">
+                <div class="ids-lv-area"><div class="ids-lv-title">Dana Whitfield</div><div class="ids-lv-desc">Confirmed Life Cycle and item status</div></div>
+                <span class="ids-tag info">1</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+    
+    <div class="hp-tab-pane" id="pane-exceptions">
+
+      
+      <div class="hp-span6" style="grid-row:span 2">
+        <section class="wgt-card" aria-label="Exceptions queue">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <h2 class="wgt-title">138 records are held; the agent proposed a fix for every one and named an owner</h2>
+              <p class="wgt-subtitle">Accept, edit or route each one; nothing broken reaches PLM</p>
+            </div>
+            <div class="wgt-actions">
+              <button class="ids-button secondary" onclick="bulkAcceptMerges()">Accept all 96 merges</button>
+              <button class="ids-button secondary" onclick="bulkFillUom()">Fill all 31 units</button>
+            </div>
+          </div>
+          <div class="wgt-content flush">
+            <table class="ids-grid" aria-label="Exceptions">
+              <thead>
+                <tr>
+                  <th class="ids-grid-th">Record</th>
+                  <th class="ids-grid-th">Kind</th>
+                  <th class="ids-grid-th">Proposed fix</th>
+                  <th class="ids-grid-th">Owner</th>
+                  <th class="ids-grid-th">Due</th>
+                  <th class="ids-grid-th">Status</th>
+                </tr>
+              </thead>
+              <tbody id="exceptionsBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span2">
+        <section class="wgt-card" aria-label="Exceptions by kind">
+          <div class="wgt-header"><div class="wgt-titles"><h2 class="wgt-title">By kind</h2></div></div>
+          <div class="wgt-content">
+            <div class="stack" style="gap:14px;margin-top:6px">
+              <div><div class="ids-pb-label"><span>Duplicate across sources</span><span class="num">96</span></div><div class="ids-pb-track"><div class="ids-pb-fill warning" style="width:69.6%"></div></div></div>
+              <div><div class="ids-pb-label"><span>Missing unit of measure</span><span class="num">31</span></div><div class="ids-pb-track"><div class="ids-pb-fill warning" style="width:22.5%"></div></div></div>
+              <div><div class="ids-pb-label"><span>BOM references a missing part</span><span class="num">9</span></div><div class="ids-pb-track"><div class="ids-pb-fill error" style="width:6.5%"></div></div></div>
+              <div><div class="ids-pb-label"><span>Circular BOM</span><span class="num">2</span></div><div class="ids-pb-track"><div class="ids-pb-fill error" style="width:1.4%"></div></div></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span2">
+        <section class="wgt-card" aria-label="Workload per owner">
+          <div class="wgt-header"><div class="wgt-titles"><h2 class="wgt-title">Where the work sits</h2></div></div>
+          <div class="wgt-content flush">
+            <div class="ids-lv-body">
+              <div class="ids-lv-item">
+                <div class="ids-lv-area"><div class="ids-lv-title">Cal Draper</div><div class="ids-lv-desc">9 broken references, 2 loops · engineering decision</div></div>
+                <span class="ids-tag error">11</span>
+              </div>
+              <div class="ids-lv-item">
+                <div class="ids-lv-area"><div class="ids-lv-title">Priya Shah</div><div class="ids-lv-desc">96 duplicate merges to accept</div></div>
+                <span class="ids-tag warning">96</span>
+              </div>
+              <div class="ids-lv-item">
+                <div class="ids-lv-area"><div class="ids-lv-title">Agent (auto)</div><div class="ids-lv-desc">31 units filled from item group default</div></div>
+                <span class="ids-tag purple">31</span>
+              </div>
+              <div class="ids-lv-item">
+                <div class="ids-lv-area"><div class="ids-lv-title">Owen Vance</div><div class="ids-lv-desc">Watching for routing impact</div></div>
+                <span class="ids-tag info">0</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span2">
+        <section class="wgt-card" aria-label="Recent fixes">
+          <div class="wgt-header"><div class="wgt-titles"><h2 class="wgt-title">Fixes in the last hour</h2></div></div>
+          <div class="wgt-content flush">
+            <div class="ids-lv-body" id="recentFixes"></div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+    
+    <div class="hp-tab-pane" id="pane-load">
+
+      
+      <div class="hp-span6">
+        <section class="wgt-card" aria-label="Load preview">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <h2 class="wgt-title">Friday's load: 1,102 parts and 3,420 BOM lines go into PLM; the rest wait until their fix lands</h2>
+              <p class="wgt-subtitle">Preview the write before Dana Whitfield approves. The load uses the PLM for Discrete data service create actions.</p>
+            </div>
+            <div class="wgt-actions">
+              <button class="ids-button secondary" onclick="showLoadDryRunModal()">Dry run</button>
+              <button class="ids-button primary" onclick="showApproveModal()">Request approval</button>
+            </div>
+          </div>
+          <div class="wgt-content">
+            <div class="split-view">
+              <div class="split-pane">
+                <div class="split-pane-title">What goes into PLM</div>
+                <div style="border:1px solid var(--ids-color-border-weaker);border-radius:6px;padding:14px">
+                  <div class="row-between"><div class="txt-sm" style="font-weight:600">Items</div><div class="num" style="font-weight:700">1,102</div></div>
+                  <div class="load-bar">
+                    <div class="load-seg loaded" style="width:88.9%">1,102 loaded</div>
+                    <div class="load-seg held" style="width:11.1%">138 held</div>
+                  </div>
+                  <div class="row-between" style="margin-top:14px"><div class="txt-sm" style="font-weight:600">BOM lines</div><div class="num" style="font-weight:700">3,420</div></div>
+                  <div class="load-bar">
+                    <div class="load-seg loaded" style="width:88.6%">3,420 loaded</div>
+                    <div class="load-seg held" style="width:11.4%">440 held</div>
+                  </div>
+                  <div class="row-between" style="margin-top:14px"><div class="txt-sm" style="font-weight:600">Documents</div><div class="num" style="font-weight:700">398</div></div>
+                  <div class="load-bar">
+                    <div class="load-seg loaded" style="width:97.1%">398 loaded</div>
+                    <div class="load-seg held" style="width:2.9%">12 held</div>
+                  </div>
+                  <div class="load-legend" style="margin-top:8px">
+                    <span><span class="legend-sw" style="background:#2ac371"></span>Loaded</span>
+                    <span><span class="legend-sw" style="background:#f98300"></span>Held with a reason</span>
+                  </div>
+                </div>
+              </div>
+              <div class="split-pane">
+                <div class="split-pane-title">Approval and audit</div>
+                <div style="border:1px solid var(--ids-color-border-weaker);border-radius:6px;padding:14px">
+                  <dl class="mdl-facts">
+                    <dt>Wave</dt><dd>Wave 1 Coastal</dd>
+                    <dt>Target</dt><dd>Infor LN · PLM for Discrete</dd>
+                    <dt>Target environment</dt><dd>Production</dd>
+                    <dt>Prepared by</dt><dd>Priya Shah</dd>
+                    <dt>Approver</dt><dd>Dana Whitfield</dd>
+                    <dt>Scheduled</dt><dd>Fri 11 Oct, 20:00 CST</dd>
+                    <dt>Rollback</dt><dd>Snapshot before write</dd>
+                  </dl>
+                  <div style="margin-top:14px;padding:10px 12px;background:var(--ids-color-purple-weakest);border-radius:6px">
+                    <div class="txt-xs" style="color:var(--ids-ai-flat);font-weight:700;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">What the agent will write</div>
+                    <div class="txt-sm txt-sec">Create items in the Coastal item group, then build the BOM structure under each top assembly, then link the Windchill drawings as documents. Every record carries its source file and row number.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span4">
+        <section class="wgt-card" aria-label="Load result preview">
+          <div class="wgt-header">
+            <div class="wgt-titles">
+              <h2 class="wgt-title">Load result, record by record</h2>
+              <p class="wgt-subtitle">After the load runs, every record shows loaded or skipped with a reason</p>
+            </div>
+          </div>
+          <div class="wgt-content flush">
+            <table class="ids-grid" aria-label="Load results">
+              <thead>
+                <tr>
+                  <th class="ids-grid-th">Part</th>
+                  <th class="ids-grid-th">Description</th>
+                  <th class="ids-grid-th">Family</th>
+                  <th class="ids-grid-th">Finish</th>
+                  <th class="ids-grid-th">Result</th>
+                  <th class="ids-grid-th">Reason</th>
+                </tr>
+              </thead>
+              <tbody id="loadBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      
+      <div class="hp-span2">
+        <section class="wgt-card" aria-label="Approver">
+          <div class="wgt-header"><div class="wgt-titles"><h2 class="wgt-title">Approver</h2></div></div>
+          <div class="wgt-content">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px 0;text-align:center">
+              <span class="ids-avatar" style="width:64px;height:64px;font-size:24px;background:#460daf">DW</span>
+              <div class="txt-sm" style="font-weight:700;font-size:16px">Dana Whitfield</div>
+              <div class="txt-xs txt-tert">VP Product Engineering</div>
+              <span class="ids-tag info">Pending approval</span>
+            </div>
+            <div style="padding-top:12px;border-top:1px solid var(--ids-color-border-weaker);margin-top:4px">
+              <div class="row-between"><span class="txt-xs txt-tert">Request sent</span><span class="txt-sm" style="font-weight:600">Just now</span></div>
+              <div class="row-between" style="margin-top:6px"><span class="txt-xs txt-tert">Decision expected</span><span class="txt-sm" style="font-weight:600">Fri 11 Oct, 17:00</span></div>
+              <button class="ids-button primary" style="width:100%;margin-top:12px" onclick="showApproveModal()">Open approval packet</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+
+<div class="wgt-modal-overlay" id="modalWave" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalWave')"></div>
+  <div class="wgt-modal-dialog">
+    <header class="mdl-header">
+      <h2 class="wgt-modal-title" id="modalWaveTitle">Wave detail</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalWave')" aria-label="Close">✕</button>
+    </header>
+    <div class="mdl-body" id="modalWaveBody"></div>
+    <footer class="mdl-footer">
+      <button class="ids-button tertiary" onclick="closeWgtModal('modalWave')">Close</button>
+      <button class="ids-button secondary" onclick="switchTab('exceptions');closeWgtModal('modalWave')">Open exceptions</button>
+      <button class="ids-button primary" onclick="switchTab('load');closeWgtModal('modalWave')">Open load preview</button>
+    </footer>
+  </div>
+</div>
+
+
+<div class="wgt-modal-overlay" id="modalMapping" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalMapping')"></div>
+  <div class="wgt-modal-dialog" style="width:min(860px,75vw)">
+    <header class="mdl-header">
+      <h2 class="wgt-modal-title" id="modalMappingTitle">Column mapping</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalMapping')" aria-label="Close">✕</button>
+    </header>
+    <div class="mdl-body" id="modalMappingBody"></div>
+    <footer class="mdl-footer">
+      <button class="ids-button tertiary" onclick="closeWgtModal('modalMapping')">Cancel</button>
+      <button class="ids-button secondary" onclick="editMapping()">Edit</button>
+      <button class="ids-button primary" onclick="confirmMapping()">Confirm mapping</button>
+    </footer>
+  </div>
+</div>
+
+
+<div class="wgt-modal-overlay" id="modalException" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalException')"></div>
+  <div class="wgt-modal-dialog">
+    <header class="mdl-header">
+      <h2 class="wgt-modal-title" id="modalExceptionTitle">Exception</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalException')" aria-label="Close">✕</button>
+    </header>
+    <div class="mdl-body" id="modalExceptionBody"></div>
+    <footer class="mdl-footer">
+      <button class="ids-button tertiary" onclick="closeWgtModal('modalException')">Cancel</button>
+      <button class="ids-button danger" onclick="routeException()">Route to engineer</button>
+      <button class="ids-button secondary" onclick="editException()">Edit</button>
+      <button class="ids-button primary" onclick="acceptException()">Accept fix</button>
+    </footer>
+  </div>
+</div>
+
+
+<div class="wgt-modal-overlay" id="modalApprove" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalApprove')"></div>
+  <div class="wgt-modal-dialog" style="width:min(760px,75vw)">
+    <header class="mdl-header">
+      <h2 class="wgt-modal-title">Approval packet · Wave 1 Coastal</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalApprove')" aria-label="Close">✕</button>
+    </header>
+    <div class="mdl-body">
+      <p class="txt-sm" style="margin-bottom:14px;line-height:1.5">Releasing this wave writes 1,102 Coastal parts, 3,420 BOM lines and 398 drawings into PLM for Discrete. The load uses the PLM data service create actions and the structure generation call; every write is audited.</p>
+      <dl class="mdl-facts">
+        <dt>Wave</dt><dd>Wave 1 Coastal · 52 inch ceiling fans</dd>
+        <dt>Items</dt><dd class="num">1,102 to load · 138 held</dd>
+        <dt>BOM lines</dt><dd class="num">3,420 to load · 440 held</dd>
+        <dt>Drawings</dt><dd class="num">398 to load · 12 held</dd>
+        <dt>Target</dt><dd>Infor LN · PLM for Discrete · Production</dd>
+        <dt>Scheduled</dt><dd>Fri 11 Oct, 20:00 CST</dd>
+        <dt>Rollback</dt><dd>Snapshot before write · Priya Shah can trigger</dd>
+      </dl>
+      <div style="margin-top:14px" class="field-row">
+        <label class="field-label">Release note (goes into the audit trail)</label>
+        <textarea class="field-input">Wave 1 Coastal release. 42 of 42 mappings confirmed. 96 duplicates merged on Priya's accept-all. 31 units filled from item group default. 11 engineering holds routed to Cal Draper and will ride the next wave.</textarea>
+      </div>
+    </div>
+    <footer class="mdl-footer">
+      <button class="ids-button tertiary" onclick="closeWgtModal('modalApprove')">Cancel</button>
+      <button class="ids-button secondary" onclick="closeWgtModal('modalApprove')">Save draft</button>
+      <button class="ids-button primary" onclick="sendForApproval()">Send to Dana Whitfield</button>
+    </footer>
+  </div>
+</div>
+
+
+<div class="wgt-modal-overlay" id="modalDryRun" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalDryRun')"></div>
+  <div class="wgt-modal-dialog">
+    <header class="mdl-header">
+      <h2 class="wgt-modal-title">Dry run · last Thursday 22:04</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalDryRun')" aria-label="Close">✕</button>
+    </header>
+    <div class="mdl-body">
+      <p class="txt-sm" style="margin-bottom:14px;line-height:1.5">The agent ran the load against a sandbox copy of Production. No records were created in the live tenant; the result below is what the Friday run will do.</p>
+      <table class="ids-grid"><thead><tr><th class="ids-grid-th">Step</th><th class="ids-grid-th r">Records</th><th class="ids-grid-th">Elapsed</th><th class="ids-grid-th">Result</th></tr></thead><tbody>
+        <tr class="ids-grid-row"><td class="ids-grid-cell">Create items</td><td class="ids-grid-cell r num">1,102</td><td class="ids-grid-cell">6 min 42 s</td><td class="ids-grid-cell"><span class="ids-tag success">All created</span></td></tr>
+        <tr class="ids-grid-row"><td class="ids-grid-cell">Generate BOM structure</td><td class="ids-grid-cell r num">3,420</td><td class="ids-grid-cell">4 min 11 s</td><td class="ids-grid-cell"><span class="ids-tag success">All created</span></td></tr>
+        <tr class="ids-grid-row"><td class="ids-grid-cell">Link documents</td><td class="ids-grid-cell r num">398</td><td class="ids-grid-cell">1 min 08 s</td><td class="ids-grid-cell"><span class="ids-tag success">All linked</span></td></tr>
+        <tr class="ids-grid-row"><td class="ids-grid-cell">Write audit entries</td><td class="ids-grid-cell r num">4,920</td><td class="ids-grid-cell">0 min 22 s</td><td class="ids-grid-cell"><span class="ids-tag success">All written</span></td></tr>
+      </tbody></table>
+    </div>
+    <footer class="mdl-footer">
+      <button class="ids-button primary" onclick="closeWgtModal('modalDryRun')">Close</button>
+    </footer>
+  </div>
+</div>
+
+
+<div class="wgt-modal-overlay" id="modalAudit" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalAudit')"></div>
+  <div class="wgt-modal-dialog">
+    <header class="mdl-header">
+      <h2 class="wgt-modal-title">Migration audit trail</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalAudit')" aria-label="Close">✕</button>
+    </header>
+    <div class="mdl-body">
+      <table class="ids-grid" aria-label="Audit events">
+        <thead><tr><th class="ids-grid-th">When</th><th class="ids-grid-th">Actor</th><th class="ids-grid-th">Event</th><th class="ids-grid-th">Record</th></tr></thead>
+        <tbody id="auditBody"></tbody>
+      </table>
+    </div>
+    <footer class="mdl-footer">
+      <button class="ids-button secondary" onclick="exportAudit()">Export CSV</button>
+      <button class="ids-button primary" onclick="closeWgtModal('modalAudit')">Close</button>
+    </footer>
+  </div>
+</div>
+
+
+<div class="wgt-modal-overlay" id="modalEvidence" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wgt-modal-backdrop" onclick="closeWgtModal('modalEvidence')"></div>
+  <div class="wgt-modal-dialog" style="width:min(720px,75vw)">
+    <header class="mdl-header">
+      <h2 class="wgt-modal-title" id="modalEvidenceTitle">Evidence</h2>
+      <button class="wgt-modal-close" onclick="closeWgtModal('modalEvidence')" aria-label="Close">✕</button>
+    </header>
+    <div class="mdl-body" id="modalEvidenceBody"></div>
+    <footer class="mdl-footer">
+      <button class="ids-button primary" onclick="closeWgtModal('modalEvidence')">Close</button>
+    </footer>
+  </div>
+</div>
+
+
+<div class="flow-modal" id="flowModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="flow-backdrop" onclick="PLMCloseFlow()"></div>
+  <div class="flow-dialog">
+    <header class="flow-header">
+      <div>
+        <div class="flow-eyebrow">Windchill to PLM migration agent</div>
+        <h2 class="flow-title" id="flowTitle">How the migration desk works</h2>
+        <div class="flow-subtitle">Five stages, from legacy export to a clean PLM load</div>
+      </div>
+      <button class="flow-close" onclick="PLMCloseFlow()" aria-label="Close">✕</button>
+    </header>
+    <div class="flow-stage">
+      <div class="flow-canvas" id="flowCanvas">
+        <svg class="flow-paths" id="flowPaths"></svg>
+        <div class="flow-nodes" id="flowNodes"></div>
+        <div class="flow-outcomes" id="flowOutcomes">
+          <div class="stage-name">Wave 1 outcome</div>
+          <div class="flow-outcomes-grid">
+            <div class="flow-outcome-stat"><div class="num">1,102</div><div class="lbl">Parts loaded</div></div>
+            <div class="flow-outcome-stat"><div class="num">138</div><div class="lbl">Held with reason</div></div>
+            <div class="flow-outcome-stat"><div class="num">0</div><div class="lbl">Bad records in PLM</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flow-caption-bar">
+      <div class="flow-step-label" id="flowStepLabel">Stage 1 of 5</div>
+      <div class="flow-step-text" id="flowStepText">…</div>
+      <div class="flow-app-callout" id="flowAppCallout">…</div>
+    </div>
+    <div class="flow-controls">
+      <button class="flow-btn" id="flowPrev">◀ Prev</button>
+      <button class="flow-btn" id="flowPlay">⏸ Pause</button>
+      <div class="flow-progress"><div class="flow-progress-fill" id="flowProgressFill" style="width:0%"></div></div>
+      <button class="flow-btn primary" id="flowNext">Next ▶</button>
+    </div>
+  </div>
+</div>
+
+
+<button class="smp-launcher" type="button" aria-label="Open assistant" onclick="openSmartPanel()">
+  <svg width="24" height="24" viewBox="0 0 18 18" fill="none">
+    <g clip-path="url(#clipSmpLauncher)">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M0.703125 9.84002C0.703125 11.8992 1.53966 13.7645 2.89121 15.1145L0.70893 17.2969L7.78649 17.2953C7.84488 17.2953 7.90288 17.2957 7.96252 17.2961C8.02568 17.2965 8.0907 17.2969 8.16003 17.2969C12.2756 17.2969 15.6166 13.9554 15.6166 9.84002C15.6166 5.72428 12.2756 2.38285 8.16003 2.38285C4.04443 2.38285 0.703125 5.72428 0.703125 9.84002Z" fill="#4600AF"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M13.3125 2.92014C13.2388 2.89976 13.187 2.83456 13.187 2.75713C13.187 2.67969 13.2388 2.61449 13.3125 2.59411L14.3745 2.32105C14.4785 2.29253 14.573 2.23957 14.6492 2.16214C14.725 2.08878 14.7788 1.99097 14.8057 1.88908L15.0799 0.825387C15.0991 0.75203 15.1659 0.703126 15.2421 0.703126C15.3183 0.703126 15.3848 0.75203 15.4039 0.825387L15.6782 1.88908C15.7051 1.99097 15.7593 2.08878 15.8351 2.16214C15.9109 2.23957 16.0058 2.29253 16.1094 2.32105L17.1718 2.59411C17.2455 2.61449 17.2969 2.67969 17.2969 2.75713C17.2969 2.83456 17.2455 2.89976 17.1718 2.92014L16.1094 3.1932C16.0058 3.21765 15.9109 3.2747 15.8351 3.34805C15.7593 3.42549 15.7051 3.51921 15.6782 3.62517L15.4039 4.68477C15.3848 4.75812 15.3183 4.81113 15.2421 4.81113C15.1659 4.81113 15.0991 4.75812 15.0799 4.68477L14.8057 3.62517C14.7788 3.51921 14.725 3.42549 14.6492 3.34805C14.573 3.2747 14.4785 3.21765 14.3745 3.1932L13.3125 2.92014Z" fill="#4600AF"/>
+    </g>
+    <defs><clipPath id="clipSmpLauncher"><rect width="18" height="18" fill="white"/></clipPath></defs>
+  </svg>
+</button>
+
+<aside class="smp-panel" id="smpPanel" aria-hidden="true">
+  <div class="smp-toolbar">
+    <span class="smp-toolbar-title">Migration assistant</span>
+    <button class="smp-close" onclick="closeSmartPanel()" aria-label="Close assistant">✕</button>
+  </div>
+  <div class="smp-content" id="smpContent">
+    <div class="smp-onboarding" id="smpOnboarding">
+      <div class="smp-onboarding-icon" style="width:64px;height:64px;border-radius:50%;background:var(--ids-color-purple-weakest);display:flex;align-items:center;justify-content:center;color:var(--ids-ai-flat)">
+        <svg width="32" height="32" viewBox="0 0 18 18" fill="none"><path d="M9 2L11 7L16 8L11 9L9 14L7 9L2 8L7 7L9 2Z" fill="currentColor"/></svg>
+      </div>
+      <h2 style="font-size:20px;font-weight:600">What do you want to know about Wave 1?</h2>
+      <p class="txt-sm txt-tert">Ask about a wave, a mapping, a duplicate or a BOM loop.</p>
+      <div class="smp-chips">
+        <button class="smp-suggestion-chip" onclick="smpAsk('Can wave 1 load on Friday?')">Can wave 1 load on Friday?</button>
+        <button class="smp-suggestion-chip" onclick="smpAsk('What are the two circular BOMs?')">The two BOM loops</button>
+        <button class="smp-suggestion-chip" onclick="smpAsk('How did you decide the duplicate merges?')">How are duplicates merged?</button>
+      </div>
+    </div>
+    <div class="smp-message-list" id="smpMessages" style="display:none"></div>
+    <div class="smp-chat-input" style="margin-top:auto">
+      <input type="text" id="smpInput" placeholder="Ask the migration agent..." onkeydown="if(event.key==='Enter'){smpAsk(this.value);this.value='';}">
+      <button type="button" onclick="var i=document.getElementById('smpInput');smpAsk(i.value);i.value='';" aria-label="Send">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M2 9L16 3L10 15L9 10L2 9Z" fill="currentColor"/></svg>
+      </button>
+    </div>
+    <div class="smp-warning">Agent answers show the evidence; verify before you approve.</div>
+  </div>
+</aside>
+
+
+<div class="demo-controls" id="demoControls">
+  <button class="demo-btn" id="idsDemoPrev" title="Previous step">◀</button>
+  <button class="demo-btn play" id="idsDemoPlay" title="Pause / resume">⏸</button>
+  <button class="demo-btn" id="idsDemoNext" title="Next step">▶</button>
+  <button class="demo-btn" id="idsDemoStop" title="Stop demo">■</button>
+  <span class="demo-status" id="idsDemoStatus">Demo running</span>
+</div>
+<div class="caption-bar" id="capBar">
+  <div class="caption-step" id="capStep">Step 1 of 10</div>
+  <div id="capText">…</div>
+</div>
+
+<script>
+"use strict";
+
+
+function openWgtModal(id){var el=document.getElementById(id);if(!el)return;el.classList.add('open');el.setAttribute('aria-hidden','false');}
+function closeWgtModal(id){var el=document.getElementById(id);if(!el)return;el.classList.remove('open');el.setAttribute('aria-hidden','true');}
+window.openWgtModal=openWgtModal;window.closeWgtModal=closeWgtModal;
+
+
+function openSmartPanel(){var p=document.getElementById('smpPanel');p.classList.add('open');p.setAttribute('aria-hidden','false');var l=document.querySelector('.smp-launcher');if(l)l.style.display='none';}
+function closeSmartPanel(){var p=document.getElementById('smpPanel');p.classList.remove('open');p.setAttribute('aria-hidden','true');var l=document.querySelector('.smp-launcher');if(l)l.style.display='';}
+window.openSmartPanel=openSmartPanel;window.closeSmartPanel=closeSmartPanel;
+
+function smpAsk(q){
+  if(!q||!q.trim())return;
+  document.getElementById('smpOnboarding').style.display='none';
+  var list=document.getElementById('smpMessages');list.style.display='flex';
+  var a="Wave 1 can load 1,102 parts and 3,420 BOM lines on Friday. 138 records are held: 96 duplicates with a merge, 31 missing units the agent will fill from the item group default, 9 BOMs that reference a part that is not in the file, and 2 circular BOMs. The 11 engineering holds are routed to Cal Draper.";
+  if(/loop|circular/i.test(q)) a="Two loops. Fan assembly C52-MB references its own motor sub-assembly M52-MB, which references the fan. Second loop is in the light kit L52 wiring harness and its driver board. Both are routed to Cal Draper for an engineering decision; neither will load until a person breaks the loop.";
+  else if(/duplic|merge/i.test(q)) a="A duplicate is a part that appears in both the Windchill part export and the Coastal spreadsheet with the same part number. The agent keeps the Windchill record as the master, carries over any description or finish present only in the spreadsheet, and shows the diff for a person to accept. Priya accepted all 96 in one click after reviewing a sample of 10.";
+  list.innerHTML+='<div class="smp-message user"><div class="smp-bubble">'+q+'</div></div><div class="smp-message ai"><div class="smp-bubble">'+a+'</div></div>';
+}
+window.smpAsk=smpAsk;
+
+
+function switchTab(name){
+  document.querySelectorAll('.hp-tab-btn').forEach(function(b){b.classList.toggle('active',b.dataset.tab===name);});
+  document.querySelectorAll('.hp-tab-pane').forEach(function(p){p.classList.toggle('active',p.id==='pane-'+name);});
+}
+window.switchTab=switchTab;
+
+
+var WAVES=[
+  {id:1,name:"Wave 1 Coastal",desc:"Coastal 52 inch ceiling fan family",parts:1240,bom:3860,drawings:410,ready:1102,held:138,load:"Fri 11 Oct",status:"Awaiting approval",statusCls:"info"},
+  {id:2,name:"Wave 2 Aria",desc:"Aria 44 inch smart fan",parts:980,bom:3140,drawings:360,ready:0,held:0,load:"Fri 25 Oct",status:"Reading sources",statusCls:"neutral"},
+  {id:3,name:"Wave 3 Summit",desc:"Summit 60 inch outdoor",parts:1420,bom:4260,drawings:480,ready:0,held:0,load:"Fri 15 Nov",status:"Scheduled",statusCls:"neutral"},
+  {id:4,name:"Wave 4 Atlas",desc:"Atlas 8 foot industrial",parts:2180,bom:6540,drawings:720,ready:0,held:0,load:"Fri 06 Dec",status:"Scheduled",statusCls:"neutral"}
+];
+
+var MAPPINGS=[
+  {src:"PART_NUMBER (Windchill)",tgt:"Item.ItemCode",tx:"Trim, uppercase",sample:"C52-MB-ROTOR-001",conf:99,entity:"Item"},
+  {src:"DESCRIPTION (Windchill)",tgt:"Item.Description",tx:"Trim, title case",sample:"Rotor assembly, 52 inch, matte black",conf:98,entity:"Item"},
+  {src:"UOM (Windchill)",tgt:"Item.UnitOfMeasure",tx:"Map to LN UOM code",sample:"EA",conf:97,entity:"Item"},
+  {src:"PART_TYPE (Windchill)",tgt:"Item.ItemGroup",tx:"Lookup in group map",sample:"MOTOR_ASSY",conf:96,entity:"Item"},
+  {src:"FINISH (spreadsheet)",tgt:"Item.FinishCode",tx:"Finish lookup",sample:"Matte Black → MB",conf:95,entity:"Item"},
+  {src:"PARENT_PN (Windchill BOM)",tgt:"BOM.ParentItem",tx:"Trim, uppercase",sample:"C52-MB-ASY",conf:99,entity:"BOM"},
+  {src:"CHILD_PN (Windchill BOM)",tgt:"BOM.ChildItem",tx:"Trim, uppercase",sample:"C52-MB-BLADE-SET",conf:99,entity:"BOM"},
+  {src:"QUANTITY (Windchill BOM)",tgt:"BOM.Quantity",tx:"To number",sample:"1",conf:98,entity:"BOM"},
+  {src:"FIND_NUMBER (Windchill BOM)",tgt:"BOM.Position",tx:"To integer",sample:"20",conf:94,entity:"BOM"},
+  {src:"DRAWING_NUMBER (Windchill)",tgt:"Document.DocumentCode",tx:"Trim",sample:"C52-MB-DWG-004",conf:97,entity:"Document"},
+  {src:"REV (Windchill)",tgt:"Document.Revision",tx:"Letter uppercase",sample:"B",conf:98,entity:"Document"},
+  {src:"FILE_PATH (Windchill)",tgt:"Document.StorageRef",tx:"Rewrite to PLM vault path",sample:"/vault/coastal/c52-mb-dwg-004.pdf",conf:92,entity:"Document"},
+  {src:"LIFE_CYCLE (spreadsheet)",tgt:"Item.StatusCode",tx:"Status map (confirmed by Dana)",sample:"Released → 20",conf:82,entity:"Item"},
+  {src:"MATERIAL (spreadsheet)",tgt:"Item.MaterialCode",tx:"Material lookup",sample:"Steel 1018",conf:93,entity:"Item"}
+];
+
+var EXCEPTIONS=[
+  {rec:"C52-MB-MOTOR-100",kind:"Duplicate",fix:"Merge · keep Windchill master, carry spreadsheet finish",owner:"Priya Shah",due:"Thu 10 Oct",status:"Proposed",statusCls:"info"},
+  {rec:"C52-MB-BLADE-002",kind:"Duplicate",fix:"Merge · keep Windchill master",owner:"Priya Shah",due:"Thu 10 Oct",status:"Proposed",statusCls:"info"},
+  {rec:"C52-BN-LIGHT-040",kind:"Duplicate",fix:"Merge · keep Windchill master",owner:"Priya Shah",due:"Thu 10 Oct",status:"Proposed",statusCls:"info"},
+  {rec:"C52-FW-HOUSING-012",kind:"Missing UoM",fix:"Fill with EA from item group default",owner:"Agent",due:"Auto",status:"Ready to apply",statusCls:"success"},
+  {rec:"C52-MB-SCREW-018",kind:"Missing UoM",fix:"Fill with EA from item group default",owner:"Agent",due:"Auto",status:"Ready to apply",statusCls:"success"},
+  {rec:"C52-MB-WIRE-200",kind:"Missing UoM",fix:"Fill with M from item group default",owner:"Agent",due:"Auto",status:"Ready to apply",statusCls:"success"},
+  {rec:"BOM C52-MB-ASY line 14",kind:"Broken reference",fix:"Child C52-MB-GASKET-X not in file; needs decision",owner:"Cal Draper",due:"Wed 09 Oct",status:"Routed",statusCls:"error"},
+  {rec:"BOM C52-BN-ASY line 7",kind:"Broken reference",fix:"Child C52-BN-SCREW-99 not in file",owner:"Cal Draper",due:"Wed 09 Oct",status:"Routed",statusCls:"error"},
+  {rec:"BOM L52 wiring",kind:"Circular BOM",fix:"Loop: L52 references driver D44, which references L52",owner:"Cal Draper",due:"Wed 09 Oct",status:"Routed",statusCls:"error"},
+  {rec:"BOM C52-MB-ASY",kind:"Circular BOM",fix:"Loop: fan references motor M52-MB, which references fan",owner:"Cal Draper",due:"Wed 09 Oct",status:"Routed",statusCls:"error"},
+  {rec:"C52-FW-GRILL-005",kind:"Duplicate",fix:"Merge · keep Windchill master",owner:"Priya Shah",due:"Thu 10 Oct",status:"Proposed",statusCls:"info"}
+];
+
+var RECENT_FIXES=[
+  {who:"Agent",what:"Filled EA for C52-MB-SCREW-018",when:"4 min ago",cls:"success"},
+  {who:"Priya Shah",what:"Accepted merge of C52-MB-MOTOR-100",when:"11 min ago",cls:"info"},
+  {who:"Cal Draper",what:"Opened loop on BOM C52-MB-ASY",when:"18 min ago",cls:"warning"},
+  {who:"Priya Shah",what:"Accepted all 96 duplicate merges",when:"23 min ago",cls:"info"}
+];
+
+var LOAD_PREVIEW=[
+  {pn:"C52-MB-ASY",desc:"Coastal 52 fan assembly",fam:"Housing",fin:"Matte black",result:"loaded",reason:"All checks passed"},
+  {pn:"C52-MB-MOTOR-100",desc:"Motor assembly",fam:"Motor",fin:"Matte black",result:"loaded",reason:"Merged from Windchill master"},
+  {pn:"C52-MB-BLADE-SET",desc:"Blade set, five blades",fam:"Blade set",fin:"Matte black",result:"loaded",reason:"All checks passed"},
+  {pn:"C52-BN-ASY",desc:"Coastal 52 fan assembly",fam:"Housing",fin:"Brushed nickel",result:"loaded",reason:"All checks passed"},
+  {pn:"C52-FW-LIGHT-040",desc:"Light kit, three bulb",fam:"Light kit",fin:"Fresh white",result:"loaded",reason:"All checks passed"},
+  {pn:"C52-FW-HOUSING-012",desc:"Housing shell",fam:"Housing",fin:"Fresh white",result:"loaded",reason:"UoM filled with EA from item group default"},
+  {pn:"C52-MB-GASKET-X",desc:"Motor gasket (missing)",fam:"Motor",fin:"Matte black",result:"skipped",reason:"BOM references a part not in file; routed to Cal Draper"},
+  {pn:"L52",desc:"Light kit assembly",fam:"Light kit",fin:"Brushed nickel",result:"skipped",reason:"Circular BOM; routed to Cal Draper"},
+  {pn:"C52-BN-WIRE-200",desc:"Wiring harness",fam:"Light kit",fin:"Brushed nickel",result:"loaded",reason:"UoM filled with M from item group default"}
+];
+
+var AUDIT=[
+  {when:"Oct 8, 10:12",actor:"Priya Shah",event:"Confirmed Finish mapping",rec:"Item.FinishCode"},
+  {when:"Oct 8, 10:04",actor:"Priya Shah",event:"Accepted all 96 duplicate merges",rec:"Wave 1"},
+  {when:"Oct 8, 09:48",actor:"Cal Draper",event:"Opened loop review on fan to motor",rec:"BOM C52-MB-ASY"},
+  {when:"Oct 8, 09:21",actor:"Agent",event:"Filled 31 missing units from item group",rec:"Wave 1 items"},
+  {when:"Oct 8, 06:14",actor:"Agent",event:"Read Windchill part and BOM exports",rec:"Wave 1 sources"},
+  {when:"Oct 7, 22:04",actor:"Agent",event:"Dry run against HFAN-SBX · all green",rec:"Wave 1"},
+  {when:"Oct 7, 17:30",actor:"Priya Shah",event:"Confirmed 40 of 42 mappings",rec:"Wave 1 mapping"},
+  {when:"Oct 7, 15:12",actor:"Dana Whitfield",event:"Confirmed Life Cycle to StatusCode map",rec:"Item.StatusCode"}
+];
+
+var EVIDENCE={
+  wcpart:{title:"Windchill part export",body:"CoastalParts_Windchill_2026-04.csv · 1,312 rows, 24 columns, exported 04 Oct 2026. Read by the agent 08 Oct 06:14. SHA256: 2b1a7e...c441."},
+  wcbom:{title:"Windchill BOM export",body:"CoastalBOM_Windchill_2026-04.csv · 4,018 rows, 18 columns, exported 04 Oct 2026. The agent detected 158 extra lines that are deprecated under Windchill lifecycle Obsolete; those are excluded from the wave."},
+  sheet:{title:"Coastal_master_v18.xlsx",body:"Priya's engineering spreadsheet, sheet BOM, header row 2, 1,418 rows. 96 part numbers match the Windchill export; 54 are spreadsheet-only draft parts not in scope for wave 1."},
+  rulebook:{title:"Mapping rulebook",body:"42 column rules confirmed, each one tagged with who confirmed it and when. The rulebook rides every wave; new columns in later waves add to it rather than overwriting it."}
+};
+
+
+function renderWaves(){
+  var pct=function(w){return w.parts?Math.round(w.ready/w.parts*1000)/10:0;};
+  document.getElementById('wavesBody').innerHTML=WAVES.map(function(w){
+    var r=pct(w);
+    return '<tr class="ids-grid-row"><td class="ids-grid-cell"><button class="ids-hyperlink" type="button" onclick="showWaveModal('+w.id+')">'+w.name+'</button></td>'+
+      '<td class="ids-grid-cell r num">'+w.parts.toLocaleString()+'</td>'+
+      '<td class="ids-grid-cell r num">'+w.bom.toLocaleString()+'</td>'+
+      '<td class="ids-grid-cell r num">'+w.drawings.toLocaleString()+'</td>'+
+      '<td class="ids-grid-cell"><div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:8px;background:var(--ids-color-neutral-20);border-radius:4px;overflow:hidden;min-width:80px"><div style="height:100%;width:'+r+'%;background:'+(r>80?'var(--ids-color-success-default)':r>0?'var(--ids-color-warning-default)':'var(--ids-color-neutral-30)')+'"></div></div><span class="num" style="font-weight:600;font-size:13px;min-width:46px;text-align:right">'+(r?r.toFixed(1)+'%':'—')+'</span></div></td>'+
+      '<td class="ids-grid-cell"><span class="ids-tag '+w.statusCls+'">'+w.load+'</span></td></tr>';
+  }).join('');
+}
+renderWaves();
+
+function renderMapping(){
+  var cls=function(c){return c>=95?'conf-high':c>=85?'conf-med':'conf-low';};
+  document.getElementById('mappingBody').innerHTML=MAPPINGS.map(function(m,i){
+    return '<tr class="ids-grid-row"><td class="ids-grid-cell"><button class="ids-hyperlink" type="button" onclick="showMappingModal('+i+')">'+m.src+'</button></td>'+
+      '<td class="ids-grid-cell mono">'+m.tgt+'</td>'+
+      '<td class="ids-grid-cell">'+m.tx+'</td>'+
+      '<td class="ids-grid-cell mono">'+m.sample+'</td>'+
+      '<td class="ids-grid-cell r"><span class="conf-pill '+cls(m.conf)+'">'+m.conf+'%</span></td>'+
+      '<td class="ids-grid-cell"><span class="ids-tag success">Confirmed</span></td></tr>';
+  }).join('');
+}
+renderMapping();
+
+function renderExceptions(){
+  document.getElementById('exceptionsBody').innerHTML=EXCEPTIONS.map(function(e,i){
+    return '<tr class="ids-grid-row"><td class="ids-grid-cell mono"><button class="ids-hyperlink" type="button" onclick="showExceptionModal('+i+')">'+e.rec+'</button></td>'+
+      '<td class="ids-grid-cell">'+e.kind+'</td>'+
+      '<td class="ids-grid-cell">'+e.fix+'</td>'+
+      '<td class="ids-grid-cell">'+e.owner+'</td>'+
+      '<td class="ids-grid-cell">'+e.due+'</td>'+
+      '<td class="ids-grid-cell"><span class="ids-tag '+e.statusCls+'">'+e.status+'</span></td></tr>';
+  }).join('');
+}
+renderExceptions();
+
+function renderRecentFixes(){
+  document.getElementById('recentFixes').innerHTML=RECENT_FIXES.map(function(f){
+    return '<div class="ids-lv-item"><div class="ids-lv-area"><div class="ids-lv-title">'+f.who+'</div><div class="ids-lv-desc">'+f.what+'</div></div><span class="ids-tag '+f.cls+'">'+f.when+'</span></div>';
+  }).join('');
+}
+renderRecentFixes();
+
+function renderLoadPreview(){
+  document.getElementById('loadBody').innerHTML=LOAD_PREVIEW.map(function(r){
+    var tag=r.result==='loaded'?'<span class="ids-tag success">Loaded</span>':'<span class="ids-tag error">Skipped</span>';
+    return '<tr class="ids-grid-row"><td class="ids-grid-cell mono">'+r.pn+'</td>'+
+      '<td class="ids-grid-cell">'+r.desc+'</td>'+
+      '<td class="ids-grid-cell">'+r.fam+'</td>'+
+      '<td class="ids-grid-cell">'+r.fin+'</td>'+
+      '<td class="ids-grid-cell">'+tag+'</td>'+
+      '<td class="ids-grid-cell">'+r.reason+'</td></tr>';
+  }).join('');
+}
+renderLoadPreview();
+
+
+function showWaveModal(id){
+  var w=WAVES.find(function(x){return x.id===id;});if(!w)return;
+  document.getElementById('modalWaveTitle').textContent=w.name;
+  document.getElementById('modalWaveBody').innerHTML='<div class="row-between" style="margin-bottom:14px"><div><div style="font-size:18px;font-weight:700">'+w.desc+'</div><div class="txt-sm txt-tert">Scheduled '+w.load+'</div></div></div>'+
+    '<div class="wave-grid" style="margin-bottom:16px"><div class="wave-stat"><div class="wave-stat-val num">'+w.parts.toLocaleString()+'</div><div class="wave-stat-lbl">Parts</div></div><div class="wave-stat"><div class="wave-stat-val num">'+w.bom.toLocaleString()+'</div><div class="wave-stat-lbl">BOM lines</div></div><div class="wave-stat"><div class="wave-stat-val num">'+w.drawings.toLocaleString()+'</div><div class="wave-stat-lbl">Drawings</div></div></div>'+
+    '<dl class="mdl-facts"><dt>Ready to load</dt><dd class="num">'+w.ready.toLocaleString()+'</dd><dt>Held with a reason</dt><dd class="num">'+w.held.toLocaleString()+'</dd><dt>Target</dt><dd>Infor LN · PLM for Discrete · Production</dd><dt>Approver</dt><dd>Dana Whitfield</dd><dt>Prepared by</dt><dd>Priya Shah</dd></dl>';
+  openWgtModal('modalWave');
+}
+window.showWaveModal=showWaveModal;
+
+function showMappingModal(i){
+  var m=MAPPINGS[i];
+  document.getElementById('modalMappingTitle').textContent=m.src;
+  document.getElementById('modalMappingBody').innerHTML='<dl class="mdl-facts"><dt>Target</dt><dd class="mono">'+m.tgt+'</dd><dt>Entity</dt><dd>'+m.entity+'</dd><dt>Transformation</dt><dd>'+m.tx+'</dd><dt>Sample value</dt><dd class="mono">'+m.sample+'</dd><dt>Confidence</dt><dd class="num">'+m.conf+'%</dd></dl>'+
+    '<div style="margin-top:16px;padding:12px;background:var(--ids-color-purple-weakest);border-radius:6px"><div class="txt-xs" style="color:var(--ids-ai-flat);font-weight:700;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">Agent note</div><div class="txt-sm txt-sec">Proposed from the column header, 50 sampled values and the shape of the data. The agent compared against prior Infor PLM imports in the same tenant.</div></div>'+
+    '<div style="margin-top:16px"><div class="txt-xs txt-tert" style="margin-bottom:4px">First 5 values from source</div><div class="mdl-code" style="max-height:120px">'+Array(5).fill(m.sample).join('\n')+'</div></div>';
+  openWgtModal('modalMapping');
+}
+window.showMappingModal=showMappingModal;
+function editMapping(){closeWgtModal('modalMapping');}
+window.editMapping=editMapping;
+function confirmMapping(){closeWgtModal('modalMapping');}
+window.confirmMapping=confirmMapping;
+
+function showExceptionModal(i){
+  var e=EXCEPTIONS[i];
+  document.getElementById('modalExceptionTitle').textContent=e.rec+' · '+e.kind;
+  document.getElementById('modalExceptionBody').innerHTML='<dl class="mdl-facts"><dt>Record</dt><dd class="mono">'+e.rec+'</dd><dt>Kind</dt><dd>'+e.kind+'</dd><dt>Proposed fix</dt><dd>'+e.fix+'</dd><dt>Owner</dt><dd>'+e.owner+'</dd><dt>Due</dt><dd>'+e.due+'</dd></dl>'+
+    '<div style="margin-top:16px;padding:12px;background:var(--ids-color-purple-weakest);border-radius:6px"><div class="txt-xs" style="color:var(--ids-ai-flat);font-weight:700;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px">Why the agent proposed this</div><div class="txt-sm txt-sec">'+evidenceFor(e)+'</div></div>'+
+    '<div style="margin-top:14px" class="field-row"><label class="field-label">Note (goes to the owner)</label><textarea class="field-input" placeholder="Any context for the owner"></textarea></div>';
+  openWgtModal('modalException');
+}
+window.showExceptionModal=showExceptionModal;
+function evidenceFor(e){
+  if(e.kind==='Duplicate') return "Same part number appears in CoastalParts_Windchill_2026-04.csv row 418 and Coastal_master_v18.xlsx row 302. Descriptions match. Windchill is kept as master; the spreadsheet row contributes the finish code that was missing in Windchill.";
+  if(e.kind==='Missing UoM') return "The row has no value in UOM. The agent took EA from the Housing item group default; 92% of items in that group use EA.";
+  if(e.kind==='Broken reference') return "The BOM line names a child that is not present in the Windchill part export or the Coastal spreadsheet. The agent cannot invent the item; an engineer has to decide what the real part is.";
+  return "The BOM structure forms a cycle. An engineer has to decide which link to break.";
+}
+function acceptException(){closeWgtModal('modalException');}
+window.acceptException=acceptException;
+function editException(){closeWgtModal('modalException');}
+window.editException=editException;
+function routeException(){closeWgtModal('modalException');}
+window.routeException=routeException;
+
+function bulkAcceptMerges(){alert('Would mark all 96 duplicate merges as accepted and record Priya Shah in the audit trail.');}
+window.bulkAcceptMerges=bulkAcceptMerges;
+function bulkFillUom(){alert('Would apply the item group default UoM to all 31 missing values; still logs each one.');}
+window.bulkFillUom=bulkFillUom;
+function exportMapping(){alert('Mapping rulebook exported as CSV.');}
+window.exportMapping=exportMapping;
+
+function showAuditModal(){
+  document.getElementById('auditBody').innerHTML=AUDIT.map(function(a){return '<tr class="ids-grid-row"><td class="ids-grid-cell">'+a.when+'</td><td class="ids-grid-cell">'+a.actor+'</td><td class="ids-grid-cell">'+a.event+'</td><td class="ids-grid-cell mono">'+a.rec+'</td></tr>';}).join('');
+  openWgtModal('modalAudit');
+}
+window.showAuditModal=showAuditModal;
+function exportAudit(){alert('Audit CSV exported.');}
+window.exportAudit=exportAudit;
+
+function showEvidence(key){
+  var e=EVIDENCE[key]||{title:'Evidence',body:''};
+  document.getElementById('modalEvidenceTitle').textContent=e.title;
+  document.getElementById('modalEvidenceBody').innerHTML='<p class="txt-sm" style="line-height:1.6">'+e.body+'</p><div style="margin-top:16px;padding:12px;background:var(--ids-color-neutral-10);border-radius:4px"><div class="txt-xs txt-tert" style="margin-bottom:4px">Cited for</div><div class="txt-sm mono">Wave 1 Coastal · 1,240 parts</div></div>';
+  openWgtModal('modalEvidence');
+}
+window.showEvidence=showEvidence;
+
+function showApproveModal(){openWgtModal('modalApprove');}
+window.showApproveModal=showApproveModal;
+function sendForApproval(){closeWgtModal('modalApprove');alert('Approval packet sent to Dana Whitfield.');}
+window.sendForApproval=sendForApproval;
+function showLoadDryRunModal(){openWgtModal('modalDryRun');}
+window.showLoadDryRunModal=showLoadDryRunModal;
+
+
+var STATE={demo:{running:false,paused:false,epoch:0,idx:0,total:0},voice:{ready:false,picked:null},flow:{open:false,idx:0,paused:false,epoch:0,audio:null}};
+
+function pickVoice(){var v=(window.speechSynthesis&&window.speechSynthesis.getVoices)?window.speechSynthesis.getVoices():[];if(!v.length)return null;return v.find(function(x){return /^en/i.test(x.lang);})||v[0];}
+function getTuning(){return{rate:0.98,pitch:1.0};}
+function prepareForSpeech(t){return(t||"").replace(/\s*—\s*/g,". ").replace(/\.\s+\./g,". ");}
+function chunkCaption(t){var s=prepareForSpeech(t),out=[],buf="",pauses=[];for(var i=0;i<s.length;i++){var ch=s[i];buf+=ch;var nxt=s[i+1]||"";if(/[.!?]/.test(ch)&&(nxt===" "||nxt===""||/[A-Z]/.test(nxt))){out.push(buf.trim());pauses.push(300);buf="";}else if(ch===";"){out.push(buf.trim());pauses.push(160);buf="";}}if(buf.trim()){out.push(buf.trim());pauses.push(0);}return{chunks:out,pauses:pauses};}
+function synthEleven(text){return new Promise(function(resolve,reject){reject(new Error("no voice cache"));});}
+
+var DEMO_STEPS=[
+  {caption:"I'm Priya Shah, the data lead on the move off Windchill. This is the migration desk for Hunter Fan.",highlight:".myday",tab:"waves"},
+  {caption:"The headline tells the whole story. Wave 1 can load one thousand one hundred and two of one thousand two hundred and forty Coastal parts on Friday. One hundred and thirty eight are held, every one of them has a reason and an owner.",highlight:".readiness-wrap",tab:"waves"},
+  {caption:"Each bar is a check. Ninety six duplicates where the same part is in Windchill and in the Coastal spreadsheet. Thirty one items where the unit of measure is missing. Nine BOMs reference a part that is not in the file, and two BOMs form a loop.",highlight:".readiness-wrap",tab:"waves"},
+  {caption:"The mapping tab. Forty two columns from the legacy exports, every one pointed at a PLM for Discrete field. I confirmed them once at the start of the project.",highlight:'[aria-label="Mapping overview"]',tab:"mapping"},
+  {caption:"Here is one of them. Part number from Windchill becomes the item code in PLM, trimmed and upper cased, sample value shown. Confidence ninety nine percent.",highlight:'[aria-label="Mapping overview"] tbody tr:first-child',tab:"mapping"},
+  {caption:"The exceptions tab. One hundred and thirty eight records held, grouped by what is wrong with them, each one with a proposed fix and an owner.",highlight:'[aria-label="Exceptions queue"]',tab:"exceptions"},
+  {caption:"The two loops and the nine broken references are routed to Cal Draper. He is the design engineer on Coastal. He owns the fix because PLM cannot invent a missing part.",highlight:'[aria-label="Workload per owner"]',tab:"exceptions"},
+  {caption:"The load tab. On Friday night the agent will write one thousand one hundred and two items, three thousand four hundred and twenty BOM lines, and three hundred and ninety eight drawings into PLM for Discrete.",highlight:'[aria-label="Load preview"]',tab:"load"},
+  {caption:"The approval packet goes to Dana Whitfield, our VP Product Engineering. Nothing writes to PLM until she says yes.",highlight:'[aria-label="Approver"]',tab:"load",open:"modalApprove"},
+  {caption:"After the load, every record shows loaded or skipped with the reason. The audit trail carries the who, the what and the when into Dana's inbox.",highlight:'[aria-label="Load result preview"]',tab:"load",close:"modalApprove"}
+];
+STATE.demo.total=DEMO_STEPS.length;
+
+var __demoOpenModalId=null;
+function clearHighlights(){document.querySelectorAll('.highlight').forEach(function(e){e.classList.remove('highlight');});if(__demoOpenModalId){closeWgtModal(__demoOpenModalId);__demoOpenModalId=null;}}
+function highlight(sel){document.querySelectorAll('.highlight').forEach(function(e){e.classList.remove('highlight');});if(!sel)return;try{var el=document.querySelector(sel);if(el){el.classList.add('highlight');el.scrollIntoView({behavior:'smooth',block:'center'});}}catch(e){}}
+function renderCaption(idx,total,text){document.getElementById('capText').textContent=text;document.getElementById('capStep').textContent="Step "+(idx+1)+" of "+total;document.getElementById('capBar').classList.add("visible");}
+function speakAndShow(idx,total,step){
+  var myEpoch=STATE.demo.epoch;
+  var stale=function(){return STATE.demo.epoch!==myEpoch||!STATE.demo.running;};
+  try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}
+  if(step.tab) switchTab(step.tab);
+  if(step.close && __demoOpenModalId){closeWgtModal(__demoOpenModalId);__demoOpenModalId=null;}
+  if(step.open){openWgtModal(step.open);__demoOpenModalId=step.open;}
+  setTimeout(function(){if(!stale())highlight(step.highlight||null);},180);
+  renderCaption(idx,total,step.caption);
+  return new Promise(function(resolve){
+    var done=false,stalePoll=null;
+    function finish(){if(done)return;done=true;if(stalePoll){clearInterval(stalePoll);stalePoll=null;}resolve();}
+    stalePoll=setInterval(function(){if(stale())finish();},100);
+    { setTimeout(finish,Math.max(4200,step.caption.length*58)); return; }
+    if(!STATE.voice.picked)STATE.voice.picked=pickVoice();
+    var voice=STATE.voice.picked,tune=getTuning();
+    var info=chunkCaption(step.caption),chunks=info.chunks,pauses=info.pauses;
+    var hardCap=Math.min(60000, Math.max(8000, step.caption.length*95+2500));
+    var minHold=Math.max(4200,step.caption.length*58);
+    var holdStart=Date.now();
+    function finishHeld(){var rem=minHold-(Date.now()-holdStart);if(rem<=0||stale())return finish();setTimeout(finish,rem);}
+    var i=0;
+    function speakNext(){
+      if(stale())return finish();
+      if(i>=chunks.length)return finishHeld();
+      var seg=chunks[i];var pause=pauses[i]||0;i++;
+      var u=new SpeechSynthesisUtterance(seg);
+      if(voice){u.voice=voice;u.lang=voice.lang||'en-US';}else{u.lang='en-US';}
+      u.rate=tune.rate;u.pitch=tune.pitch;u.volume=1;
+      u.onend=function(){if(stale())return finish();setTimeout(speakNext,pause);};
+      u.onerror=function(){if(stale())return finish();setTimeout(speakNext,pause);};
+      try{window.speechSynthesis.speak(u);}catch(e){setTimeout(speakNext,pause);}
+    }
+    speakNext();
+    setTimeout(function(){try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}finish();},hardCap);
+  });
+}
+function showDemoUI(){document.getElementById("demoControls").classList.add("visible");var b=document.getElementById("runDemoBtn");b.classList.add("running");document.getElementById("runDemoLabel").textContent="Stop demo";}
+function hideDemoUI(){document.getElementById("demoControls").classList.remove("visible");document.getElementById("capBar").classList.remove("visible");var b=document.getElementById("runDemoBtn");b.classList.remove("running");document.getElementById("runDemoLabel").textContent="Run demo";}
+async function runDemo(startIdx){
+  if(STATE.demo.running)return;
+  STATE.demo.running=true;STATE.demo.paused=false;
+  STATE.demo.idx=(typeof startIdx==='number'&&startIdx>=0)?Math.min(startIdx,DEMO_STEPS.length-1):0;
+  STATE.demo.total=DEMO_STEPS.length;STATE.demo.epoch++;
+  showDemoUI();
+  document.getElementById("idsDemoPlay").textContent="⏸";
+  document.getElementById("idsDemoStatus").textContent="Demo running";
+  while(STATE.demo.running&&STATE.demo.idx<DEMO_STEPS.length){
+    var i=STATE.demo.idx,step=DEMO_STEPS[i];
+    try{await speakAndShow(i,DEMO_STEPS.length,step);}catch(e){console.error(e);}
+    if(!STATE.demo.running)break;
+    if(STATE.demo.paused){await new Promise(function(res){var t=function(){if(!STATE.demo.paused||!STATE.demo.running)res();else setTimeout(t,150);};t();});if(!STATE.demo.running)break;}
+    if(STATE.demo.idx===i)STATE.demo.idx=i+1;
+    await new Promise(function(r){setTimeout(r,180);});
+  }
+  stopDemo(false);
+}
+function stopDemo(reset){
+  STATE.demo.running=false;STATE.demo.paused=false;STATE.demo.epoch++;
+  if(reset!==false)STATE.demo.idx=0;
+  try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}
+  clearHighlights();
+  document.querySelectorAll('.wgt-modal-overlay.open').forEach(function(el){closeWgtModal(el.id);});
+  __demoOpenModalId=null;
+  hideDemoUI();
+}
+function pauseResume(){if(!STATE.demo.running){runDemo();return;}STATE.demo.paused=!STATE.demo.paused;document.getElementById("idsDemoPlay").textContent=STATE.demo.paused?"▶":"⏸";document.getElementById("idsDemoStatus").textContent=STATE.demo.paused?"Demo paused":"Demo running";}
+function nextStep(){if(!STATE.demo.running){runDemo(Math.min(STATE.demo.idx+1,DEMO_STEPS.length-1));return;}STATE.demo.epoch++;STATE.demo.idx=Math.min(STATE.demo.idx+1,DEMO_STEPS.length-1);try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}}
+function prevStep(){if(!STATE.demo.running){runDemo(Math.max(0,STATE.demo.idx-1));return;}STATE.demo.epoch++;STATE.demo.idx=Math.max(STATE.demo.idx-1,0);try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}}
+document.getElementById("runDemoBtn").addEventListener("click",function(){if(STATE.demo.running)stopDemo();else runDemo();});
+document.getElementById("idsDemoPlay").addEventListener("click",pauseResume);
+document.getElementById("idsDemoStop").addEventListener("click",function(){stopDemo(true);});
+document.getElementById("idsDemoNext").addEventListener("click",nextStep);
+document.getElementById("idsDemoPrev").addEventListener("click",prevStep);
+if(window.speechSynthesis){if(window.speechSynthesis.getVoices().length){STATE.voice.picked=pickVoice();STATE.voice.ready=true;}window.speechSynthesis.onvoiceschanged=function(){STATE.voice.picked=pickVoice();STATE.voice.ready=true;};}
+
+
+var PLM_FLOW_STEPS=[
+  {stage:1,callout:"Read legacy exports",narration:"Stage one. The agent reads the Windchill part and BOM exports and the Coastal engineering spreadsheet. One thousand two hundred and forty parts, three thousand eight hundred and sixty BOM lines, four hundred and ten drawings for wave 1 Coastal."},
+  {stage:2,callout:"Propose mapping",narration:"Stage two. The agent proposes a mapping for every legacy column into the PLM for Discrete item, BOM and document fields. Priya confirms the forty two mappings once; the rulebook rides every wave after that."},
+  {stage:3,callout:"Clean and check",narration:"Stage three. The agent cleans and checks. It finds ninety six duplicates between Windchill and the spreadsheet, thirty one items with no unit of measure, nine BOMs that reference a part not in the file, and two circular BOMs."},
+  {stage:4,callout:"Hold with a reason",narration:"Stage four. The agent proposes a merge for every duplicate, fills the missing units from the item group default, and routes the broken references and loops to Cal Draper. Each held record carries a reason and an owner."},
+  {stage:5,callout:"Dana approves, then load",narration:"Stage five. Dana Whitfield reviews the approval packet and clicks approve. The agent writes the clean records into PLM for Discrete, drawings included; every create and every held reason lands in the audit trail."}
+];
+var PLM_FLOW_CONN=[[2],[3],[4],[5],["outcomes"]];
+
+function PLMOpenFlow(){STATE.flow.open=true;STATE.flow.idx=0;STATE.flow.epoch++;document.getElementById('flowModal').classList.add('open');document.getElementById('flowModal').setAttribute('aria-hidden','false');PLMBuildFlowNodes();setTimeout(function(){PLMRenderFlow();PLMPlayFlowNarration();},100);}
+function PLMCloseFlow(){STATE.flow.open=false;STATE.flow.epoch++;try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}document.getElementById('flowModal').classList.remove('open');document.getElementById('flowModal').setAttribute('aria-hidden','true');}
+window.PLMOpenFlow=PLMOpenFlow;window.PLMCloseFlow=PLMCloseFlow;
+
+function PLMBuildFlowNodes(){
+  var nodes=document.getElementById('flowNodes');nodes.innerHTML='';
+  var names=["Read legacy","Propose mapping","Clean and check","Hold with reason","Approve and load"];
+  PLM_FLOW_STEPS.forEach(function(s,i){var node=document.createElement('div');node.className='flow-node';node.dataset.idx=i;node.innerHTML='<div class="stage-num">'+(i+1)+'</div><div class="stage-name">'+names[i]+'</div><div class="stage-blurb">'+s.callout+'</div>';nodes.appendChild(node);});
+  nodes.style.gridTemplateColumns='repeat('+PLM_FLOW_STEPS.length+', 1fr)';
+}
+function PLMDrawFlowPaths(){
+  var canvas=document.querySelector('.flow-canvas');var svg=document.getElementById('flowPaths');if(!canvas||!svg)return;
+  var cr=canvas.getBoundingClientRect();if(!cr.width||!cr.height)return;
+  var cw=Math.max(canvas.scrollWidth,cr.width);var ch=Math.max(canvas.scrollHeight,cr.height);
+  svg.setAttribute('width',cw);svg.setAttribute('height',ch);svg.setAttribute('viewBox','0 0 '+cw+' '+ch);
+  svg.style.width=cw+'px';svg.style.height=ch+'px';while(svg.firstChild)svg.removeChild(svg.firstChild);
+  var nodes=canvas.querySelectorAll('.flow-node');var outcomes=document.getElementById('flowOutcomes');var ns='http://www.w3.org/2000/svg';
+  function geom(el){var r=el.getBoundingClientRect();return{left:r.left-cr.left+canvas.scrollLeft,right:r.right-cr.left+canvas.scrollLeft,top:r.top-cr.top+canvas.scrollTop,bottom:r.bottom-cr.top+canvas.scrollTop,cx:(r.left+r.right)/2-cr.left+canvas.scrollLeft,cy:(r.top+r.bottom)/2-cr.top+canvas.scrollTop};}
+  function curve(a,b){if(Math.abs(b.cy-a.cy)<12){var l2r=b.cx>a.cx;return'M '+(l2r?a.right:a.left)+' '+a.cy+' L '+(l2r?b.left:b.right)+' '+b.cy;}var sx=a.cx,sy=a.bottom,ex=b.cx,ey=b.top,mid=(sy+ey)/2;return'M '+sx+' '+sy+' C '+sx+' '+mid+', '+ex+' '+mid+', '+ex+' '+ey;}
+  PLM_FLOW_CONN.forEach(function(targets,i){var src=nodes[i];if(!src)return;var a=geom(src);targets.forEach(function(tg){var dst=tg==="outcomes"?outcomes:nodes[tg-1];if(!dst)return;var b=geom(dst);var path=document.createElementNS(ns,'path');path.setAttribute('d',curve(a,b));path.setAttribute('class','flow-path'+(i<STATE.flow.idx?' done':(i===STATE.flow.idx?' active':'')));svg.appendChild(path);});});
+}
+function PLMRenderFlow(){
+  var nodes=document.querySelectorAll('.flow-canvas .flow-node');
+  nodes.forEach(function(n,i){n.classList.remove('active','done');if(i<STATE.flow.idx)n.classList.add('done');else if(i===STATE.flow.idx)n.classList.add('active');});
+  var outcomes=document.getElementById('flowOutcomes');outcomes.classList.remove('active');
+  if(STATE.flow.idx===PLM_FLOW_STEPS.length-1)outcomes.classList.add('active');
+  var step=PLM_FLOW_STEPS[STATE.flow.idx];
+  if(step){document.getElementById('flowStepLabel').textContent='Stage '+(STATE.flow.idx+1)+' of '+PLM_FLOW_STEPS.length;document.getElementById('flowStepText').textContent=step.narration;document.getElementById('flowAppCallout').textContent=step.callout;document.getElementById('flowProgressFill').style.width=((STATE.flow.idx+1)/PLM_FLOW_STEPS.length*100)+'%';}
+  PLMDrawFlowPaths();
+}
+function PLMPlayFlowNarration(){
+  var myEpoch=STATE.flow.epoch;var step=PLM_FLOW_STEPS[STATE.flow.idx];if(!step)return;
+  try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}
+  if(!('speechSynthesis' in window))return;
+  if(!STATE.voice.picked)STATE.voice.picked=pickVoice();
+  var voice=STATE.voice.picked,tune=getTuning();
+  var info=chunkCaption(step.narration),chunks=info.chunks,pauses=info.pauses,i=0;
+  function speakNext(){
+    if(STATE.flow.epoch!==myEpoch||!STATE.flow.open||STATE.flow.paused)return;
+    if(i>=chunks.length){if(STATE.flow.epoch===myEpoch&&STATE.flow.open&&!STATE.flow.paused&&STATE.flow.idx<PLM_FLOW_STEPS.length-1){STATE.flow.idx++;PLMRenderFlow();PLMPlayFlowNarration();}return;}
+    var seg=chunks[i];var pause=pauses[i]||0;i++;
+    var u=new SpeechSynthesisUtterance(seg);if(voice){u.voice=voice;u.lang=voice.lang||'en-US';}else{u.lang='en-US';}
+    u.rate=tune.rate;u.pitch=tune.pitch;u.volume=1;
+    u.onend=function(){if(STATE.flow.epoch!==myEpoch||!STATE.flow.open||STATE.flow.paused)return;setTimeout(speakNext,pause);};
+    u.onerror=function(){if(STATE.flow.epoch!==myEpoch||!STATE.flow.open||STATE.flow.paused)return;setTimeout(speakNext,pause);};
+    try{window.speechSynthesis.speak(u);}catch(e){setTimeout(speakNext,pause);}
+  }
+  speakNext();
+}
+document.getElementById('flowPrev').addEventListener('click',function(){if(STATE.flow.idx>0){STATE.flow.idx--;STATE.flow.epoch++;PLMRenderFlow();PLMPlayFlowNarration();}});
+document.getElementById('flowNext').addEventListener('click',function(){if(STATE.flow.idx<PLM_FLOW_STEPS.length-1){STATE.flow.idx++;STATE.flow.epoch++;PLMRenderFlow();PLMPlayFlowNarration();}else PLMCloseFlow();});
+document.getElementById('flowPlay').addEventListener('click',function(){STATE.flow.paused=!STATE.flow.paused;document.getElementById('flowPlay').textContent=STATE.flow.paused?'▶ Resume':'⏸ Pause';if(STATE.flow.paused){try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}}else{STATE.flow.epoch++;PLMPlayFlowNarration();}});
+window.addEventListener('resize',function(){if(STATE.flow.open){PLMDrawFlowPaths();}});
+document.getElementById('flowBtn').addEventListener('click',PLMOpenFlow);
+</script>
+<script data-sf-repair="ellipsis-tooltips">
+(function () {
+  if (window.__sfEllipsisTooltips) return;
+  var api = { state: {}, run: run };
+  window.__sfEllipsisTooltips = api;
+  function norm(s) { return String(s || '').replace(/\s+/g, ' ').trim(); }
+  function run() {
+    var all = document.body ? document.body.getElementsByTagName('*') : [];
+    for (var i = 0; i < all.length; i++) {
+      var el = all[i];
+      var cs = window.getComputedStyle(el);
+      if (cs.textOverflow !== 'ellipsis' || (cs.overflowX !== 'hidden' && cs.overflowX !== 'clip')) continue;
+      var full = norm(el.textContent); if (!full) continue;
+      if (!(el.scrollWidth > el.clientWidth + 1)) continue;
+      if (el.hasAttribute('title')) continue;
+      el.setAttribute('title', full); el.setAttribute('data-sf-title', 'auto');
+    }
+  }
+  var pending=false,last=0;
+  function tick(){if(Date.now()-last<200){requestAnimationFrame(tick);return;}pending=false;last=Date.now();try{run();}catch(e){}}
+  function schedule(){if(pending)return;pending=true;requestAnimationFrame(tick);}
+  function start(){try{run();}catch(e){}try{new MutationObserver(schedule).observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class','style']});}catch(e){}window.addEventListener('resize',schedule);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+  window.addEventListener('load',schedule);
+})();
+</script>
+</body>
+</html>
