@@ -9,7 +9,6 @@ window.VISION = {
     { t: "Pricing maintenance", go: "proto-pricing" },
     { t: "Retailer content", go: "proto-retailer" },
     { t: "PLM Workspace", go: "real-plm-workspace" },
-    { t: "Engineering data migration", go: "proto-migration" },
     { t: "PLM-first item launch", go: "proto-plm-first" }
   ],
   lanes: [
@@ -29,7 +28,6 @@ window.VISION = {
     { t: "Online store integration", lane: "out", tag: "Your board date", go: "real-online-store" },
     { t: "NPD Launch Readiness", lane: "out", tag: "Added for you", go: "real-npd-readiness" },
     { t: "Change Impact Workflow", lane: "out", tag: "Added for you", go: "real-change-impact-workflow" },
-    { t: "Engineering data migration", lane: "out", tag: "Added for you", go: "proto-migration" },
     { t: "Retailer content", lane: "out", tag: "Added for you", go: "proto-retailer" }
   ]
 };
