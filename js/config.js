@@ -4,7 +4,7 @@ window.DEMO_URLS = {
   "plm-workspace":          "https://mingle-portal.inforcloudsuite.com/v2/SLSGDENA119_DEM/f284f515-8161-481b-bee7-6350eb837706",
   "item-setup-readiness":   "https://mingle-portal.inforcloudsuite.com/v2/SLSGDENA119_DEM/b16f921c-c21a-4b89-9e93-936d8011d5e0",
   "cash-application":       "REPLACE",
-  "blocked-orders":         "REPLACE",
+  "blocked-orders":         "https://mingle-portal.inforcloudsuite.com/v2/SLSGDENA119_DEM/889bb8c1-b649-432b-a8da-22730005b7db",
   "online-store":           "REPLACE"
 };
 
