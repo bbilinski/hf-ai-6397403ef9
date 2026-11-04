@@ -318,3 +318,6 @@
 .cards--gen3 .card, .cards--gen2 .card { min-height: 0; }
 @media (max-width: 860px) { .cards.cards--gen3, .cards.cards--gen2 { grid-template-columns: minmax(0, 1fr); } }
 .general-h:first-of-type { margin-top: 14px; }
+
+.sub-still { max-width: 1100px; margin: 4px 0 8px; }
+.sub-still img { display: block; width: 100%; height: auto; background: #fff; }
