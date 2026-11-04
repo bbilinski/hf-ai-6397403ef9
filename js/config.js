@@ -5,7 +5,7 @@ window.DEMO_URLS = {
   "item-setup-readiness":   "https://mingle-portal.inforcloudsuite.com/v2/SLSGDENA119_DEM/b16f921c-c21a-4b89-9e93-936d8011d5e0",
   "cash-application":       "https://mingle-portal.inforcloudsuite.com/v2/SLSGDENA119_DEM/22554466-c1e3-4994-a4b3-bce2dfe0fdab",
   "blocked-orders":         "https://mingle-portal.inforcloudsuite.com/v2/SLSGDENA119_DEM/889bb8c1-b649-432b-a8da-22730005b7db",
-  "online-store":           "REPLACE"
+  "online-store":           "https://mingle-portal.inforcloudsuite.com/v2/SLSGDENA119_DEM/9ef3f8cb-bd34-4e0f-a2b9-581c51ad43d6"
 };
 
 window.DEMO_TARGET = "_top";
